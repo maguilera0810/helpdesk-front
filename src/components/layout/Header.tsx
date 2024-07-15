@@ -1,7 +1,7 @@
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar, Typography, Avatar } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthStore';
@@ -40,12 +40,12 @@ const Header: React.FC<HeaderProps> = ({ handleDrawerToggle }) => {
         </Typography>
         {user && (
           <Box display="flex" alignItems="center">
-            <Typography variant="h6" noWrap component="div">
-              {user.firstName}
+            <Typography variant="h6" noWrap component="div" marginRight={1}>
+              {user.email}
             </Typography>
-            <IconButton color="inherit" onClick={handleLogout}>
-              <AccountCircle />
-            </IconButton>
+            <Avatar sx={{ bgcolor: "blue", marginRight: 2 }} onClick={handleLogout}>
+              {`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()}
+            </Avatar>
           </Box>
         )}
       </Toolbar>
