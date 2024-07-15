@@ -36,14 +36,14 @@ const AppRoutes: React.FC = () => (
     <Routes>
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/admin/users" element={<Users />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tickets" element={<Tickets />} />
+        <Route path="/dashboard/tickets" element={<Tickets />} />
+        <Route path="/dashboard/reports" element={<Reports />} />
+        <Route path="/profile/settings" element={<Settings />} />
         {/* <Route path="/tickets/:ticketId" element={<TicketDetails />} /> */}
-        <Route path="/users" element={<Users />} />
         {/* <Route path="/profile" element={<UserProfile />} /> */}
         {/* <Route path="/faqs" element={<FAQs />} /> */}
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/settings" element={<Settings />} />
       </Route>
       <Route element={<PublicRoute />}>
         <Route path="/auth/login" element={<Login />} />
