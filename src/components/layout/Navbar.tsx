@@ -1,12 +1,9 @@
 import React from 'react';
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import PersonIcon from '@mui/icons-material/Person';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Drawer, List, Toolbar } from '@mui/material';
 
@@ -26,14 +23,14 @@ const Navbar: React.FC<NavbarProps> = ({ mobileOpen, handleDrawerToggle, drawerO
     <div>
       <Toolbar />
       <List>
+        <NavItem text="Usuarios" icon={<PeopleIcon />} path="/admin/users" />
         <NavItem text="Dashboard" icon={<DashboardIcon />} path="/dashboard" />
-        <NavItem text="Tickets" icon={<AssignmentIcon />} path="/tickets" />
-        <NavItem text="Crear Ticket" icon={<AddCircleIcon />} path="/create-ticket" />
-        <NavItem text="Usuarios" icon={<PeopleIcon />} path="/users" />
-        <NavItem text="Perfil de Usuario" icon={<PersonIcon />} path="/profile" />
-        <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" />
-        <NavItem text="Informes" icon={<BarChartIcon />} path="/reports" />
-        <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/settings" />
+        <NavItem text="Tickets" icon={<AssignmentIcon />} path="/dashboard/tickets" />
+        <NavItem text="Informes" icon={<BarChartIcon />} path="/dashboard/reports" />
+        <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings" />
+        {/* <NavItem text="Perfil de Usuario" icon={<PersonIcon />} path="/profile" /> */}
+        {/* <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" /> */}
+        {/* <NavItem text="Crear Ticket" icon={<AddCircleIcon />} path="/create-ticket" /> */}
       </List>
     </div>
   );
