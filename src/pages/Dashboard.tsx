@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
         </Typography>
         {user ? (
           <Box>
-            <Typography variant="body1">Welcome, {user.firstName}!</Typography>
+            <Typography variant="body1">Welcome, {user.first_name}!</Typography>
             <Typography variant="body1">Email: {user.email}</Typography>
             <Button variant="contained" color="primary" onClick={handleLogout}>
               Logout
