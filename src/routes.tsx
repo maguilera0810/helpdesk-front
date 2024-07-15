@@ -1,11 +1,16 @@
 // src/routes.tsx
 import React from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import App from './App';
-import Dashboard from './components/Dashboard';
+import Users from './pages/admin/Users';
 import Login from './pages/auth/Login';
-
+import Dashboard from './pages/Dashboard';
+import Reports from './pages/management/Reports';
+import Settings from './pages/management/Settings';
+import Tickets from './pages/management/Tickets';
 import useAuthStore from './stores/useAuthStore';
+// import TicketDetails from './pages/management/TicketDetails';
+// import UserProfile from './pages/management/UserProfile';
+// import FAQs from './pages/management/FAQs';
 
 
 const PublicRoute: React.FC = () => {
@@ -30,13 +35,18 @@ const AppRoutes: React.FC = () => (
   <Router>
     <Routes>
       <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tickets" element={<Tickets />} />
+        {/* <Route path="/tickets/:ticketId" element={<TicketDetails />} /> */}
+        <Route path="/users" element={<Users />} />
+        {/* <Route path="/profile" element={<UserProfile />} /> */}
+        {/* <Route path="/faqs" element={<FAQs />} /> */}
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
       <Route element={<PublicRoute />}>
         <Route path="/auth/login" element={<Login />} />
-      </Route>
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
     </Routes>
   </Router>
