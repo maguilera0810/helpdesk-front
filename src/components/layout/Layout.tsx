@@ -11,49 +11,29 @@ interface LayoutProps {
   children: ReactNode;
 }
 const Layout: FC<LayoutProps> = ({ children }) => {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const isDrawerOpen = useUIStore((state) => state.isDrawerOpen);
-  const toggleDrawer = useUIStore((state) => state.toggleDrawer);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box id="box-layout" sx={{
+      display: 'flex',
+      minHeight: '100vh',
+      minWidth: '100vw',
+    }}>
       <CssBaseline />
-      <Header handleDrawerToggle={handleDrawerToggle} />
+      <Header />
+      <Navbar />
       <Box
-        component="nav"
-        sx={{ width: { sm: isDrawerOpen ? drawerWidth : 0 }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        <Navbar
-          mobileOpen={mobileOpen}
-          handleDrawerToggle={handleDrawerToggle}
-          drawerOpen={isDrawerOpen} />
-      </Box>
-      <Box
+        id="main-box"
         component="main"
         sx={{
+          // backgroundColor: "#BB0000",
           flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          marginTop: 8,
-          transition: 'width 0.5s', // Transición suave para el cambio de ancho
-          ml: isDrawerOpen ? 0 : -drawerWidth,
+          minHeight: '100vh',
+          width: { sm: `calc(100vw - ${isDrawerOpen ? drawerWidth : 0}px)` },
+          transition: 'margin 0.3s',
         }}
       >
         <Toolbar />
-        <IconButton
-          color="inherit"
-          aria-label="toggle drawer"
-          edge="start"
-          onClick={toggleDrawer}
-          sx={{ ml: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -62,9 +42,11 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         >
           {children}
         </motion.div>
+
       </Box>
     </Box>
   );
 };
 
 export default Layout;
+

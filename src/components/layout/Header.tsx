@@ -11,7 +11,7 @@ interface HeaderProps {
   handleDrawerToggle: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ handleDrawerToggle }) => {
+const Header: React.FC = () => {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
