@@ -1,7 +1,16 @@
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonIcon from '@mui/icons-material/Person';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Drawer, List, Toolbar } from '@mui/material';
+
+import NavItem from './NavItem';
 
 const drawerWidth = 240;
 
@@ -12,19 +21,19 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ mobileOpen, handleDrawerToggle, drawerOpen }) => {
-  const navigate = useNavigate();
 
   const drawer = (
     <div>
       <Toolbar />
       <List>
-        <ListItem button onClick={() => navigate('/dashboard')}>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
-        {/* Add more menu items here */}
+        <NavItem text="Dashboard" icon={<DashboardIcon />} path="/dashboard" />
+        <NavItem text="Tickets" icon={<AssignmentIcon />} path="/tickets" />
+        <NavItem text="Crear Ticket" icon={<AddCircleIcon />} path="/create-ticket" />
+        <NavItem text="Usuarios" icon={<PeopleIcon />} path="/users" />
+        <NavItem text="Perfil de Usuario" icon={<PersonIcon />} path="/profile" />
+        <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" />
+        <NavItem text="Informes" icon={<BarChartIcon />} path="/reports" />
+        <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/settings" />
       </List>
     </div>
   );

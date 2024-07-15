@@ -28,7 +28,10 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         sx={{ width: { sm: isDrawerOpen ? drawerWidth : 0 }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        <Navbar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} drawerOpen={isDrawerOpen} />
+        <Navbar
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
+          drawerOpen={isDrawerOpen} />
       </Box>
       <Box
         component="main"
@@ -37,7 +40,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           marginTop: 8,
-          transition: 'width 0.3s', // Transición suave para el cambio de ancho
+          transition: 'width 0.5s', // Transición suave para el cambio de ancho
           ml: isDrawerOpen ? 0 : -drawerWidth,
         }}
       >
