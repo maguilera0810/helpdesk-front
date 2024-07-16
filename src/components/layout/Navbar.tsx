@@ -4,6 +4,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
+import { AdminPanelSettings } from '@mui/icons-material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import useUIStore from '../../stores/useUIStore';
@@ -16,14 +17,19 @@ const drawerWidth = 240;
 const Navbar: React.FC = () => {
   const isDrawerOpen = useUIStore((state) => state.isDrawerOpen);
   const toggleDrawer = useUIStore((state) => state.toggleDrawer);
+
   const drawer = (
     <>
       <Toolbar />
       <List>
-        <NavItem text="Usuarios" icon={<PeopleIcon />} path="/admin/users" />
-        <NavItem text="Dashboard" icon={<DashboardIcon />} path="/dashboard" />
-        <NavItem text="Tickets" icon={<AssignmentIcon />} path="/dashboard/tickets" />
-        <NavItem text="Informes" icon={<BarChartIcon />} path="/dashboard/reports" />
+        <NavItem text="Admin" icon={<AdminPanelSettings />}>
+          <NavItem text="Usuarios" icon={<PeopleIcon />} path="/admin/users" />
+        </NavItem>
+        <NavItem text="Dashboard" icon={<DashboardIcon />} >
+          <NavItem text="Proyectos" icon={<DashboardIcon />} path="/dashboard" />
+          <NavItem text="Tickets" icon={<AssignmentIcon />} path="/dashboard/tickets" />
+          <NavItem text="Informes" icon={<BarChartIcon />} path="/dashboard/reports" />
+        </NavItem>
         <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings" />
         {/* <NavItem text="Perfil de Usuario" icon={<PersonIcon />} path="/profile" /> */}
         {/* <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" /> */}
@@ -67,7 +73,6 @@ const Navbar: React.FC = () => {
       >
         {drawer}
       </Drawer>
-
     </Box>
   );
 };
