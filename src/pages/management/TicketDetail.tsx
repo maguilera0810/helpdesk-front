@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Layout from '../../components/layout/Layout';
+import Layout from '../../components/layouts/Layout';
 
 const TicketDetails: React.FC = () => {
   const { ticketId } = useParams();

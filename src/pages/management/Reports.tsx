@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import Layout from '../../components/layout/Layout';
+import Layout from '../../components/layouts/Layout';
 
 const Reports: React.FC = () => {
   return (

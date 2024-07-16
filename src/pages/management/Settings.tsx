@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import Layout from '../../components/layout/Layout';
+import Layout from '../../components/layouts/Layout';
 
 const Settings: React.FC = () => {
   return (
