@@ -36,7 +36,7 @@ const Header: React.FC = () => {
           {isDrawerOpen ? <MenuOpenIcon /> : <MenuIcon />}
         </IconButton>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          MyApp
+          UTMACH HelpDesk
         </Typography>
         {user && (
           <Box display="flex" alignItems="center">
