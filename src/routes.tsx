@@ -1,7 +1,7 @@
 // src/routes.tsx
 import React from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Users from './pages/admin/Users';
+import ListUsers from './pages/admin/ListUsers';
 import Login from './pages/auth/Login';
 import Dashboard from './pages/Dashboard';
 import Reports from './pages/management/Reports';
@@ -36,7 +36,7 @@ const AppRoutes: React.FC = () => (
     <Routes>
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/users" element={<ListUsers />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/tickets" element={<Tickets />} />
         <Route path="/dashboard/reports" element={<Reports />} />
