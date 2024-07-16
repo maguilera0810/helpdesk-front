@@ -1,29 +1,47 @@
 import axios from 'axios';
-import { User, Token } from '../interfaces/AuthInterfaces';
+import { Token, User } from '../interfaces/AuthInterfaces';
+import useAuthStore from '../stores/useAuthStore';
 import Environment from './../environments/Environment';
+
 const { apiUrl, apiKey } = Environment;
 
+class AuthService {
+  private static instance: AuthService;
+  private apiUrl: string;
+  private apiKey: string;
 
-export class AuthService {
-
-  async getToken(user: Partial<User>): Promise<Token | null> {
-    console.log("getToken   - 1");
-    console.table(user);
-    const headers = { 'API-KEY': apiKey };
-    console.log("getToken   - 2");
-    return await axios.post<Token>(`${apiUrl}/api/auth/token/`, user, { headers }).then((response: any) => {
-      console.log(response.data);
-      return response.data;
-    }).catch((error: any) => {
-      console.error('Error en el inicio de sesión:', error);
-      return null;
-    });
+  private constructor(apiUrl: string, apiKey: string) {
+    this.apiUrl = apiUrl;
+    this.apiKey = apiKey;
   }
 
-  async fetchUser(token: string): Promise<User | null> {
+  public static getInstance(): AuthService {
+    if (!AuthService.instance) {
+      AuthService.instance = new AuthService(apiUrl, apiKey);
+    }
+    return AuthService.instance;
+  }
+
+  private getAuthHeaders() {
+    const token = useAuthStore.getState().token?.access || null;
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  }
+
+  public async getToken(user: Partial<User>): Promise<Token | null> {
+    const headers = { 'API-KEY': this.apiKey };
     try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get<User>(`${apiUrl}/api/auth/user/info/`, { headers });
+      const response = await axios.post<Token>(`${this.apiUrl}/api/auth/token/`, user, { headers });
+      return response.data;
+    } catch (error) {
+      console.error('Error en el inicio de sesión:', error);
+      return null;
+    }
+  }
+
+  public async fetchUser(): Promise<User | null> {
+    try {
+      const headers = this.getAuthHeaders();
+      const response = await axios.get<User>(`${this.apiUrl}/api/auth/user/info/`, { headers });
       return response.data;
     } catch (error) {
       console.error('Error al obtener el usuario:', error);
@@ -31,11 +49,11 @@ export class AuthService {
     }
   }
 
-  async refreshToken(token: string): Promise<Token | null> {
+  public async refreshToken(): Promise<Token | null> {
+    const headers = this.getAuthHeaders();
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       const response = await axios.post<Token>(
-        `${apiUrl}/api/auth/token/refresh/`,
+        `${this.apiUrl}/api/auth/token/refresh/`,
         {},
         { headers },
       );
@@ -46,10 +64,10 @@ export class AuthService {
     }
   }
 
-  async verifyToken(token: string): Promise<boolean> {
+  public async verifyToken(): Promise<boolean> {
+    const headers = this.getAuthHeaders();
     try {
-      const headers = { Authorization: `Bearer ${token}` };
-      await axios.post(`${apiUrl}/api/auth/token/verify/`,
+      await axios.post(`${this.apiUrl}/api/auth/token/verify/`,
         {},
         { headers });
       return true;
@@ -60,4 +78,4 @@ export class AuthService {
   }
 }
 
-export default new AuthService();
+export default AuthService.getInstance();
