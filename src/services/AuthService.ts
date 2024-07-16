@@ -1,36 +1,42 @@
 import axios from 'axios';
 import { Token, User } from '../interfaces/AuthInterfaces';
 import useAuthStore from '../stores/useAuthStore';
+import { keysToCamel } from '../utils/caseUtils';
 import Environment from './../environments/Environment';
 
 const { apiUrl, apiKey } = Environment;
 
 class AuthService {
   private static instance: AuthService;
-  private apiUrl: string;
   private apiKey: string;
+  private url: string;
 
-  private constructor(apiUrl: string, apiKey: string) {
-    this.apiUrl = apiUrl;
+  private constructor() {
+    this.url = `${apiUrl}/api/auth`;
     this.apiKey = apiKey;
   }
 
   public static getInstance(): AuthService {
     if (!AuthService.instance) {
-      AuthService.instance = new AuthService(apiUrl, apiKey);
+      AuthService.instance = new AuthService();
     }
     return AuthService.instance;
   }
 
+  private getSavedToken(): string | null {
+    // Obtener el token desde el store de Zustand
+    return useAuthStore.getState().token?.access || null;
+  }
+
   private getAuthHeaders() {
-    const token = useAuthStore.getState().token?.access || null;
+    const token = this.getSavedToken();
     return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
   public async getToken(user: Partial<User>): Promise<Token | null> {
     const headers = { 'API-KEY': this.apiKey };
     try {
-      const response = await axios.post<Token>(`${this.apiUrl}/api/auth/token/`, user, { headers });
+      const response = await axios.post<Token>(`${this.url}/token/`, user, { headers });
       return response.data;
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
@@ -41,8 +47,8 @@ class AuthService {
   public async fetchUser(): Promise<User | null> {
     try {
       const headers = this.getAuthHeaders();
-      const response = await axios.get<User>(`${this.apiUrl}/api/auth/user/info/`, { headers });
-      return response.data;
+      const response = await axios.get<User>(`${this.url}/user/info/`, { headers });
+      return keysToCamel(response.data);
     } catch (error) {
       console.error('Error al obtener el usuario:', error);
       return null;
@@ -53,7 +59,7 @@ class AuthService {
     const headers = this.getAuthHeaders();
     try {
       const response = await axios.post<Token>(
-        `${this.apiUrl}/api/auth/token/refresh/`,
+        `${this.url}/token/refresh/`,
         {},
         { headers },
       );
@@ -67,7 +73,7 @@ class AuthService {
   public async verifyToken(): Promise<boolean> {
     const headers = this.getAuthHeaders();
     try {
-      await axios.post(`${this.apiUrl}/api/auth/token/verify/`,
+      await axios.post(`${this.url}/token/verify/`,
         {},
         { headers });
       return true;
