@@ -44,7 +44,7 @@ const Header: React.FC = () => {
               {user.email}
             </Typography>
             <Avatar sx={{ bgcolor: "blue", marginRight: 2 }} onClick={handleLogout}>
-              {`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()}
+              {`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase()}
             </Avatar>
           </Box>
         )}
