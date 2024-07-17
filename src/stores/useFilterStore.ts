@@ -20,5 +20,5 @@ const stateCreator: StateCreator<IFilterState, [], [], IFilterState> = (set) => 
     })),
 });
 
-const filterStore = create<IFilterState>()(stateCreator);
-export default filterStore;
+const useFilterStore = create<IFilterState>()(stateCreator);
+export default useFilterStore;
