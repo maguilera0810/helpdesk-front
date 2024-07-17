@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
 import { User } from '../interfaces/AuthInterfaces';
 import UserService from '../services/UserService';
 
@@ -8,11 +9,11 @@ export const useUsers = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async (filters: { [key: string]: any } = {}) => {
     setLoading(true);
     setError(null);
     try {
-      const userList = await UserService.list();
+      const userList = await UserService.list(filters);
       setUsers(userList);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -20,7 +21,7 @@ export const useUsers = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const fetchUser = async (userId: number) => {
     setLoading(true);

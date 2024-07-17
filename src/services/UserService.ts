@@ -32,9 +32,12 @@ export class UserService {
     return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
-  public async list(): Promise<User[]> {
+  public async list(filters: { [key: string]: any } = {}): Promise<User[]> {
     try {
-      const response = await axios.get<User[]>(this.url, { headers: this.getAuthHeaders() });
+      const response = await axios.get<User[]>(this.url, {
+        headers: this.getAuthHeaders(),
+        params: keysToSnake(filters),
+      });
       return keysToCamel(response.data);
     } catch (error) {
       console.error('SERVICE: Error fetching users:', error);

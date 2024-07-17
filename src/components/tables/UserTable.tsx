@@ -5,6 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { useUsers } from '../../hooks/useUsers';
 import UserFilters from '../filters/UserFilters';
+import useFilterStore from '../../stores/useFilterStore';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -16,6 +17,11 @@ const columns: GridColDef[] = [
 
 const UserTable: FC = () => {
   const { users, loading, error, fetchUsers, deleteUser } = useUsers();
+  const { filters } = useFilterStore();
+
+  useEffect(() => {
+    fetchUsers(filters);
+  }, [filters]);
 
   useEffect(() => {
     console.log("---1", users);
@@ -26,13 +32,16 @@ const UserTable: FC = () => {
   }, []);
 
   const handleDelete = (id: number) => {
-    deleteUser(id);
+    // deleteUser(id);
+    console.log(id);
+    
+
   };
 
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        
+
         <Button variant="contained" color="primary" href="/admin/users/create">
           Create User
         </Button>

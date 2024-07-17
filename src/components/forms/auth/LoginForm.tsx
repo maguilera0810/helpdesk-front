@@ -18,11 +18,11 @@ const LoginForm: React.FC = () => {
     const token = await AuthService.getToken({ email, password });
     if (token?.access) {
       setToken(token);
-      const fetchedUser = await AuthService.fetchUser(token.access);
+      const fetchedUser = await AuthService.fetchUser();
       if (fetchedUser) {
         console.log(fetchedUser);
         setUser(fetchedUser);
-        navigate('/dashboard');
+        navigate('/dashboard/proyects');
       } else {
         alert('Error al obtener el usuario');
       }
