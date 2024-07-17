@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { AdminPanelSettings, RequestQuote } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import { AdminPanelSettings } from '@mui/icons-material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import useUIStore from '../../stores/useUIStore';
@@ -26,8 +26,9 @@ const Navbar: React.FC = () => {
           <NavItem text="Usuarios" icon={<PeopleIcon />} path="/admin/users" />
         </NavItem>
         <NavItem text="Dashboard" icon={<DashboardIcon />} >
-          <NavItem text="Proyectos" icon={<DashboardIcon />} path="/dashboard" />
+          <NavItem text="Proyectos" icon={<DashboardIcon />} path="/dashboard/proyects" />
           <NavItem text="Tickets" icon={<AssignmentIcon />} path="/dashboard/tickets" />
+          <NavItem text="Solicitudes" icon={<RequestQuote />} path="/dashboard/requests" />
           <NavItem text="Informes" icon={<BarChartIcon />} path="/dashboard/reports" />
         </NavItem>
         <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings" />
