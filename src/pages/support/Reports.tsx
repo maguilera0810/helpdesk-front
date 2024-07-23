@@ -7,7 +7,7 @@ const Reports: React.FC = () => {
     <Layout>
       <Box sx={{ padding: 2 }}>
         <Typography variant="h1" gutterBottom>
-          Informes
+          Reports
         </Typography>
       </Box>
     </Layout>
