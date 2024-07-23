@@ -1,11 +1,24 @@
 import React from 'react';
 
-import { AdminPanelSettings, RequestQuote } from '@mui/icons-material';
+import { AdminPanelSettings } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
+import EventIcon from '@mui/icons-material/Event';
+import GroupIcon from '@mui/icons-material/Group';
+import InsertChartIcon from '@mui/icons-material/InsertChart';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import PersonIcon from '@mui/icons-material/Person';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
+import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import WorkIcon from '@mui/icons-material/Work';
+
+
+
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import useUIStore from '../../stores/useUIStore';
 
@@ -22,19 +35,24 @@ const Navbar: React.FC = () => {
     <>
       <Toolbar />
       <List>
-        <NavItem text="Admin" icon={<AdminPanelSettings />}>
-          <NavItem text="Usuarios" icon={<PeopleIcon />} path="/admin/users" />
+      <NavItem text="Administración" icon={<AdminPanelSettings />}>
+          <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users" />
+          <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups" />
+          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles" />
+          <NavItem text="Campus" icon={<LocationCityIcon />} path="/admin/campus" />
+          <NavItem text="Facultades" icon={<SchoolIcon />} path="/admin/faculties" />
         </NavItem>
-        <NavItem text="Dashboard" icon={<DashboardIcon />} >
-          <NavItem text="Proyectos" icon={<DashboardIcon />} path="/dashboard/proyects" />
-          <NavItem text="Tickets" icon={<AssignmentIcon />} path="/dashboard/tickets" />
-          <NavItem text="Solicitudes" icon={<RequestQuote />} path="/dashboard/requests" />
-          <NavItem text="Informes" icon={<BarChartIcon />} path="/dashboard/reports" />
+        <NavItem text="Soporte" icon={<SupportAgentIcon />}>
+          <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/dashboard" />
+          <NavItem text="Tickets" icon={<AssignmentIcon />} path="/soporte/tickets" />
+          <NavItem text="Solicitudes" icon={<RequestQuoteIcon />} path="/soporte/requests" />
+          <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning" />
+          <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects" />
+          <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics" />
+          <NavItem text="Reportes" icon={<InsertChartIcon />} path="/soporte/reports" />
         </NavItem>
         <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings" />
-        {/* <NavItem text="Perfil de Usuario" icon={<PersonIcon />} path="/profile" /> */}
-        {/* <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" /> */}
-        {/* <NavItem text="Crear Ticket" icon={<AddCircleIcon />} path="/create-ticket" /> */}
+        <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" />
       </List>
     </>
   );
@@ -46,7 +64,7 @@ const Navbar: React.FC = () => {
       aria-label="mailbox folders"
     >
       <Drawer
-        variant="temporary"
+        variant="temporary"// mobile
         open={isDrawerOpen}
         onClose={toggleDrawer}
         ModalProps={{
@@ -54,13 +72,17 @@ const Navbar: React.FC = () => {
         }}
         sx={{
           display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: drawerWidth,
+          },
         }}
       >
         {drawer}
+        {drawer}
       </Drawer>
       <Drawer
-        variant="permanent"
+        variant="persistent" // desktop
         sx={{
           display: { xs: 'none', sm: 'block' },
           '& .MuiDrawer-paper': {
