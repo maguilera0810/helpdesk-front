@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import useFilterStore from '../../stores/useFilterStore';
 
+
+const filterEmptyValues = (filters: { [key: string]: any }) => {
+  return Object.fromEntries(
+    Object.entries(filters).filter(([_, value]) => value !== '' && value !== null && value !== undefined)
+  );
+};
+
 const UserFilters: React.FC = () => {
   const { filters, setFilters } = useFilterStore();
   const [localFilters, setLocalFilters] = useState<{ [key: string]: any }>(filters);
@@ -19,7 +26,8 @@ const UserFilters: React.FC = () => {
   };
 
   const handleApplyFilters = () => {
-    setFilters(localFilters);
+    const filteredFilters = filterEmptyValues(localFilters);
+    setFilters(filteredFilters);
   };
 
   return (
