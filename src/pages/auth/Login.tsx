@@ -29,11 +29,12 @@ const Login: React.FC = () => {
         maxWidth="xs"
         sx={{
           display: 'flex',
+          height: 'auto',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'rgba(255, 255, 255, 0.85)',
-          borderRadius: 1,
+          borderRadius: 3,
           boxShadow: 3,
           padding: 4,
         }}

@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
       if (fetchedUser) {
         console.log(fetchedUser);
         setUser(fetchedUser);
-        navigate('/dashboard/proyects');
+        navigate('/admin/users');
       } else {
         alert('Error al obtener el usuario');
       }
@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
     >
 
       <Box component="form" onSubmit={handleLogin} sx={{ width: '100%' }}>
-        <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
+        <Typography component="h1" variant="h5" sx={{ mb: 2, color: 'rgb(50,50,50,0.85)' }}>
           Sign in
         </Typography>
         <TextField
