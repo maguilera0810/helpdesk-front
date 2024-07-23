@@ -1,14 +1,30 @@
-
+export interface UserProfile {
+  document: string;
+  documentType: string;
+  phone: string;
+  address: string;
+  isAvailable: boolean;
+}
 
 export interface User {
   id: number;
-  username: string; // cedula
-  email: string;
+  username: string;
   firstName: string;
   lastName: string;
+  email: string;
+  profile: Partial<UserProfile>;
+  password?: string;
+}
+
+
+export interface User2 {
+  id: number;
+  username: string; // cedula
+  firstName: string;
+  lastName: string;
+  email: string;
   password?: string;
   cellphone?: string;
-  role?: Role;
 }
 
 export interface Role {

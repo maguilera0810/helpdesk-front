@@ -20,17 +20,13 @@ const UserTable: FC = () => {
   const { filters } = useFilterStore();
 
   useEffect(() => {
-    fetchUsers(filters);
-  }, [filters]);
-
-  useEffect(() => {
     console.log("---1", users);
-    if (!users.length) {
+    if (!loading) {
       console.log("---2");
       fetchUsers();
     }
-  }, []);
-
+  }, [filters]);
+  
   const handleDelete = (id: number) => {
     // deleteUser(id);
     console.log(id);
