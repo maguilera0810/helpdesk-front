@@ -18,6 +18,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       display: 'flex',
       minHeight: '100vh',
       minWidth: '100vw',
+      // overflow: 'auto',
     }}>
       <CssBaseline />
       <Header />
@@ -31,6 +32,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           minHeight: '100vh',
           width: { sm: `calc(100vw - ${isDrawerOpen ? drawerWidth : 0}px)` },
           transition: 'margin 0.3s',
+          // position: 'relative'
         }}
       >
         <Toolbar />
