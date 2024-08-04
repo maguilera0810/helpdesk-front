@@ -10,13 +10,13 @@ const columns: GridColDef[] = [
   { field: 'code', headerName: 'Code', width: 130 },
 ];
 
-const TicketTable: FC = () => {
+const TaskTable: FC = () => {
 
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Button variant="contained" color="primary" href="/admin/users/create">
-          Crear Ticket
+          Crear Tarea
         </Button>
       </Box>
       <div style={{ height: 400, width: '100%' }}>
@@ -33,4 +33,4 @@ const TicketTable: FC = () => {
   );
 };
 
-export default TicketTable;
+export default TaskTable;

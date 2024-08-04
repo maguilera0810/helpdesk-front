@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
     <>
       <Toolbar />
       <List>
-      <NavItem text="Administración" icon={<AdminPanelSettings />}>
+        <NavItem text="Administración" icon={<AdminPanelSettings />}>
           <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users" />
           <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups" />
           <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles" />
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
         </NavItem>
         <NavItem text="Soporte" icon={<SupportAgentIcon />}>
           <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/dashboard" />
-          <NavItem text="Tickets" icon={<AssignmentIcon />} path="/soporte/tickets" />
+          <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas" />
           <NavItem text="Solicitudes" icon={<RequestQuoteIcon />} path="/soporte/requests" />
           <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning" />
           <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects" />

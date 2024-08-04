@@ -1,19 +1,19 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
-import TicketTable from '../../../components/tables/TicketTable';
+import TaskTable from '../../../components/tables/TaskTable';
 
-const ListTickets: React.FC = () => {
+const ListTasks: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 2 }}>
-        <Typography variant="h1" gutterBottom>
-          ListTickets
+        <Typography variant="h4" gutterBottom>
+          Tareas
         </Typography>
-        <TicketTable/>
+        <TaskTable/>
       </Box>
     </Layout>
   );
 };
 
-export default ListTickets;
+export default ListTasks;

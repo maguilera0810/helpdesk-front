@@ -16,13 +16,13 @@ import Reports from './pages/support/Reports';
 import Requests from './pages/support/Requests';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
-import Tickets from './pages/support/tickets/ListTickets';
+import ListTasks from './pages/support/tasks/ListTasks';
 
 
 import ListFaculties from './pages/admin/faculties/ListFaculties';
 import ListGroups from './pages/admin/groups/ListGroups';
 import useAuthStore from './stores/useAuthStore';
-// import TicketDetails from './pages/management/TicketDetails';
+// import TaskDetails from './pages/management/TaskDetails';
 // import UserProfile from './pages/management/UserProfile';
 // import FAQs from './pages/management/FAQs';
 
@@ -49,7 +49,7 @@ const AppRoutes: React.FC = () => (
         <Route path="/admin/faculties" element={<ListFaculties />} />
         <Route path="/admin/campus" element={<Campus />} />
         <Route path="/soporte/dashboard" element={<Dashboard />} />
-        <Route path="/soporte/tickets" element={<Tickets />} />
+        <Route path="/soporte/tareas" element={<ListTasks />} />
         <Route path="/soporte/proyects" element={<Projects />} />
         <Route path="/soporte/planning" element={<Planning />} />
         <Route path="/soporte/reports" element={<Reports />} />
@@ -58,7 +58,7 @@ const AppRoutes: React.FC = () => (
         <Route path="/profile/settings" element={<Settings />} />
         <Route path="/faqs" element={<FAQs />} />
 
-        {/* <Route path="/tickets/:ticketId" element={<TicketDetails />} /> */}
+        {/* <Route path="/tickets/:ticketId" element={<TaskDetails />} /> */}
         {/* <Route path="/profile" element={<UserProfile />} /> */}
         {/* <Route path="/faqs" element={<FAQs />} /> */}
       </Route>
