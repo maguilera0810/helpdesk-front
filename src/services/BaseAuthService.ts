@@ -9,13 +9,25 @@ abstract class BaseAuthService {
   protected axiosInstance: AxiosInstance;
 
   constructor(baseURL: string) {
+    console.log(`${apiUrl}${baseURL}`);
+
     this.axiosInstance = axios.create({
       baseURL: `${apiUrl}${baseURL}`,
     });
-    this.setupInterceptors();
+    this.setupToken();
+    // this.setupInterceptors();
+  }
+  private setupToken() {
+    this.axiosInstance.interceptors.request.use((config) => {
+      const token = this.getSavedToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
   }
 
-  private setupInterceptors() {
+  private setupInterceptors() { // TODO FALTA IMPLEMENTAR, ESTO ES PARA RENOVAR LOS TOKENS
     this.axiosInstance.interceptors.response.use(
       (response) => response,
       async (error) => {
