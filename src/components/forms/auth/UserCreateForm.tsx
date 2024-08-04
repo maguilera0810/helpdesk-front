@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import { useUsers } from '../../../hooks/useUsers';
+import { useUser } from '../../../hooks/useUser';
 import { User } from '../../../interfaces/ModelInterfaces';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Tab, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 import { PasswordField, SelectField } from '../fields';
@@ -33,7 +33,7 @@ const documentTypeOptions = [ // TODO get options from backend server
 ];
 
 const UserCreateForm: React.FC = () => {
-  const { error, loading, success, createUser } = useUsers();
+  const { error, loading, success, createUser } = useUser();
   const [formData, setFormData] = useState<Partial<User>>({});
   const [tabValue, setTabValue] = useState('0');
 
