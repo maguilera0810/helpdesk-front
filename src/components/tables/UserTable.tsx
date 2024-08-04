@@ -26,11 +26,11 @@ const UserTable: FC = () => {
       fetchUsers();
     }
   }, [filters]);
-  
+
   const handleDelete = (id: number) => {
     // deleteUser(id);
     console.log(id);
-    
+
 
   };
 
@@ -39,7 +39,7 @@ const UserTable: FC = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
 
         <Button variant="contained" color="primary" href="/admin/users/create">
-          Create User
+          Crear Usuario
         </Button>
       </Box>
       <UserFilters />
