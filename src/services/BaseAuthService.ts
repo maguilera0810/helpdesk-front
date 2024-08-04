@@ -1,12 +1,17 @@
 import axios, { AxiosInstance } from 'axios';
+import Environment from '../environments/Environment';
 import useAuthStore from '../stores/useAuthStore';
 import AuthService from './AuthService';
 
-abstract class BaseService {
+const { apiUrl } = Environment;
+
+abstract class BaseAuthService {
   protected axiosInstance: AxiosInstance;
 
   constructor(baseURL: string) {
-    this.axiosInstance = axios.create({ baseURL });
+    this.axiosInstance = axios.create({
+      baseURL: `${apiUrl}${baseURL}`,
+    });
     this.setupInterceptors();
   }
 
@@ -39,4 +44,4 @@ abstract class BaseService {
   }
 }
 
-export default BaseService;
+export default BaseAuthService;
