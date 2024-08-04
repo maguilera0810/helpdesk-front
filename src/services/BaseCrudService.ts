@@ -1,5 +1,5 @@
 import BaseAuthService from './BaseAuthService';
-
+import { keysToCamel, keysToSnake } from '../utils/caseUtils';
 abstract class BaseCrudService<T> extends BaseAuthService {
 
   constructor(endpoint: string) {
@@ -8,8 +8,9 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async list(filters: { [key: string]: any } = {}): Promise<T[]> {
     try {
-      const response = await this.axiosInstance.get<T[]>('', { params: filters });
-      return response.data;
+      const response = await this.axiosInstance.get<T[]>('',
+        { params: keysToSnake(filters) });
+      return keysToCamel(response.data);
     } catch (error) {
       console.error('Error fetching list:', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
       throw error;
@@ -19,7 +20,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
   public async retrieve(id: number): Promise<T> {
     try {
       const response = await this.axiosInstance.get<T>(`${id}`);
-      return response.data;
+      return keysToCamel(response.data);
     } catch (error) {
       console.error(`Error fetching item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
       throw error;
@@ -28,8 +29,8 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async create(item: Partial<T>): Promise<T> {
     try {
-      const response = await this.axiosInstance.post<T>('', item);
-      return response.data;
+      const response = await this.axiosInstance.post<T>('', keysToSnake(item));
+      return keysToCamel(response.data);
     } catch (error) {
       console.error('Error creating item:', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
       throw error;
@@ -38,8 +39,8 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async update(id: number, item: Partial<T>): Promise<T> {
     try {
-      const response = await this.axiosInstance.put<T>(`${id}`, item);
-      return response.data;
+      const response = await this.axiosInstance.put<T>(`${id}`, keysToSnake(item));
+      return keysToCamel(response.data);
     } catch (error) {
       console.error(`Error updating item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
       throw error;
