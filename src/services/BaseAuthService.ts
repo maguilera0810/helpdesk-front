@@ -8,11 +8,11 @@ const { apiUrl } = Environment;
 abstract class BaseAuthService {
   protected axiosInstance: AxiosInstance;
 
-  constructor(baseURL: string) {
-    console.log(`${apiUrl}${baseURL}`);
+  constructor(path: string) {
+    console.log(`${apiUrl}${path}`);
 
     this.axiosInstance = axios.create({
-      baseURL: `${apiUrl}${baseURL}`,
+      baseURL: `${apiUrl}${path}`,
     });
     this.setupToken();
     // this.setupInterceptors();
