@@ -1,7 +1,5 @@
 import { User } from '../interfaces/AuthInterfaces';
-import BaseCrudService from './BaseCrudService'; // TODO VERIFICAR POR QUE NO FUNCIONA??
-
-
+import BaseCrudService from './BaseCrudService';
 
 
 export class UserService extends BaseCrudService<User> {
