@@ -27,6 +27,13 @@ class AuthService {
     // Obtener el token desde el store de Zustand
     return useAuthStore.getState().token?.access || null;
   }
+  private getRefreshToken(): string | null {
+    return useAuthStore.getState().token?.refresh || null;
+  }
+
+  private clearAuth(): void {
+    useAuthStore.getState().logout();
+  }
 
   private getAuthHeaders() {
     const token = this.getSavedToken();
@@ -56,6 +63,9 @@ class AuthService {
   }
 
   public async refreshToken(): Promise<Token | null> {
+    // TODO terminar este servicio
+    // const token = this.getRefreshToken();
+
     const headers = this.getAuthHeaders();
     try {
       const response = await axios.post<Token>(
@@ -66,6 +76,7 @@ class AuthService {
       return response.data;
     } catch (error) {
       console.error('Error al renovar el token:', error);
+      this.clearAuth();
       return null;
     }
   }
