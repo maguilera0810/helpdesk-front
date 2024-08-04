@@ -50,7 +50,7 @@ const NavItem: React.FC<NavItemProps> = ({ text, icon, path, children }) => {
         <ListItemIcon sx={{ color: isActive ? theme.palette.primary.main : 'inherit' }}>{icon}</ListItemIcon>
         <ListItemText primary={text}
           sx={{ color: isActive ? theme.palette.primary.main : 'inherit' }} />
-        {children ? (expanded ? <ExpandLess /> : <ExpandMore />) : null}
+        {children && (expanded ? <ExpandLess /> : <ExpandMore />)}
       </ListItem>
       {children && (
         <Collapse in={expanded} timeout="auto" unmountOnExit>
