@@ -1,7 +1,7 @@
-import { User } from '../interfaces/ModelInterfaces';
+import { Task } from '../interfaces/ModelInterfaces';
 import BaseCrudService from './BaseCrudService';
 
-export class TaskService extends BaseCrudService<User> {
+export class TaskService extends BaseCrudService<Task> {
   private static instance: TaskService;
 
   private constructor() {
