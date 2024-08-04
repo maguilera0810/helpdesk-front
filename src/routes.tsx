@@ -4,9 +4,7 @@ import React from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
-import Faculties from './pages/admin/Faculties';
-import Groups from './pages/admin/Groups';
-import Roles from './pages/admin/Roles';
+import ListRoles from './pages/admin/roles/ListRoles';
 import CreateUser from './pages/admin/users/CreateUser';
 import ListUsers from './pages/admin/users/ListUsers';
 import Login from './pages/auth/Login';
@@ -18,9 +16,11 @@ import Reports from './pages/support/Reports';
 import Requests from './pages/support/Requests';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
-import Tickets from './pages/support/Tickets';
+import Tickets from './pages/support/tickets/ListTickets';
 
 
+import ListFaculties from './pages/admin/faculties/ListFaculties';
+import ListGroups from './pages/admin/groups/ListGroups';
 import useAuthStore from './stores/useAuthStore';
 // import TicketDetails from './pages/management/TicketDetails';
 // import UserProfile from './pages/management/UserProfile';
@@ -44,10 +44,10 @@ const AppRoutes: React.FC = () => (
         {/* <Route path="/" element={<Projects />} /> */}
         <Route path="/admin/users" element={<ListUsers />} />
         <Route path="/admin/users/create" element={<CreateUser />} />
-        <Route path="/admin/groups" element={<Groups />} />
-        <Route path="/admin/roles" element={<Roles />} />
+        <Route path="/admin/groups" element={<ListGroups />} />
+        <Route path="/admin/roles" element={<ListRoles />} />
+        <Route path="/admin/faculties" element={<ListFaculties />} />
         <Route path="/admin/campus" element={<Campus />} />
-        <Route path="/admin/faculties" element={<Faculties />} />
         <Route path="/soporte/dashboard" element={<Dashboard />} />
         <Route path="/soporte/tickets" element={<Tickets />} />
         <Route path="/soporte/proyects" element={<Projects />} />
