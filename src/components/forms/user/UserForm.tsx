@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { User } from '../../../interfaces/AuthInterfaces';
+import { User } from '../../../interfaces/ModelInterfaces';
 
 interface UserFormProps {
   initialUser?: Partial<User>;

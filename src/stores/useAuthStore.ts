@@ -1,7 +1,8 @@
 import { produce } from 'immer';
 import { create, StateCreator } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
-import { Token, User } from '../interfaces/AuthInterfaces';
+import { Token } from '../interfaces/AuthInterfaces';
+import { User } from '../interfaces/ModelInterfaces';
 import { decryptData, encryptData } from '../utils/cryptoUtil';
 
 interface AuthState {

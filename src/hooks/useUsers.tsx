@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { User } from '../interfaces/AuthInterfaces';
+import { User } from '../interfaces/ModelInterfaces';
 import UserService from '../services/UserService';
 
 export const useUsers = () => {

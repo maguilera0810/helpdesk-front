@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Token, User } from '../interfaces/AuthInterfaces';
+import { Token } from '../interfaces/AuthInterfaces';
+import { User } from '../interfaces/ModelInterfaces';
 import useAuthStore from '../stores/useAuthStore';
 import { keysToCamel } from '../utils/caseUtils';
 import Environment from './../environments/Environment';

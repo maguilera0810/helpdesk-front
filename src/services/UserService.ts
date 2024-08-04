@@ -1,4 +1,4 @@
-import { User } from '../interfaces/AuthInterfaces';
+import { User } from '../interfaces/ModelInterfaces';
 import BaseCrudService from './BaseCrudService';
 
 
