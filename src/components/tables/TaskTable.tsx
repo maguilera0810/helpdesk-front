@@ -6,8 +6,14 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Name', width: 130 },
-  { field: 'code', headerName: 'Code', width: 130 },
+  { field: 'code', headerName: 'Codigo', width: 130 },
+  { field: 'title', headerName: 'Titulo', width: 130 },
+  { field: 'status', headerName: 'Estado', width: 130 },
+  { field: 'priority', headerName: 'Prioridad', width: 130 },
+  { field: 'createdBy', headerName: 'Creado por', width: 130 },
+  { field: 'responsible', headerName: 'Responsable', width: 130 },
+  { field: 'createdAt', headerName: 'Fecha Creación', width: 130 },
+  { field: 'updatedAt', headerName: 'Fecha Actualización', width: 130 },
 ];
 
 const TaskTable: FC = () => {
