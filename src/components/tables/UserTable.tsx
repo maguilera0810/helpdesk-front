@@ -3,9 +3,9 @@ import { FC, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
-import { useUsers } from '../../hooks/useUsers';
-import UserFilters from '../filters/UserFilters';
+import { useUser } from '../../hooks/useUser';
 import useFilterStore from '../../stores/useFilterStore';
+import UserFilters from '../filters/UserFilters';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -16,7 +16,7 @@ const columns: GridColDef[] = [
 ];
 
 const UserTable: FC = () => {
-  const { users, loading, error, fetchUsers, deleteUser } = useUsers();
+  const { users, loading, error, fetchUsers, deleteUser } = useUser();
   const { filters } = useFilterStore();
 
   useEffect(() => {
