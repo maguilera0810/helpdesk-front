@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { User } from '../interfaces/ModelInterfaces';
 import UserService from '../services/UserService';
 
-export const useUsers = () => {
+export const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
