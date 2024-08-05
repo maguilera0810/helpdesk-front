@@ -29,13 +29,12 @@ const UserTable: FC = () => {
     }
   }, [filters]);
 
-  const handleDelete = (id: number) => {
-    // deleteUser(id);
-    console.log(id);
+  const handleCreate = () => {
+    navigate('/admin/users/addNew/');
   };
 
-  const handleCreate = () => {
-    navigate('/admin/users/create/');
+  const handleUpdate = (id: number) => {
+    navigate(`/admin/users/${id}/`);
   };
 
   return (
@@ -54,7 +53,7 @@ const UserTable: FC = () => {
           loading={loading}
           pageSizeOptions={[5, 10, 50, 100]}
           checkboxSelection
-          onRowClick={(params) => handleDelete(params.id as number)}
+          onRowClick={(params) => handleUpdate(params.id as number)}
         />
       </div>
     </>
