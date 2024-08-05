@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Box, CssBaseline, Typography } from '@mui/material';
 import UserCreateForm from '../../../components/forms/auth/UserCreateForm.tsx';
-import Layout from '../../../components/layouts/Layout';
+import Layout from '../../../components/layouts/Layout.tsx';
 
-const CreateUser: React.FC = () => {
+const UserDetail: React.FC = () => {
   return (
     <Layout>
       <Box
@@ -23,4 +23,4 @@ const CreateUser: React.FC = () => {
 };
 
 
-export default CreateUser;
+export default UserDetail;

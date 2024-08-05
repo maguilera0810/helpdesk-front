@@ -5,8 +5,8 @@ import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-
 
 import Campus from './pages/admin/Campus';
 import ListRoles from './pages/admin/roles/ListRoles';
-import CreateUser from './pages/admin/users/CreateUser';
 import ListUsers from './pages/admin/users/ListUsers';
+import UserDetail from './pages/admin/users/UserDetail';
 import Login from './pages/auth/Login';
 import FAQs from './pages/FAQ';
 import Dashboard from './pages/support/Dashboard';
@@ -43,13 +43,14 @@ const AppRoutes: FC = () => (
       <Route element={<ProtectedRoute />}>
         {/* <Route path="/" element={<Projects />} /> */}
         <Route path="/admin/users/" element={<ListUsers />} />
-        <Route path="/admin/users/create/" element={<CreateUser />} />
+        <Route path="/admin/users/:id/" element={<UserDetail />} />
         <Route path="/admin/groups/" element={<ListGroups />} />
         <Route path="/admin/roles/" element={<ListRoles />} />
         <Route path="/admin/faculties/" element={<ListFaculties />} />
         <Route path="/admin/campus/" element={<Campus />} />
         <Route path="/soporte/dashboard/" element={<Dashboard />} />
         <Route path="/soporte/tareas/" element={<ListTasks />} />
+        <Route path="/soporte/tareas/:id" element={<ListTasks />} />
         <Route path="/soporte/tareas/crear/" element={<ListTasks />} />
         <Route path="/soporte/proyects/" element={<Projects />} />
         <Route path="/soporte/planning/" element={<Planning />} />
