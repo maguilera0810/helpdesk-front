@@ -42,20 +42,21 @@ const AppRoutes: React.FC = () => (
     <Routes>
       <Route element={<ProtectedRoute />}>
         {/* <Route path="/" element={<Projects />} /> */}
-        <Route path="/admin/users" element={<ListUsers />} />
-        <Route path="/admin/users/create" element={<CreateUser />} />
-        <Route path="/admin/groups" element={<ListGroups />} />
-        <Route path="/admin/roles" element={<ListRoles />} />
-        <Route path="/admin/faculties" element={<ListFaculties />} />
-        <Route path="/admin/campus" element={<Campus />} />
-        <Route path="/soporte/dashboard" element={<Dashboard />} />
-        <Route path="/soporte/tareas" element={<ListTasks />} />
-        <Route path="/soporte/proyects" element={<Projects />} />
-        <Route path="/soporte/planning" element={<Planning />} />
-        <Route path="/soporte/reports" element={<Reports />} />
-        <Route path="/soporte/requests" element={<Requests />} />
-        <Route path="/soporte/statistics" element={<Statistics />} />
-        <Route path="/profile/settings" element={<Settings />} />
+        <Route path="/admin/users/" element={<ListUsers />} />
+        <Route path="/admin/users/create/" element={<CreateUser />} />
+        <Route path="/admin/groups/" element={<ListGroups />} />
+        <Route path="/admin/roles/" element={<ListRoles />} />
+        <Route path="/admin/faculties/" element={<ListFaculties />} />
+        <Route path="/admin/campus/" element={<Campus />} />
+        <Route path="/soporte/dashboard/" element={<Dashboard />} />
+        <Route path="/soporte/tareas/" element={<ListTasks />} />
+        <Route path="/soporte/tareas/crear/" element={<ListTasks />} />
+        <Route path="/soporte/proyects/" element={<Projects />} />
+        <Route path="/soporte/planning/" element={<Planning />} />
+        <Route path="/soporte/reports/" element={<Reports />} />
+        <Route path="/soporte/requests/" element={<Requests />} />
+        <Route path="/soporte/statistics/" element={<Statistics />} />
+        <Route path="/profile/settings/" element={<Settings />} />
         <Route path="/faqs" element={<FAQs />} />
 
         {/* <Route path="/tickets/:ticketId" element={<TaskDetails />} /> */}
