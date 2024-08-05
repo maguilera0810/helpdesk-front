@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-
+import { useNavigate } from 'react-router-dom';
+import { useTask } from '../../hooks/useTask';
+import useFilterStore from '../../stores/useFilterStore';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -17,22 +19,42 @@ const columns: GridColDef[] = [
 ];
 
 const TaskTable: FC = () => {
+  const navigate = useNavigate();
+  const { tasks, loading, error, fetchTasks, deleteTask } = useTask();
+  const { filters, clearFilters } = useFilterStore();
+
+  useEffect(() => {
+    console.log("---1", tasks);
+    if (!loading) {
+      console.log("---2");
+      fetchTasks();
+    }
+  }, [filters]);
+
+  const handleCreate = () => {
+    navigate('/soporte/tareas/addNew/');
+  };
+
+  const handleUpdate = (id: number) => {
+    navigate(`/soporte/tareas/${id}/`);
+  };
 
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Button variant="contained" color="primary" href="/admin/users/create">
+        <Button variant="contained" color="primary" onClick={handleCreate}>
           Crear Tarea
         </Button>
       </Box>
+      {error && <Typography color="error">{error}</Typography>}
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={[]}
+          rows={tasks}
           columns={columns}
-          loading={false}
+          loading={loading}
           pageSizeOptions={[5, 10, 50, 100]}
           checkboxSelection
-          onRowClick={(params) => console.log(params.id as number)}
+          onRowClick={(params) => handleUpdate(params.id as number)}
         />
       </div>
     </>
