@@ -5,7 +5,7 @@ export class TaskService extends BaseCrudService<Task> {
   private static instance: TaskService;
 
   private constructor() {
-    super(`/api/auth/admin-user/`);
+    super(`/api/management/task/`);
   }
 
   public static getInstance(): TaskService {
