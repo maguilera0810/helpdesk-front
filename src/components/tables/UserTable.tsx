@@ -3,6 +3,7 @@ import { FC, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
+import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/useUser';
 import useFilterStore from '../../stores/useFilterStore';
 import UserFilters from '../filters/UserFilters';
@@ -16,8 +17,9 @@ const columns: GridColDef[] = [
 ];
 
 const UserTable: FC = () => {
+  const navigate = useNavigate();
   const { users, loading, error, fetchUsers, deleteUser } = useUser();
-  const { filters } = useFilterStore();
+  const { filters, clearFilters } = useFilterStore();
 
   useEffect(() => {
     console.log("---1", users);
@@ -30,15 +32,16 @@ const UserTable: FC = () => {
   const handleDelete = (id: number) => {
     // deleteUser(id);
     console.log(id);
+  };
 
-
+  const handleCreate = () => {
+    navigate('/admin/users/create/');
   };
 
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-
-        <Button variant="contained" color="primary" href="/admin/users/create">
+        <Button variant="contained" color="primary" onClick={handleCreate}>
           Crear Usuario
         </Button>
       </Box>
