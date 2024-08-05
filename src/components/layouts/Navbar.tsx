@@ -36,23 +36,23 @@ const Navbar: React.FC = () => {
       <Toolbar />
       <List>
         <NavItem text="Administración" icon={<AdminPanelSettings />}>
-          <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users" />
-          <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups" />
-          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles" />
-          <NavItem text="Campus" icon={<LocationCityIcon />} path="/admin/campus" />
-          <NavItem text="Facultades" icon={<SchoolIcon />} path="/admin/faculties" />
+          <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users/" />
+          <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups/" />
+          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles/" />
+          <NavItem text="Campus" icon={<LocationCityIcon />} path="/admin/campus/" />
+          <NavItem text="Facultades" icon={<SchoolIcon />} path="/admin/faculties/" />
         </NavItem>
         <NavItem text="Soporte" icon={<SupportAgentIcon />}>
-          <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/dashboard" />
-          <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas" />
-          <NavItem text="Solicitudes" icon={<RequestQuoteIcon />} path="/soporte/requests" />
-          <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning" />
-          <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects" />
-          <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics" />
-          <NavItem text="Reportes" icon={<InsertChartIcon />} path="/soporte/reports" />
+          <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/dashboard/" />
+          <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas/" />
+          <NavItem text="Solicitudes" icon={<RequestQuoteIcon />} path="/soporte/requests/" />
+          <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning/" />
+          <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects/" />
+          <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics/" />
+          <NavItem text="Reportes" icon={<InsertChartIcon />} path="/soporte/reports/" />
         </NavItem>
-        <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings" />
-        <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs" />
+        <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings/" />
+        <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs/" />
       </List>
     </>
   );
