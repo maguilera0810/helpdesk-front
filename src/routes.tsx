@@ -1,5 +1,5 @@
 // src/routes.tsx
-import React from 'react';
+import { FC } from 'react';
 
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
@@ -27,17 +27,17 @@ import useAuthStore from './stores/useAuthStore';
 // import FAQs from './pages/management/FAQs';
 
 
-const PublicRoute: React.FC = () => {
+const PublicRoute: FC = () => {
   const token = useAuthStore((state) => state.token);
   return token ? <Navigate to="/soporte/proyects" /> : <Outlet />;
 };
 
-const ProtectedRoute: React.FC = () => {
+const ProtectedRoute: FC = () => {
   const token = useAuthStore((state) => state.token);
   return token ? <Outlet /> : <Navigate to="/auth/login" />;
 };
 
-const AppRoutes: React.FC = () => (
+const AppRoutes: FC = () => (
   <Router>
     <Routes>
       <Route element={<ProtectedRoute />}>
