@@ -2,14 +2,14 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useUser } from '../../../hooks/useUser';
-import { User } from '../../../interfaces/ModelInterfaces';
+import { useUser } from '../../../../hooks/useUser';
+import { User } from '../../../../interfaces/ModelInterfaces';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 
-import { PasswordField, SelectField } from '../fields';
+import { PasswordField, SelectField } from '../../fields';
 
 
 const gridItemProps = {
