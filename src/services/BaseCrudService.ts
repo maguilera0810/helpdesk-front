@@ -19,7 +19,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async retrieve(id: number): Promise<T> {
     try {
-      const response = await this.axiosInstance.get<T>(`${id}`);
+      const response = await this.axiosInstance.get<T>(`${id}/`);
       return keysToCamel(response.data);
     } catch (error) {
       console.error(`Error fetching item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
@@ -39,7 +39,8 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async update(id: number, item: Partial<T>): Promise<T> {
     try {
-      const response = await this.axiosInstance.put<T>(`${id}`, keysToSnake(item));
+      console.log(keysToSnake(item));
+      const response = await this.axiosInstance.put<T>(`${id}/`, keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
       console.error(`Error updating item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
