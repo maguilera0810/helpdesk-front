@@ -48,7 +48,7 @@ export const useUser = () => {
     setSuccess(false);
     try {
       const newUser = await UserService.create(user);
-      setUsers((prevUsers) => [...prevUsers, newUser]);
+      setUser(newUser);
       setSuccess(true);
     } catch (error) {
       console.error('Error creating user:', error);
@@ -65,9 +65,7 @@ export const useUser = () => {
     setSuccess(false);
     try {
       const updatedUser = await UserService.update(userId, user);
-      setUsers((prevUsers) =>
-        prevUsers.map((u) => (u.id === userId ? updatedUser : u))
-      );
+      setUser(updatedUser)
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating user with id ${userId}:`, error);
@@ -84,7 +82,7 @@ export const useUser = () => {
     setSuccess(false);
     try {
       await UserService.destroy(userId);
-      setUsers((prevUsers) => prevUsers.filter((u) => u.id !== userId));
+      setUser(null);
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting user with id ${userId}:`, error);
