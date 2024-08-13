@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '../../../components/layouts/Layout';
 import UserTable from '../../../components/tables/UserTable';
 
-const Users: React.FC = () => {
+const UserList: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 2 }}>
@@ -16,4 +16,4 @@ const Users: React.FC = () => {
   );
 };
 
-export default Users;
+export default UserList;
