@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
 import TaskTable from '../../../components/tables/TaskTable';
 
-const ListTasks: React.FC = () => {
+const TaskList: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 2 }}>
@@ -16,4 +16,4 @@ const ListTasks: React.FC = () => {
   );
 };
 
-export default ListTasks;
+export default TaskList;

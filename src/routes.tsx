@@ -16,7 +16,7 @@ import Reports from './pages/support/Reports';
 import Requests from './pages/support/Requests';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
-import ListTasks from './pages/support/tasks/ListTasks';
+import TaskList from './pages/support/tasks/TaskList';
 
 
 import ListFaculties from './pages/admin/faculties/ListFaculties';
@@ -49,9 +49,9 @@ const AppRoutes: FC = () => (
         <Route path="/admin/faculties/" element={<ListFaculties />} />
         <Route path="/admin/campus/" element={<Campus />} />
         <Route path="/soporte/dashboard/" element={<Dashboard />} />
-        <Route path="/soporte/tareas/" element={<ListTasks />} />
-        <Route path="/soporte/tareas/:id" element={<ListTasks />} />
-        <Route path="/soporte/tareas/crear/" element={<ListTasks />} />
+        <Route path="/soporte/tareas/" element={<TaskList />} />
+        <Route path="/soporte/tareas/:id" element={<TaskList />} />
+        <Route path="/soporte/tareas/crear/" element={<TaskList />} />
         <Route path="/soporte/proyects/" element={<Projects />} />
         <Route path="/soporte/planning/" element={<Planning />} />
         <Route path="/soporte/reports/" element={<Reports />} />
