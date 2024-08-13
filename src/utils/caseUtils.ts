@@ -37,3 +37,11 @@ export const keysToSnake = (obj: any): any => {
   }
   return obj;
 };
+
+export const removeKeys = <T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> => {
+  const newObj = { ...obj };
+  keys.forEach(key => {
+    delete newObj[key];
+  });
+  return newObj as Omit<T, K>;
+};
