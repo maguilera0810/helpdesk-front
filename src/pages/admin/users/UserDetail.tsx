@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Box, CssBaseline, Typography } from '@mui/material';
-import UserCreateForm from '../../../components/forms/auth/UserCreateForm.tsx';
+import { Box, CssBaseline } from '@mui/material';
+import UserForm from '../../../components/forms/auth/UserForm.tsx';
 import Layout from '../../../components/layouts/Layout.tsx';
 
 const UserDetail: React.FC = () => {
@@ -16,7 +16,7 @@ const UserDetail: React.FC = () => {
         }}
       >
         <CssBaseline />
-        <UserCreateForm />
+        <UserForm />
       </Box>
     </Layout>
   );
