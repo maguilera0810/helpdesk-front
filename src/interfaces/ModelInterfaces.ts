@@ -33,8 +33,8 @@ export interface Task {
   team: number[] | Partial<User>[];
   plan?: number; // Plan
   scheduled: number; //TODO ANALIZAR
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | null; //
+  updatedAt: Date | null; //
 }
 
 
