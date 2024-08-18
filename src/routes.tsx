@@ -5,8 +5,8 @@ import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-
 
 import Campus from './pages/admin/Campus';
 import ListRoles from './pages/admin/roles/ListRoles';
-import UserList from './pages/admin/users/UserList';
 import UserDetail from './pages/admin/users/UserDetail';
+import UserList from './pages/admin/users/UserList';
 import Login from './pages/auth/Login';
 import FAQs from './pages/FAQ';
 import Dashboard from './pages/support/Dashboard';
@@ -16,6 +16,7 @@ import Reports from './pages/support/Reports';
 import Requests from './pages/support/Requests';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
+import TaskDetail from './pages/support/tasks/TaskDetail';
 import TaskList from './pages/support/tasks/TaskList';
 
 
@@ -50,8 +51,7 @@ const AppRoutes: FC = () => (
         <Route path="/admin/campus/" element={<Campus />} />
         <Route path="/soporte/dashboard/" element={<Dashboard />} />
         <Route path="/soporte/tareas/" element={<TaskList />} />
-        <Route path="/soporte/tareas/:id" element={<TaskList />} />
-        <Route path="/soporte/tareas/crear/" element={<TaskList />} />
+        <Route path="/soporte/tareas/:id/" element={<TaskDetail />} />
         <Route path="/soporte/proyects/" element={<Projects />} />
         <Route path="/soporte/planning/" element={<Planning />} />
         <Route path="/soporte/reports/" element={<Reports />} />
