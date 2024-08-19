@@ -17,6 +17,7 @@ export interface User {
   email: string;
   profile: Partial<UserProfile>;
   password?: string;
+  groups: number[] = [];
 }
 
 
