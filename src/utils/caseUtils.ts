@@ -29,7 +29,12 @@ export const keysToSnake = (obj: any): any => {
   } else if (obj !== null && obj.constructor === Object) {
     return Object.keys(obj).reduce(
       (result, key) => {
-        result[camelToSnake(key)] = keysToSnake(obj[key]);
+        const snakeKey = camelToSnake(key);
+        if (snakeKey.endsWith('__in') && Array.isArray(obj[key])) {
+          result[snakeKey] = obj[key].join(',');
+        } else {
+          result[snakeKey] = keysToSnake(obj[key]);
+        }
         return result;
       },
       {} as any
