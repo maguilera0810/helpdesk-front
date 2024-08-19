@@ -1,9 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { useTask } from '../../../../hooks/useTask';
-import { Task } from '../../../../interfaces/ModelInterfaces';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
@@ -11,8 +7,10 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
-
-import { SelectField } from '../../fields';
+import { useTask } from '../../../../hooks/useTask';
+import { useUser } from '../../../../hooks/useUser';
+import { Task } from '../../../../interfaces/ModelInterfaces';
+import { MultipleSelectField, SelectField } from '../../fields';
 
 
 const gridItemProps = {
@@ -57,11 +55,17 @@ const statusOptions = [ // TODO get options from backend server
 const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { task, error, loading, success, fetchTask, createTask, updateTask } = useTask();
+  const { task, error: errorTask, loading: loadingTask, success: successTask, fetchTask, createTask, updateTask } = useTask();
+  const { users, fetchUsers } = useUser();
+
   const [formData, setFormData] = useState<Partial<Task>>({});
   const [tabValue, setTabValue] = useState('0');
 
   const isUpdate = id && id !== 'addNew';
+
+  useEffect(() => {
+    fetchUsers({ "groups__id__in": [1, 2, 3] });
+  }, []);
 
   useEffect(() => {
     if (isUpdate) {
@@ -83,7 +87,7 @@ const TaskForm: React.FC = () => {
   }, [task]);
 
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
     if (name) {
       setFormData((prev) => ({
@@ -128,10 +132,10 @@ const TaskForm: React.FC = () => {
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update Task' : 'Create Task'}</Typography>
-      {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
-      {success && <Typography color="primary" sx={{ mb: 2 }}>Task {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
-      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mt: 3, mb: 2 }}>
-        {loading ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update Task' : 'Create Task')}
+      {errorTask && <Typography color="error" sx={{ mb: 2 }}>{errorTask}</Typography>}
+      {successTask && <Typography color="primary" sx={{ mb: 2 }}>Task {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
+      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingTask} sx={{ mt: 3, mb: 2 }}>
+        {loadingTask ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update Task' : 'Create Task')}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
@@ -221,6 +225,28 @@ const TaskForm: React.FC = () => {
                   value={dayjs(formData.updatedAt)}
                   onChange={handleDateChange('updatedAt')}
                   {...fieldProps}
+                />
+              </Grid>
+              <Grid item {...gridItemProps} key={"responsible"}>
+                <SelectField
+                  label="Responsible"
+                  name="responsible"
+                  value={formData.responsible?.toString() ?? ''}
+                  options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+                  onChange={(e) => handleInputChange(e)}
+                  fullWidth
+                  height="56px"
+                />
+              </Grid>
+              <Grid item {...gridItemProps} key={"team"}>
+                <MultipleSelectField
+                  label="Team"
+                  name="team"
+                  value={formData.team?.map(e => e.toString()) ?? []}
+                  options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+                  onChange={(e) => handleInputChange(e)}
+                  fullWidth
+                  height="auto"
                 />
               </Grid>
             </Grid>
