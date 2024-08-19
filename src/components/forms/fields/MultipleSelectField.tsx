@@ -1,10 +1,11 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import { Theme, useTheme } from '@mui/material/styles';
 import React, { ChangeEvent } from 'react';
 
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { Theme, useTheme } from '@mui/material/styles';
 
 
 
@@ -41,13 +42,11 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
   const theme = useTheme();
 
   const getStyles = (item: any, options: readonly any[], theme: Theme) => {
-    console.log(options.filter(op => op.value === item.value).length, item);
-
     return {
       fontWeight:
-        options.filter(op => op.value === item.value).length
-          ? theme.typography.fontWeightBold
-          : theme.typography.fontWeightLight,
+        options.indexOf(item.value) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightBold,
     };
   }
 
@@ -80,8 +79,9 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
           <MenuItem
             key={option.value}
             value={option.value}
-          // style={getStyles(option, options, theme)}
+            style={getStyles(option, value, theme)}
           >
+            <Checkbox checked={value.indexOf(option.value) > -1} />
             {option.label}
           </MenuItem>
         ))}
