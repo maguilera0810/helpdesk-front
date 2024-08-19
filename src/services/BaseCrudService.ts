@@ -1,5 +1,7 @@
-import BaseAuthService from './BaseAuthService';
 import { keysToCamel, keysToSnake } from '../utils/caseUtils';
+import BaseAuthService from './BaseAuthService';
+
+
 abstract class BaseCrudService<T> extends BaseAuthService {
 
   constructor(endpoint: string) {
