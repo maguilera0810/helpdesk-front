@@ -17,12 +17,11 @@ export interface User {
   email: string;
   profile: Partial<UserProfile>;
   password?: string;
-  groups: number[] = [];
+  groups: number[];
 }
 
-
 export interface Task {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   code: string;
@@ -36,6 +35,18 @@ export interface Task {
   scheduled: number; //TODO ANALIZAR
   createdAt: Date | null; //
   updatedAt: Date | null; //
+}
+
+export interface Issue {
+  id?: number;
+  title: string;
+  description: string;
+  status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
+  contact_email: string;
+  contact_phone: string;
+  requesting_unit: number;
+  task: number;
+  categories: number[];
 }
 
 
