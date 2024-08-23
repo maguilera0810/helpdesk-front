@@ -42,11 +42,13 @@ export interface Issue {
   title: string;
   description: string;
   status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
-  contact_email: string;
-  contact_phone: string;
-  requesting_unit: number;
+  contactEmail: string;
+  contactPhone: string;
+  requestingUnit: number;
   task: number;
   categories: number[];
+  createdBy: number;
+  createdAt: Date | null; //
+  updatedAt: Date | null; //
 }
-
 
