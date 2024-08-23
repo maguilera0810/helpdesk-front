@@ -4,24 +4,22 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
+import ListFaculties from './pages/admin/faculties/ListFaculties';
+import ListGroups from './pages/admin/groups/ListGroups';
 import ListRoles from './pages/admin/roles/ListRoles';
 import UserDetail from './pages/admin/users/UserDetail';
 import UserList from './pages/admin/users/UserList';
 import Login from './pages/auth/Login';
 import FAQs from './pages/FAQ';
 import Dashboard from './pages/support/Dashboard';
+import IssueList from './pages/support/issues/IssueList';
 import Planning from './pages/support/Planning';
 import Projects from './pages/support/Projects';
 import Reports from './pages/support/Reports';
-import Requests from './pages/support/Requests';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
 import TaskDetail from './pages/support/tasks/TaskDetail';
 import TaskList from './pages/support/tasks/TaskList';
-
-
-import ListFaculties from './pages/admin/faculties/ListFaculties';
-import ListGroups from './pages/admin/groups/ListGroups';
 import useAuthStore from './stores/useAuthStore';
 // import TaskDetails from './pages/management/TaskDetails';
 // import UserProfile from './pages/management/UserProfile';
@@ -55,7 +53,7 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/proyects/" element={<Projects />} />
         <Route path="/soporte/planning/" element={<Planning />} />
         <Route path="/soporte/reports/" element={<Reports />} />
-        <Route path="/soporte/requests/" element={<Requests />} />
+        <Route path="/soporte/issue/" element={<IssueList />} />
         <Route path="/soporte/statistics/" element={<Statistics />} />
         <Route path="/profile/settings/" element={<Settings />} />
         <Route path="/faqs" element={<FAQs />} />
