@@ -4,6 +4,7 @@ import { AdminPanelSettings } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import CategoryIcon from '@mui/icons-material/Category';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ErrorIcon from '@mui/icons-material/Error';
 import EventIcon from '@mui/icons-material/Event';
@@ -16,7 +17,6 @@ import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import WorkIcon from '@mui/icons-material/Work';
-
 
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import useUIStore from '../../stores/useUIStore';
@@ -38,6 +38,7 @@ const Navbar: React.FC = () => {
           <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users/" />
           <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups/" />
           <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles/" />
+          <NavItem text="Categorias" icon={<CategoryIcon />} path="/admin/category/" />
           <NavItem text="Campus" icon={<LocationCityIcon />} path="/admin/campus/" />
           <NavItem text="Facultades" icon={<SchoolIcon />} path="/admin/faculties/" />
         </NavItem>
