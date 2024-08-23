@@ -12,6 +12,7 @@ import UserList from './pages/admin/users/UserList';
 import Login from './pages/auth/Login';
 import FAQs from './pages/FAQ';
 import Dashboard from './pages/support/Dashboard';
+import IssueDetail from './pages/support/issues/IssueDetail';
 import IssueList from './pages/support/issues/IssueList';
 import Planning from './pages/support/Planning';
 import Projects from './pages/support/Projects';
@@ -54,6 +55,8 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/planning/" element={<Planning />} />
         <Route path="/soporte/reports/" element={<Reports />} />
         <Route path="/soporte/issue/" element={<IssueList />} />
+        <Route path="/soporte/issue/:id/" element={<IssueDetail />} />
+        
         <Route path="/soporte/statistics/" element={<Statistics />} />
         <Route path="/profile/settings/" element={<Settings />} />
         <Route path="/faqs" element={<FAQs />} />
