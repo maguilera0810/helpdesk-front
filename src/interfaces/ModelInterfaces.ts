@@ -39,6 +39,7 @@ export interface Task {
 
 export interface Issue {
   id?: number;
+  code: string;
   title: string;
   description: string;
   status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
