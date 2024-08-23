@@ -5,18 +5,17 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import ErrorIcon from '@mui/icons-material/Error';
 import EventIcon from '@mui/icons-material/Event';
 import GroupIcon from '@mui/icons-material/Group';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import PersonIcon from '@mui/icons-material/Person';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import WorkIcon from '@mui/icons-material/Work';
-
 
 
 import { Box, Drawer, List, Toolbar } from '@mui/material';
@@ -45,7 +44,7 @@ const Navbar: React.FC = () => {
         <NavItem text="Soporte" icon={<SupportAgentIcon />}>
           <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/dashboard/" />
           <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas/" />
-          <NavItem text="Solicitudes" icon={<RequestQuoteIcon />} path="/soporte/requests/" />
+          <NavItem text="Problemas" icon={<ErrorIcon />} path="/soporte/issue/" />
           <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning/" />
           <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects/" />
           <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics/" />
