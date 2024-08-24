@@ -7,7 +7,6 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { Dayjs } from 'dayjs';
 
 import { useCategory } from '../../../../hooks/useCategory';
-import { useUser } from '../../../../hooks/useUser';
 import { Category } from '../../../../interfaces/ModelInterfaces';
 import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
@@ -56,31 +55,11 @@ const CategoryForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { category, error: errorCategory, loading: loadingCategory, success: successCategory, fetchCategory, createCategory, updateCategory } = useCategory();
-  const { users, fetchUsers } = useUser();
-
   const [formData, setFormData] = useState<Partial<Category>>({});
   const [tabValue, setTabValue] = useState('0');
-
   const isUpdate = id && id !== 'addNew';
 
-  useEffect(() => {
-    fetchUsers({ "groups__id__in": [1, 2, 3] });
-  }, []);
 
-  useEffect(() => {
-    if (isUpdate) {
-      const categoryId = parseInt(id);
-      if (!isNaN(categoryId)) {
-        fetchCategory(categoryId);
-      }
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (category) {
-      setFormData({ ...category });
-    }
-  }, [category]);
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
@@ -128,6 +107,20 @@ const CategoryForm: React.FC = () => {
     setTabValue(newValue);
   };
 
+  useEffect(() => {
+    if (isUpdate) {
+      const categoryId = parseInt(id);
+      if (!isNaN(categoryId)) {
+        fetchCategory(categoryId);
+      }
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (category) {
+      setFormData({ ...category });
+    }
+  }, [category]);
   // useEffect(() => {
   //   success && setFormData({});
   // }, [success]);
