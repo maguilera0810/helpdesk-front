@@ -28,27 +28,10 @@ const fieldStyles = {
     outline: 'none',
   }
 };
-const typeOptions = [ // TODO get options from backend server
-  { value: 'preventive', label: 'Preventive' },
-  { value: 'emergency', label: 'Emergency' },
+const categoryTypeOptions = [ // TODO get options from backend server
+  { value: 'skill', label: 'Skill' },
+  { value: 'issue', label: 'Issue' },
 ];
-
-const priorityOptions = [ // TODO get options from backend server
-  { value: 'lowest', label: 'Lowest' },
-  { value: 'low', label: 'Low' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'high', label: 'High' },
-  { value: 'highest', label: 'Highest' },
-];
-
-const statusOptions = [ // TODO get options from backend server
-  { value: 'to_do', label: 'To do' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'blocked', label: 'Blocked' },
-  { value: 'to_validate', label: 'To Validate' },
-  { value: 'completed', label: 'Completed' },
-];
-
 
 
 const CategoryForm: React.FC = () => {
@@ -58,9 +41,6 @@ const CategoryForm: React.FC = () => {
   const [formData, setFormData] = useState<Partial<Category>>({});
   const [tabValue, setTabValue] = useState('0');
   const isUpdate = id && id !== 'addNew';
-
-
-
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
@@ -176,8 +156,8 @@ const CategoryForm: React.FC = () => {
                 <SelectField
                   label="Type"
                   name="type"
-                  value={formData.type ?? typeOptions[0].value}
-                  options={typeOptions}
+                  value={formData.type ?? categoryTypeOptions[0].value}
+                  options={categoryTypeOptions}
                   onChange={(e) => handleInputChange(e)}
                   fullWidth
                   height="56px"
