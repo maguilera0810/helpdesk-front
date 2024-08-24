@@ -36,6 +36,13 @@ const ColorPickerField: React.FC<ColorPickerFieldProps> = ({ label, name, value,
     setSelectedColorIndex(COLOR_PALLETS.flat().indexOf(color as any));
   };
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newColor = event.target.value.toUpperCase();
+    if (!newColor || /^#[0-9A-F]{0,6}$/i.test(newColor)) {
+      onChange(newColor);
+    }
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const maxIndex = COLOR_PALLETS.flat().length - 1;
     if (event.key === 'ArrowRight') {
@@ -64,7 +71,7 @@ const ColorPickerField: React.FC<ColorPickerFieldProps> = ({ label, name, value,
         label={label}
         name={name}
         value={value}
-        onClick={handleClick}
+        onChange={handleInputChange}
         fullWidth
         InputProps={{
           endAdornment: (
@@ -77,6 +84,7 @@ const ColorPickerField: React.FC<ColorPickerFieldProps> = ({ label, name, value,
                 minWidth: 32,
                 cursor: 'pointer',
               }}
+              onClick={handleClick}
             />
           ),
         }}
@@ -118,13 +126,16 @@ const ColorPickerField: React.FC<ColorPickerFieldProps> = ({ label, name, value,
                     transform: value === color ? 'scale(1.2)' : 'scale(1)',
                     transition: 'transform 0.2s ease-in-out',
                     '&:hover': {
-                      transform: 'scale(1.2)',
+                      transform: 'scale(1.5)',
                       zIndex: 2,
                       border: '3px solid black',
                       boxShadow: '0px 0px 15px 10px rgba(0, 0, 0, 1)',
                       backgroundColor: color,
                       borderStyle: 'solid',
                     },
+                    '&:focus': {
+                      outline: 'none',
+                    }
                   }}
                 />
               ))}
