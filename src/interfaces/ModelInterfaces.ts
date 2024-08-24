@@ -53,3 +53,13 @@ export interface Issue {
   updatedAt: Date | null; //
 }
 
+export interface Category {
+  id: number;
+  title: string;
+  description: string;
+  code: string;
+  type: string;
+  color: string;
+  relations: number[];
+}
+
