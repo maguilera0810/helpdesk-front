@@ -4,6 +4,8 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
+import CategoryDetail from './pages/admin/category/CategoryDetail';
+import CategoryList from './pages/admin/category/CategoryList';
 import ListFaculties from './pages/admin/faculties/ListFaculties';
 import ListGroups from './pages/admin/groups/ListGroups';
 import ListRoles from './pages/admin/roles/ListRoles';
@@ -45,6 +47,8 @@ const AppRoutes: FC = () => (
         <Route path="/admin/users/" element={<UserList />} />
         <Route path="/admin/users/:id/" element={<UserDetail />} />
         <Route path="/admin/groups/" element={<ListGroups />} />
+        <Route path="/admin/category/" element={<CategoryList />} />
+        <Route path="/admin/category/:id/" element={<CategoryDetail />} />
         <Route path="/admin/roles/" element={<ListRoles />} />
         <Route path="/admin/faculties/" element={<ListFaculties />} />
         <Route path="/admin/campus/" element={<Campus />} />
@@ -56,7 +60,7 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/reports/" element={<Reports />} />
         <Route path="/soporte/issue/" element={<IssueList />} />
         <Route path="/soporte/issue/:id/" element={<IssueDetail />} />
-        
+
         <Route path="/soporte/statistics/" element={<Statistics />} />
         <Route path="/profile/settings/" element={<Settings />} />
         <Route path="/faqs" element={<FAQs />} />
