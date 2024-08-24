@@ -1,0 +1,110 @@
+import { useCallback, useState } from 'react';
+import { Category } from '../interfaces/ModelInterfaces';
+import CategoryService from '../services/CategoryService';
+
+export const useCategory = () => {
+  const [category, setCategory] = useState<Category | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
+
+  const fetchCategories = useCallback(async (filters: { [key: string]: any } = {}) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      const categoryList = await CategoryService.list(filters);
+      setCategories(categoryList);
+      setSuccess(true);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      setError('Error fetching categories');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const fetchCategory = async (categoryId: number) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      const category = await CategoryService.retrieve(categoryId);
+      setCategory(category);
+      setSuccess(true);
+      return category;
+    } catch (error) {
+      console.error(`Error fetching category with id ${categoryId}:`, error);
+      setError('Error fetching category');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createCategory = async (category: Partial<Category>) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      const newCategory = await CategoryService.create(category);
+      setCategories((prevCategories) => [...prevCategories, newCategory]);
+      setSuccess(true);
+    } catch (error) {
+      console.error('Error creating category:', error);
+      setError('Error creating category');
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateCategory = async (categoryId: number, category: Partial<Category>) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      const updatedCategory = await CategoryService.update(categoryId, category);
+      setCategories((prevCategories) =>
+        prevCategories.map((u) => (u.id === categoryId ? updatedCategory : u))
+      );
+      setSuccess(true);
+    } catch (error) {
+      console.error(`Error updating category with id ${categoryId}:`, error);
+      setError('Error updating category');
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCategory = async (categoryId: number) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      await CategoryService.destroy(categoryId);
+      setCategories((prevCategories) => prevCategories.filter((u) => u.id !== categoryId));
+      setSuccess(true);
+    } catch (error) {
+      console.error(`Error deleting category with id ${categoryId}:`, error);
+      setError('Error deleting category');
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    category,
+    categories,
+    loading,
+    error,
+    success,
+    fetchCategories,
+    fetchCategory,
+    createCategory,
+    updateCategory,
+    deleteCategory,
+  };
+};
