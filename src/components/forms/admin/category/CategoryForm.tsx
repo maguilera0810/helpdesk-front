@@ -10,6 +10,7 @@ import { useCategory } from '../../../../hooks/useCategory';
 import { Category } from '../../../../interfaces/ModelInterfaces';
 import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
+import TextAreaField from '../../fields/TextAreaField';
 
 
 const gridItemProps = {
@@ -133,7 +134,7 @@ const CategoryForm: React.FC = () => {
                 />
               </Grid>
               <Grid item {...gridItemProps} key={"description"}>
-                <TextField
+                <TextAreaField
                   label="Description"
                   name="description"
                   value={formData.description ?? ''}
