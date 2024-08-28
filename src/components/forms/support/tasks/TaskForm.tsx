@@ -11,6 +11,7 @@ import { useTask } from '../../../../hooks/useTask';
 import { useUser } from '../../../../hooks/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import { MultipleSelectField, SelectField } from '../../fields';
+import TextAreaField from '../../fields/TextAreaField';
 
 
 const gridItemProps = {
@@ -157,9 +158,10 @@ const TaskForm: React.FC = () => {
                 />
               </Grid>
               <Grid item {...gridItemProps} key={"description"}>
-                <TextField
+                <TextAreaField
                   label="Description"
                   name="description"
+                  required={true}
                   value={formData.description ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
