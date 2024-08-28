@@ -16,11 +16,12 @@ interface DraggableItemProps {
 }
 
 const DraggableItem: React.FC<DraggableItemProps> = ({ item, moveItem }) => {
-  const [{ isDragging }, drag, preview] = useDrag(() => ({
+  const [{ isDragging, opacity }, drag, preview] = useDrag(() => ({
     type: 'ITEM',
     item: { id: item.id },
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
+      opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   }));
 
