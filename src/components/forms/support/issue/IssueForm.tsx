@@ -9,7 +9,8 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { useIssue } from '../../../../hooks/useIssue';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
-import { MultipleSelectField, SelectField } from '../../fields';
+import { SelectField } from '../../fields';
+import TextAreaField from '../../fields/TextAreaField';
 
 
 const gridItemProps = {
@@ -153,7 +154,7 @@ const IssueForm: React.FC = () => {
                 />
               </Grid>
               <Grid item {...gridItemProps} key={"description"}>
-                <TextField
+                <TextAreaField
                   label="Description"
                   name="description"
                   required={true}
