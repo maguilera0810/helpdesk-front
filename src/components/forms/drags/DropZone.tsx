@@ -1,8 +1,12 @@
-import React from 'react';
-import { Box, Paper, Typography } from '@mui/material';
-import { useDrop } from 'react-dnd';
-import DraggableItem, { Item } from './DraggableItem';
+import React, { useState } from 'react';
 
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
+
+
+import { Paper, Typography } from '@mui/material';
+
+import DraggableItem, { Item } from './DraggableItem';
 interface DropZoneProps {
   items: Item[];
   onDrop: (item: Item, toRight: boolean) => void;
@@ -11,31 +15,46 @@ interface DropZoneProps {
 }
 
 const DropZone: React.FC<DropZoneProps> = ({ items, onDrop, title, toRight }) => {
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: 'ITEM',
-    drop: (item: Item) => onDrop(item, toRight),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  }));
+
+  const [localItems, setLocalItems] = useState<Item[]>(items)
+
+  const isOver = true;
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    setLocalItems((localItems) => {
+      const oldeIndex = localItems.findIndex(item => item.id === active.id)
+      const newIndex = localItems.findIndex(item => item.id === over?.id)
+      return arrayMove(localItems, oldeIndex, newIndex)
+    })
+
+  }
 
   return (
-    <Paper
-      ref={drop}
-      sx={{
-        padding: 2,
-        minHeight: 200,
-        backgroundColor: isOver ? '#e0f7fa' : '#f0f0f0',
-        overflowY: 'auto',
-      }}
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
     >
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
-      {items.map((item) => (
-        <DraggableItem key={item.id} item={item} moveItem={() => onDrop(item, toRight)} />
-      ))}
-    </Paper>
+      <SortableContext items={localItems} strategy={verticalListSortingStrategy}>
+        <Paper
+          sx={{
+            padding: 1,
+            minHeight: 200,
+            backgroundColor: isOver ? '#e0f7fa' : '#f0f0f0',
+            overflowY: 'auto',
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            {title}
+          </Typography>
+          {localItems.map((item) => (
+            <DraggableItem
+              key={item.id}
+              item={item}
+            />
+          ))}
+        </Paper>
+      </SortableContext>
+    </DndContext>
   );
 };
 
