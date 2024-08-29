@@ -3,7 +3,6 @@ import { create, StateCreator } from 'zustand';
 import { ICategoryState } from '../interfaces/StateInterfaces';
 
 
-
 const stateCreator: StateCreator<ICategoryState, [], [], ICategoryState> = (set) => ({
   category: null,
   categories: [],
