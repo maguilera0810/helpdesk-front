@@ -8,6 +8,7 @@ import { Dayjs } from 'dayjs';
 
 import { useCategory } from '../../../../hooks/useCategory';
 import { Category } from '../../../../interfaces/ModelInterfaces';
+import DraggableContainer from '../../drags/DraggableContainer';
 import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
@@ -172,7 +173,9 @@ const CategoryForm: React.FC = () => {
                   onChange={(e) => handleInputValueChange("color", e)}
                 />
               </Grid>
-
+              <Grid item >
+                <DraggableContainer />
+              </Grid>
             </Grid>
           </Box>
         </TabPanel>
