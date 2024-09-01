@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Chip from '@mui/material/Chip';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { Theme, useTheme } from '@mui/material/styles';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
 
 
 
@@ -19,17 +19,37 @@ const MenuProps = {
     },
   },
 };
-
+interface IOption {
+  value: any;
+  label: string;
+  color?: string;
+}
 
 interface IMultipleSelectFieldProps {
   label: string;
   name: string;
   value: any[];
-  options: Array<{ value: any; label: string }>;
+  options: IOption[];
   onChange: (e: SelectChangeEvent<string[]> | ChangeEvent<HTMLInputElement>) => void;
   fullWidth?: boolean;
-  height?: string;
+  height?: string | number;
 }
+
+type MenuItemStyles = (
+  option: IOption,
+  selectedValues: readonly any[],
+  theme: Theme
+) => SxProps<Theme>;
+
+const getMenuItemStyles: MenuItemStyles = (option, selectedValues, theme) => {
+  return {
+    fontWeight:
+      selectedValues.indexOf(option.value) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightBold,
+    height: '1.4rem',
+  };
+};
 
 const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
   label,
@@ -41,15 +61,6 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
   height = '56px' }) => {
   const theme = useTheme();
 
-  const getStyles = (item: any, options: readonly any[], theme: Theme) => {
-    return {
-      fontWeight:
-        options.indexOf(item.value) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightBold,
-    };
-  }
-
   return (
     <FormControl fullWidth={fullWidth}>
       <InputLabel>{label}</InputLabel>
@@ -57,20 +68,16 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
         name={name}
         value={value}
         onChange={onChange}
-        // sx={{ height }}
         multiple
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.3 }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.3, maxHeight: height }}>
             {selected.map((value) => (
               <Chip key={value} label={options.find(e => e.value === value)?.label} />
             ))}
           </Box>
         )}
         MenuProps={MenuProps}
-        sx={{
-          height,
-        }}
       >
         <MenuItem value="">
           <em></em>
@@ -79,9 +86,11 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
           <MenuItem
             key={option.value}
             value={option.value}
-            style={getStyles(option, value, theme)}
+            sx={getMenuItemStyles(option, value, theme)}
           >
-            <Checkbox checked={value.indexOf(option.value) > -1} />
+            <Checkbox
+              checked={value.indexOf(option.value) > -1}
+              sx={{ padding: 0 }} />
             {option.label}
           </MenuItem>
         ))}
