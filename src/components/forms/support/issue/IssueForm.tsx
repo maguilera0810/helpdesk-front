@@ -25,19 +25,6 @@ const fieldProps = {
   fullWidth: true,
 };
 
-const typeOptions = [ // TODO get options from backend server
-  { value: 'preventive', label: 'Preventive' },
-  { value: 'emergency', label: 'Emergency' },
-];
-
-const priorityOptions = [ // TODO get options from backend server
-  { value: 'lowest', label: 'Lowest' },
-  { value: 'low', label: 'Low' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'high', label: 'High' },
-  { value: 'highest', label: 'Highest' },
-];
-
 const statusOptions = [ // TODO get options from backend server
   { value: 'received', label: 'Recibido' },
   { value: 'task_created', label: 'Tarea Creada' },
@@ -60,35 +47,15 @@ const IssueForm: React.FC = () => {
   const [openDialogCreateTask, setOpenDialogCreateTask] = useState<boolean>(false);
   const [openDialogRejectIssue, setOpenDialogRejectIssue] = useState<boolean>(false);
 
-  const isUpdate = id && id !== 'addNew';
-  const toogleOpenDialog = () => {
-    setOpenDialogCreateTask((e) => !e)
+  const isUpdate = Boolean(id && id !== 'addNew');
+
+  const toogleOpenDialog = (dialogCase: 'createTask' | 'refectIssue') => {
+    if (dialogCase === 'createTask') {
+      setOpenDialogCreateTask((e) => !e)
+    } else if (dialogCase === 'refectIssue') {
+      setOpenDialogRejectIssue((e) => !e)
+    }
   }
-
-  useEffect(() => {
-    fetchCategories({ "type": "skill" });
-  }, []);
-
-
-  useEffect(() => {
-    if (isUpdate) {
-      const issueId = parseInt(id);
-      if (!isNaN(issueId)) {
-        fetchIssue(issueId);
-      }
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (issue) {
-      setFormData({
-        ...issue,
-        createdAt: issue.createdAt ? dayjs(issue.createdAt).toDate() : undefined,
-        updatedAt: issue.updatedAt ? dayjs(issue.updatedAt).toDate() : undefined,
-      });
-    }
-  }, [issue]);
-
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
@@ -110,7 +77,7 @@ const IssueForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isUpdate) {
-      const issueId = parseInt(id);
+      const issueId = parseInt(id as string);
       if (!isNaN(issueId)) {
         await updateIssue(issueId, formData);
       }
@@ -130,14 +97,49 @@ const IssueForm: React.FC = () => {
 
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
-    setOpenDialogCreateTask(true); // Open the confirmation dialog
+    toogleOpenDialog('createTask'); // Open the confirmation dialog
   };
 
   const handleConfirmCreateTask = async () => {
-    setOpenDialogCreateTask(false); // Close the confirmation dialog
-    issue?.id && createTask(issue.id)
-    console.log("tarea creada :D");
+    toogleOpenDialog('createTask'); // Close the confirmation dialog
+    issue?.id && await createTask(issue.id)
   }
+
+
+  const handleRejectIssue = async (e: React.FormEvent) => {
+    e.preventDefault();
+    toogleOpenDialog('refectIssue'); // Open the confirmation dialog
+  };
+
+  const handleConfirmRejectIssue = async () => {
+    toogleOpenDialog('refectIssue'); // Close the confirmation dialog
+    issue?.id && await updateIssue(issue.id, { "status": "rejected" })
+    console.log("issue cancelado :'v");
+  }
+
+
+  useEffect(() => {
+    fetchCategories({ "type": "skill" });
+  }, []);
+
+  useEffect(() => {
+    if (!isUpdate) {
+      return
+    }
+    const issueId = parseInt(id as string);
+    if (!isNaN(issueId)) {
+      fetchIssue(issueId);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (!issue) { return; }
+    setFormData({
+      ...issue,
+      createdAt: issue.createdAt ? dayjs(issue.createdAt).toDate() : undefined,
+      updatedAt: issue.updatedAt ? dayjs(issue.updatedAt).toDate() : undefined,
+    });
+  }, [issue]);
 
   useEffect(() => {
     if (createdTask) {
@@ -145,19 +147,11 @@ const IssueForm: React.FC = () => {
     }
   }, [createdTask])
 
-  const handleRejectIssue = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setOpenDialogRejectIssue(true); // Open the confirmation dialog
-  };
-
-  const handleConfirmRejectIssue = async () => {
-    setOpenDialogRejectIssue(false); // Close the confirmation dialog
-    console.log("issue cancelado :'v");
-  }
-
-  // useEffect(() => {
-  //   success && setFormData({});
-  // }, [success]);
+  useEffect(() => {
+    if (successIssue && !isUpdate && issue) {
+      navigate(`/soporte/issue/${issue.id}/`);
+    }
+  }, [successIssue, issue])
 
   const getDialogs = () => (
     <>
@@ -176,21 +170,35 @@ const IssueForm: React.FC = () => {
     </>
   )
 
+  const displayButtons = () => {
+    if (!isUpdate) {
+      return <>
+        <Button onClick={handleSubmit} variant="contained" color="primary"
+          disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
+          {loadingIssue ? 'Creating...' : 'Create Issue'}
+        </Button>
+      </>;
+    } else if (issue?.status === 'received') {
+      return <>
+        <Button onClick={handleCreateTask} variant="contained" color="secondary"
+          disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
+          Crear Tarea
+        </Button>
+        <Button onClick={handleRejectIssue} variant="contained" color="warning"
+          disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
+          Rechazar
+        </Button>
+      </>;
+    }
+  }
+
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       {getDialogs()}
       <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update Issue' : 'Create Issue'}</Typography>
-      {errorIssue && <Typography color="error" sx={{ mb: 2 }}>{errorIssue}</Typography>}
-      {successIssue && <Typography color="primary" sx={{ mb: 2 }}>Issue {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
-      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingIssue} sx={{ mt: 3, mb: 2 }}>
-        {loadingIssue ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update Issue' : 'Create Issue')}
-      </Button>
-      <Button onClick={handleCreateTask} variant="contained" color="secondary" disabled={loadingIssue} sx={{ mt: 3, mb: 2 }}>
-        Crear Tarea
-      </Button>
-      <Button onClick={handleRejectIssue} variant="contained" color="warning" disabled={loadingIssue} sx={{ mt: 3, mb: 2 }}>
-        Rechazar
-      </Button>
+      {/* {errorIssue && <Typography color="error" sx={{ mb: 2 }}>{errorIssue}</Typography>} */}
+      {/* {successIssue && <Typography color="primary" sx={{ mb: 2 }}>Issue {isUpdate ? 'updated' : 'created'} successfully!</Typography>} */}
+      {displayButtons()}
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="issue form tabs">
@@ -206,6 +214,9 @@ const IssueForm: React.FC = () => {
                   label="Title"
                   name="title"
                   required={true}
+                  InputProps={{
+                    readOnly: isUpdate,
+                  }}
                   value={formData.title ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -216,6 +227,7 @@ const IssueForm: React.FC = () => {
                   label="Description"
                   name="description"
                   required={true}
+                  InputProps={{ readOnly: isUpdate, }}
                   value={formData.description ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -225,6 +237,9 @@ const IssueForm: React.FC = () => {
                 <TextField
                   label="Email Contacto"
                   name="contactEmail"
+                  InputProps={{
+                    readOnly: isUpdate,
+                  }}
                   value={formData.contactEmail ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -234,6 +249,9 @@ const IssueForm: React.FC = () => {
                 <TextField
                   label="Télefono Contacto"
                   name="contactPhone"
+                  InputProps={{
+                    readOnly: isUpdate,
+                  }}
                   value={formData.contactPhone ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -243,7 +261,6 @@ const IssueForm: React.FC = () => {
                 <TextField
                   label="Code"
                   name="code"
-                  disabled={true}
                   value={formData.code ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   required
@@ -254,6 +271,7 @@ const IssueForm: React.FC = () => {
                 <SelectField
                   label="Status"
                   name="status"
+                  readOnly={isUpdate}
                   value={formData.status ?? statusOptions[0].value}
                   options={statusOptions}
                   onChange={(e) => handleInputChange(e)}
@@ -290,6 +308,7 @@ const IssueForm: React.FC = () => {
                     color: category.color,
                   }))}
                   onChange={(e) => handleInputChange(e)}
+                  disabled={isUpdate}
                   fullWidth
                 />
               </Grid>
