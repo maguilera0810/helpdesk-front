@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import React, { ChangeEvent } from 'react';
 
 interface ISelectFieldProps {
   label: string;
@@ -9,9 +9,18 @@ interface ISelectFieldProps {
   onChange: (e: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement>) => void;
   fullWidth?: boolean;
   height?: string;
+  readOnly?: boolean;
 }
 
-const SelectField: React.FC<ISelectFieldProps> = ({ label, name, value, options, onChange, fullWidth = true, height = '56px' }) => {
+const SelectField: React.FC<ISelectFieldProps> = ({
+  label,
+  name,
+  value,
+  options,
+  onChange,
+  fullWidth = true,
+  readOnly = false,
+  height = '56px' }) => {
   return (
     <FormControl fullWidth={fullWidth}>
       <InputLabel>{label}</InputLabel>
@@ -20,6 +29,9 @@ const SelectField: React.FC<ISelectFieldProps> = ({ label, name, value, options,
         value={value}
         onChange={onChange}
         sx={{ height }}
+        inputProps={{
+          readOnly: readOnly,
+        }}
       >
         <MenuItem value="">
           <em></em>
