@@ -49,7 +49,7 @@ export const useIssue = () => {
     setSuccess(false);
     try {
       const newIssue = await IssueService.create(issue);
-      setIssues((prevIssues) => [...prevIssues, newIssue]);
+      setIssue(newIssue)
       setSuccess(true);
     } catch (error) {
       console.error('Error creating issue:', error);
