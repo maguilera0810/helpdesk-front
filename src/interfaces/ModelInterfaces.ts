@@ -31,6 +31,7 @@ export interface Task {
   created_by: number | Partial<User>;
   responsible: number | Partial<User>;
   team: number[] | Partial<User>[];
+  categories: number[] | Partial<Category>[];
   plan?: number; // Plan
   scheduled: number; //TODO ANALIZAR
   createdAt: Date | null; //

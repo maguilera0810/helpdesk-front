@@ -7,6 +7,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { useCategory } from '../../../../hooks/useCategory';
 import { useTask } from '../../../../hooks/useTask';
 import { useUser } from '../../../../hooks/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
@@ -56,6 +57,7 @@ const statusOptions = [ // TODO get options from backend server
 const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { categories, fetchCategories } = useCategory();
   const { task, error: errorTask, loading: loadingTask, success: successTask, fetchTask, createTask, updateTask } = useTask();
   const { users, fetchUsers } = useUser();
 
@@ -66,6 +68,7 @@ const TaskForm: React.FC = () => {
 
   useEffect(() => {
     fetchUsers({ "groups__id__in": [1, 2, 3] });
+    fetchCategories({ "type": "skill" });
   }, []);
 
   useEffect(() => {
@@ -249,6 +252,20 @@ const TaskForm: React.FC = () => {
                   onChange={(e) => handleInputChange(e)}
                   fullWidth
                   height="auto"
+                />
+              </Grid>
+              <Grid item {...gridItemProps} key={"categories"}>
+                <MultipleSelectField
+                  label="Categories"
+                  name="categories"
+                  value={formData.categories?.map(e => e.toString()) ?? []}
+                  options={categories.map(category => ({
+                    value: category.id.toString(),
+                    label: category.title,
+                    color: category.color,
+                  }))}
+                  onChange={(e) => handleInputChange(e)}
+                  fullWidth
                 />
               </Grid>
             </Grid>
