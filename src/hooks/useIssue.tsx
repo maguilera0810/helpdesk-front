@@ -9,6 +9,7 @@ export const useIssue = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+  const [successCreateTask, setSuccessCreateTask] = useState<boolean>(false);
 
   const fetchIssues = useCallback(async (filters: { [key: string]: any } = {}) => {
     setLoading(true);
@@ -63,15 +64,15 @@ export const useIssue = () => {
   const createTask = async (id: number) => {
     setLoading(true);
     setError(null);
-    setSuccess(false);
+    setSuccessCreateTask(false);
     try {
       const taskId = await IssueService.createTask(id);
       setCreatedTask(taskId)
-      setSuccess(true);
+      setSuccessCreateTask(true);
     } catch (error) {
       console.error('Error creating issue:', error);
       setError('Error creating issue');
-      setSuccess(false);
+      setSuccessCreateTask(false);
     } finally {
       setLoading(false);
     }
@@ -117,6 +118,7 @@ export const useIssue = () => {
     loading,
     error,
     success,
+    successCreateTask,
     issue,
     issues,
     createdTask,
