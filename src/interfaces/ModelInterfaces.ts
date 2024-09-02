@@ -33,6 +33,7 @@ export interface Task {
   team: number[] | Partial<User>[];
   categories: number[] | Partial<Category>[];
   plan?: number; // Plan
+  issue?: number;
   scheduled: number; //TODO ANALIZAR
   createdAt: Date | null; //
   updatedAt: Date | null; //
@@ -47,7 +48,7 @@ export interface Issue {
   contactEmail: string;
   contactPhone: string;
   requestingUnit: number;
-  task: number;
+  task?: number;
   categories: number[];
   createdBy: number;
   createdAt: Date | null; //

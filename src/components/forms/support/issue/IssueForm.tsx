@@ -52,8 +52,8 @@ const IssueForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { categories, fetchCategories } = useCategory();
-  const { issue, error: errorIssue, loading: loadingIssue, success: successIssue,
-    fetchIssue, createIssue, updateIssue } = useIssue();
+  const { issue, createdTask, error: errorIssue, loading: loadingIssue, success: successIssue,
+    fetchIssue, createIssue, updateIssue, createTask } = useIssue();
 
   const [formData, setFormData] = useState<Partial<Issue>>({});
   const [tabValue, setTabValue] = useState('0');
@@ -135,8 +135,16 @@ const IssueForm: React.FC = () => {
 
   const handleConfirmCreateTask = async () => {
     setOpenDialogCreateTask(false); // Close the confirmation dialog
+    issue?.id && createTask(issue.id)
     console.log("tarea creada :D");
   }
+
+  useEffect(() => {
+    if (createdTask) {
+      navigate(`/soporte/tareas/${createdTask}/`);
+    }
+  }, [createdTask])
+
   const handleRejectIssue = async (e: React.FormEvent) => {
     e.preventDefault();
     setOpenDialogRejectIssue(true); // Open the confirmation dialog
