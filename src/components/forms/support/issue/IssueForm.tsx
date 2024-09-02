@@ -156,7 +156,7 @@ const IssueForm: React.FC = () => {
       <DialogComponent
         open={openDialogCreateTask}
         variant={'confirm'}
-        title="Estas seguro de crear una tarea?"
+        title="Estas seguro de crear una tarea"
         onConfirm={handleConfirmCreateTask}
         onCancel={() => setOpenDialogCreateTask(false)} />
       <DialogComponent
