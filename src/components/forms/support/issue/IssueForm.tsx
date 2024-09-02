@@ -10,9 +10,9 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useCategory } from '../../../../hooks/useCategory';
 import { useIssue } from '../../../../hooks/useIssue';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
+import DialogComponent from '../../../dialogs/DialogComponent';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
-
 
 const gridItemProps = {
   xs: 12,
@@ -39,10 +39,10 @@ const priorityOptions = [ // TODO get options from backend server
 ];
 
 const statusOptions = [ // TODO get options from backend server
-  { value: 'to_do', label: 'To do' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'blocked', label: 'Blocked' },
-  { value: 'to_validate', label: 'To Validate' },
+  { value: 'received', label: 'Recibido' },
+  { value: 'task_created', label: 'Tarea Creada' },
+  { value: 'rejected', label: 'Rechazado' },
+  { value: 'to_validate', label: 'Por Validar' },
   { value: 'completed', label: 'Completed' },
 ];
 
@@ -55,11 +55,15 @@ const IssueForm: React.FC = () => {
   const { issue, error: errorIssue, loading: loadingIssue, success: successIssue,
     fetchIssue, createIssue, updateIssue } = useIssue();
 
-
   const [formData, setFormData] = useState<Partial<Issue>>({});
   const [tabValue, setTabValue] = useState('0');
+  const [openDialogCreateTask, setOpenDialogCreateTask] = useState<boolean>(false);
+  const [openDialogRejectIssue, setOpenDialogRejectIssue] = useState<boolean>(false);
 
   const isUpdate = id && id !== 'addNew';
+  const toogleOpenDialog = () => {
+    setOpenDialogCreateTask((e) => !e)
+  }
 
   useEffect(() => {
     fetchCategories({ "type": "skill" });
@@ -124,17 +128,60 @@ const IssueForm: React.FC = () => {
     setTabValue(newValue);
   };
 
+  const handleCreateTask = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setOpenDialogCreateTask(true); // Open the confirmation dialog
+  };
+
+  const handleConfirmCreateTask = async () => {
+    setOpenDialogCreateTask(false); // Close the confirmation dialog
+    console.log("tarea creada :D");
+  }
+  const handleRejectIssue = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setOpenDialogRejectIssue(true); // Open the confirmation dialog
+  };
+
+  const handleConfirmRejectIssue = async () => {
+    setOpenDialogRejectIssue(false); // Close the confirmation dialog
+    console.log("issue cancelado :'v");
+  }
+
   // useEffect(() => {
   //   success && setFormData({});
   // }, [success]);
 
+  const getDialogs = () => (
+    <>
+      <DialogComponent
+        open={openDialogCreateTask}
+        variant={'confirm'}
+        title="Estas seguro de crear una tarea?"
+        onConfirm={handleConfirmCreateTask}
+        onCancel={() => setOpenDialogCreateTask(false)} />
+      <DialogComponent
+        open={openDialogRejectIssue}
+        variant={'alert'}
+        title="Estas seguro de rechazar"
+        onConfirm={handleConfirmRejectIssue}
+        onCancel={() => setOpenDialogRejectIssue(false)} />
+    </>
+  )
+
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
+      {getDialogs()}
       <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update Issue' : 'Create Issue'}</Typography>
       {errorIssue && <Typography color="error" sx={{ mb: 2 }}>{errorIssue}</Typography>}
       {successIssue && <Typography color="primary" sx={{ mb: 2 }}>Issue {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingIssue} sx={{ mt: 3, mb: 2 }}>
         {loadingIssue ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update Issue' : 'Create Issue')}
+      </Button>
+      <Button onClick={handleCreateTask} variant="contained" color="secondary" disabled={loadingIssue} sx={{ mt: 3, mb: 2 }}>
+        Crear Tarea
+      </Button>
+      <Button onClick={handleRejectIssue} variant="contained" color="warning" disabled={loadingIssue} sx={{ mt: 3, mb: 2 }}>
+        Rechazar
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
