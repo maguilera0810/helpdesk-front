@@ -3,24 +3,22 @@ import { FC, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
+
 import { useIssue } from '../../hooks/useIssue';
 import useFilterStore from '../../stores/useFilterStore';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'id', headerName: 'ID', width: 20 },
   { field: 'code', headerName: 'Codigo', width: 130 },
   { field: 'title', headerName: 'Titulo', width: 130 },
   { field: 'status', headerName: 'Estado', width: 130 },
-  { field: 'priority', headerName: 'Prioridad', width: 130 },
   { field: 'createdBy', headerName: 'Creado por', width: 130 },
-  { field: 'responsible', headerName: 'Responsable', width: 130 },
-  { field: 'createdAt', headerName: 'Fecha Creación', width: 130 },
-  { field: 'updatedAt', headerName: 'Fecha Actualización', width: 130 },
+  { field: 'createdAt', headerName: 'Fecha Creación', width: 200 },
 ];
 
 const IssueTable: FC = () => {
   const navigate = useNavigate();
-  const { issues, loading, error, fetchIssues, deleteIssue } = useIssue();
+  const { issues, loading, error, fetchIssues} = useIssue();
   const { filters, clearFilters } = useFilterStore();
 
   useEffect(() => {
