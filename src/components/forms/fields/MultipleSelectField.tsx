@@ -33,6 +33,7 @@ interface IMultipleSelectFieldProps {
   onChange: (e: SelectChangeEvent<string[]> | ChangeEvent<HTMLInputElement>) => void;
   fullWidth?: boolean;
   height?: string | number;
+  disabled?: boolean;
 }
 
 type MenuItemStyles = (
@@ -58,7 +59,8 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
   options,
   onChange,
   fullWidth = true,
-  height = '56px' }) => {
+  height = '56px',
+  disabled = false }) => {
   const theme = useTheme();
 
   return (
@@ -79,14 +81,12 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
         )}
         MenuProps={MenuProps}
       >
-        <MenuItem value="">
-          <em></em>
-        </MenuItem>
         {options.map((option) => (
           <MenuItem
             key={option.value}
             value={option.value}
             sx={getMenuItemStyles(option, value, theme)}
+            disabled={disabled}
           >
             <Checkbox
               checked={value.indexOf(option.value) > -1}
