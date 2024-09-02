@@ -8,11 +8,12 @@ import { Dayjs } from 'dayjs';
 
 import { useCategory } from '../../../../hooks/useCategory';
 import { Category } from '../../../../interfaces/ModelInterfaces';
+import useCategoryStore from '../../../../stores/useCategoryStore';
 import DraggableContainer from '../../drags/DraggableContainer';
 import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
-
+import CategoryRelations from './CategoryRelations';
 
 const gridItemProps = {
   xs: 12,
@@ -39,6 +40,7 @@ const categoryTypeOptions = [ // TODO get options from backend server
 const CategoryForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const setCategory = useCategoryStore((state) => state.setCategory);
   const { category, error: errorCategory, loading: loadingCategory, success: successCategory, fetchCategory, createCategory, updateCategory } = useCategory();
   const [formData, setFormData] = useState<Partial<Category>>({});
   const [tabValue, setTabValue] = useState('0');
@@ -80,6 +82,7 @@ const CategoryForm: React.FC = () => {
     }
     // navigate('/admin/users');
   };
+
   const showField = () => {
     return "block";
     isUpdate ? "block" : "none"
@@ -101,6 +104,7 @@ const CategoryForm: React.FC = () => {
   useEffect(() => {
     if (category) {
       setFormData({ ...category });
+      setCategory(category)
     }
   }, [category]);
   // useEffect(() => {
@@ -119,7 +123,7 @@ const CategoryForm: React.FC = () => {
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="category form tabs">
             <Tab label="Base Info" value="0" />
-            <Tab label="Permissions" value="1" />
+            <Tab label="Relations" value="1" />
           </TabList>
         </Box>
         <TabPanel value="0">
@@ -178,6 +182,9 @@ const CategoryForm: React.FC = () => {
               </Grid>
             </Grid>
           </Box>
+        </TabPanel>
+        <TabPanel value="1">
+          <CategoryRelations />
         </TabPanel>
       </TabContext>
     </Paper>
