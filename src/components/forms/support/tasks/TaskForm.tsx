@@ -14,7 +14,6 @@ import { Task } from '../../../../interfaces/ModelInterfaces';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 
-
 const gridItemProps = {
   xs: 12,
   sm: 6,
@@ -25,18 +24,13 @@ const gridItemProps = {
 const fieldProps = {
   fullWidth: true,
 };
-const fieldStyles = {
-  // height: '56px',
-  '&:focus': {
-    outline: 'none',
-  }
-};
-const typeOptions = [ // TODO get options from backend server
+
+const typeOptions = [
   { value: 'preventive', label: 'Preventive' },
   { value: 'emergency', label: 'Emergency' },
 ];
 
-const priorityOptions = [ // TODO get options from backend server
+const priorityOptions = [
   { value: 'lowest', label: 'Lowest' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
@@ -44,7 +38,7 @@ const priorityOptions = [ // TODO get options from backend server
   { value: 'highest', label: 'Highest' },
 ];
 
-const statusOptions = [ // TODO get options from backend server
+const statusOptions = [
   { value: 'to_do', label: 'To do' },
   { value: 'in_progress', label: 'In Progress' },
   { value: 'blocked', label: 'Blocked' },
