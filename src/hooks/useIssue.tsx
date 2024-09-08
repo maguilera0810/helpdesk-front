@@ -84,9 +84,7 @@ export const useIssue = () => {
     setSuccess(false);
     try {
       const updatedIssue = await IssueService.update(issueId, issue);
-      setIssues((prevIssues) =>
-        prevIssues.map((u) => (u.id === issueId ? updatedIssue : u))
-      );
+      setIssue(updatedIssue);
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating issue with id ${issueId}:`, error);
@@ -103,7 +101,7 @@ export const useIssue = () => {
     setSuccess(false);
     try {
       await IssueService.destroy(issueId);
-      setIssues((prevIssues) => prevIssues.filter((u) => u.id !== issueId));
+      setIssue(null);
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting issue with id ${issueId}:`, error);
