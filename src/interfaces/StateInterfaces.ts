@@ -1,6 +1,15 @@
 import { Token } from '../interfaces/AuthInterfaces';
-import { User } from '../interfaces/ModelInterfaces';
+import { Task, User } from '../interfaces/ModelInterfaces';
 import { Category } from "./ModelInterfaces";
+
+
+export interface ITaskState {
+  task: Task | null;
+  tasks: Task[];
+  setTask: (task: Task | null) => void;
+  setTasks: (tasks: Task[]) => void;
+  clearTaks: () => void;
+}
 
 export interface ICategoryState {
   category: Category | null;
