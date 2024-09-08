@@ -52,7 +52,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async destroy(id: number): Promise<void> {
     try {
-      await this.axiosInstance.delete(`${id}`);
+      await this.axiosInstance.delete(`${id}/`);
     } catch (error) {
       console.error(`Error deleting item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
       throw error;
