@@ -172,12 +172,11 @@ const IssueForm: React.FC = () => {
 
   const displayButtons = () => {
     if (!isUpdate) {
-      return <>
+      return (
         <Button onClick={handleSubmit} variant="contained" color="primary"
           disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
           {loadingIssue ? 'Creating...' : 'Create Issue'}
-        </Button>
-      </>;
+        </Button>);
     } else if (issue?.status === 'received') {
       return <>
         <Button onClick={handleCreateTask} variant="contained" color="secondary"
@@ -195,7 +194,7 @@ const IssueForm: React.FC = () => {
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       {getDialogs()}
-      <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update Issue' : 'Create Issue'}</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Problema</Typography>
       {/* {errorIssue && <Typography color="error" sx={{ mb: 2 }}>{errorIssue}</Typography>} */}
       {/* {successIssue && <Typography color="primary" sx={{ mb: 2 }}>Issue {isUpdate ? 'updated' : 'created'} successfully!</Typography>} */}
       {displayButtons()}
