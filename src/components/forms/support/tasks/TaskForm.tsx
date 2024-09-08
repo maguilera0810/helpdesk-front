@@ -39,11 +39,14 @@ const priorityOptions = [
 ];
 
 const statusOptions = [
-  { value: 'to_do', label: 'To do' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'blocked', label: 'Blocked' },
-  { value: 'to_validate', label: 'To Validate' },
-  { value: 'completed', label: 'Completed' },
+  { value: 'to_do', label: 'Por hacer' },
+  { value: 'in_progress', label: 'En ejecucion' },
+  { value: 'blocked', label: 'Bloqueado' },
+  { value: 'scheduled', label: 'Programado' },
+  { value: 'rescheduled', label: 'Reprogramado' },
+  { value: 'executed', label: 'Ejecutado' },
+  { value: 'to_validate', label: 'Por validar' },
+  { value: 'completed', label: 'Completado' },
 ];
 
 
@@ -129,17 +132,17 @@ const TaskForm: React.FC = () => {
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
-      <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update Task' : 'Create Task'}</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Actualizar Tarea' : 'Crear Tarea'}</Typography>
       {errorTask && <Typography color="error" sx={{ mb: 2 }}>{errorTask}</Typography>}
-      {successTask && <Typography color="primary" sx={{ mb: 2 }}>Task {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
+      {/* {successTask && <Typography color="primary" sx={{ mb: 2 }}>Task {isUpdate ? 'updated' : 'created'} successfully!</Typography>} */}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingTask} sx={{ mt: 3, mb: 2 }}>
-        {loadingTask ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update Task' : 'Create Task')}
+        {loadingTask ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Actualizar Tarea' : 'Crear Tarea')}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="task form tabs">
             <Tab label="Base Info" value="0" />
-            <Tab label="Permissions" value="1" />
+            {/* <Tab label="Permissions" value="1" /> */}
           </TabList>
         </Box>
         <TabPanel value="0">
