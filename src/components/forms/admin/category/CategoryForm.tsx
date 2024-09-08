@@ -9,7 +9,6 @@ import { Dayjs } from 'dayjs';
 import { useCategory } from '../../../../hooks/useCategory';
 import { Category } from '../../../../interfaces/ModelInterfaces';
 import useCategoryStore from '../../../../stores/useCategoryStore';
-import DraggableContainer from '../../drags/DraggableContainer';
 import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
@@ -113,11 +112,11 @@ const CategoryForm: React.FC = () => {
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
-      <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update Category' : 'Create Category'}</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Categoria</Typography>
       {errorCategory && <Typography color="error" sx={{ mb: 2 }}>{errorCategory}</Typography>}
-      {successCategory && <Typography color="primary" sx={{ mb: 2 }}>Category {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
+      {/* {successCategory && <Typography color="primary" sx={{ mb: 2 }}>Category {isUpdate ? 'updated' : 'created'} successfully!</Typography>} */}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingCategory} sx={{ mt: 3, mb: 2 }}>
-        {loadingCategory ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update Category' : 'Create Category')}
+        {loadingCategory ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Actualizar' : 'Crear')}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
@@ -176,9 +175,6 @@ const CategoryForm: React.FC = () => {
                   value={formData.color ?? ""}
                   onChange={(e) => handleInputValueChange("color", e)}
                 />
-              </Grid>
-              <Grid item >
-                <DraggableContainer />
               </Grid>
             </Grid>
           </Box>
