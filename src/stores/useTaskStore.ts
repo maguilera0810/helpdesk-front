@@ -20,6 +20,6 @@ const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
     })),
 });
 
-const useCategoryStore = create<ITaskState>()(stateCreator);
+const useTaskStore = create<ITaskState>()(stateCreator);
 
-export default useCategoryStore;
+export default useTaskStore;
