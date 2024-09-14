@@ -13,8 +13,8 @@ const persistOptions: PersistOptions<IAuthState> = {
 };
 
 const stateCreator: StateCreator<IAuthState, [], [], IAuthState> = (set) => ({
-  token: null,
   user: null,
+  token: null,
   setUser: (user) =>
     set(produce((state: IAuthState) => {
       state.user = user;
