@@ -6,7 +6,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { priorityOptions, statusOptions, taskTypeOptions } from '../../../../constants';
+import { priorityOptions, taskStatusOptions, taskTypeOptions } from '../../../../constants';
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import useCategoryStore from '../../../../stores/useCategoryStore';
@@ -174,8 +174,8 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <SelectField
             label="Status"
             name="status"
-            value={formData.status ?? statusOptions[0].value}
-            options={statusOptions}
+            value={formData.status ?? taskStatusOptions[0].value}
+            options={taskStatusOptions}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="56px"
