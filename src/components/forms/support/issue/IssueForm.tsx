@@ -7,6 +7,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { issueStatusOptions } from '../../../../constants';
 import { useCategory } from '../../../../hooks/useCategory';
 import { useIssue } from '../../../../hooks/useIssue';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
@@ -25,13 +26,6 @@ const fieldProps = {
   fullWidth: true,
 };
 
-const statusOptions = [ // TODO get options from backend server
-  { value: 'received', label: 'Recibido' },
-  { value: 'task_created', label: 'Tarea Creada' },
-  { value: 'rejected', label: 'Rechazado' },
-  { value: 'to_validate', label: 'Por Validar' },
-  { value: 'completed', label: 'Completed' },
-];
 
 
 
@@ -271,8 +265,8 @@ const IssueForm: React.FC = () => {
                   label="Status"
                   name="status"
                   readOnly={isUpdate}
-                  value={formData.status ?? statusOptions[0].value}
-                  options={statusOptions}
+                  value={formData.status ?? issueStatusOptions[0].value}
+                  options={issueStatusOptions}
                   onChange={(e) => handleInputChange(e)}
                   fullWidth
                   height="56px"
