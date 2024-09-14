@@ -41,7 +41,6 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async update(id: number, item: Partial<T>): Promise<T> {
     try {
-      console.log(keysToSnake(item));
       const response = await this.axiosInstance.put<T>(`${id}/`, keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
