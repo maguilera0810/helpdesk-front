@@ -21,7 +21,7 @@ export interface User {
 }
 
 export interface Task {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   code: string;
