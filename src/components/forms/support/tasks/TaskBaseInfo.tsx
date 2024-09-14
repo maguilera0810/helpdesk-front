@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
+
+import { priorityOptions, statusOptions, taskTypeOptions } from '../../../../constants';
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import useCategoryStore from '../../../../stores/useCategoryStore';
@@ -25,29 +26,6 @@ const fieldProps = {
   fullWidth: true,
 };
 
-const typeOptions = [
-  { value: 'preventive', label: 'Preventive' },
-  { value: 'emergency', label: 'Emergency' },
-];
-
-const priorityOptions = [
-  { value: 'lowest', label: 'Lowest' },
-  { value: 'low', label: 'Low' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'high', label: 'High' },
-  { value: 'highest', label: 'Highest' },
-];
-
-const statusOptions = [
-  { value: 'to_do', label: 'Por hacer' },
-  { value: 'in_progress', label: 'En ejecucion' },
-  { value: 'blocked', label: 'Bloqueado' },
-  { value: 'scheduled', label: 'Programado' },
-  { value: 'rescheduled', label: 'Reprogramado' },
-  { value: 'executed', label: 'Ejecutado' },
-  { value: 'to_validate', label: 'Por validar' },
-  { value: 'completed', label: 'Completado' },
-];
 
 interface TaskBaseInfoProps {
   onSubmit?: (task: Partial<Task>) => void;
@@ -185,8 +163,8 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <SelectField
             label="Type"
             name="type"
-            value={formData.type ?? typeOptions[0].value}
-            options={typeOptions}
+            value={formData.type ?? taskTypeOptions[0].value}
+            options={taskTypeOptions}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="56px"
