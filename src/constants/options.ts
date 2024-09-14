@@ -1,10 +1,11 @@
+import { IOption } from "../interfaces/GlobalInterfaces";
 
-export const tasksTypeOptions = [
+export const taskTypeOptions: IOption[] = [
   { value: 'preventive', label: 'Preventive' },
   { value: 'emergency', label: 'Emergency' },
 ];
 
-export const priorityOptions = [
+export const priorityOptions: IOption[] = [
   { value: 'lowest', label: 'Lowest' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
@@ -12,7 +13,7 @@ export const priorityOptions = [
   { value: 'highest', label: 'Highest' },
 ];
 
-export const statusOptions = [
+export const statusOptions: IOption[] = [
   { value: 'to_do', label: 'Por hacer' },
   { value: 'in_progress', label: 'En ejecución' },
   { value: 'blocked', label: 'Bloqueado' },

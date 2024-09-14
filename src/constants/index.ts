@@ -1,2 +1,2 @@
-export * from './formOptions';
+export * from './options';
 

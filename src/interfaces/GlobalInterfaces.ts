@@ -6,3 +6,9 @@ export interface IRandomStringOptions {
   useNumbers?: boolean;
   useSpecialChars?: boolean;
 }
+
+
+export interface IOption {
+  value: string;
+  label: string;
+}
