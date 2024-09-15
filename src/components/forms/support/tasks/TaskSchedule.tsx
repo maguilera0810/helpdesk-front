@@ -1,12 +1,13 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
@@ -20,7 +21,7 @@ const gridItemProps = {
     xs: 12,
     sm: 6,
     md: 4,
-    xl: 2,
+    xl: 3,
   }
 };
 
@@ -34,6 +35,8 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
+
+  const [currDate, setCurrDate] = useState<Dayjs | null>(dayjs());
   const { task, setTask } = useTaskStore()
   const { task: taskFetched, loading, success, method, updateTask } = useTask();
 
@@ -75,6 +78,11 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     }
   }, [success]);
 
+  useEffect(() => {
+    console.log("cambio");
+
+  }, [formData.responsible, formData.team])
+
   const showField = () => {
     return isUpdate ? "block" : "none";
   }
@@ -83,12 +91,11 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     if (loading) {
       return isUpdate ? 'Actualizando...' : 'Creando...';
     }
-    return isUpdate ? 'Actualizar' : 'Crear';
+    return isUpdate ? 'Agendar' : 'Reagendar';
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
-    console.log(name, value);
     if (name) {
       setFormData((prev) => ({
         ...prev,
@@ -97,41 +104,53 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     }
   };
 
+
+
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
-      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
-        {buttonMsg()}
-      </Button>
+      <Grid container spacing={1} alignItems={"center"} alignContent={"center"}>
+        <Grid>
+          <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
+            {buttonMsg()}
+          </Button>
+        </Grid>
+        <Grid key={"responsible"}>
+          <SelectField
+            label="Responsable"
+            name="responsible"
+            value={formData.responsible?.toString() ?? ''}
+            options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+            onChange={(e) => handleInputChange(e)}
+            fullWidth
+            height="56px"
+          />
+        </Grid>
+        <Grid key={"team"}>
+          <MultipleSelectField
+            label="Equipo"
+            name="team"
+            value={formData.team?.map((e) => typeof e === 'number' ? e.toString() : e) ?? []}
+            options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+            onChange={(e) => handleInputChange(e)}
+            fullWidth
+            height="auto"
+          />
+        </Grid>
+      </Grid>
       <Grid container>
         <Grid container
           direction="column"
           spacing={1}
           {...gridItemProps}>
           <Grid>
-            Calendario
+            <DateCalendar
+              showDaysOutsideCurrentMonth
+              defaultValue={dayjs()}
+              views={['year', 'month', 'day']}
+              value={currDate}
+              onChange={(newDate) => setCurrDate(newDate)} />
           </Grid>
-          <Grid key={"responsible"}>
-            <SelectField
-              label="Responsable"
-              name="responsible"
-              value={formData.responsible?.toString() ?? ''}
-              options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
-              onChange={(e) => handleInputChange(e)}
-              fullWidth
-              height="56px"
-            />
-          </Grid>
-          <Grid key={"team"}>
-            <MultipleSelectField
-              label="Equipo"
-              name="team"
-              value={formData.team?.map((e) => typeof e === 'number' ? e.toString() : e) ?? []}
-              options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
-              onChange={(e) => handleInputChange(e)}
-              fullWidth
-              height="auto"
-            />
-          </Grid>
+
         </Grid>
         <Grid container>
           <Grid>
