@@ -107,7 +107,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     }
     console.log(userIds, formData.startAt, formData.endAt);
 
-  }, [formData.responsible, formData.team])
+  }, [formData.responsible, formData.team, startAt, endAt])
 
   const showField = () => {
     return isUpdate ? "block" : "none";
@@ -158,7 +158,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
             <MultipleSelectField
               label="Equipo"
               name="team"
-              value={formData.team?.map((e) => typeof e === 'number' ? e.toString() : e) ?? []}
+              value={formData.team ?? []}
               options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
               onChange={(e) => handleInputChange(e)}
               fullWidth
