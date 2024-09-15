@@ -68,7 +68,7 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
       <InputLabel>{label}</InputLabel>
       <Select
         name={name}
-        value={value}
+        value={value.map((e) => typeof e === 'number' ? e.toString() : e)}
         onChange={onChange}
         multiple
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
