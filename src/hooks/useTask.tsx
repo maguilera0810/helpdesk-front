@@ -1,14 +1,17 @@
 import { useCallback, useState } from 'react';
-import { Task } from '../interfaces/ModelInterfaces';
+import { Task, UserTask } from '../interfaces/ModelInterfaces';
+import { TaskScheduleRequest } from '../interfaces/RequestInterfaces';
 import TaskService from '../services/TaskService';
 
+type methodType = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | null;
 
 export const useTask = () => {
   const [task, setTask] = useState<Task | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [userTasks, setUserTasks] = useState<UserTask[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [method, setMethod] = useState<"fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | null>(null);
+  const [method, setMethod] = useState<methodType>(null);
   const [success, setSuccess] = useState<boolean | null>(null);
 
   const fetchTasks = useCallback(async (filters: { [key: string]: any } = {}) => {
@@ -26,7 +29,24 @@ export const useTask = () => {
       setError('Error fetching tasks');
     } finally {
       setLoading(false);
-      setMethod(null);
+    }
+  }, []);
+
+  const fetchUserTasks = useCallback(async (body: TaskScheduleRequest) => {
+    setMethod("fetchTasks");
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      const resp = await TaskService.retrieveSchedules(body);
+      setUserTasks(resp);
+      setSuccess(true);
+    } catch (error) {
+      setSuccess(false)
+      console.error('Error fetching user tasks:', error);
+      setError('Error fetching user tasks');
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -45,7 +65,6 @@ export const useTask = () => {
       console.error(`Error fetching task with id ${taskId}:`, error);
       setError('Error fetching task');
     } finally {
-      setMethod(null);
       setLoading(false);
     }
   };
@@ -65,7 +84,6 @@ export const useTask = () => {
       setError('Error creating task');
       setSuccess(null);
     } finally {
-      setMethod(null);
       setLoading(false);
     }
   };
@@ -85,7 +103,6 @@ export const useTask = () => {
       setError('Error updating task');
       setSuccess(null);
     } finally {
-      setMethod(null);
       setLoading(false);
     }
   };
@@ -104,7 +121,6 @@ export const useTask = () => {
       setError('Error deleting task');
       setSuccess(null);
     } finally {
-      setMethod(null);
       setLoading(false);
     }
   };
@@ -112,12 +128,14 @@ export const useTask = () => {
   return {
     task,
     tasks,
+    userTasks,
     loading,
     error,
     success,
     method,
-    fetchTasks,
     fetchTask,
+    fetchTasks,
+    fetchUserTasks,
     createTask,
     updateTask,
     deleteTask,
