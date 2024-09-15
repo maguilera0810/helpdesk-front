@@ -40,6 +40,11 @@ export interface Task {
   endAt: Date | null;
 }
 
+export interface UserTask extends User {
+  taks: Partial<Task>[];
+}
+
+
 export interface Issue {
   id?: number;
   code: string;
@@ -65,4 +70,5 @@ export interface Category {
   color: string;
   relations: number[];
 }
+
 
