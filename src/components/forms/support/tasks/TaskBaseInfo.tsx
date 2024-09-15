@@ -222,7 +222,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <MultipleSelectField
             label="Team"
             name="team"
-            value={formData.team?.map((e) => typeof e === 'number' && e.toString()) ?? []}
+            value={formData.team ?? []}
             options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
@@ -233,7 +233,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <MultipleSelectField
             label="Categories"
             name="categories"
-            value={formData.categories?.map(e => typeof e === 'number' && e.toString()) ?? []}
+            value={formData.categories ?? []}
             options={categories.map(category => {
               return {
                 value: category.id.toString(),
