@@ -38,10 +38,11 @@ const NavItem: React.FC<NavItemProps> = ({ text, icon, path, children }) => {
 
   return (
     <>
-      <ListItem button onClick={handleClick}
+      <ListItem onClick={handleClick}
         sx={{
           backgroundColor: isActive ? theme.palette.action.selected : 'transparent',
           height: 35,
+          cursor: "pointer",
           '&:hover': {
             backgroundColor: theme.palette.action.hover,
           },
