@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
@@ -16,12 +18,20 @@ import useUserStore from '../../../../stores/useUserStore';
 import MultipleSelectField from '../../fields/MultipleSelectField';
 import SelectField from '../../fields/SelectField';
 
-const gridItemProps = {
+const gridColProps = {
   size: {
     xs: 12,
     sm: 6,
-    md: 4,
-    xl: 3,
+    md: 2,
+    // xl: 3,
+  }
+};
+const gridItemProps = {
+  size: {
+    xs: 6,
+    sm: 12,
+    // md: 12,
+    // xl: 6,
   }
 };
 
@@ -37,15 +47,22 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
 
 
   const [currDate, setCurrDate] = useState<Dayjs | null>(dayjs());
+  const [startAt, setStartAt] = useState<Dayjs | null>(dayjs());
+  const [endAt, setEndAt] = useState<Dayjs | null>(dayjs().add(1, 'hour'));
+
   const { task, setTask } = useTaskStore()
   const { task: taskFetched, loading, success, method, updateTask } = useTask();
-
   const users = useUserStore((state) => state.users);
 
   const [formData, setFormData] = useState<Partial<Task>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // setFormData((prev) => ({
+    //   ...prev,
+    //   startAt: startAt?.toISOString(),
+    //   endAt: endAt?.toISOString(),
+    // }));
     onSubmit && onSubmit(formData);
     if (isUpdate) {
       const taskId = parseInt(id as string);
@@ -62,6 +79,8 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
         ...task,
         createdAt: task.createdAt ? dayjs(task.createdAt).toDate() : undefined,
         updatedAt: task.updatedAt ? dayjs(task.updatedAt).toDate() : undefined,
+        startAt: task.startAt ? dayjs(task.startAt).toDate() : undefined, // capaz fale y se deba usar dayjs type
+        endAt: task.endAt ? dayjs(task.endAt).toDate() : undefined, // capaz fale y se deba usar dayjs type
       });
     }
   }, [task]);
@@ -80,6 +99,13 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
 
   useEffect(() => {
     console.log("cambio");
+    let userIds: string[] = []
+    if (formData.responsible) { userIds.push(formData.responsible.toString()) }
+    if (formData.team) {
+      console.log('si entro', formData.team.map(e => e.toString()));
+      userIds = userIds.concat(formData.team.map(e => e.toString()))
+    }
+    console.log(userIds, formData.startAt, formData.endAt);
 
   }, [formData.responsible, formData.team])
 
@@ -114,43 +140,45 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
             {buttonMsg()}
           </Button>
         </Grid>
-        <Grid key={"responsible"}>
-          <SelectField
-            label="Responsable"
-            name="responsible"
-            value={formData.responsible?.toString() ?? ''}
-            options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
-            onChange={(e) => handleInputChange(e)}
-            fullWidth
-            height="56px"
-          />
-        </Grid>
-        <Grid key={"team"}>
-          <MultipleSelectField
-            label="Equipo"
-            name="team"
-            value={formData.team?.map((e) => typeof e === 'number' ? e.toString() : e) ?? []}
-            options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
-            onChange={(e) => handleInputChange(e)}
-            fullWidth
-            height="auto"
-          />
-        </Grid>
       </Grid>
       <Grid container>
-        <Grid container
-          direction="column"
-          spacing={1}
-          {...gridItemProps}>
-          <Grid>
-            <DateCalendar
-              showDaysOutsideCurrentMonth
-              defaultValue={dayjs()}
-              views={['year', 'month', 'day']}
-              value={currDate}
-              onChange={(newDate) => setCurrDate(newDate)} />
+        <Grid container direction="column" spacing={1} {...gridColProps}>
+          <Grid key={"responsible"} {...gridItemProps}>
+            <SelectField
+              label="Responsable"
+              name="responsible"
+              value={formData.responsible?.toString() ?? ''}
+              options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+              onChange={(e) => handleInputChange(e)}
+              fullWidth
+              height="56px"
+            />
           </Grid>
-
+          <Grid key={"team"} {...gridItemProps}>
+            <MultipleSelectField
+              label="Equipo"
+              name="team"
+              value={formData.team?.map((e) => typeof e === 'number' ? e.toString() : e) ?? []}
+              options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+              onChange={(e) => handleInputChange(e)}
+              fullWidth
+              height="auto"
+            />
+          </Grid>
+          <Grid {...gridItemProps}>
+            <DateTimePicker
+              label="Fecha y hora de inicio"
+              value={startAt}
+              onChange={(newDate) => setStartAt(newDate)}
+            />
+          </Grid>
+          <Grid {...gridItemProps}>
+            <DateTimePicker
+              label="Fecha y hora de fin"
+              value={endAt}
+              onChange={(newDate) => setEndAt(newDate)}
+            />
+          </Grid>
         </Grid>
         <Grid container>
           <Grid>
