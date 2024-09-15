@@ -1,7 +1,8 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
@@ -16,10 +17,12 @@ import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 
 const gridItemProps = {
-  xs: 12,
-  sm: 6,
-  md: 4,
-  xl: 3,
+  size: {
+    xs: 12,
+    sm: 6,
+    md: 4,
+    xl: 3,
+  }
 };
 
 const fieldProps = {
@@ -58,10 +61,6 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
     }
   }, [task]);
 
-  useEffect(() => {
-    console.log(categories);
-  }, [categories])
-
 
   useEffect(() => {
     if (taskFetched) {
@@ -71,8 +70,6 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
 
   useEffect(() => {
     if (onSuccess && success === true && task && (method === 'createTask' || method === 'updateTask')) {
-      console.log("entro");
-
       onSuccess(task.id);
     }
   }, [success]);
@@ -129,7 +126,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         {buttonMsg()}
       </Button>
       <Grid container spacing={{ xs: 1 }}>
-        <Grid item {...gridItemProps} key={"title"}>
+        <Grid {...gridItemProps} key={"title"}>
           <TextField
             label="Title"
             name="title"
@@ -138,7 +135,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             {...fieldProps}
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"description"}>
+        <Grid {...gridItemProps} key={"description"}>
           <TextAreaField
             label="Description"
             name="description"
@@ -148,7 +145,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             {...fieldProps}
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"code"} display={showField()}>
+        <Grid {...gridItemProps} key={"code"} display={showField()}>
           <TextField
             label="Code"
             name="code"
@@ -159,7 +156,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             {...fieldProps}
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"type"}>
+        <Grid {...gridItemProps} key={"type"}>
           <SelectField
             label="Type"
             name="type"
@@ -170,7 +167,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             height="56px"
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"status"}>
+        <Grid {...gridItemProps} key={"status"}>
           <SelectField
             label="Status"
             name="status"
@@ -181,7 +178,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             height="56px"
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"priority"}>
+        <Grid {...gridItemProps} key={"priority"}>
           <SelectField
             label="Priority"
             name="priority"
@@ -192,7 +189,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             height="56px"
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"createdAt"}>
+        <Grid {...gridItemProps} key={"createdAt"}>
           <DateTimeField
             label="Created At"
             disabled={true}
@@ -201,7 +198,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             {...fieldProps}
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"updatedAt"}>
+        <Grid {...gridItemProps} key={"updatedAt"}>
           <DateTimeField
             label="Updated At"
             disabled={true}
@@ -210,7 +207,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             {...fieldProps}
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"responsible"}>
+        <Grid {...gridItemProps} key={"responsible"}>
           <SelectField
             label="Responsible"
             name="responsible"
@@ -221,7 +218,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             height="56px"
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"team"}>
+        <Grid {...gridItemProps} key={"team"}>
           <MultipleSelectField
             label="Team"
             name="team"
@@ -232,7 +229,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             height="auto"
           />
         </Grid>
-        <Grid item {...gridItemProps} key={"categories"}>
+        <Grid {...gridItemProps} key={"categories"}>
           <MultipleSelectField
             label="Categories"
             name="categories"
