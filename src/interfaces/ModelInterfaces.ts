@@ -25,18 +25,19 @@ export interface Task {
   title: string;
   description: string;
   code: string;
-  type: string; // 'emergency' | 'normal'; // Asumiendo que puede haber otros tipos
-  status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
-  priority: string; // 'highest' | 'high' | 'medium' | 'low' | 'lowest'; // Asumiendo que puede haber otros niveles de prioridad
+  type: string;
+  status: string;
+  priority: string;
   created_by: number | Partial<User>;
   responsible: number | Partial<User>;
   team: number[] | Partial<User>[];
   categories: number[] | Partial<Category>[];
-  plan?: number; // Plan
+  plan?: number;
   issue?: number;
-  scheduled: number; //TODO ANALIZAR
-  createdAt: Date | null; //
-  updatedAt: Date | null; //
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  startAt: Date | null;
+  endAt: Date | null;
 }
 
 export interface Issue {
