@@ -211,8 +211,8 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <SelectField
             label="Responsible"
             name="responsible"
-            value={formData.responsible?.toString() ?? ''}
-            options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+            value={formData.responsible ?? ''}
+            options={users.map(user => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="56px"
@@ -223,7 +223,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             label="Team"
             name="team"
             value={formData.team ?? []}
-            options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+            options={users.map(user => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="auto"
@@ -234,15 +234,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             label="Categories"
             name="categories"
             value={formData.categories ?? []}
-            options={categories.map(category => {
-              return {
-                value: category.id.toString(),
-                label: category.title,
-                color: category.color,
-              }
-
-
-            })}
+            options={categories.map(category => ({ value: category.id, label: category.title, color: category.color }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
           />
