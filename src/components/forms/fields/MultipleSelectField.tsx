@@ -63,12 +63,13 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
   disabled = false }) => {
   const theme = useTheme();
 
+
   return (
     <FormControl fullWidth={fullWidth}>
       <InputLabel>{label}</InputLabel>
       <Select
         name={name}
-        value={value.map((e) => typeof e === 'number' ? e.toString() : e)}
+        value={value}
         onChange={onChange}
         multiple
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}

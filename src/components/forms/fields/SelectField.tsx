@@ -4,8 +4,8 @@ import React, { ChangeEvent } from 'react';
 interface ISelectFieldProps {
   label: string;
   name: string;
-  value: string;
-  options: Array<{ value: string; label: string }>;
+  value: any;
+  options: Array<{ value: any; label: string }>;
   onChange: (e: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement>) => void;
   fullWidth?: boolean;
   height?: string;
