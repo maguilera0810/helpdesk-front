@@ -1,6 +1,8 @@
 
 
 export interface TaskScheduleRequest {
-  userIds: number[];
-  currentDay: Date;
+  responsibleId: number;
+  team: number[];
+  startAt: Date;
+  endAt: Date;
 }
