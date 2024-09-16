@@ -7,9 +7,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
@@ -22,13 +20,13 @@ const gridColProps = {
   size: {
     xs: 12,
     sm: 6,
-    md: 2,
-    // xl: 3,
+    md: 3,
+    xl: 2,
   }
 };
 const gridItemProps = {
   size: {
-    xs: 6,
+    xs: 12,
     sm: 12,
     // md: 12,
     // xl: 6,
@@ -46,28 +44,28 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   const isUpdate = Boolean(id && id !== 'addNew');
 
 
-  const [currDate, setCurrDate] = useState<Dayjs | null>(dayjs());
+  const [currDay, setCurrDay] = useState<Dayjs | null>(dayjs());
   const [startAt, setStartAt] = useState<Dayjs | null>(dayjs());
   const [endAt, setEndAt] = useState<Dayjs | null>(dayjs().add(1, 'hour'));
 
   const { task, setTask } = useTaskStore()
-  const { task: taskFetched, loading, success, method, updateTask } = useTask();
+  const { task: taskFetched, userTasks, loading, success, method, updateTask, fetchUserTasks } = useTask();
   const users = useUserStore((state) => state.users);
 
   const [formData, setFormData] = useState<Partial<Task>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // setFormData((prev) => ({
-    //   ...prev,
-    //   startAt: startAt?.toISOString(),
-    //   endAt: endAt?.toISOString(),
-    // }));
-    onSubmit && onSubmit(formData);
+    const aux = {
+      ...formData,
+      startAt: startAt?.toDate(),
+      endAt: endAt?.toDate(),
+    }
+    onSubmit && onSubmit(aux);
     if (isUpdate) {
       const taskId = parseInt(id as string);
       if (!isNaN(taskId)) {
-        updateTask(taskId, formData);
+        updateTask(taskId, aux);
       }
     }
   };
@@ -82,6 +80,8 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
         startAt: task.startAt ? dayjs(task.startAt).toDate() : undefined, // capaz fale y se deba usar dayjs type
         endAt: task.endAt ? dayjs(task.endAt).toDate() : undefined, // capaz fale y se deba usar dayjs type
       });
+      setStartAt(task.startAt ? dayjs(task.startAt) : null);
+      setEndAt(task.endAt ? dayjs(task.endAt) : null);
     }
   }, [task]);
 
@@ -98,20 +98,22 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   }, [success]);
 
   useEffect(() => {
-    console.log("cambio");
-    let userIds: string[] = []
-    if (formData.responsible) { userIds.push(formData.responsible.toString()) }
-    if (formData.team) {
-      console.log('si entro', formData.team.map(e => e.toString()));
-      userIds = userIds.concat(formData.team.map(e => e.toString()))
+    if (!(formData.responsible && startAt && endAt)) {
+      return;
     }
-    console.log(userIds, formData.startAt, formData.endAt);
+
+    fetchUserTasks({
+      responsibleId: formData.responsible,
+      team: formData.team ?? [],
+      startAt: startAt.toDate(),
+      endAt: endAt.toDate()
+    })
 
   }, [formData.responsible, formData.team, startAt, endAt])
 
-  const showField = () => {
-    return isUpdate ? "block" : "none";
-  }
+  useEffect(() => {
+    console.log(userTasks);
+  }, [userTasks])
 
   const buttonMsg = () => {
     if (loading) {
@@ -130,6 +132,14 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     }
   };
 
+  const handleDateChange = (type: "start" | "end", newDate: Dayjs | null) => {
+    console.log(newDate?.format('YYYY-MM-DD'));
+    if (type === 'start') {
+      setStartAt(newDate)
+    } else {
+      setEndAt(newDate)
+    }
+  }
 
 
   return (
@@ -143,12 +153,26 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
       </Grid>
       <Grid container>
         <Grid container direction="column" spacing={1} {...gridColProps}>
+          <Grid {...gridItemProps}>
+            <DateTimePicker
+              label="Inicio"
+              value={startAt}
+              onChange={(newDate) => handleDateChange('start', newDate)}
+            />
+          </Grid>
+          <Grid {...gridItemProps}>
+            <DateTimePicker
+              label="Fin"
+              value={endAt}
+              onChange={(newDate) => handleDateChange('end', newDate)}
+            />
+          </Grid>
           <Grid key={"responsible"} {...gridItemProps}>
             <SelectField
               label="Responsable"
               name="responsible"
-              value={formData.responsible?.toString() ?? ''}
-              options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+              value={formData.responsible ?? ''}
+              options={users.map(user => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
               onChange={(e) => handleInputChange(e)}
               fullWidth
               height="56px"
@@ -159,24 +183,10 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
               label="Equipo"
               name="team"
               value={formData.team ?? []}
-              options={users.map(user => ({ value: user.id.toString(), label: `${user.firstName} ${user.lastName}` }))}
+              options={users.map(user => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
               onChange={(e) => handleInputChange(e)}
               fullWidth
               height="auto"
-            />
-          </Grid>
-          <Grid {...gridItemProps}>
-            <DateTimePicker
-              label="Fecha y hora de inicio"
-              value={startAt}
-              onChange={(newDate) => setStartAt(newDate)}
-            />
-          </Grid>
-          <Grid {...gridItemProps}>
-            <DateTimePicker
-              label="Fecha y hora de fin"
-              value={endAt}
-              onChange={(newDate) => setEndAt(newDate)}
             />
           </Grid>
         </Grid>
