@@ -294,12 +294,8 @@ const IssueForm: React.FC = () => {
                 <MultipleSelectField
                   label="Categories"
                   name="categories"
-                  value={formData.categories?.map(e => e.toString()) ?? []}
-                  options={categories.map(category => ({
-                    value: category.id.toString(),
-                    label: category.title,
-                    color: category.color,
-                  }))}
+                  value={formData.categories ?? []}
+                  options={categories.map(category => ({ value: category.id, label: category.title, color: category.color }))}
                   onChange={(e) => handleInputChange(e)}
                   disabled={isUpdate}
                   fullWidth
