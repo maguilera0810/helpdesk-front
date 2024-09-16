@@ -28,9 +28,9 @@ export interface Task {
   type: string;
   status: string;
   priority: string;
-  created_by: number | Partial<User>;
-  responsible: number | Partial<User>;
-  team: number[] | Partial<User>[];
+  created_by: number;
+  responsible: number;
+  team: number[];
   categories: number[] | Partial<Category>[];
   plan?: number;
   issue?: number;
@@ -40,8 +40,9 @@ export interface Task {
   endAt: Date | null;
 }
 
-export interface UserTask extends User {
-  taks: Partial<Task>[];
+export interface UserTask {
+  userId: number;
+  tasks: Partial<Task>[];
 }
 
 
