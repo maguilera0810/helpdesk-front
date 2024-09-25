@@ -207,28 +207,6 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             {...fieldProps}
           />
         </Grid>
-        <Grid {...gridItemProps} key={"responsible"}>
-          <SelectField
-            label="Responsible"
-            name="responsible"
-            value={formData.responsible ?? ''}
-            options={users.map(user => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
-            onChange={(e) => handleInputChange(e)}
-            fullWidth
-            height="56px"
-          />
-        </Grid>
-        <Grid {...gridItemProps} key={"team"}>
-          <MultipleSelectField
-            label="Team"
-            name="team"
-            value={formData.team ?? []}
-            options={users.map(user => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
-            onChange={(e) => handleInputChange(e)}
-            fullWidth
-            height="auto"
-          />
-        </Grid>
         <Grid {...gridItemProps} key={"categories"}>
           <MultipleSelectField
             label="Categories"
