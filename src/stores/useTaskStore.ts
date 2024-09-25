@@ -6,6 +6,10 @@ import { ITaskState } from '../interfaces/StateInterfaces';
 const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
   task: null,
   tasks: [],
+  userTasks: [],
+  currDate: null,
+  startAt: null,
+  endAt: null,
   setTask: (task) =>
     set(produce((state: ITaskState) => {
       state.task = task;
@@ -14,9 +18,34 @@ const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
     set(produce((state: ITaskState) => {
       state.tasks = tasks;
     })),
+  setUserTasks: (userTasks) =>
+    set(produce((state: ITaskState) => {
+      state.userTasks = userTasks;
+    })),
+  setCurrDate: (currDate) =>
+    set(produce((state: ITaskState) => {
+      state.currDate = currDate;
+    })),
+  setStartAt: (startAt) =>
+    set(produce((state: ITaskState) => {
+      state.startAt = startAt;
+    })),
+  setEndAt: (endAt) =>
+    set(produce((state: ITaskState) => {
+      state.endAt = endAt;
+    })),
   clearTaks: () =>
     set(produce((state: ITaskState) => {
       state.tasks = [];
+    })),
+  clearState: () =>
+    set(produce((state: ITaskState) => {
+      state.task = null;
+      state.tasks = [];
+      state.userTasks = [];
+      state.currDate = null;
+      state.startAt = null;
+      state.endAt = null;
     })),
 });
 
