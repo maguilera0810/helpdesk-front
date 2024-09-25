@@ -15,13 +15,22 @@ import useTaskStore from '../../../../stores/useTaskStore';
 import useUserStore from '../../../../stores/useUserStore';
 import MultipleSelectField from '../../fields/MultipleSelectField';
 import SelectField from '../../fields/SelectField';
+import ScheduleGrid from './schedule/ScheduleGrid';
 
-const gridColProps = {
+const gridCol1Props = {
   size: {
     xs: 12,
     sm: 6,
     md: 3,
     xl: 2,
+  }
+};
+const gridCol2Props = {
+  size: {
+    xs: 12,
+    sm: 6,
+    md: 9,
+    xl: 10,
   }
 };
 const gridItemProps = {
@@ -45,10 +54,9 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
 
 
   const [currDay, setCurrDay] = useState<Dayjs | null>(dayjs());
-  const [startAt, setStartAt] = useState<Dayjs | null>(dayjs());
-  const [endAt, setEndAt] = useState<Dayjs | null>(dayjs().add(1, 'hour'));
 
-  const { task, setTask } = useTaskStore()
+  const { task, startAt, endAt, setTask, setUserTasks,
+    setCurrDate, setStartAt, setEndAt } = useTaskStore()
   const { task: taskFetched, userTasks, loading, success, method, updateTask, fetchUserTasks } = useTask();
   const users = useUserStore((state) => state.users);
 
@@ -72,7 +80,6 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
 
   useEffect(() => {
     if (task) {
-      console.log(task);
       setFormData({
         ...task,
         createdAt: task.createdAt ? dayjs(task.createdAt).toDate() : undefined,
@@ -80,6 +87,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
         startAt: task.startAt ? dayjs(task.startAt).toDate() : undefined, // capaz fale y se deba usar dayjs type
         endAt: task.endAt ? dayjs(task.endAt).toDate() : undefined, // capaz fale y se deba usar dayjs type
       });
+      setCurrDate(task.startAt ? dayjs(task.startAt) : null)
       setStartAt(task.startAt ? dayjs(task.startAt) : null);
       setEndAt(task.endAt ? dayjs(task.endAt) : null);
     }
@@ -112,7 +120,9 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   }, [formData.responsible, formData.team, startAt, endAt])
 
   useEffect(() => {
-    console.log(userTasks);
+    if (userTasks.length > 0) {
+      setUserTasks(userTasks);
+    }
   }, [userTasks])
 
   const buttonMsg = () => {
@@ -133,8 +143,8 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   };
 
   const handleDateChange = (type: "start" | "end", newDate: Dayjs | null) => {
-    console.log(newDate?.format('YYYY-MM-DD'));
     if (type === 'start') {
+      setCurrDate(newDate)
       setStartAt(newDate)
     } else {
       setEndAt(newDate)
@@ -151,8 +161,8 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
           </Button>
         </Grid>
       </Grid>
-      <Grid container>
-        <Grid container direction="column" spacing={1} {...gridColProps}>
+      <Grid container direction="row">
+        <Grid container direction="column" spacing={1} {...gridCol1Props}>
           <Grid {...gridItemProps}>
             <DateTimePicker
               label="Inicio"
@@ -190,11 +200,8 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
             />
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid>
-            Horarios
-          </Grid>
-
+        <Grid container {...gridCol2Props}>
+          <ScheduleGrid />
         </Grid>
       </Grid>
     </Box>
