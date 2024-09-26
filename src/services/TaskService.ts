@@ -1,4 +1,4 @@
-import { Task, UserTask } from '../interfaces/ModelInterfaces';
+import { Schedule, Task } from '../interfaces/ModelInterfaces';
 import { TaskScheduleRequest } from '../interfaces/RequestInterfaces';
 import { keysToCamel, keysToSnake } from '../utils/caseUtils';
 import BaseCrudService from './BaseCrudService';
@@ -18,9 +18,9 @@ export class TaskService extends BaseCrudService<Task> {
     return TaskService.instance;
   }
 
-  public async retrieveSchedules(item: TaskScheduleRequest): Promise<UserTask[]> {
+  public async retrieveSchedules(item: TaskScheduleRequest): Promise<Schedule> {
     try {
-      const response = await this.axiosInstance.post<UserTask[]>(`schedules/`, keysToSnake(item));
+      const response = await this.axiosInstance.post<Schedule>(`schedule/`, keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
       console.error('Error creating :', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
