@@ -40,9 +40,17 @@ export interface Task {
   endAt: Date | null;
 }
 
+export interface ScheduleTask extends Task {
+  hasCollision?: boolean;
+}
+
 export interface UserTask {
   userId: number;
-  tasks: Partial<Task>[];
+  tasks: ScheduleTask[];
+}
+export interface Schedule {
+  hasCollision?: boolean;
+  userTasks: UserTask[];
 }
 
 
