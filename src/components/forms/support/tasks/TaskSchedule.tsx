@@ -57,7 +57,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
 
   const { task, startAt, endAt, setTask, setUserTasks,
     setCurrDate, setStartAt, setEndAt } = useTaskStore()
-  const { task: taskFetched, userTasks, loading, success, method, updateTask, fetchUserTasks } = useTask();
+  const { task: taskFetched, schedule, loading, success, method, updateTask, fetchSchedule } = useTask();
   const users = useUserStore((state) => state.users);
 
   const [formData, setFormData] = useState<Partial<Task>>({});
@@ -110,7 +110,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
       return;
     }
 
-    fetchUserTasks({
+    fetchSchedule({
       responsibleId: formData.responsible,
       team: formData.team ?? [],
       startAt: startAt.toDate(),
@@ -120,10 +120,10 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   }, [formData.responsible, formData.team, startAt, endAt])
 
   useEffect(() => {
-    if (userTasks.length > 0) {
-      setUserTasks(userTasks);
+    if (schedule && schedule.userTasks.length > 0) {
+      setUserTasks(schedule.userTasks);
     }
-  }, [userTasks])
+  }, [schedule])
 
   const buttonMsg = () => {
     if (loading) {
