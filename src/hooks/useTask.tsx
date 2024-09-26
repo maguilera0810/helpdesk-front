@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Task, UserTask } from '../interfaces/ModelInterfaces';
+import { Schedule, Task, UserTask } from '../interfaces/ModelInterfaces';
 import { TaskScheduleRequest } from '../interfaces/RequestInterfaces';
 import TaskService from '../services/TaskService';
 
@@ -8,7 +8,7 @@ type methodType = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "de
 export const useTask = () => {
   const [task, setTask] = useState<Task | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [userTasks, setUserTasks] = useState<UserTask[]>([]);
+  const [schedule, setSchedules] = useState<Schedule | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [method, setMethod] = useState<methodType>(null);
@@ -32,14 +32,14 @@ export const useTask = () => {
     }
   }, []);
 
-  const fetchUserTasks = useCallback(async (body: TaskScheduleRequest) => {
+  const fetchSchedule = useCallback(async (body: TaskScheduleRequest) => {
     setMethod("fetchTasks");
     setLoading(true);
     setError(null);
     setSuccess(null);
     try {
       const resp = await TaskService.retrieveSchedules(body);
-      setUserTasks(resp);
+      setSchedules(resp);
       setSuccess(true);
     } catch (error) {
       setSuccess(false)
@@ -128,14 +128,14 @@ export const useTask = () => {
   return {
     task,
     tasks,
-    userTasks,
+    schedule,
     loading,
     error,
     success,
     method,
     fetchTask,
     fetchTasks,
-    fetchUserTasks,
+    fetchSchedule,
     createTask,
     updateTask,
     deleteTask,
