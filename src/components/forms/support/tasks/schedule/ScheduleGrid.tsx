@@ -26,8 +26,6 @@ const ScheduleGrid: FC<ScheduleGridProps> = () => {
   useEffect(() => {
     if (currDate) {
       const localTime = dayjs(currDate).tz("America/Guayaquil");
-      console.log(localTime);
-      console.log("------------------------------------- 2");
       setTimes(Array.from({ length: 24 * 2 }, (_, i) => localTime.startOf('day').add(i * 30, 'minutes')));
     } else {
       setTimes([]);
