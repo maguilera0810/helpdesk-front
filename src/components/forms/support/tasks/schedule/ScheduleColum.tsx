@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 import Grid from '@mui/material/Grid2';
 import dayjs, { Dayjs } from 'dayjs';
@@ -7,66 +7,71 @@ import utc from 'dayjs/plugin/utc';
 import { useNavigate } from 'react-router-dom';
 
 
-import { Task } from '../../../../../interfaces/ModelInterfaces';
+import { GridTaskProps, ScheduleColumnProps } from '../../../../../interfaces/ComponentInterfaces';
 import useTaskStore from '../../../../../stores/useTaskStore';
 
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-interface ScheduleColumnProps {
-  tasks: Partial<Task>[];
-  times: Dayjs[];
+
+const SCHEDULE_ITEMS = {
+  disponible: {
+    label: 'disponible',
+    style: {
+      borderBottom: '1px solid #ddd',
+      background: '#fff',
+    }
+  },
+  ocupado: {
+    label: 'ocupado',
+    style: {
+      border: '1px solid #ba000d',
+      background: "#ba000d",
+      cursor: 'pointer',
+    }
+  },
+  propuesta: {
+    label: 'propuesta',
+    style: {
+      borderBottom: '1px solid #00bcd4',
+      background: '#00bcd4'
+    }
+  },
+  actual: {
+    label: 'actual',
+    style: {
+      border: '1px solid #757ce8',
+      background: "#757ce8",
+      cursor: 'pointer',
+    }
+  }
+
 }
 
-interface GridTaskProps {
-  type: 'disponible' | 'ocupado' | 'propuesta' | 'actual';
-  time: Dayjs;
-  task?: Partial<Task>;
-  onClick?: ((id: number) => void) | (() => void);
-}
-
-
-
-const GridTask: FC<GridTaskProps> = ({ type, time, task, onClick }) => {
+const ScheduleItem: FC<GridTaskProps> = ({ type, time, task, onClick }) => {
   if (type === 'disponible') {
     return (
       <Grid size={{ xs: 12 }} key={`${time.toISOString()}`}
-        sx={{
-          borderBottom: '1px solid #ddd',
-          background: '#fff',
-        }}>
-        DISPONIBLE
+        sx={SCHEDULE_ITEMS[type].style}>
+        {SCHEDULE_ITEMS[type].label}
       </Grid>);
   } else if (type === 'ocupado') {
     return (
       <Grid size={{ xs: 12 }} key={`${time.toISOString()} ${task?.id}`}
-        sx={{
-          border: '1px solid #ba000d',
-          background: "#ba000d",
-          cursor: 'pointer',
-        }}
         onClick={() => onClick?.(task?.id as number)}
-      >
+        sx={SCHEDULE_ITEMS[type].style}>
         {task?.title}
       </Grid>);
   } else if (type === 'propuesta') {
     return <Grid size={{ xs: 12 }} key={`${time.toISOString()}`}
-      sx={{
-        borderBottom: '1px solid #00bcd4',
-        background: '#00bcd4'
-      }}>
-      PROPUESTA
+      sx={SCHEDULE_ITEMS[type].style}>
+      {SCHEDULE_ITEMS[type].label}
     </Grid>;
   } else if (type === 'actual') {
     return (<Grid size={{ xs: 12 }} key={`${time.toISOString()} ${task?.id}`}
-      sx={{
-        border: '1px solid #757ce8',
-        background: "#757ce8",
-        cursor: 'pointer',
-      }}
-    >
-      ACTUAL
+      sx={SCHEDULE_ITEMS[type].style}>
+      {SCHEDULE_ITEMS[type].label}
     </Grid>);
   }
 }
@@ -94,13 +99,13 @@ const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
         ))
         if (!task) {
           return (
-            <GridTask type={checkIsPropuesta(time) ? 'propuesta' : 'disponible'}
+            <ScheduleItem type={checkIsPropuesta(time) ? 'propuesta' : 'disponible'}
               time={time} key={time.toISOString()} />);
         }
         const current = currTask && currTask.id === task.id
         if (!current) {
           return (
-            <GridTask type='ocupado' task={task} time={time}
+            <ScheduleItem type='ocupado' task={task} time={time}
               onClick={() => handleTaskClick(task.id as number)}
               key={time.toISOString()}
             />);
@@ -108,13 +113,13 @@ const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
         }
         if (dayjs(task.startAt).isSame(startAt, 'minute') && dayjs(task.endAt).isSame(endAt, 'minute')) {
           return (
-            <GridTask type='actual' task={task} time={time}
+            <ScheduleItem type='actual' task={task} time={time}
               onClick={() => handleTaskClick(task.id as number)}
               key={time.toISOString()}
             />);
         }
         return (
-          <GridTask type={checkIsPropuesta(time) ? 'propuesta' : 'disponible'}
+          <ScheduleItem type={checkIsPropuesta(time) ? 'propuesta' : 'disponible'}
             time={time} key={time.toISOString()} />);
 
 
