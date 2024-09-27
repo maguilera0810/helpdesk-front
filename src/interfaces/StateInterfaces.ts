@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Task, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { Category } from "./ModelInterfaces";
 
 
@@ -17,12 +17,14 @@ export interface ITaskState extends IBaseState, ICallback {
   task: Task | null;
   tasks: Task[];
   userTasks: UserTask[];
+  schedule: Schedule | null;
   currDate: Dayjs | null;
   startAt: Dayjs | null;
   endAt: Dayjs | null;
   setTask: (task: Task | null) => void;
   setTasks: (tasks: Task[]) => void;
   setUserTasks: (userTasks: UserTask[]) => void;
+  setSchedule: (schedule: Schedule | null) => void;
   setCurrDate: (date: Dayjs | null) => void;
   setStartAt: (date: Dayjs | null) => void;
   setEndAt: (date: Dayjs | null) => void;

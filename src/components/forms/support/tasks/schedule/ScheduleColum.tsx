@@ -6,7 +6,6 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { useNavigate } from 'react-router-dom';
 
-
 import { GridTaskProps, ScheduleColumnProps } from '../../../../../interfaces/ComponentInterfaces';
 import useTaskStore from '../../../../../stores/useTaskStore';
 
@@ -20,37 +19,43 @@ const SCHEDULE_ITEMS = {
     label: 'disponible',
     style: {
       borderBottom: '1px solid #ddd',
-      background: '#fff',
+      background: '#F0F0F0',
     }
   },
   ocupado: {
     label: 'ocupado',
     style: {
-      border: '1px solid #ba000d',
-      background: "#ba000d",
+      border: '1px solid #FF7043',
+      background: "#FF7043",
       cursor: 'pointer',
+    }
+  },
+  colision: {
+    label: 'colision',
+    style: {
+      border: '1px solid #D32F2F',
+      background: "#D32F2F",
     }
   },
   propuesta: {
     label: 'propuesta',
     style: {
-      borderBottom: '1px solid #00bcd4',
-      background: '#00bcd4'
+      borderBottom: '1px solid #FFC107',
+      background: '#FFC107'
     }
   },
   actual: {
     label: 'actual',
     style: {
-      border: '1px solid #757ce8',
-      background: "#757ce8",
-      cursor: 'pointer',
+      border: '1px solid #2196F3',
+      background: "#2196F3",
     }
   }
 
 }
 
 const ScheduleItem: FC<GridTaskProps> = ({ type, time, task, onClick }) => {
-  if (type === 'disponible') {
+  if (type === 'disponible' || type === 'colision' || type === 'propuesta') {
     return (
       <Grid size={{ xs: 12 }} key={`${time.toISOString()}`}
         sx={SCHEDULE_ITEMS[type].style}>
@@ -63,16 +68,12 @@ const ScheduleItem: FC<GridTaskProps> = ({ type, time, task, onClick }) => {
         sx={SCHEDULE_ITEMS[type].style}>
         {task?.title}
       </Grid>);
-  } else if (type === 'propuesta') {
-    return <Grid size={{ xs: 12 }} key={`${time.toISOString()}`}
-      sx={SCHEDULE_ITEMS[type].style}>
-      {SCHEDULE_ITEMS[type].label}
-    </Grid>;
   } else if (type === 'actual') {
-    return (<Grid size={{ xs: 12 }} key={`${time.toISOString()} ${task?.id}`}
-      sx={SCHEDULE_ITEMS[type].style}>
-      {SCHEDULE_ITEMS[type].label}
-    </Grid>);
+    return (
+      <Grid size={{ xs: 12 }} key={`${time.toISOString()} ${task?.id}`}
+        sx={SCHEDULE_ITEMS[type].style}>
+        {SCHEDULE_ITEMS[type].label}
+      </Grid>);
   }
 }
 
@@ -90,6 +91,13 @@ const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
   const checkIsPropuesta = (currTime: Dayjs) => dayjs(startAt).isSame(currTime, 'minute') ||
     (dayjs(startAt).isBefore(currTime, 'minute') && dayjs(endAt).isAfter(currTime, 'minute'));
 
+  const getType = (currTime: Dayjs) => {
+    if (!checkIsPropuesta(currTime)) {
+      return 'disponible'
+    }
+
+    return ''
+  }
 
   return (
     <Grid container direction={"column"} sx={{ border: '1px solid #ddd' }} size={"grow"}>
@@ -106,7 +114,7 @@ const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
         if (!current) {
           return (
             <ScheduleItem type='ocupado' task={task} time={time}
-              onClick={() => handleTaskClick(task.id as number)}
+              onClick={() => handleTaskClick(task.id)}
               key={time.toISOString()}
             />);
 
@@ -114,7 +122,7 @@ const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
         if (dayjs(task.startAt).isSame(startAt, 'minute') && dayjs(task.endAt).isSame(endAt, 'minute')) {
           return (
             <ScheduleItem type='actual' task={task} time={time}
-              onClick={() => handleTaskClick(task.id as number)}
+              onClick={() => handleTaskClick(task.id)}
               key={time.toISOString()}
             />);
         }

@@ -5,6 +5,7 @@ import { ITaskState } from '../interfaces/StateInterfaces';
 
 const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
   task: null,
+  schedule: null,
   tasks: [],
   userTasks: [],
   currDate: null,
@@ -21,6 +22,10 @@ const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
   setUserTasks: (userTasks) =>
     set(produce((state: ITaskState) => {
       state.userTasks = userTasks;
+    })),
+  setSchedule: (schedule) =>
+    set(produce((state: ITaskState) => {
+      state.schedule = schedule;
     })),
   setCurrDate: (currDate) =>
     set(produce((state: ITaskState) => {
@@ -43,6 +48,7 @@ const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
       state.task = null;
       state.tasks = [];
       state.userTasks = [];
+      state.schedule = null
       state.currDate = null;
       state.startAt = null;
       state.endAt = null;

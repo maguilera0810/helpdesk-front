@@ -52,15 +52,13 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
+  const [formData, setFormData] = useState<Partial<Task>>({});
 
-  const [currDay, setCurrDay] = useState<Dayjs | null>(dayjs());
-
-  const { task, startAt, endAt, setTask, setUserTasks,
+  const { task, startAt, endAt, setTask, setUserTasks, setSchedule,
     setCurrDate, setStartAt, setEndAt } = useTaskStore()
   const { task: taskFetched, schedule, loading, success, method, updateTask, fetchSchedule } = useTask();
   const users = useUserStore((state) => state.users);
 
-  const [formData, setFormData] = useState<Partial<Task>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,19 +108,18 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
       return;
     }
 
-    fetchSchedule({
+    task && fetchSchedule({
       responsibleId: formData.responsible,
       team: formData.team ?? [],
       startAt: startAt.toDate(),
-      endAt: endAt.toDate()
+      endAt: endAt.toDate(),
+      currTaskId: task.id
     })
 
   }, [formData.responsible, formData.team, startAt, endAt])
 
   useEffect(() => {
-    if (schedule && schedule.userTasks.length > 0) {
-      setUserTasks(schedule.userTasks);
-    }
+    schedule && setSchedule(schedule);
   }, [schedule])
 
   const buttonMsg = () => {
@@ -143,11 +140,12 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   };
 
   const handleDateChange = (type: "start" | "end", newDate: Dayjs | null) => {
+    const cleanDate = newDate ? newDate.set('second', 0).set('millisecond', 0) : newDate;
     if (type === 'start') {
-      setCurrDate(newDate)
-      setStartAt(newDate)
+      setCurrDate(cleanDate);
+      setStartAt(cleanDate);
     } else {
-      setEndAt(newDate)
+      setEndAt(cleanDate);
     }
   }
 

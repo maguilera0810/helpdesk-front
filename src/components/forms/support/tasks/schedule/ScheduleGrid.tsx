@@ -7,6 +7,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
+import { UserTask } from '../../../../../interfaces/ModelInterfaces';
 import useTaskStore from '../../../../../stores/useTaskStore';
 import useUserStore from '../../../../../stores/useUserStore';
 import ScheduleColumn from './ScheduleColum';
@@ -19,9 +20,11 @@ interface ScheduleGridProps {
 }
 
 const ScheduleGrid: FC<ScheduleGridProps> = () => {
-  const { task, userTasks, currDate } = useTaskStore()
-  const [times, setTimes] = useState<Dayjs[]>([])
+
+  const { schedule, currDate } = useTaskStore()
   const users = useUserStore((state) => state.users);
+  const [times, setTimes] = useState<Dayjs[]>([])
+  const [userTasks, setUserTasks] = useState<UserTask[]>([])
 
   useEffect(() => {
     if (currDate) {
@@ -32,15 +35,12 @@ const ScheduleGrid: FC<ScheduleGridProps> = () => {
     }
   }, [currDate])
 
+
   useEffect(() => {
-    console.log('ScheduleGrid.userTasks', userTasks);
-  }, [userTasks])
-  useEffect(() => {
-    console.log('ScheduleGrid.task', task);
-  }, [task])
-  useEffect(() => {
-    console.log('ScheduleGrid.users', users);
-  }, [users])
+    console.log('ScheduleGrid.schedule', schedule);
+    schedule && setUserTasks(schedule.userTasks)
+  }, [schedule])
+
   return (
     <Grid container
       size={"grow"}

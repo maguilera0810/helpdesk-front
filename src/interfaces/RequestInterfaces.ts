@@ -5,4 +5,5 @@ export interface TaskScheduleRequest {
   team: number[];
   startAt: Date;
   endAt: Date;
+  currTaskId: number;
 }

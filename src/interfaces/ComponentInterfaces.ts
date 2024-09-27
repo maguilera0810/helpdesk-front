@@ -9,7 +9,7 @@ export interface ScheduleColumnProps {
 }
 
 export interface GridTaskProps {
-  type: 'disponible' | 'ocupado' | 'propuesta' | 'actual';
+  type: 'disponible' | 'ocupado' | 'propuesta' | 'actual'| 'colision';
   time: Dayjs;
   task?: ScheduleTask;
   onClick?: ((id: number) => void) | (() => void);
