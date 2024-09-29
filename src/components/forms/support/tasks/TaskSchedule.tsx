@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 
 import dayjs, { Dayjs } from 'dayjs';
 
+import CircleIcon from '@mui/icons-material/Circle';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
+import { Stack, Typography } from '@mui/material';
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import useTaskStore from '../../../../stores/useTaskStore';
@@ -41,6 +44,37 @@ const gridItemProps = {
     // xl: 6,
   }
 };
+
+type stateType = 'ocupado' | 'colision' | 'propuesta' | 'actual'
+const STATES: stateType[] = ['ocupado', 'colision', 'propuesta', 'actual'];
+
+const SCHEDULE_ITEMS = {
+  ocupado: {
+    label: 'ocupado',
+    style: {
+      color: "#FF7043",
+    }
+  },
+  colision: {
+    label: 'colision',
+    style: {
+      color: "#D32F2F",
+    }
+  },
+  propuesta: {
+    label: 'propuesta',
+    style: {
+      color: '#FFC107'
+    }
+  },
+  actual: {
+    label: 'actual',
+    style: {
+      color: "#2196F3",
+    }
+  }
+
+}
 
 interface TaskScheduleProps {
   onSubmit?: (task: Partial<Task>) => void;
@@ -149,14 +183,17 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     }
   }
 
-
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
       <Grid container spacing={1} alignItems={"center"} alignContent={"center"}>
-        <Grid>
-          <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
+        <Grid container spacing={1} alignItems={"center"} alignContent={"center"} direction="row">
+          <Button onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            disabled={loading || schedule?.hasCollision} sx={{ mb: 2, height: 50 }}>
             {buttonMsg()}
           </Button>
+          {schedule?.hasCollision && <Alert severity="error" sx={{ mb: 2, height: 50 }}>Hay un conflicto.</Alert>}
         </Grid>
       </Grid>
       <Grid container direction="row">
@@ -165,6 +202,14 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
             <DateTimePicker
               label="Inicio"
               value={startAt}
+              minutesStep={30}
+              format={'DD/MM/YYYY, HH:mm'}
+              views={['year', 'month', 'day', 'hours', 'minutes']}
+              ampm={false}
+              displayWeekNumber={true}
+              showDaysOutsideCurrentMonth={true}
+              slotProps={{ textField: { fullWidth: true }, }}
+              // viewRenderers={{ hours: renderDigitalClockTimeView, }}
               onChange={(newDate) => handleDateChange('start', newDate)}
             />
           </Grid>
@@ -172,6 +217,14 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
             <DateTimePicker
               label="Fin"
               value={endAt}
+              minutesStep={30}
+              format={'DD/MM/YYYY, HH:mm'}
+              views={['year', 'month', 'day', 'hours', 'minutes']}
+              ampm={false}
+              displayWeekNumber={true}
+              showDaysOutsideCurrentMonth={true}
+              slotProps={{ textField: { fullWidth: true }, }}
+              // viewRenderers={{ hours: renderDigitalClockTimeView, }}
               onChange={(newDate) => handleDateChange('end', newDate)}
             />
           </Grid>
@@ -196,6 +249,26 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
               fullWidth
               height="auto"
             />
+          </Grid>
+          <Grid key={"leyend"} {...gridItemProps}>
+            <Stack direction={'column'} spacing={{ xs: 0 }}>
+              {STATES.map((state) => {
+                return (
+                  <Typography key={state}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'initial',
+                    }}>
+                    <CircleIcon sx={{
+                      margin: 0, padding: 0,
+                      ...SCHEDULE_ITEMS[state].style
+                    }} />
+                    {SCHEDULE_ITEMS[state].label}
+                  </Typography>);
+              })}
+            </Stack>
+
           </Grid>
         </Grid>
         <Grid container {...gridCol2Props}>
