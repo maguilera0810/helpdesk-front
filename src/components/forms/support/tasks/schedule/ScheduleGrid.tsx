@@ -58,7 +58,7 @@ const ScheduleGrid: FC<ScheduleGridProps> = () => {
     >
 
       <Grid container direction={"row"} size={12}>
-        <Grid key={"time"} size={1 / 2}>
+        <Grid key={"time"} size={1}>
         </Grid>
         {userTasks.map((userTask) => {
           const user = users.find(e => e.id == userTask.userId)
@@ -83,13 +83,21 @@ const ScheduleGrid: FC<ScheduleGridProps> = () => {
           // border: '1px solid #ddd',
           // padding: 2,
         }}>
-        <Grid container direction={"column"} sx={{ border: '1px solid #ddd' }} size={1 / 2}>
+        <Grid container direction={"column"} sx={{ border: '1px solid #ddd' }} size={1}>
           {times.map((time) => {
-            const value = `${time.format("HH:mm")}`
+            const initTime = `${time.format("HH:mm")}`
+            const endTime = `${time.add(30, 'minute').format("HH:mm")}`
             return (
               <Grid size={{ xs: 12 }} key={`${time.toISOString()}`}
-                sx={{ borderBottom: '1px solid #ddd' }}>
-                {value}
+                sx={{
+                  
+                  height: '1.4rem',
+                  border: '1px solid #ddd',
+                  background: '#F0F0F0',
+                }}>
+                <Typography sx={{fontSize:'0.7rem'}}>
+                  {initTime} - {endTime}
+                </Typography>
               </Grid>);
 
           })}
