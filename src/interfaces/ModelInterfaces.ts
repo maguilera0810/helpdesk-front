@@ -75,9 +75,14 @@ export interface Category {
   title: string;
   description: string;
   code: string;
-  type: string;
+  type: number;
   color: string;
   relations: number[];
 }
 
+export interface CategoryType {
+  id: number;
+  title: string;
+  description: string;
+}
 
