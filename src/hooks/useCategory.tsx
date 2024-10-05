@@ -5,11 +5,13 @@ import CategoryService from '../services/CategoryService';
 export const useCategory = () => {
   const [category, setCategory] = useState<Category | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [method, setMethod] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
   const fetchCategories = useCallback(async (filters: { [key: string]: any } = {}) => {
+    setMethod('fetchCategories');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -26,6 +28,7 @@ export const useCategory = () => {
   }, []);
 
   const fetchCategory = async (categoryId: number) => {
+    setMethod('fetchCategory');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -43,6 +46,7 @@ export const useCategory = () => {
   };
 
   const createCategory = async (category: Partial<Category>) => {
+    setMethod('createCategory');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -60,6 +64,7 @@ export const useCategory = () => {
   };
 
   const updateCategory = async (categoryId: number, category: Partial<Category>) => {
+    setMethod('updateCategory');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -79,6 +84,7 @@ export const useCategory = () => {
   };
 
   const deleteCategory = async (categoryId: number) => {
+    setMethod('deleteCategory');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -101,6 +107,7 @@ export const useCategory = () => {
     loading,
     error,
     success,
+    method,
     fetchCategories,
     fetchCategory,
     createCategory,
