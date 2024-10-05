@@ -9,7 +9,7 @@ export const useCategoryType = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const fetchCategories = useCallback(async (filters: { [key: string]: any } = {}) => {
+  const fetchCategoryTypes = useCallback(async (filters: { [key: string]: any } = {}) => {
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -101,8 +101,8 @@ export const useCategoryType = () => {
     loading,
     error,
     success,
-    fetchCategories,
     fetchCategoryType,
+    fetchCategoryTypes,
     createCategoryType,
     updateCategoryType,
     deleteCategoryType,
