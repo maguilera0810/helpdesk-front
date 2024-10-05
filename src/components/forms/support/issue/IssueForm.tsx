@@ -113,7 +113,7 @@ const IssueForm: React.FC = () => {
 
 
   useEffect(() => {
-    fetchCategories({ "type": "skill" });
+    fetchCategories({ "type": 1 });
   }, []);
 
   useEffect(() => {

@@ -33,7 +33,7 @@ const TaskForm: React.FC = () => {
 
 
   useEffect(() => {
-    fetchCategories({ "type": "skill" });
+    fetchCategories({ "type": 1 });
     fetchUsers({ "groups__id__in": [1, 2, 3] });
   }, []);
 
