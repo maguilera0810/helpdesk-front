@@ -2,48 +2,49 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
+import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { Dayjs } from 'dayjs';
 
 import { useCategory } from '../../../../hooks/useCategory';
+import { useCategoryType } from '../../../../hooks/useCategoryType';
+
 import { Category } from '../../../../interfaces/ModelInterfaces';
+
 import useCategoryStore from '../../../../stores/useCategoryStore';
+
 import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
+
 import CategoryRelations from './CategoryRelations';
 
-const gridItemProps = {
+const gridSizes = {
   xs: 12,
   sm: 6,
   md: 4,
   xl: 3,
 };
-
 const fieldProps = {
   fullWidth: true,
 };
-const fieldStyles = {
-  // height: '56px',
-  '&:focus': {
-    outline: 'none',
-  }
-};
-const categoryTypeOptions = [ // TODO get options from backend server
-  { value: 'skill', label: 'Skill' },
-  { value: 'issue', label: 'Issue' },
-];
-
 
 const CategoryForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const { categoryTypes, fetchCategoryTypes } = useCategoryType();
+  const [categoryTypeOptions, setCategoryTypeOptions] = useState<any[]>([]);
+
   const setCategory = useCategoryStore((state) => state.setCategory);
-  const { category, error: errorCategory, loading: loadingCategory, success: successCategory, fetchCategory, createCategory, updateCategory } = useCategory();
+  const { category, error: errorCategory, loading: loadingCategory, success, method,
+    fetchCategory, createCategory, updateCategory } = useCategory();
   const [formData, setFormData] = useState<Partial<Category>>({});
   const [tabValue, setTabValue] = useState('0');
   const isUpdate = id && id !== 'addNew';
+
+
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
@@ -79,17 +80,23 @@ const CategoryForm: React.FC = () => {
     } else {
       await createCategory(formData);
     }
-    // navigate('/admin/users');
   };
 
   const showField = () => {
-    return "block";
-    isUpdate ? "block" : "none"
+    return isUpdate ? "block" : "none"
   }
 
   const handleTabLisChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
+
+  useEffect(() => {
+    fetchCategoryTypes();
+  }, []);
+
+  useEffect(() => {
+    setCategoryTypeOptions(categoryTypes.map((e) => ({ value: e.id, label: e.title })))
+  }, [categoryTypes])
 
   useEffect(() => {
     if (isUpdate) {
@@ -100,15 +107,20 @@ const CategoryForm: React.FC = () => {
     }
   }, [id]);
 
+
   useEffect(() => {
     if (category) {
       setFormData({ ...category });
       setCategory(category)
     }
   }, [category]);
-  // useEffect(() => {
-  //   success && setFormData({});
-  // }, [success]);
+
+
+  useEffect(() => {
+    if (success && category && (method === 'createCategory' || method === 'updateCategory')) {
+      navigate(`/admin/category/${category.id}/`);
+    }
+  }, [success]);
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
@@ -128,7 +140,7 @@ const CategoryForm: React.FC = () => {
         <TabPanel value="0">
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
             <Grid container spacing={{ xs: 1 }}>
-              <Grid item {...gridItemProps} key={"title"}>
+              <Grid size={gridSizes} key={"title"}>
                 <TextField
                   label="Title"
                   name="title"
@@ -137,7 +149,7 @@ const CategoryForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"description"}>
+              <Grid size={gridSizes} key={"description"}>
                 <TextAreaField
                   label="Description"
                   name="description"
@@ -146,7 +158,7 @@ const CategoryForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"code"} display={showField()}>
+              <Grid size={gridSizes} key={"code"} display={showField()}>
                 <TextField
                   label="Code"
                   name="code"
@@ -157,18 +169,18 @@ const CategoryForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"type"}>
+              <Grid size={gridSizes} key={"type"}>
                 <SelectField
                   label="Type"
                   name="type"
-                  value={formData.type ?? categoryTypeOptions[0].value}
+                  value={formData.type ?? ''}
                   options={categoryTypeOptions}
                   onChange={(e) => handleInputChange(e)}
                   fullWidth
                   height="56px"
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"color"}>
+              <Grid size={gridSizes} key={"color"}>
                 <ColorPickerField
                   label="Color"
                   name="Color"
