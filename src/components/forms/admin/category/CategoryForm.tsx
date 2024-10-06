@@ -5,7 +5,6 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { Dayjs } from 'dayjs';
 import { useCategory } from '../../../../hooks/useCategory';
 import { useCategoryType } from '../../../../hooks/useCategoryType';
 
@@ -13,7 +12,6 @@ import { Category } from '../../../../interfaces/ModelInterfaces';
 
 import useCategoryStore from '../../../../stores/useCategoryStore';
 
-import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
 
