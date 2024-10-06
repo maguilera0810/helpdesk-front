@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
-import CategoryDetail from './pages/admin/category/CategoryDetail';
-import CategoryList from './pages/admin/category/CategoryList';
+import CategoryDetail from './pages/settings/category/CategoryDetail';
+import CategoryList from './pages/settings/category/CategoryList';
 import ListFaculties from './pages/admin/faculties/ListFaculties';
 import ListGroups from './pages/admin/groups/ListGroups';
 import ListRoles from './pages/admin/roles/ListRoles';
