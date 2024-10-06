@@ -41,7 +41,7 @@ const AutoCompletField: React.FC<ISelectFieldProps> = ({
     if (typeof newValue === 'string') {
       canAdd && onCreate?.(newValue)
       setLocalValue({ label: newValue });
-    } else if (newValue && newValue.inputValue) {
+    } else if (newValue?.inputValue) {
       canAdd && onCreate?.(newValue.inputValue)
       onChange({ label: newValue.inputValue })
       setLocalValue({ label: newValue.inputValue });
