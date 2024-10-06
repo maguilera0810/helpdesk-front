@@ -90,7 +90,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
       return;
     }
     if (!isDialog) {
-      navigate(`/admin/category-type/${categoryType.id}/`);
+      navigate(`/configuraciones/categorias-type/${categoryType.id}/`);
     }
   }, [success]);
 

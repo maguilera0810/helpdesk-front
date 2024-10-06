@@ -43,16 +43,13 @@ const AppRoutes: FC = () => (
   <Router>
     <Routes>
       <Route element={<ProtectedRoute />}>
-        {/* <Route path="/" element={<Projects />} /> */}
+        <Route path="/" element={<Dashboard />} />
         <Route path="/admin/users/" element={<UserList />} />
         <Route path="/admin/users/:id/" element={<UserDetail />} />
         <Route path="/admin/groups/" element={<ListGroups />} />
-        <Route path="/admin/category/" element={<CategoryList />} />
-        <Route path="/admin/category/:id/" element={<CategoryDetail />} />
         <Route path="/admin/roles/" element={<ListRoles />} />
-        <Route path="/admin/faculties/" element={<ListFaculties />} />
-        <Route path="/admin/campus/" element={<Campus />} />
-        <Route path="/soporte/dashboard/" element={<Dashboard />} />
+
+        <Route path="/soporte/tablero/" element={<Dashboard />} />
         <Route path="/soporte/tareas/" element={<TaskList />} />
         <Route path="/soporte/tareas/:id/" element={<TaskDetail />} />
         <Route path="/soporte/proyects/" element={<Projects />} />
@@ -60,9 +57,14 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/reports/" element={<Reports />} />
         <Route path="/soporte/issue/" element={<IssueList />} />
         <Route path="/soporte/issue/:id/" element={<IssueDetail />} />
-
         <Route path="/soporte/statistics/" element={<Statistics />} />
-        <Route path="/profile/settings/" element={<Settings />} />
+
+        <Route path="/configuraciones/categorias/" element={<CategoryList />} />
+        <Route path="/configuraciones/categorias/:id/" element={<CategoryDetail />} />
+        <Route path="/configuraciones/facultades/" element={<ListFaculties />} />
+        <Route path="/configuraciones/campus/" element={<Campus />} />
+        <Route path="/configuraciones/perfil/" element={<Settings />} />
+
         <Route path="/faqs" element={<FAQs />} />
 
         {/* <Route path="/tickets/:ticketId" element={<TaskDetails />} /> */}

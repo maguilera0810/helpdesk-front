@@ -17,6 +17,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import WorkIcon from '@mui/icons-material/Work';
+import TimelineIcon from '@mui/icons-material/Timeline';
 
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import useUIStore from '../../stores/useUIStore';
@@ -34,16 +35,9 @@ const Navbar: React.FC = () => {
     <>
       <Toolbar />
       <List>
-        <NavItem text="Administración" icon={<AdminPanelSettings />}>
-          <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users/" />
-          <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups/" />
-          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles/" />
-          <NavItem text="Categorias" icon={<CategoryIcon />} path="/admin/category/" />
-          <NavItem text="Campus" icon={<LocationCityIcon />} path="/admin/campus/" />
-          <NavItem text="Facultades" icon={<SchoolIcon />} path="/admin/faculties/" />
-        </NavItem>
         <NavItem text="Soporte" icon={<SupportAgentIcon />}>
-          <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/dashboard/" />
+          <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/tablero/" />
+          <NavItem text="Seguimiento" icon={<TimelineIcon />} path="/soporte/seguimiento-tareas/" />
           <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas/" />
           <NavItem text="Problemas" icon={<ErrorIcon />} path="/soporte/issue/" />
           <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning/" />
@@ -51,7 +45,17 @@ const Navbar: React.FC = () => {
           <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics/" />
           <NavItem text="Reportes" icon={<InsertChartIcon />} path="/soporte/reports/" />
         </NavItem>
-        <NavItem text="Configuraciones" icon={<SettingsIcon />} path="/profile/settings/" />
+        <NavItem text="Administración" icon={<AdminPanelSettings />}>
+          <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users/" />
+          <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups/" />
+          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles/" />
+        </NavItem>
+        <NavItem text="Configuraciones" icon={<SettingsIcon />} >
+          <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
+          <NavItem text="Categorias" icon={<CategoryIcon />} path="/configuraciones/categorias/" />
+          <NavItem text="Campus" icon={<LocationCityIcon />} path="/configuraciones/campus/" />
+          <NavItem text="Facultades" icon={<SchoolIcon />} path="/configuraciones/facultades/" />
+        </NavItem>
         <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs/" />
       </List>
     </>
