@@ -4,15 +4,15 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
-import CategoryDetail from './pages/settings/category/CategoryDetail';
-import CategoryList from './pages/settings/category/CategoryList';
-import ListFaculties from './pages/admin/faculties/ListFaculties';
 import ListGroups from './pages/admin/groups/ListGroups';
 import ListRoles from './pages/admin/roles/ListRoles';
 import UserDetail from './pages/admin/users/UserDetail';
 import UserList from './pages/admin/users/UserList';
 import Login from './pages/auth/Login';
 import FAQs from './pages/FAQ';
+import CategoryDetail from './pages/settings/category/CategoryDetail';
+import CategoryList from './pages/settings/category/CategoryList';
+import ListFaculties from './pages/settings/faculties/ListFaculties';
 import Dashboard from './pages/support/Dashboard';
 import IssueDetail from './pages/support/issues/IssueDetail';
 import IssueList from './pages/support/issues/IssueList';
