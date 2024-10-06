@@ -33,10 +33,6 @@ const AutoCompletField: React.FC<ISelectFieldProps> = ({
   const [localValue, setLocalValue] = useState<IAutocompleteOption | null>(null);
 
   useEffect(() => {
-    console.log(value);
-    console.log(options);
-    console.log(options.find((e) => e.value === value));
-    
     setLocalValue(options.find((e) => e.value === value) ?? null);
   }, [value, options])
 

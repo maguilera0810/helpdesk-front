@@ -85,7 +85,8 @@ const IssueForm: React.FC = () => {
     isUpdate ? "block" : "none"
   }
 
-  const handleTabLisChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabLisChange = (e: React.SyntheticEvent, newValue: string) => {
+    e.preventDefault();
     setTabValue(newValue);
   };
 
@@ -108,7 +109,6 @@ const IssueForm: React.FC = () => {
   const handleConfirmRejectIssue = async () => {
     toogleOpenDialog('refectIssue'); // Close the confirmation dialog
     issue?.id && await updateIssue(issue.id, { "status": "rejected" })
-    console.log("issue cancelado :'v");
   }
 
 
