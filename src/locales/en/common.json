@@ -1,0 +1,8 @@
+{
+  "button.submit": "Enviar",
+  "button.update": "Actualizar",
+  "button.create": "Crear",
+  "button.cancel": "Cancelar",
+  "loading": "Cargando...",
+  "error.generic": "Ocurrió un error. Por favor, inténtelo nuevamente."
+}
