@@ -21,12 +21,10 @@ import Projects from './pages/support/Projects';
 import Reports from './pages/support/Reports';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
+import TaskTracking from './pages/support/task-tracking/TaskTrackingDetail';
 import TaskDetail from './pages/support/tasks/TaskDetail';
 import TaskList from './pages/support/tasks/TaskList';
 import useAuthStore from './stores/useAuthStore';
-// import TaskDetails from './pages/management/TaskDetails';
-// import UserProfile from './pages/management/UserProfile';
-// import FAQs from './pages/management/FAQs';
 
 
 const PublicRoute: FC = () => {
@@ -52,6 +50,7 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/tablero/" element={<Dashboard />} />
         <Route path="/soporte/tareas/" element={<TaskList />} />
         <Route path="/soporte/tareas/:id/" element={<TaskDetail />} />
+        <Route path="/soporte/seguimiento-tareas/" element={<TaskTracking />} />
         <Route path="/soporte/proyects/" element={<Projects />} />
         <Route path="/soporte/planning/" element={<Planning />} />
         <Route path="/soporte/reports/" element={<Reports />} />
