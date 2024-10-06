@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import dayjs, { Dayjs } from 'dayjs';
+import { useParams } from 'react-router-dom';
 
 import CircleIcon from '@mui/icons-material/Circle';
 import Alert from '@mui/material/Alert';
@@ -9,9 +9,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
-import { Stack, Typography } from '@mui/material';
+
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import useTaskStore from '../../../../stores/useTaskStore';
@@ -96,7 +98,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     task: taskFetched, schedule, loading, success, method,
     updateTask, fetchSchedule,
   } = useTask();
-  const users = useUserStore((state) => state.users);
+  const { users } = useUserStore();
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -228,7 +230,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
               ampm={false}
               displayWeekNumber={true}
               showDaysOutsideCurrentMonth={true}
-              slotProps={{ textField: { fullWidth: true }, }}
+              slotProps={{ textField: { fullWidth: true } }}
               // viewRenderers={{ hours: renderDigitalClockTimeView, }}
               onChange={(newDate) => handleDateChange('end', newDate)}
             />
