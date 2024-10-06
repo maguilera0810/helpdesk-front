@@ -1,23 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 
-import { Box, CssBaseline } from '@mui/material';
 import IssueForm from '../../../components/forms/support/issue/IssueForm';
 import Layout from '../../../components/layouts/Layout';
 
-const IssueDetail: React.FC = () => {
+const IssueDetail: FC = () => {
   return (
     <Layout>
-      <Box
-        sx={{
-          marginTop: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <CssBaseline />
-        <IssueForm />
-      </Box>
+      <IssueForm />
     </Layout>
   );
 };

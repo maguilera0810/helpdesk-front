@@ -1,9 +1,10 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { FC } from 'react';
+
+import { Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
 import TaskTable from '../../../components/tables/TaskTable';
 
-const TaskList: React.FC = () => {
+const TaskList: FC = () => {
   return (
     <Layout>
       <Typography variant="h4" gutterBottom>

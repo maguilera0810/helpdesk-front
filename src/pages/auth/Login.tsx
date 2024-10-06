@@ -1,11 +1,12 @@
+import { FC } from 'react';
+
 import { Box, Container } from '@mui/material';
-import React from 'react';
 import backgroundImage from '../../assets/bg_auth.jpg';
 import LoginForm from '../../components/forms/auth/LoginForm';
 
 
 
-const Login: React.FC = () => {
+const Login: FC = () => {
 
   return (
     <Box

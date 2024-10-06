@@ -1,17 +1,17 @@
-import { Box, Typography } from '@mui/material';
-import React from 'react';
+import { FC } from 'react';
+
+import { Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
 import FacultiesTable from '../../../components/tables/FacultiesTable';
 
-const ListFaculties: React.FC = () => {
+const ListFaculties: FC = () => {
   return (
     <Layout>
-      <Box sx={{ padding: 2 }}>
-        <Typography variant="h4" gutterBottom>
-          Listado de Facultades
-        </Typography>
-        <FacultiesTable />
-      </Box>
+      <Typography variant="h4" gutterBottom>
+        Listado de Facultades
+      </Typography>
+      <FacultiesTable />
+
     </Layout>
   );
 };
