@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
@@ -6,7 +6,6 @@ import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { Dayjs } from 'dayjs';
-
 import { useCategory } from '../../../../hooks/useCategory';
 import { useCategoryType } from '../../../../hooks/useCategoryType';
 
@@ -18,6 +17,8 @@ import { SelectField } from '../../fields';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
 
+import { IAutocompleteOption } from '../../../../interfaces/GlobalInterfaces';
+import AutoCompletField from '../../fields/AutoCompletField';
 import CategoryRelations from './CategoryRelations';
 
 const gridSizes = {
@@ -34,7 +35,7 @@ const CategoryForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { categoryTypes, fetchCategoryTypes } = useCategoryType();
+  const { categoryTypes, fetchCategoryTypes, createCategoryType } = useCategoryType();
   const [categoryTypeOptions, setCategoryTypeOptions] = useState<any[]>([]);
 
   const setCategory = useCategoryStore((state) => state.setCategory);
@@ -61,13 +62,6 @@ const CategoryForm: React.FC = () => {
       ...prev,
       [name]: value
     }));
-
-  };
-  const handleDateChange = (name: keyof Category) => (date: Dayjs | null) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: date?.toDate() || null,
-    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -86,9 +80,20 @@ const CategoryForm: React.FC = () => {
     return isUpdate ? "block" : "none"
   }
 
-  const handleTabLisChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabLisChange = (e: SyntheticEvent, newValue: string) => {
+    e.preventDefault();
     setTabValue(newValue);
   };
+
+  const handleAutoCompleteChange = (selectedValue: IAutocompleteOption | string | number | null) => {
+    if (typeof selectedValue === 'object') {
+      handleInputValueChange('type', selectedValue?.value)
+    }
+  }
+  const handleAutoCompleteCreate = async (newValue: string) => {
+    await createCategoryType({ title: newValue });
+    fetchCategoryTypes();
+  }
 
   useEffect(() => {
     fetchCategoryTypes();
@@ -107,14 +112,12 @@ const CategoryForm: React.FC = () => {
     }
   }, [id]);
 
-
   useEffect(() => {
     if (category) {
       setFormData({ ...category });
       setCategory(category)
     }
   }, [category]);
-
 
   useEffect(() => {
     if (success && category && (method === 'createCategory' || method === 'updateCategory')) {
@@ -126,7 +129,6 @@ const CategoryForm: React.FC = () => {
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       <Typography variant="h4" sx={{ mb: 2 }}>Categoria</Typography>
       {errorCategory && <Typography color="error" sx={{ mb: 2 }}>{errorCategory}</Typography>}
-      {/* {successCategory && <Typography color="primary" sx={{ mb: 2 }}>Category {isUpdate ? 'updated' : 'created'} successfully!</Typography>} */}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingCategory} sx={{ mt: 3, mb: 2 }}>
         {loadingCategory ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Actualizar' : 'Crear')}
       </Button>
@@ -142,7 +144,7 @@ const CategoryForm: React.FC = () => {
             <Grid container spacing={{ xs: 1 }}>
               <Grid size={gridSizes} key={"title"}>
                 <TextField
-                  label="Title"
+                  label="Título"
                   name="title"
                   value={formData.title ?? ''}
                   onChange={(e) => handleInputChange(e)}
@@ -151,7 +153,7 @@ const CategoryForm: React.FC = () => {
               </Grid>
               <Grid size={gridSizes} key={"description"}>
                 <TextAreaField
-                  label="Description"
+                  label="Descripción"
                   name="description"
                   value={formData.description ?? ''}
                   onChange={(e) => handleInputChange(e)}
@@ -160,24 +162,25 @@ const CategoryForm: React.FC = () => {
               </Grid>
               <Grid size={gridSizes} key={"code"} display={showField()}>
                 <TextField
-                  label="Code"
+                  label="Codigo"
                   name="code"
                   disabled={true}
                   value={formData.code ?? ''}
                   onChange={(e) => handleInputChange(e)}
-                  required
                   {...fieldProps}
                 />
               </Grid>
-              <Grid size={gridSizes} key={"type"}>
-                <SelectField
-                  label="Type"
-                  name="type"
-                  value={formData.type ?? ''}
+              <Grid size={gridSizes} key={"type2"}>
+                <AutoCompletField
+                  label='Tipo'
+                  name='categoryTypeField'
                   options={categoryTypeOptions}
-                  onChange={(e) => handleInputChange(e)}
-                  fullWidth
-                  height="56px"
+                  value={formData.type ?? null}
+                  canAdd={true}
+                  key={'categoryType'}
+                  onChange={handleAutoCompleteChange}
+                  onCreate={handleAutoCompleteCreate}
+
                 />
               </Grid>
               <Grid size={gridSizes} key={"color"}>
@@ -195,6 +198,14 @@ const CategoryForm: React.FC = () => {
           <CategoryRelations />
         </TabPanel>
       </TabContext>
+      {/* <Dialog open={true}>
+        <DialogTitle>Add a new film</DialogTitle>
+        <DialogContent>
+          <CategoryTypeForm
+            isDialog={true}
+          />
+        </DialogContent>
+      </Dialog> */}
     </Paper>
   );
 };

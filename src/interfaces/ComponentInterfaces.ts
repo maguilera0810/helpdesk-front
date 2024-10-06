@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-import { ScheduleTask } from "./ModelInterfaces";
+import { CategoryType, ScheduleTask } from "./ModelInterfaces";
 
 
 
@@ -9,8 +9,16 @@ export interface ScheduleColumnProps {
 }
 
 export interface GridTaskProps {
-  type: 'disponible' | 'ocupado' | 'propuesta' | 'actual'| 'colision';
+  type: 'disponible' | 'ocupado' | 'propuesta' | 'actual' | 'colision';
   time: Dayjs;
   task?: ScheduleTask;
   onClick?: ((id: number) => void) | (() => void);
+}
+
+
+export interface CategoryTypeFormProps {
+  categoryTypeInput?: CategoryType;
+  onSave?: () => void;
+  onCancel?: () => void;
+  isDialog?: boolean;
 }

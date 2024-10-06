@@ -7,9 +7,11 @@ export const useCategoryType = () => {
   const [categoryTypes, setCategoryTypes] = useState<CategoryType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [method, setMethod] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
   const fetchCategoryTypes = useCallback(async (filters: { [key: string]: any } = {}) => {
+    setMethod('fetchCategoryTypes');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -26,6 +28,7 @@ export const useCategoryType = () => {
   }, []);
 
   const fetchCategoryType = async (categoryTypeId: number) => {
+    setMethod('fetchCategoryType');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -43,6 +46,7 @@ export const useCategoryType = () => {
   };
 
   const createCategoryType = async (categoryType: Partial<CategoryType>) => {
+    setMethod('createCategoryType');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -60,6 +64,7 @@ export const useCategoryType = () => {
   };
 
   const updateCategoryType = async (categoryTypeId: number, categoryType: Partial<CategoryType>) => {
+    setMethod('updateCategoryType');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -79,6 +84,7 @@ export const useCategoryType = () => {
   };
 
   const deleteCategoryType = async (categoryTypeId: number) => {
+    setMethod('deleteCategoryType');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -101,6 +107,7 @@ export const useCategoryType = () => {
     loading,
     error,
     success,
+    method,
     fetchCategoryType,
     fetchCategoryTypes,
     createCategoryType,

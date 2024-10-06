@@ -9,6 +9,10 @@ export interface IRandomStringOptions {
 
 
 export interface IOption {
-  value: string;
+  value?: any;
   label: string;
+}
+
+export interface IAutocompleteOption extends IOption {
+  inputValue?: string;
 }
