@@ -14,7 +14,7 @@ i18n
     fallbackLng: 'es', // Idioma por defecto si no se encuentra traducción
     supportedLngs: ['es', 'en'], // Idiomas soportados en la aplicación
     preload: ['es'], // Carga de antemano los idiomas inglés y español
-    ns: ['common', 'forms', 'task', 'schedules', 'user', 'navigation', 'validation', 'dialog'],// Define los namespaces que vas a usar
+    ns: ['common', 'form', ],// Define los namespaces que vas a usar
     defaultNS: 'common', // Namespace por defecto si no se especifica
     interpolation: {
       escapeValue: false, // React ya hace escaping de las variables para prevenir XSS
