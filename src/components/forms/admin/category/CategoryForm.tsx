@@ -162,7 +162,7 @@ const CategoryForm: React.FC = () => {
               </Grid>
               <Grid size={gridSizes} key={"code"} display={showField()}>
                 <TextField
-                  label="Codigo"
+                  label="Código Público"
                   name="code"
                   disabled={true}
                   value={formData.code ?? ''}
