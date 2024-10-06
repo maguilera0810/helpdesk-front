@@ -11,9 +11,9 @@ i18n
   .use(initReactI18next) // Inicializa react-i18next con la configuración de i18n
   .init({
     debug: true, // Habilita los mensajes de debug en la consola (útil para desarrollo)
-    fallbackLng: 'en', // Idioma por defecto si no se encuentra traducción
-    supportedLngs: ['en', 'es'], // Idiomas soportados en la aplicación
-    preload: ["en", "es"], // Carga de antemano los idiomas inglés y español
+    fallbackLng: 'es', // Idioma por defecto si no se encuentra traducción
+    supportedLngs: ['es', 'en'], // Idiomas soportados en la aplicación
+    preload: ['es'], // Carga de antemano los idiomas inglés y español
     ns: ['common', 'forms', 'task', 'schedules', 'user', 'navigation', 'validation', 'dialog'],// Define los namespaces que vas a usar
     defaultNS: 'common', // Namespace por defecto si no se especifica
     interpolation: {
