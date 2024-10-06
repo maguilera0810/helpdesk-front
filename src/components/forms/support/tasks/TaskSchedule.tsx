@@ -88,9 +88,14 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
 
   const [formData, setFormData] = useState<Partial<Task>>({});
 
-  const { task, startAt, endAt, setTask, setUserTasks, setSchedule,
-    setCurrDate, setStartAt, setEndAt } = useTaskStore()
-  const { task: taskFetched, schedule, loading, success, method, updateTask, fetchSchedule } = useTask();
+  const {
+    task, startAt, endAt,
+    setTask, setSchedule, setCurrDate, setStartAt, setEndAt,
+  } = useTaskStore()
+  const {
+    task: taskFetched, schedule, loading, success, method,
+    updateTask, fetchSchedule,
+  } = useTask();
   const users = useUserStore((state) => state.users);
 
 
