@@ -1,12 +1,15 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent, FC } from 'react';
 
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Chip from '@mui/material/Chip';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
-
 
 
 const ITEM_HEIGHT = 48;
@@ -52,7 +55,7 @@ const getMenuItemStyles: MenuItemStyles = (option, selectedValues, theme) => {
   };
 };
 
-const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
+const MultipleSelectField: FC<IMultipleSelectFieldProps> = ({
   label,
   name,
   value,
@@ -62,7 +65,6 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
   height = '56px',
   disabled = false }) => {
   const theme = useTheme();
-
 
   return (
     <FormControl fullWidth={fullWidth}>
@@ -74,13 +76,14 @@ const MultipleSelectField: React.FC<IMultipleSelectFieldProps> = ({
         multiple
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.3, maxHeight: height }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.2, maxHeight: height }}>
             {selected.map((value) => (
               <Chip key={value} label={options.find(e => e.value === value)?.label} />
             ))}
           </Box>
         )}
         MenuProps={MenuProps}
+        sx={{ height: height }}
       >
         {options.map((option) => (
           <MenuItem
