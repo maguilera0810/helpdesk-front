@@ -6,12 +6,10 @@ import TaskTable from '../../../components/tables/TaskTable';
 const TaskList: React.FC = () => {
   return (
     <Layout>
-      <Box sx={{ padding: 2 }}>
-        <Typography variant="h4" gutterBottom>
-          Tareas
-        </Typography>
-        <TaskTable/>
-      </Box>
+      <Typography variant="h4" gutterBottom>
+        Tareas
+      </Typography>
+      <TaskTable />
     </Layout>
   );
 };

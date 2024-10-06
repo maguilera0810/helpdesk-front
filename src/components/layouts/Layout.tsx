@@ -32,6 +32,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           minHeight: '100vh',
           width: { sm: `calc(100vw - ${isDrawerOpen ? drawerWidth : 0}px)` },
           transition: 'margin 0.3s',
+          padding:2,
           // position: 'relative'
         }}
       >

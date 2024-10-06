@@ -7,17 +7,7 @@ import Layout from '../../../components/layouts/Layout.tsx';
 const TaskDetail: React.FC = () => {
   return (
     <Layout>
-      <Box
-        sx={{
-          marginTop: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <CssBaseline />
-        <TaskForm />
-      </Box>
+      <TaskForm />
     </Layout>
   );
 };
