@@ -7,3 +7,8 @@ export interface TaskScheduleRequest {
   endAt: Date;
   currTaskId: number;
 }
+
+export interface TrackingTasksRequest {
+  team: number[];
+  currDate: Date;
+}
