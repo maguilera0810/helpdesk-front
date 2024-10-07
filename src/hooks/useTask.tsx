@@ -1,14 +1,14 @@
 import { useCallback, useState } from 'react';
 import { Schedule, Task, UserTask } from '../interfaces/ModelInterfaces';
-import { TaskScheduleRequest } from '../interfaces/RequestInterfaces';
+import { TaskScheduleRequest, TrackingTasksRequest } from '../interfaces/RequestInterfaces';
 import TaskService from '../services/TaskService';
 
-type methodType = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | null;
+type methodType = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | "fetchTrackingTasks" | null;
 
 export const useTask = () => {
   const [task, setTask] = useState<Task | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [schedule, setSchedules] = useState<Schedule | null>(null);
+  const [schedule, setSchedule] = useState<Schedule | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [method, setMethod] = useState<methodType>(null);
@@ -39,7 +39,7 @@ export const useTask = () => {
     setSuccess(null);
     try {
       const resp = await TaskService.retrieveSchedules(body);
-      setSchedules(resp);
+      setSchedule(resp);
       setSuccess(true);
     } catch (error) {
       setSuccess(false)
@@ -49,6 +49,26 @@ export const useTask = () => {
       setLoading(false);
     }
   }, []);
+
+  const fetchTrackingTasks = useCallback(async (body: TrackingTasksRequest) => {
+    setMethod("fetchTrackingTasks");
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      const resp = await TaskService.trackingTasks(body);
+      setSchedule(resp);
+      setSuccess(true);
+    } catch (error) {
+      setSuccess(false)
+      console.error('Error fetching user tasks:', error);
+      setError('Error fetching user tasks');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+
 
   const fetchTask = async (taskId: number) => {
     setMethod("fetchTask");
@@ -136,6 +156,7 @@ export const useTask = () => {
     fetchTask,
     fetchTasks,
     fetchSchedule,
+    fetchTrackingTasks,
     createTask,
     updateTask,
     deleteTask,
