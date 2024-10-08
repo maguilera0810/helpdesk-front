@@ -8,7 +8,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { useNavigate } from 'react-router-dom';
 
-import { GridTaskProps, ScheduleColumnProps } from '../../../../../interfaces/ComponentInterfaces';
+import { ScheduleColumnProps, ScheduleItemProps } from '../../../../../interfaces/ComponentInterfaces';
 import useTaskStore from '../../../../../stores/useTaskStore';
 
 
@@ -61,7 +61,7 @@ const SCHEDULE_ITEMS = {
 
 }
 
-const ScheduleItem: FC<GridTaskProps> = ({ type, time, task, onClick }) => {
+const ScheduleItem: FC<ScheduleItemProps> = ({ type, time, task, onClick }) => {
   const isStart = time.isSame(task?.startAt);
   const style = { ...gridStyle, ...SCHEDULE_ITEMS[type].style }
   if (type === 'disponible') {

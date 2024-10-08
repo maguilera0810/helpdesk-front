@@ -50,6 +50,8 @@ export interface UserTask {
 }
 export interface Schedule {
   hasCollision?: boolean;
+  minTime?: Date;
+  maxTime?: Date;
   userTasks: UserTask[];
 }
 

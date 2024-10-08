@@ -8,11 +8,15 @@ export interface ScheduleColumnProps {
   times: Dayjs[];
 }
 
-export interface GridTaskProps {
+export interface ScheduleItemProps {
   type: 'disponible' | 'ocupado' | 'propuesta' | 'actual' | 'colision';
   time: Dayjs;
   task?: ScheduleTask;
   onClick?: ((id: number) => void) | (() => void);
+}
+
+export interface TrackingItemProps extends ScheduleItemProps {
+  type: 'disponible' | 'ocupado';
 }
 
 

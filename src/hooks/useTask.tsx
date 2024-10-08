@@ -157,6 +157,7 @@ export const useTask = () => {
     fetchTasks,
     fetchSchedule,
     fetchTrackingTasks,
+    setSchedule,
     createTask,
     updateTask,
     deleteTask,
