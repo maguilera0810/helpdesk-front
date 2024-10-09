@@ -23,7 +23,7 @@ export class TaskService extends BaseCrudService<Task> {
       const response = await this.axiosInstance.post<Schedule>(`schedule/`, keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
-      console.error('Error retrieveSchedules :', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error('Error retrieveSchedules :', error);
       throw error;
     }
   }
@@ -33,7 +33,7 @@ export class TaskService extends BaseCrudService<Task> {
       const response = await this.axiosInstance.post<Schedule>(`tracking/`, keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
-      console.error('Error trackingTasks :', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error('Error trackingTasks :', error);
       throw error;
     }
   }
