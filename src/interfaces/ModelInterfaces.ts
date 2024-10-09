@@ -39,6 +39,24 @@ export interface Task {
   startAt: Date | null;
   endAt: Date | null;
 }
+export interface Status {
+  id: number;
+  title: string;
+  description: string;
+  color: string;
+}
+export interface TaskStatus extends Status {
+}
+export interface IssueStatus extends Status {
+}
+export interface Priority {
+  id: number;
+  title: string;
+  description: string;
+  color: string;
+  value: number;
+  icon: string;
+}
 
 export interface ScheduleTask extends Task {
   hasCollision?: boolean;
