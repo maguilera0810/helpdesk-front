@@ -12,12 +12,14 @@ import GroupIcon from '@mui/icons-material/Group';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import PersonIcon from '@mui/icons-material/Person';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import WorkIcon from '@mui/icons-material/Work';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import WorkIcon from '@mui/icons-material/Work';
+
 
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import useUIStore from '../../stores/useUIStore';
@@ -53,6 +55,7 @@ const Navbar: React.FC = () => {
         <NavItem text="Configuraciones" icon={<SettingsIcon />} >
           <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
           <NavItem text="Categorias" icon={<CategoryIcon />} path="/configuraciones/categorias/" />
+          <NavItem text="Prioridad" icon={<PriorityHighIcon />} path="/configuraciones/prioridad/" />
           <NavItem text="Campus" icon={<LocationCityIcon />} path="/configuraciones/campus/" />
           <NavItem text="Facultades" icon={<SchoolIcon />} path="/configuraciones/facultades/" />
         </NavItem>
