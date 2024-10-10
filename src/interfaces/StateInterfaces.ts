@@ -1,10 +1,10 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Priority, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { Category } from "./ModelInterfaces";
 
 
-interface IBaseState {
+interface BaseState {
   clearState?: () => void
 }
 
@@ -13,7 +13,7 @@ interface ICallback {
   setCallback?: (callback: (fn: any) => void) => void
 }
 
-export interface ITaskState extends IBaseState, ICallback {
+export interface ITaskState extends BaseState, ICallback {
   task: Task | null;
   tasks: Task[];
   userTasks: UserTask[];
@@ -31,14 +31,25 @@ export interface ITaskState extends IBaseState, ICallback {
   clearTaks: () => void;
 }
 
-export interface ICategoryState extends IBaseState {
+export interface CategoryState extends BaseState {
   category: Category | null;
   categories: Category[];
   setCategory: (category: Category | null) => void;
   setCategories: (categories: Category[]) => void;
 }
+export interface PriorityState extends BaseState {
+  priority?: Priority;
+  priorities: Priority[];
+  setPriority: (priority?: Priority) => void;
+  setPriorities: (priorities: Priority[]) => void;
+}
 
-export interface IAuthState extends IBaseState {
+export interface GlobalDataState extends PriorityState, CategoryState {
+  reload: boolean;
+  setReload: (reload: boolean) => void;
+}
+
+export interface IAuthState extends BaseState {
   user: User | null;
   token: Token | null;
   setUser: (user: User | null) => void;
@@ -46,7 +57,7 @@ export interface IAuthState extends IBaseState {
   logout: () => void;
 }
 
-export interface IUserState extends IBaseState {
+export interface IUserState extends BaseState {
   user: User | null;
   users: User[];
   setUser: (user: User | null) => void;
@@ -54,13 +65,20 @@ export interface IUserState extends IBaseState {
 }
 
 
-export interface IFilterState extends IBaseState {
+export interface IFilterState extends BaseState {
   filters: { [key: string]: any };
   setFilters: (filters: { [key: string]: any }) => void;
   clearFilters: () => void;
 }
 
-export interface IUIState extends IBaseState {
+export interface IUIState extends BaseState {
   isDrawerOpen: boolean;
   toggleDrawer: () => void;
+}
+
+
+export interface NavbarState {
+  expandedItems: string[];
+  toggleItem: (item: string) => void;
+  isItemExpanded: (item: string) => boolean;
 }
