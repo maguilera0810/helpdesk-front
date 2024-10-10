@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Token } from '../interfaces/AuthInterfaces';
 import { User } from '../interfaces/ModelInterfaces';
-import useAuthStore from '../stores/useAuthStore';
+import authStore from '../stores/authStore';
 import { keysToCamel } from '../utils/caseUtils';
 import Environment from './../environments/Environment';
 
@@ -26,14 +26,14 @@ class AuthService {
 
   private getSavedToken(): string | null {
     // Obtener el token desde el store de Zustand
-    return useAuthStore.getState().token?.access || null;
+    return authStore.getState().token?.access || null;
   }
   private getRefreshToken(): string | null {
-    return useAuthStore.getState().token?.refresh || null;
+    return authStore.getState().token?.refresh || null;
   }
 
   private clearAuth(): void {
-    useAuthStore.getState().logout();
+    authStore.getState().logout();
   }
 
   private getAuthHeaders() {

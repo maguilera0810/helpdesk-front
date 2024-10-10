@@ -26,16 +26,16 @@ import Statistics from './pages/support/Statistics';
 import TaskTracking from './pages/support/task-tracking/TaskTracking';
 import TaskDetail from './pages/support/task/TaskDetail';
 import TaskList from './pages/support/task/TaskList';
-import useAuthStore from './stores/useAuthStore';
+import authStore from './stores/authStore';
 
 
 const PublicRoute: FC = () => {
-  const token = useAuthStore((state) => state.token);
+  const token = authStore((state) => state.token);
   return token ? <Navigate to="/soporte/proyects" /> : <Outlet />;
 };
 
 const ProtectedRoute: FC = () => {
-  const token = useAuthStore((state) => state.token);
+  const token = authStore((state) => state.token);
   return token ? <Outlet /> : <Navigate to="/auth/login" />;
 };
 

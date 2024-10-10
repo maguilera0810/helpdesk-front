@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../../services/AuthService';
-import useAuthStore from '../../../stores/useAuthStore';
+import authStore from '../../../stores/authStore';
 
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
-  const setToken = useAuthStore((state) => state.setToken);
-  const setUser = useAuthStore((state) => state.setUser);
+  const setToken = authStore((state) => state.setToken);
+  const setUser = authStore((state) => state.setUser);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

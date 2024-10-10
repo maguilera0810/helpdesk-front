@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import Environment from '../environments/Environment';
-import useAuthStore from '../stores/useAuthStore';
+import authStore from '../stores/authStore';
 import AuthService from './AuthService';
 
 const { apiUrl } = Environment;
@@ -39,7 +39,7 @@ abstract class BaseAuthService {
             originalRequest.headers['Authorization'] = `Bearer ${newToken.access}`;
             return this.axiosInstance(originalRequest);
           }
-          useAuthStore.getState().logout();
+          authStore.getState().logout();
           window.location.href = '/auth/login';
         }
         return Promise.reject(error);
@@ -47,7 +47,7 @@ abstract class BaseAuthService {
     );
   }
   protected getSavedToken(): string | null {
-    return useAuthStore.getState().token?.access || null;
+    return authStore.getState().token?.access || null;
   }
 
   protected getAuthHeaders() {
