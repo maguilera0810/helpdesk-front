@@ -24,11 +24,11 @@ const PriorityTable: FC = () => {
   }, []);
 
   const handleCreate = () => {
-    navigate('/configuraciones/prioridades/addNew/');
+    navigate('/configuraciones/prioridad/addNew/');
   };
 
   const handleUpdate = (id: number) => {
-    navigate(`/configuraciones/prioridades/${id}/`);
+    navigate(`/configuraciones/prioridad/${id}/`);
   };
 
   return (

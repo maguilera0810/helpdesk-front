@@ -13,6 +13,7 @@ import FAQs from './pages/FAQ';
 import CategoryDetail from './pages/settings/category/CategoryDetail';
 import CategoryList from './pages/settings/category/CategoryList';
 import ListFaculties from './pages/settings/faculties/ListFaculties';
+import PriorityDetail from './pages/settings/priority/PriorityDetail';
 import PriorityList from './pages/settings/priority/PriorityList';
 import Dashboard from './pages/support/Dashboard';
 import IssueDetail from './pages/support/issues/IssueDetail';
@@ -62,7 +63,7 @@ const AppRoutes: FC = () => (
         <Route path="/configuraciones/categorias/" element={<CategoryList />} />
         <Route path="/configuraciones/categorias/:id/" element={<CategoryDetail />} />
         <Route path="/configuraciones/prioridad/" element={<PriorityList />} />
-        <Route path="/configuraciones/prioridad/:priorityID/" element={<PriorityList />} />
+        <Route path="/configuraciones/prioridad/:priorityID/" element={<PriorityDetail />} />
         <Route path="/configuraciones/facultades/" element={<ListFaculties />} />
         <Route path="/configuraciones/campus/" element={<Campus />} />
         <Route path="/configuraciones/perfil/" element={<Settings />} />
