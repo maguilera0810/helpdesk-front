@@ -19,21 +19,18 @@ const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
-
   const { setTask } = useTaskStore()
-  const setUsers = useUserStore((state) => state.setUsers);
-  const setCategories = useCategoryStore((state) => state.setCategories)
+  const { setUsers } = useUserStore();
+  const { setCategories } = useCategoryStore();
 
   const { users, fetchUsers } = useUser();
   const { categories, fetchCategories } = useCategory();
-
-  const { task, error, success, method, fetchTask, createTask, updateTask } = useTask();
-
+  const { task, error, success, method, fetchTask } = useTask();
   const [tabValue, setTabValue] = useState('0');
 
 
   useEffect(() => {
-    fetchCategories({ "type": 1 });
+    fetchCategories({ "type__title": "habilidad" });
     fetchUsers({ "groups__id__in": [1, 2, 3] });
   }, []);
 
