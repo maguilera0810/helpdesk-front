@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
 import { Box, CssBaseline } from '@mui/material';
-import CategoryForm from '../../../components/forms/admin/category/CategoryForm';
+import CategoryForm from '../../../components/forms/settings/category/CategoryForm';
 import Layout from '../../../components/layouts/Layout';
 
 const CategoryDetail: FC = () => {
