@@ -7,12 +7,12 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { priorityOptions, taskStatusOptions, taskTypeOptions } from '../../../../constants';
+import { taskStatusOptions, taskTypeOptions } from '../../../../constants';
+import useGlobalData from '../../../../hooks/useGlobalData';
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import useCategoryStore from '../../../../stores/useCategoryStore';
 import useTaskStore from '../../../../stores/useTaskStore';
-import useUserStore from '../../../../stores/useUserStore';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 
@@ -42,13 +42,10 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
   const isUpdate = Boolean(id && id !== 'addNew');
 
 
-
+  const { priorities } = useGlobalData();
   const { task, setTask } = useTaskStore()
   const { task: taskFetched, loading, success, method, createTask, updateTask } = useTask();
-
-  const users = useUserStore((state) => state.users);
   const categories = useCategoryStore((state) => state.categories)
-
   const [formData, setFormData] = useState<Partial<Task>>({});
 
   useEffect(() => {
@@ -60,7 +57,6 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
       });
     }
   }, [task]);
-
 
   useEffect(() => {
     if (taskFetched) {
@@ -182,8 +178,8 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <SelectField
             label="Priority"
             name="priority"
-            value={formData.priority ?? priorityOptions[0].value}
-            options={priorityOptions}
+            value={formData.priority ?? ''}
+            options={priorities.map(e => ({ value: e.id, label: e.title }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="56px"
@@ -212,7 +208,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             label="Categories"
             name="categories"
             value={formData.categories ?? []}
-            options={categories.map(category => ({ value: category.id, label: category.title, color: category.color }))}
+            options={categories.map(e => ({ value: e.id, label: e.title }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
           />

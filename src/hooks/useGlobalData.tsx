@@ -1,6 +1,3 @@
-
-
-
 import { useEffect } from 'react';
 import globalDataStore from '../stores/globalDataStore';
 import useAuthStore from '../stores/useAuthStore';
@@ -16,23 +13,20 @@ const useGlobalData = () => {
 
   useEffect(() => {
     if (!reload || !token) {
-      return
+      return;
     }
-    console.log("fetchPriorities");
     fetchPriorities();
     fetchCategories();
     setReload(false);
   }, [reload, token])
 
-
   useEffect(() => {
-    setPriorities(fetchedPriorities);
+    fetchedPriorities.length && setPriorities(fetchedPriorities);
   }, [fetchedPriorities])
 
   useEffect(() => {
-    setCategories(fetchedCategories);
+    fetchedPriorities.length && setCategories(fetchedCategories);
   }, [fetchedCategories])
-
 
 
   return {
