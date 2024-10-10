@@ -1,19 +1,19 @@
+import { FC, useEffect } from 'react';
 
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-import { I18nextProvider } from 'react-i18next';
-import i18n from './i18n';
+import useGlobalData from './hooks/useGlobalData';
 
 import AppRoutes from './routes';
 
-const App = () => {
+const App: FC = () => {
+  const { setReload } = useGlobalData();
+
+  useEffect(() => {
+    setReload(true);
+  }, [])
+
+
   return (
-    <I18nextProvider i18n={i18n}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <AppRoutes />
-      </LocalizationProvider>
-    </I18nextProvider>
+    <AppRoutes />
   )
 }
 
