@@ -5,7 +5,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography, Avatar } from '@mui/mater
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthStore';
-import useUIStore from '../../stores/useUIStore';
+import uiStore from '../../stores/uiStore';
 
 interface HeaderProps {
   handleDrawerToggle: () => void;
@@ -15,8 +15,8 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
-  const isDrawerOpen = useUIStore((state) => state.isDrawerOpen);
-  const toggleDrawer = useUIStore((state) => state.toggleDrawer);
+  const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
+  const toggleDrawer = uiStore((state) => state.toggleDrawer);
 
   const handleLogout = () => {
     logout();

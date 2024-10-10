@@ -22,7 +22,7 @@ import WorkIcon from '@mui/icons-material/Work';
 
 
 import { Box, Drawer, List, Toolbar } from '@mui/material';
-import useUIStore from '../../stores/useUIStore';
+import uiStore from '../../stores/uiStore';
 
 import NavItem from './NavItem';
 
@@ -30,8 +30,8 @@ const drawerWidth = 240;
 
 
 const Navbar: React.FC = () => {
-  const isDrawerOpen = useUIStore((state) => state.isDrawerOpen);
-  const toggleDrawer = useUIStore((state) => state.toggleDrawer);
+  const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
+  const toggleDrawer = uiStore((state) => state.toggleDrawer);
 
   const drawer = (
     <>

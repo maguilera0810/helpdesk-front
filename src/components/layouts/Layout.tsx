@@ -2,7 +2,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Box, CssBaseline, IconButton, Toolbar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FC, ReactNode, useState } from 'react';
-import useUIStore from '../../stores/useUIStore';
+import uiStore from '../../stores/uiStore';
 import Header from './Header';
 import Navbar from './Navbar';
 
@@ -11,7 +11,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 const Layout: FC<LayoutProps> = ({ children }) => {
-  const isDrawerOpen = useUIStore((state) => state.isDrawerOpen);
+  const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
 
   return (
     <Box id="box-layout" sx={{
