@@ -8,7 +8,7 @@ import { useCategory } from '../../../../hooks/useCategory';
 import { useTask } from '../../../../hooks/useTask';
 import { useUser } from '../../../../hooks/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
-import useCategoryStore from '../../../../stores/useCategoryStore';
+import categoryStore from '../../../../stores/categoryStore';
 import useTaskStore from '../../../../stores/useTaskStore';
 import useUserStore from '../../../../stores/useUserStore';
 import TaskBaseInfo from './TaskBaseInfo';
@@ -21,7 +21,7 @@ const TaskForm: React.FC = () => {
 
   const { setTask } = useTaskStore()
   const { setUsers } = useUserStore();
-  const { setCategories } = useCategoryStore();
+  const { setCategories } = categoryStore();
 
   const { users, fetchUsers } = useUser();
   const { categories, fetchCategories } = useCategory();

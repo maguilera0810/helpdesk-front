@@ -9,13 +9,13 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 
 import { useCategory } from '../../../../hooks/useCategory';
-import useCategoryStore from '../../../../stores/useCategoryStore';
+import categoryStore from '../../../../stores/categoryStore';
 
 
 
 
 const CategoryRelations: React.FC = () => {
-  const category = useCategoryStore((state) => state.category);
+  const category = categoryStore((state) => state.category);
   const {  updateCategory, fetchCategories } = useCategory();
   const [expanded, setExpanded] = useState(false);
 

@@ -10,7 +10,7 @@ import { useCategoryType } from '../../../../hooks/useCategoryType';
 
 import { Category } from '../../../../interfaces/ModelInterfaces';
 
-import useCategoryStore from '../../../../stores/useCategoryStore';
+import categoryStore from '../../../../stores/categoryStore';
 
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
@@ -36,7 +36,7 @@ const CategoryForm: React.FC = () => {
   const { categoryTypes, fetchCategoryTypes, createCategoryType } = useCategoryType();
   const [categoryTypeOptions, setCategoryTypeOptions] = useState<any[]>([]);
 
-  const setCategory = useCategoryStore((state) => state.setCategory);
+  const setCategory = categoryStore((state) => state.setCategory);
   const { category, error: errorCategory, loading: loadingCategory, success, method,
     fetchCategory, createCategory, updateCategory } = useCategory();
   const [formData, setFormData] = useState<Partial<Category>>({});

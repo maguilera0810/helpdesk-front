@@ -105,7 +105,7 @@ const ScheduleItem: FC<ScheduleItemProps> = ({ type, time, task, onClick }) => {
 const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
 
   const navigate = useNavigate();
-  const { task: currTask, schedule, startAt, endAt } = useTaskStore()
+  const { task: currTask, startAt, endAt } = useTaskStore()
 
   const handleTaskClick = (taskId: number) => {
     navigate(`/soporte/tareas/${taskId}/`);

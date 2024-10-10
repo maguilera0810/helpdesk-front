@@ -11,7 +11,7 @@ import { taskStatusOptions, taskTypeOptions } from '../../../../constants';
 import useGlobalData from '../../../../hooks/useGlobalData';
 import { useTask } from '../../../../hooks/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
-import useCategoryStore from '../../../../stores/useCategoryStore';
+import categoryStore from '../../../../stores/categoryStore';
 import useTaskStore from '../../../../stores/useTaskStore';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
@@ -45,7 +45,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
   const { priorities } = useGlobalData();
   const { task, setTask } = useTaskStore()
   const { task: taskFetched, loading, success, method, createTask, updateTask } = useTask();
-  const categories = useCategoryStore((state) => state.categories)
+  const categories = categoryStore((state) => state.categories)
   const [formData, setFormData] = useState<Partial<Task>>({});
 
   useEffect(() => {
