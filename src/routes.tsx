@@ -24,8 +24,8 @@ import Reports from './pages/support/Reports';
 import Settings from './pages/support/Settings';
 import Statistics from './pages/support/Statistics';
 import TaskTracking from './pages/support/task-tracking/TaskTracking';
-import TaskDetail from './pages/support/tasks/TaskDetail';
-import TaskList from './pages/support/tasks/TaskList';
+import TaskDetail from './pages/support/task/TaskDetail';
+import TaskList from './pages/support/task/TaskList';
 import useAuthStore from './stores/useAuthStore';
 
 
