@@ -1,6 +1,7 @@
 import { produce } from 'immer';
-import { create, StateCreator } from 'zustand';
+import { StateCreator } from 'zustand';
 import { IFilterState } from '../interfaces/StateInterfaces';
+import storeCreator from './storeCreator';
 
 
 const stateCreator: StateCreator<IFilterState, [], [], IFilterState> = (set) => ({
@@ -15,5 +16,5 @@ const stateCreator: StateCreator<IFilterState, [], [], IFilterState> = (set) => 
     })),
 });
 
-const useFilterStore = create<IFilterState>()(stateCreator);
-export default useFilterStore;
+
+export default storeCreator(stateCreator);

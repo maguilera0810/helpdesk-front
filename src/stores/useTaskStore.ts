@@ -1,6 +1,7 @@
 import { produce } from 'immer';
-import { create, StateCreator } from 'zustand';
+import { StateCreator } from 'zustand';
 import { ITaskState } from '../interfaces/StateInterfaces';
+import storeCreator from './storeCreator';
 
 
 const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
@@ -55,6 +56,4 @@ const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
     })),
 });
 
-const useTaskStore = create<ITaskState>()(stateCreator);
-
-export default useTaskStore;
+export default storeCreator(stateCreator);

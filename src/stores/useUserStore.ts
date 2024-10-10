@@ -1,16 +1,7 @@
 import { produce } from 'immer';
-import { create, StateCreator } from 'zustand';
-import { persist, PersistOptions } from 'zustand/middleware';
+import { StateCreator } from 'zustand';
 import { IUserState } from '../interfaces/StateInterfaces';
-import { decryptData, encryptData } from '../utils/cryptoUtil';
-
-
-const persistOptions: PersistOptions<IUserState> = {
-  name: 'auth-storage',
-  getStorage: () => localStorage,
-  serialize: encryptData,
-  deserialize: decryptData,
-};
+import storeCreator from './storeCreator';
 
 const stateCreator: StateCreator<IUserState, [], [], IUserState> = (set) => ({
   user: null,
@@ -25,8 +16,5 @@ const stateCreator: StateCreator<IUserState, [], [], IUserState> = (set) => ({
     })),
 });
 
-const useUserStore = create<IUserState>()(
-  persist(stateCreator, persistOptions)
-);
-
-export default useUserStore;
+const storageName = 'user-storage'
+export default storeCreator(stateCreator, storageName);

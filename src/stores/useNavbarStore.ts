@@ -1,20 +1,7 @@
-import { create, StateCreator } from 'zustand';
-import { persist, PersistOptions } from 'zustand/middleware';
 import { produce } from 'immer';
-import { decryptData, encryptData } from '../utils/cryptoUtil';
-
-interface NavbarState {
-  expandedItems: string[];
-  toggleItem: (item: string) => void;
-  isItemExpanded: (item: string) => boolean;
-}
-
-const persistOptions: PersistOptions<NavbarState> = {
-  name: 'navbar-storage',
-  getStorage: () => localStorage,
-  serialize: encryptData,
-  deserialize: decryptData,
-};
+import { StateCreator } from 'zustand';
+import { NavbarState } from '../interfaces/StateInterfaces';
+import storeCreator from './storeCreator';
 
 const stateCreator: StateCreator<NavbarState, [], [], NavbarState> = (set, get) => ({
   expandedItems: [],
@@ -29,8 +16,6 @@ const stateCreator: StateCreator<NavbarState, [], [], NavbarState> = (set, get) 
   isItemExpanded: (item) => get().expandedItems.includes(item),
 });
 
-const useNavbarStore = create<NavbarState>()(
-  persist(stateCreator, persistOptions)
-);
 
-export default useNavbarStore;
+const storageName = 'navbar-storage'
+export default storeCreator(stateCreator, storageName);

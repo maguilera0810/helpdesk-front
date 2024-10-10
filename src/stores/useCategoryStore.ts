@@ -1,21 +1,21 @@
 import { produce } from 'immer';
-import { create, StateCreator } from 'zustand';
-import { ICategoryState } from '../interfaces/StateInterfaces';
+import { StateCreator } from 'zustand';
+import { CategoryState } from '../interfaces/StateInterfaces';
+import storeCreator from './storeCreator';
 
 
-const stateCreator: StateCreator<ICategoryState, [], [], ICategoryState> = (set) => ({
+const stateCreator: StateCreator<CategoryState, [], [], CategoryState> = (set) => ({
   category: null,
   categories: [],
   setCategory: (category) =>
-    set(produce((state: ICategoryState) => {
+    set(produce((state: CategoryState) => {
       state.category = category;
     })),
   setCategories: (categories) =>
-    set(produce((state: ICategoryState) => {
+    set(produce((state: CategoryState) => {
       state.categories = categories;
     })),
 });
 
-const useCategoryStore = create<ICategoryState>()(stateCreator);
 
-export default useCategoryStore;
+export default storeCreator(stateCreator);

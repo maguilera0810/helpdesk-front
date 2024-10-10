@@ -1,17 +1,9 @@
 import { produce } from 'immer';
-import { create, StateCreator } from 'zustand';
-import { persist, PersistOptions } from 'zustand/middleware';
+import { StateCreator } from 'zustand';
 import { IUIState } from '../interfaces/StateInterfaces';
-import { decryptData, encryptData } from '../utils/cryptoUtil';
+import storeCreator from './storeCreator';
 
 
-
-const persistOptions: PersistOptions<IUIState> = {
-  name: 'auth-storage',
-  getStorage: () => localStorage,
-  serialize: encryptData,
-  deserialize: decryptData,
-};
 
 const stateCreator: StateCreator<IUIState, [], [], IUIState> = (set) => ({
   isDrawerOpen: true,
@@ -21,8 +13,6 @@ const stateCreator: StateCreator<IUIState, [], [], IUIState> = (set) => ({
     })),
 });
 
-const useUIStore = create<IUIState>()(
-  persist(stateCreator, persistOptions)
-);
 
-export default useUIStore;
+const storageName = 'ui-storage'
+export default storeCreator(stateCreator, storageName);
