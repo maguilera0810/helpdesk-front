@@ -86,7 +86,6 @@ const Navbar: React.FC = () => {
         }}
       >
         {drawer}
-        {drawer}
       </Drawer>
       <Drawer
         variant="persistent" // desktop
