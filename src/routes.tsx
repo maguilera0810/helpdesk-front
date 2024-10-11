@@ -15,7 +15,7 @@ import CategoryList from './pages/settings/category/CategoryList';
 import ListFaculties from './pages/settings/faculties/ListFaculties';
 import PriorityDetail from './pages/settings/priority/PriorityDetail';
 import PriorityList from './pages/settings/priority/PriorityList';
-import Dashboard from './pages/support/Dashboard';
+import Dashboard from './pages/support/dashboard/Dashboard';
 import IssueDetail from './pages/support/issues/IssueDetail';
 import IssueList from './pages/support/issues/IssueList';
 import Planning from './pages/support/Planning';
