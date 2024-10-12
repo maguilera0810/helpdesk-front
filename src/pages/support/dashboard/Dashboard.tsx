@@ -15,7 +15,9 @@ import Layout from '../../../components/layouts/Layout';
 
 
 
-import KPIGrid from './KPIGrid';
+import KPISection from './KPISection';
+import StatusTasksBarChart from '../../../components/forms/data_visualization/StatusTasksBarChart';
+import ChartsSection from './ChartsSection';
 
 
 
@@ -103,14 +105,15 @@ const KPIS = [
 
 
 
-
 const Dashboard: FC = () => {
   return (
     <Layout>
       <Typography variant="h4" gutterBottom>
         Tablero
       </Typography>
-      <KPIGrid kpis={KPIS}/>
+      <KPISection kpis={KPIS}/>
+      <ChartsSection />
+      
     </Layout>
   );
 };
