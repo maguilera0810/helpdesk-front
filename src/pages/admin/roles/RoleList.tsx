@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
 import RolesTable from '../../../components/tables/RolesTable';
 
-const ListRoles: React.FC = () => {
+const RoleList: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 2 }}>
@@ -16,4 +16,4 @@ const ListRoles: React.FC = () => {
   );
 };
 
-export default ListRoles;
+export default RoleList;
