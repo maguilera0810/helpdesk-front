@@ -1,4 +1,4 @@
-// AUTHENTICATION
+import { BaseInfo } from "./CoreInterfaces";
 
 
 export interface UserProfile {
@@ -18,12 +18,22 @@ export interface User {
   profile: Partial<UserProfile>;
   password?: string;
   groups: number[];
+  roles?: number[]; // controlar 
 }
 
-export interface Task {
+export interface Role extends BaseInfo {
   id: number;
-  title: string;
-  description: string;
+  permissions: number[];
+}
+
+export interface Permission extends BaseInfo {
+  id: number;
+  permissions: number[];
+}
+
+
+export interface Task extends BaseInfo {
+  id: number;
   code: string;
   type: string;
   status: string;
@@ -39,20 +49,16 @@ export interface Task {
   startAt: Date | null;
   endAt: Date | null;
 }
-export interface Status {
+export interface Status extends BaseInfo {
   id: number;
-  title: string;
-  description: string;
   color: string;
 }
 export interface TaskStatus extends Status {
 }
 export interface IssueStatus extends Status {
 }
-export interface Priority {
+export interface Priority extends BaseInfo {
   id: number;
-  title: string;
-  description: string;
   color: string;
   value: number;
   icon: string;
@@ -74,11 +80,9 @@ export interface Schedule {
 }
 
 
-export interface Issue {
+export interface Issue extends BaseInfo {
   id?: number;
   code: string;
-  title: string;
-  description: string;
   status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
   contactEmail: string;
   contactPhone: string;
@@ -90,19 +94,15 @@ export interface Issue {
   updatedAt: Date | null; //
 }
 
-export interface Category {
+export interface Category extends BaseInfo {
   id: number;
-  title: string;
-  description: string;
   code: string;
   type: number;
   color: string;
   relations: number[];
 }
 
-export interface CategoryType {
+export interface CategoryType extends BaseInfo {
   id: number;
-  title: string;
-  description: string;
 }
 
