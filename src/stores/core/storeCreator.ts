@@ -1,6 +1,6 @@
 import { create, StateCreator } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
-import { decryptData, encryptData } from '../utils/cryptoUtil';
+import { decryptData, encryptData } from '../../utils/cryptoUtil';
 
 const storeCreator = <T>(stateCreator: StateCreator<T, [], [], T>, name?: string) => {
 
