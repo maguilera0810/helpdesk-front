@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Paper, Tab, Typography } from '@mui/material';
 
-import { useCategory } from '../../../../hooks/useCategory';
+import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useTask } from '../../../../hooks/useTask';
 import { useUser } from '../../../../hooks/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';

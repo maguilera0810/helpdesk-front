@@ -8,7 +8,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 
-import { useCategory } from '../../../../hooks/useCategory';
+import { useCategory } from '../../../../hooks/settings/useCategory';
 import categoryStore from '../../../../stores/categoryStore';
 
 

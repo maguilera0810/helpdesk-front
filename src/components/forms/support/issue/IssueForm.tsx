@@ -8,7 +8,7 @@ import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { issueStatusOptions } from '../../../../constants';
-import { useCategory } from '../../../../hooks/useCategory';
+import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useIssue } from '../../../../hooks/useIssue';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
 import DialogComponent from '../../../dialogs/DialogComponent';

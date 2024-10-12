@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import globalDataStore from '../stores/globalDataStore';
 import authStore from '../stores/authStore';
-import { useCategory } from './useCategory';
+import { useCategory } from './settings/useCategory';
 import { usePriority } from './usePriority';
 
 const useGlobalData = () => {
