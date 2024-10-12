@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { CategoryType } from '../interfaces/ModelInterfaces';
-import CategoryTypeService from '../services/settings/CategoryTypeService';
+import { CategoryType } from '../../interfaces/ModelInterfaces';
+import CategoryTypeService from '../../services/settings/CategoryTypeService';
 
 export const useCategoryType = () => {
   const [categoryType, setCategoryType] = useState<CategoryType | null>(null);

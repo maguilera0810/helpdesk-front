@@ -6,7 +6,7 @@ import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 
-import { useCategoryType } from '../../../../hooks/useCategoryType';
+import { useCategoryType } from '../../../../hooks/settings/useCategoryType';
 
 import { CategoryType } from '../../../../interfaces/ModelInterfaces';
 
