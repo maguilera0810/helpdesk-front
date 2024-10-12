@@ -1,16 +1,14 @@
-import { BaseInfo } from "./CoreInterfaces";
+import { BaseInfoModel, BaseModel } from "./CoreInterfaces";
 
 
-export interface UserProfile {
+export interface UserProfile extends BaseModel {
   document: string;
   documentType: string;
   phone: string;
   address: string;
   isAvailable: boolean;
 }
-
-export interface User {
-  id: number;
+export interface User extends BaseModel {
   username: string;
   firstName: string;
   lastName: string;
@@ -20,19 +18,15 @@ export interface User {
   groups: number[];
   roles?: number[]; // controlar 
 }
-
-export interface Role extends BaseInfo {
+export interface Role extends BaseInfoModel {
   id: number;
   permissions: number[];
 }
-
-export interface Permission extends BaseInfo {
+export interface Permission extends BaseInfoModel {
   id: number;
   permissions: number[];
 }
-
-
-export interface Task extends BaseInfo {
+export interface Task extends BaseInfoModel {
   id: number;
   code: string;
   type: string;
@@ -49,7 +43,7 @@ export interface Task extends BaseInfo {
   startAt: Date | null;
   endAt: Date | null;
 }
-export interface Status extends BaseInfo {
+export interface Status extends BaseInfoModel {
   id: number;
   color: string;
 }
@@ -57,30 +51,16 @@ export interface TaskStatus extends Status {
 }
 export interface IssueStatus extends Status {
 }
-export interface Priority extends BaseInfo {
+export interface Priority extends BaseInfoModel {
   id: number;
   color: string;
   value: number;
   icon: string;
 }
-
 export interface ScheduleTask extends Task {
   hasCollision?: boolean;
 }
-
-export interface UserTask {
-  userId: number;
-  tasks: ScheduleTask[];
-}
-export interface Schedule {
-  hasCollision?: boolean;
-  minTime?: Date;
-  maxTime?: Date;
-  userTasks: UserTask[];
-}
-
-
-export interface Issue extends BaseInfo {
+export interface Issue extends BaseInfoModel {
   id?: number;
   code: string;
   status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
@@ -93,16 +73,23 @@ export interface Issue extends BaseInfo {
   createdAt: Date | null; //
   updatedAt: Date | null; //
 }
-
-export interface Category extends BaseInfo {
+export interface Category extends BaseInfoModel {
   id: number;
   code: string;
   type: number;
   color: string;
   relations: number[];
 }
-
-export interface CategoryType extends BaseInfo {
+export interface CategoryType extends BaseInfoModel {
   id: number;
 }
-
+export interface UserTask {
+  userId: number;
+  tasks: ScheduleTask[];
+}
+export interface Schedule {
+  hasCollision?: boolean;
+  minTime?: Date;
+  maxTime?: Date;
+  userTasks: UserTask[];
+}
