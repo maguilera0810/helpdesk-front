@@ -1,5 +1,5 @@
 import { Category } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './BaseCrudService';
+import BaseCrudService from './core/BaseCrudService';
 
 export class CategoryService extends BaseCrudService<Category> {
   private static instance: CategoryService;

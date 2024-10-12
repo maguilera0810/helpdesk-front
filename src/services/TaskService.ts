@@ -1,7 +1,7 @@
 import { Schedule, Task } from '../interfaces/ModelInterfaces';
 import { TaskScheduleRequest, TrackingTasksRequest } from '../interfaces/RequestInterfaces';
 import { keysToCamel, keysToSnake } from '../utils/caseUtils';
-import BaseCrudService from './BaseCrudService';
+import BaseCrudService from './core/BaseCrudService';
 
 
 export class TaskService extends BaseCrudService<Task> {

@@ -1,6 +1,6 @@
 import { Issue } from '../interfaces/ModelInterfaces';
 import { keysToCamel } from '../utils/caseUtils';
-import BaseCrudService from './BaseCrudService';
+import BaseCrudService from './core/BaseCrudService';
 
 export class IssueService extends BaseCrudService<Issue> {
   private static instance: IssueService;

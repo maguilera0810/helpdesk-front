@@ -1,4 +1,4 @@
-import { keysToCamel, keysToSnake } from '../utils/caseUtils';
+import { keysToCamel, keysToSnake } from '../../utils/caseUtils';
 import BaseAuthService from './BaseAuthService';
 
 
