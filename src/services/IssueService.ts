@@ -21,7 +21,7 @@ export class IssueService extends BaseCrudService<Issue> {
       const response = await this.axiosInstance.post<number>(`${id}/create-task/`);
       return keysToCamel(response.data);
     } catch (error) {
-      console.error('Error creating :', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error('Error creating :', error);
       throw error;
     }
   }
