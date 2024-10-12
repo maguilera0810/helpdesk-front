@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
-import { usePriority } from '../../hooks/usePriority';
+import { usePriority } from '../../hooks/settings/usePriority';
 
 const COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },

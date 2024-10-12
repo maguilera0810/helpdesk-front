@@ -6,7 +6,7 @@ import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 
-import { usePriority } from '../../../../hooks/usePriority';
+import { usePriority } from '../../../../hooks/settings/usePriority';
 import { Priority } from '../../../../interfaces/ModelInterfaces';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
