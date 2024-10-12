@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import Environment from '../../environments/Environment';
-import authStore from '../../stores/authStore';
+import authStore from '../../stores/auth/authStore';
 import AuthService from '../auth/AuthService';
 
 const { apiUrl } = Environment;

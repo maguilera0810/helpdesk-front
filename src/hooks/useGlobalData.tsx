@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import globalDataStore from '../stores/globalDataStore';
-import authStore from '../stores/authStore';
+import authStore from '../stores/auth/authStore';
 import { useCategory } from './settings/useCategory';
 import { usePriority } from './settings/usePriority';
 

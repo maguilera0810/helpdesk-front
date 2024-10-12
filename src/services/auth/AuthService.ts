@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Token } from '../../interfaces/AuthInterfaces';
 import { User } from '../../interfaces/ModelInterfaces';
-import authStore from '../../stores/authStore';
+import authStore from '../../stores/auth/authStore';
 import { keysToCamel } from '../../utils/caseUtils';
 import Environment from '../../environments/Environment';
 

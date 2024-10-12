@@ -4,7 +4,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { AppBar, Box, IconButton, Toolbar, Typography, Avatar } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import authStore from '../../stores/authStore';
+import authStore from '../../stores/auth/authStore';
 import uiStore from '../../stores/uiStore';
 
 interface HeaderProps {

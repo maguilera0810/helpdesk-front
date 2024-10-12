@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../../services/auth/AuthService';
-import authStore from '../../../stores/authStore';
+import authStore from '../../../stores/auth/authStore';
 
 
 const LoginForm: React.FC = () => {

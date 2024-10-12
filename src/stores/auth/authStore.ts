@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { StateCreator } from 'zustand';
-import { IAuthState } from '../interfaces/StateInterfaces';
-import storeCreator from './storeCreator';
+import { IAuthState } from '../../interfaces/StateInterfaces';
+import storeCreator from '../storeCreator';
 
 const stateCreator: StateCreator<IAuthState, [], [], IAuthState> = (set) => ({
   user: null,

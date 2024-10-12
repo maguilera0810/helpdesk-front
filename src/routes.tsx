@@ -25,7 +25,7 @@ import Statistics from './pages/support/Statistics';
 import TaskTracking from './pages/support/task-tracking/TaskTracking';
 import TaskDetail from './pages/support/task/TaskDetail';
 import TaskList from './pages/support/task/TaskList';
-import authStore from './stores/authStore';
+import authStore from './stores/auth/authStore';
 
 
 const PublicRoute: FC = () => {
