@@ -14,7 +14,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
         { params: keysToSnake(filters) });
       return keysToCamel(response.data);
     } catch (error) {
-      console.error('Error fetching list:', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error('Error fetching list:', error);
       throw error;
     }
   }
@@ -24,7 +24,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
       const response = await this.axiosInstance.get<T>(`${id}/`);
       return keysToCamel(response.data);
     } catch (error) {
-      console.error(`Error fetching item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error(`Error fetching item with id ${id}:`, error);
       throw error;
     }
   }
@@ -34,7 +34,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
       const response = await this.axiosInstance.post<T>('', keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
-      console.error('Error creating item:', error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error('Error creating item:', error);
       throw error;
     }
   }
@@ -44,7 +44,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
       const response = await this.axiosInstance.put<T>(`${id}/`, keysToSnake(item));
       return keysToCamel(response.data);
     } catch (error) {
-      console.error(`Error updating item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error(`Error updating item with id ${id}:`, error);
       throw error;
     }
   }
@@ -53,7 +53,7 @@ abstract class BaseCrudService<T> extends BaseAuthService {
     try {
       await this.axiosInstance.delete(`${id}/`);
     } catch (error) {
-      console.error(`Error deleting item with id ${id}:`, error);// TODO ONLY FOR DEVELOPMENT, DELETE ERROR LOGS
+      console.error(`Error deleting item with id ${id}:`, error);
       throw error;
     }
   }
