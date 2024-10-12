@@ -31,7 +31,7 @@ const KPISection: FC<KPIGridProps> = ({ kpis }) => {
   };
 
   return (
-    <Swipper>
+    <Swipper movementStep={1.5}>
       {kpis.map((kpi) => (
         <Paper
           key={kpi.key}
