@@ -1,10 +1,11 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useRef, useState } from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Swipper from '../../../components/layouts/Swipper';
 
 
 // Definición de la interfaz para los datos del KPI
@@ -23,19 +24,14 @@ interface KPIGridProps {
 
 
 const KPISection: FC<KPIGridProps> = ({ kpis }) => {
+
+
+  const handleClick = () => {
+    console.log("handleClick");
+  };
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        overflowX: 'auto',
-        padding: 2,
-        width: { xs: '95vw', sm: '100%' },
-        gap: 2,
-        scrollbarWidth: 'thin',
-        scrollbarColor: '#888 #f1f1f1',
-        scrollbarGutter: 'stable'
-      }}
-    >
+    <Swipper>
       {kpis.map((kpi) => (
         <Paper
           key={kpi.key}
@@ -49,6 +45,7 @@ const KPISection: FC<KPIGridProps> = ({ kpis }) => {
             height: '100px',
             overflow: 'hidden',
           }}
+          onClick={handleClick}
         >
           {kpi.icon && (
             <Avatar
@@ -80,7 +77,29 @@ const KPISection: FC<KPIGridProps> = ({ kpis }) => {
           </div>
         </Paper>
       ))}
-    </Box>
+    </Swipper>
+    // <Box
+    //   ref={containerRef}
+    //   onMouseDown={handleMouseDown}
+    //   onMouseMove={handleMouseMove}
+    //   onMouseUp={handleMouseUp}
+    //   onMouseLeave={handleMouseUp}
+    //   sx={{
+    //     display: 'flex',
+    //     overflowX: 'auto',
+    //     padding: 2,
+    //     width: { xs: '95vw', sm: '100%' },
+    //     gap: 2,
+    //     cursor: isDragging ? 'grabbing' : 'pointer',
+    //     userSelect: isDragging ? 'none' : 'auto', // Deshabilitar selección de texto
+    //     // scrollbarWidth: 'thin',
+    //     scrollbarWidth: 'none',
+    //     scrollbarColor: '#888 #f1f1f1',
+    //     scrollbarGutter: 'stable'
+    //   }}
+    // >
+
+    // </Box>
   );
 };
 
