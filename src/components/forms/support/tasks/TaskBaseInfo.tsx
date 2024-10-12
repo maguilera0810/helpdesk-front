@@ -9,7 +9,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { taskStatusOptions, taskTypeOptions } from '../../../../constants';
 import useGlobalData from '../../../../hooks/useGlobalData';
-import { useTask } from '../../../../hooks/useTask';
+import { useTask } from '../../../../hooks/support/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/categoryStore';
 import useTaskStore from '../../../../stores/useTaskStore';

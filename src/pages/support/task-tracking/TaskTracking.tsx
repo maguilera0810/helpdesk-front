@@ -7,7 +7,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 import MultipleSelectField from "../../../components/forms/fields/MultipleSelectField.tsx";
 import Layout from '../../../components/layouts/Layout.tsx';
-import { useTask } from "../../../hooks/useTask.tsx";
+import { useTask } from "../../../hooks/support/useTask.tsx";
 import { useUser } from "../../../hooks/useUser.tsx";
 import useTaskStore from "../../../stores/useTaskStore.ts";
 import useUserStore from "../../../stores/useUserStore.ts";

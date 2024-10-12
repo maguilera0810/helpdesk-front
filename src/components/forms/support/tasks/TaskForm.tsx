@@ -5,7 +5,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Paper, Tab, Typography } from '@mui/material';
 
 import { useCategory } from '../../../../hooks/settings/useCategory';
-import { useTask } from '../../../../hooks/useTask';
+import { useTask } from '../../../../hooks/support/useTask';
 import { useUser } from '../../../../hooks/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/categoryStore';

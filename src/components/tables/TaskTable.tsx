@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
-import { useTask } from '../../hooks/useTask';
+import { useTask } from '../../hooks/support/useTask';
 import useFilterStore from '../../stores/useFilterStore';
 
 const columns: GridColDef[] = [

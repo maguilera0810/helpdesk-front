@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
-import { useTask } from '../../../../hooks/useTask';
+import { useTask } from '../../../../hooks/support/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import useTaskStore from '../../../../stores/useTaskStore';
 import useUserStore from '../../../../stores/useUserStore';
