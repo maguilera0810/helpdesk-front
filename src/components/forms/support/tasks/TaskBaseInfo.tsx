@@ -12,7 +12,7 @@ import useGlobalData from '../../../../hooks/useGlobalData';
 import { useTask } from '../../../../hooks/support/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/settings/categoryStore';
-import useTaskStore from '../../../../stores/useTaskStore';
+import useTaskStore from '../../../../stores/support/useTaskStore';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 
