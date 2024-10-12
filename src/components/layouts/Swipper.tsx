@@ -3,16 +3,16 @@ import { FC, ReactNode, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 
 interface SwipperProps {
+  movementStep?: number;// Multiplier to make the movement faster
   children?: ReactNode;
 }
-const Swipper: FC<SwipperProps> = ({ children }) => {
+const Swipper: FC<SwipperProps> = ({ children, movementStep = 2 }) => {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const dragThreshold: number = 5; // Distance threshold to differentiate click and drag
-  const movementStep: number = 2; // Multiplier to make the movement faster
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (containerRef.current) {
