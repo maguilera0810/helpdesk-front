@@ -8,7 +8,7 @@ import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useTask } from '../../../../hooks/support/useTask';
 import { useUser } from '../../../../hooks/admin/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
-import categoryStore from '../../../../stores/admin/categoryStore';
+import categoryStore from '../../../../stores/settings/categoryStore';
 import useTaskStore from '../../../../stores/useTaskStore';
 import useUserStore from '../../../../stores/useUserStore';
 import TaskBaseInfo from './TaskBaseInfo';

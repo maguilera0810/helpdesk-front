@@ -9,7 +9,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 
 import { useCategory } from '../../../../hooks/settings/useCategory';
-import categoryStore from '../../../../stores/admin/categoryStore';
+import categoryStore from '../../../../stores/settings/categoryStore';
 
 
 
