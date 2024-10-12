@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { Role } from '../interfaces/ModelInterfaces';
-import RoleService from '../services/auth/RoleService';
+import RoleService from '../services/admin/RoleService';
 
 export const useRole = () => {
   const [role, setRole] = useState<Role | null>(null);

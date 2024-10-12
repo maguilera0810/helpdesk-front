@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { Permission } from '../interfaces/ModelInterfaces';
-import PermissionService from '../services/auth/PermissionService';
+import PermissionService from '../services/admin/PermissionService';
 
 export const usePermission = () => {
   const [permission, setPermission] = useState<Permission | null>(null);
