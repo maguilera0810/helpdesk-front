@@ -9,7 +9,7 @@ import utc from 'dayjs/plugin/utc';
 
 import { UserTask } from '../../../../../interfaces/ModelInterfaces';
 import useTaskStore from '../../../../../stores/support/useTaskStore';
-import useUserStore from '../../../../../stores/useUserStore';
+import useUserStore from '../../../../../stores/admin/useUserStore';
 import ScheduleColumn from './ScheduleColum';
 
 dayjs.extend(utc);
