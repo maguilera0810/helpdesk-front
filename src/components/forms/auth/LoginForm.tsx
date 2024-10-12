@@ -2,7 +2,7 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../../../services/AuthService';
+import AuthService from '../../../services/auth/AuthService';
 import authStore from '../../../stores/authStore';
 
 

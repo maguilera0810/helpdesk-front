@@ -22,9 +22,7 @@ const UserTable: FC = () => {
   const { filters, clearFilters } = useFilterStore();
 
   useEffect(() => {
-    console.log("---1", users);
     if (!loading) {
-      console.log("---2");
       fetchUsers();
     }
   }, [filters]);

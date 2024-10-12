@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Token } from '../interfaces/AuthInterfaces';
-import { User } from '../interfaces/ModelInterfaces';
-import authStore from '../stores/authStore';
-import { keysToCamel } from '../utils/caseUtils';
-import Environment from './../environments/Environment';
+import { Token } from '../../interfaces/AuthInterfaces';
+import { User } from '../../interfaces/ModelInterfaces';
+import authStore from '../../stores/authStore';
+import { keysToCamel } from '../../utils/caseUtils';
+import Environment from '../../environments/Environment';
 
 const { apiUrl, apiKey } = Environment;
 

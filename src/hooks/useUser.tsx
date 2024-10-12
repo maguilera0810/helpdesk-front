@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { User } from '../interfaces/ModelInterfaces';
-import UserService from '../services/UserService';
+import UserService from '../services/auth/UserService';
 
 export const useUser = () => {
   const [user, setUser] = useState<User | null>(null);

@@ -1,5 +1,5 @@
-import { User } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { User } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 
 export class UserService extends BaseCrudService<User> {

@@ -1,5 +1,5 @@
-import { TaskStatus } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { TaskStatus } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 export class TaskStatusService extends BaseCrudService<TaskStatus> {
   private static instance: TaskStatusService;

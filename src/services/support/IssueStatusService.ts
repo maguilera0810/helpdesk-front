@@ -1,5 +1,5 @@
-import { IssueStatus } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { IssueStatus } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 export class IssueStatusService extends BaseCrudService<IssueStatus> {
   private static instance: IssueStatusService;

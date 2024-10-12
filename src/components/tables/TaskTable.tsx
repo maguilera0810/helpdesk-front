@@ -24,9 +24,7 @@ const TaskTable: FC = () => {
   const { filters, clearFilters } = useFilterStore();
 
   useEffect(() => {
-    console.log("---1", tasks);
     if (!loading) {
-      console.log("---2");
       fetchTasks();
     }
   }, [filters]);

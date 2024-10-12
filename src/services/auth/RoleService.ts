@@ -1,5 +1,5 @@
-import { Role } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { Role } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 export class RoleService extends BaseCrudService<Role> {
   private static instance: RoleService;

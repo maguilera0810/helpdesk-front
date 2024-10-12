@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Schedule, Task, UserTask } from '../interfaces/ModelInterfaces';
 import { TaskScheduleRequest, TrackingTasksRequest } from '../interfaces/RequestInterfaces';
-import TaskService from '../services/TaskService';
+import TaskService from '../services/support/TaskService';
 
 type methodType = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | "fetchTrackingTasks" | null;
 

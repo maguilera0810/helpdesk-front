@@ -1,5 +1,5 @@
-import { CategoryType } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { CategoryType } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 export class CategoryTypeService extends BaseCrudService<CategoryType> {
   private static instance: CategoryTypeService;

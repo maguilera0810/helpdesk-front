@@ -1,5 +1,5 @@
-import { Permission } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { Permission } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 export class PermissionService extends BaseCrudService<Permission> {
   private static instance: PermissionService;
