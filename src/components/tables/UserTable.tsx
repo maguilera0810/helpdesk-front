@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../hooks/admin/useUser';
 import useFilterStore from '../../stores/useFilterStore';
 import UserFilters from '../filters/UserFilters';
 

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useUser } from '../../../../hooks/useUser';
+import { useUser } from '../../../../hooks/admin/useUser';
 import { User } from '../../../../interfaces/ModelInterfaces';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';

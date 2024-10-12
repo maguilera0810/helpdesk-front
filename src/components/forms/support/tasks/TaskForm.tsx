@@ -6,7 +6,7 @@ import { Box, Paper, Tab, Typography } from '@mui/material';
 
 import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useTask } from '../../../../hooks/support/useTask';
-import { useUser } from '../../../../hooks/useUser';
+import { useUser } from '../../../../hooks/admin/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/categoryStore';
 import useTaskStore from '../../../../stores/useTaskStore';
