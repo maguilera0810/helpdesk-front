@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 
-import { useIssue } from '../../hooks/useIssue';
+import { useIssue } from '../../hooks/support/useIssue';
 import useFilterStore from '../../stores/useFilterStore';
 
 const columns: GridColDef[] = [

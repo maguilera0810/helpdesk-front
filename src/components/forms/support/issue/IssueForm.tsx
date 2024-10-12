@@ -9,7 +9,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { issueStatusOptions } from '../../../../constants';
 import { useCategory } from '../../../../hooks/settings/useCategory';
-import { useIssue } from '../../../../hooks/useIssue';
+import { useIssue } from '../../../../hooks/support/useIssue';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
 import DialogComponent from '../../../dialogs/DialogComponent';
 import { MultipleSelectField, SelectField } from '../../fields';

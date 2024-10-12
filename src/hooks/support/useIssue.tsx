@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { Issue } from '../interfaces/ModelInterfaces';
-import IssueService from '../services/support/IssueService';
+import { Issue } from '../../interfaces/ModelInterfaces';
+import IssueService from '../../services/support/IssueService';
 
 export const useIssue = () => {
   const [issue, setIssue] = useState<Issue | null>(null);
