@@ -10,7 +10,7 @@ const columns: GridColDef[] = [
   { field: 'code', headerName: 'Code', width: 130 },
 ];
 
-const RolesTable: FC = () => {
+const RoleTable: FC = () => {
 
   return (
     <>
@@ -33,4 +33,4 @@ const RolesTable: FC = () => {
   );
 };
 
-export default RolesTable;
+export default RoleTable;
