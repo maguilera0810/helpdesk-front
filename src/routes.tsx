@@ -4,7 +4,6 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
-import ListGroups from './pages/admin/groups/ListGroups';
 import ListRoles from './pages/admin/roles/ListRoles';
 import UserDetail from './pages/admin/users/UserDetail';
 import UserList from './pages/admin/users/UserList';
@@ -46,7 +45,6 @@ const AppRoutes: FC = () => (
         <Route path="/" element={<Dashboard />} />
         <Route path="/admin/users/" element={<UserList />} />
         <Route path="/admin/users/:id/" element={<UserDetail />} />
-        <Route path="/admin/groups/" element={<ListGroups />} />
         <Route path="/admin/roles/" element={<ListRoles />} />
 
         <Route path="/soporte/tablero/" element={<Dashboard />} />

@@ -49,7 +49,6 @@ const Navbar: React.FC = () => {
         </NavItem>
         <NavItem text="Administración" icon={<AdminPanelSettings />}>
           <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users/" />
-          <NavItem text="Grupos" icon={<GroupIcon />} path="/admin/groups/" />
           <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles/" />
         </NavItem>
         <NavItem text="Configuraciones" icon={<SettingsIcon />} >
