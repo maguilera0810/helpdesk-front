@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
-import RoleList from './pages/admin/roles/RoleList';
+import RoleList from './pages/admin/role/RoleList';
 import UserDetail from './pages/admin/users/UserDetail';
 import UserList from './pages/admin/users/UserList';
 import Login from './pages/auth/Login';
