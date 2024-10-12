@@ -10,7 +10,7 @@ import { useCategoryType } from '../../../../hooks/settings/useCategoryType';
 
 import { Category } from '../../../../interfaces/ModelInterfaces';
 
-import categoryStore from '../../../../stores/categoryStore';
+import categoryStore from '../../../../stores/admin/categoryStore';
 
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
