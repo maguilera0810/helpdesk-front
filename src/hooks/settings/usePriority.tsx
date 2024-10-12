@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Priority } from '../../interfaces/ModelInterfaces';
-import PriorityService from '../../services/PriorityService';
+import PriorityService from '../../services/settings/PriorityService';
 
 export const usePriority = () => {
   const [priority, setPriority] = useState<Priority | null>(null);

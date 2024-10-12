@@ -1,5 +1,5 @@
-import { Priority } from '../interfaces/ModelInterfaces';
-import BaseCrudService from './core/BaseCrudService';
+import { Priority } from '../../interfaces/ModelInterfaces';
+import BaseCrudService from '../core/BaseCrudService';
 
 export class PriorityService extends BaseCrudService<Priority> {
   private static instance: PriorityService;
