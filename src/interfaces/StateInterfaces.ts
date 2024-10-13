@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Priority, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { Category } from "./ModelInterfaces";
 
 
@@ -44,9 +44,25 @@ export interface PriorityState extends BaseState {
   setPriorities: (priorities: Priority[]) => void;
 }
 
-export interface GlobalDataState extends PriorityState, CategoryState {
+export interface PermissionState extends BaseState {
+  permission?: Permission;
+  permissions: Permission[];
+  setPermission: (permission?: Permission) => void;
+  setPermissions: (permissions: Permission[]) => void;
+}
+
+export interface RoleState extends BaseState {
+  role?: Role;
+  roles: Role[];
+  setRole: (role?: Role) => void;
+  setRoles: (roles: Role[]) => void;
+}
+export interface GlobalDataState extends PriorityState, CategoryState, PermissionState {
   reload: boolean;
-  setReload: (reload: boolean) => void;
+  reloadPermission: boolean;
+  reloadCategory: boolean;
+  reloadPriority: boolean;
+  setReload: (reload: boolean, reloadType?: 'permission' | 'category' | 'priority') => void;
 }
 
 export interface IAuthState extends BaseState {

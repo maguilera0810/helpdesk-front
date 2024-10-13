@@ -4,7 +4,7 @@ import { Permission } from '../../interfaces/ModelInterfaces';
 import PermissionService from '../../services/admin/PermissionService';
 
 export const usePermission = () => {
-  const [permission, setPermission] = useState<Permission | null>(null);
+  const [permission, setPermission] = useState<Permission | undefined>(undefined);
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [method, setMethod] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false);
