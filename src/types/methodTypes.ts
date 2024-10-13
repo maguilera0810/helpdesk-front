@@ -1,2 +1,2 @@
 
-export type BasaeMethodType<T> = (data?: Partial<T> | number) => void
+export type BaseMethod<T> = (data?: Partial<T> | number) => void

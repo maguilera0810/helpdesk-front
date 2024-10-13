@@ -7,7 +7,7 @@ import { Box, Paper, Tab, Typography } from '@mui/material';
 import { useRole } from '../../../../hooks/admin/useRole';
 import { Role } from '../../../../interfaces/ModelInterfaces';
 import roleStore from '../../../../stores/admin/roleStore';
-import { BasaeMethodType } from '../../../../types/methodTypes';
+import { BaseMethod } from '../../../../types/methodTypes';
 import RoleBaseInfo from './RoleBaseInfo';
 import RolePermissions from './RolePermissions';
 
@@ -41,11 +41,11 @@ const RoleForm: React.FC = () => {
     }
   }, [success]);
 
-  const handleSuccess: BasaeMethodType<Role> = (id) => {
+  const handleSuccess: BaseMethod<Role> = (id) => {
     typeof id === 'number' && navigate(`/admin/role/${id}/`);
   }
 
-  const handleSubmit: BasaeMethodType<Role> = (role) => {
+  const handleSubmit: BaseMethod<Role> = (role) => {
     console.log(role);
   };
 

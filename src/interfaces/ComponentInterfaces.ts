@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-import { BasaeMethodType } from "../types/methodTypes";
+import { BaseMethod } from "../types/methodTypes";
 import { CategoryType, ScheduleTask } from "./ModelInterfaces";
 
 
@@ -29,8 +29,8 @@ export interface CategoryTypeFormProps {
 }
 
 export interface BaseMethodsProps<T> {
-  onSubmit?: BasaeMethodType<T>
-  onSuccess?: BasaeMethodType<T>
-  onFail?: BasaeMethodType<T>
-  onCancel?: BasaeMethodType<T>
+  onSubmit?: BaseMethod<T>
+  onSuccess?: BaseMethod<T>
+  onFail?: BaseMethod<T>
+  onCancel?: BaseMethod<T>
 }
