@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid2";
 import TextField from "@mui/material/TextField";
 
 import { useRole } from "../../../../hooks/admin/useRole";
-import { BaseMethodsProps } from "../../../../interfaces/ComponentInterfaces";
+import { BaseMethodsProps } from "../../../../interfaces/CoreInterfaces";
 import { Role } from "../../../../interfaces/ModelInterfaces";
 import roleStore from "../../../../stores/admin/roleStore";
 import { BaseChangeMethod } from "../../../../types/methodTypes";
