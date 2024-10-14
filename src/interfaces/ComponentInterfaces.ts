@@ -1,8 +1,5 @@
 import { Dayjs } from "dayjs";
-import { BaseMethod } from "../types/methodTypes";
-import { CategoryType, ScheduleTask } from "./ModelInterfaces";
-
-
+import { CategoryType, Permission, ScheduleTask } from "./ModelInterfaces";
 
 export interface ScheduleColumnProps {
   tasks: ScheduleTask[];
@@ -28,9 +25,14 @@ export interface CategoryTypeFormProps {
   isDialog?: boolean;
 }
 
-export interface BaseMethodsProps<T> {
-  onSubmit?: BaseMethod<T>
-  onSuccess?: BaseMethod<T>
-  onFail?: BaseMethod<T>
-  onCancel?: BaseMethod<T>
+export interface GroupPermission { // Add here if a new permission group is created
+  dashboard: Permission[];
+  tracking: Permission[];
+  task: Permission[];
+  issue: Permission[];
+  user: Permission[];
+  role: Permission[];
+  profile: Permission[];
+  category: Permission[];
+  priority: Permission[];
 }
