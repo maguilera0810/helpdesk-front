@@ -24,7 +24,7 @@ const fieldProps = {
 const PriorityForm: FC = () => {
   const navigate = useNavigate();
   const { priorityId } = useParams<{ priorityId: string }>();
-  
+
   const { priority, error: errorPriority, loading: loadingPriority, success, method,
     fetchPriority, createPriority, updatePriority } = usePriority();
   const [formData, setFormData] = useState<Partial<Priority>>({});
@@ -126,10 +126,10 @@ const PriorityForm: FC = () => {
               </Grid>
               <Grid size={gridSizes} key={"value"}>
                 <TextField
-                  label="Valor"
-                  name="value"
+                  label="Orden"
+                  name="order"
                   type='number'
-                  value={formData.value ?? 0}
+                  value={formData.order ?? 0}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
                 />

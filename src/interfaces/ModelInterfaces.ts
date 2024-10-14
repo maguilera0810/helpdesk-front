@@ -20,7 +20,9 @@ export interface User extends BaseModel {
 }
 export interface Role extends BaseInfoModel {
   id: number;
+  users: number[];
   permissions: number[];
+  key: string;
 }
 export interface Permission extends BaseInfoModel {
   id: number;
@@ -54,7 +56,7 @@ export interface IssueStatus extends Status {
 export interface Priority extends BaseInfoModel {
   id: number;
   color: string;
-  value: number;
+  order: number;
   icon: string;
 }
 export interface ScheduleTask extends Task {

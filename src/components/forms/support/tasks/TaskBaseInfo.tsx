@@ -15,6 +15,7 @@ import categoryStore from '../../../../stores/settings/categoryStore';
 import useTaskStore from '../../../../stores/support/useTaskStore';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
+import { BaseChangeMethod } from '../../../../types/methodTypes';
 
 const gridItemProps = {
   size: {
@@ -70,10 +71,8 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
     }
   }, [success]);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
+  const handleInputChange: BaseChangeMethod<any> = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
-
     if (name) {
       setFormData((prev) => ({
         ...prev,

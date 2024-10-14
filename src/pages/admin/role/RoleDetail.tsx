@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import UserForm from '../../../components/forms/admin/user/UserForm.tsx';
+import RoleForm from '../../../components/forms/admin/role/RoleForm.tsx';
 import Layout from '../../../components/layouts/Layout.tsx';
 import { usePermission } from '../../../hooks/admin/usePermission.tsx';
 
@@ -16,7 +16,7 @@ const RoleDetail: React.FC = () => {
   }, [permissions])
   return (
     <Layout>
-      <UserForm />
+      <RoleForm />
     </Layout>
   );
 };

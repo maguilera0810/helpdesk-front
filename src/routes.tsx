@@ -26,6 +26,7 @@ import TaskTracking from './pages/support/task-tracking/TaskTracking';
 import TaskDetail from './pages/support/task/TaskDetail';
 import TaskList from './pages/support/task/TaskList';
 import authStore from './stores/auth/authStore';
+import RoleDetail from './pages/admin/role/RoleDetail';
 
 
 const PublicRoute: FC = () => {
@@ -45,7 +46,8 @@ const AppRoutes: FC = () => (
         <Route path="/" element={<Dashboard />} />
         <Route path="/admin/users/" element={<UserList />} />
         <Route path="/admin/users/:id/" element={<UserDetail />} />
-        <Route path="/admin/roles/" element={<RoleList />} />
+        <Route path="/admin/role/" element={<RoleList />} />
+        <Route path="/admin/role/:roleId" element={<RoleDetail />} />
 
         <Route path="/soporte/tablero/" element={<Dashboard />} />
         <Route path="/soporte/tareas/" element={<TaskList />} />
