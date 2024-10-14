@@ -7,8 +7,8 @@ import { usePriority } from '../../hooks/settings/usePriority';
 
 const COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'title', headerName: 'Titulo', width: 130 },
-  { field: 'value', headerName: 'Valor', width: 130 },
+  { field: 'title', headerName: 'Título', width: 130 },
+  { field: 'order', headerName: 'Orden', width: 130 },
   { field: 'icon', headerName: 'Icono', width: 130 },
 ];
 Object.freeze(COLUMNS);

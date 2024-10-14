@@ -27,7 +27,9 @@ export interface Role extends BaseInfoModel {
 export interface Permission extends BaseInfoModel {
   id: number;
   permissions: number[];
+  group: string;
 }
+
 export interface Task extends BaseInfoModel {
   id: number;
   code: string;

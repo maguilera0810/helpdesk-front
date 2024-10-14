@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
         </NavItem>
         <NavItem text="Administración" icon={<AdminPanelSettings />}>
           <NavItem text="Usuarios" icon={<PersonIcon />} path="/admin/users/" />
-          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/roles/" />
+          <NavItem text="Roles" icon={<AssignmentIndIcon />} path="/admin/role/" />
         </NavItem>
         <NavItem text="Configuraciones" icon={<SettingsIcon />} >
           <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
