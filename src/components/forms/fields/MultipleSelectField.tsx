@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
+import Swipper from '../../layouts/Swipper';
 
 
 const ITEM_HEIGHT = 48;
@@ -76,11 +77,11 @@ const MultipleSelectField: FC<IMultipleSelectFieldProps> = ({
         multiple
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.2, maxHeight: height }}>
+          <Swipper gap={0.2}>
             {selected.map((value) => (
               <Chip key={value} label={options.find(e => e.value === value)?.label} />
             ))}
-          </Box>
+          </Swipper>
         )}
         MenuProps={MenuProps}
         sx={{ height: height }}

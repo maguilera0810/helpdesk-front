@@ -5,8 +5,9 @@ import Box from '@mui/material/Box';
 interface SwipperProps {
   movementStep?: number;// Multiplier to make the movement faster
   children?: ReactNode;
+  gap?: number;
 }
-const Swipper: FC<SwipperProps> = ({ children, movementStep = 2 }) => {
+const Swipper: FC<SwipperProps> = ({ children, movementStep = 2, gap = 2 }) => {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -52,7 +53,7 @@ const Swipper: FC<SwipperProps> = ({ children, movementStep = 2 }) => {
         overflowX: 'auto',
         padding: 2,
         width: { xs: '95vw', sm: '100%' },
-        gap: 2,
+        gap,
         cursor: isDragging ? 'grabbing' : 'pointer',
         userSelect: isDragging ? 'none' : 'auto',
         scrollbarWidth: 'none',
