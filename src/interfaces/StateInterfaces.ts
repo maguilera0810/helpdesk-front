@@ -2,6 +2,7 @@ import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
 import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { Category } from "./ModelInterfaces";
+import { GroupPermission } from './ComponentInterfaces';
 
 
 interface BaseState {
@@ -51,17 +52,26 @@ export interface PermissionState extends BaseState {
   setPermissions: (permissions: Permission[]) => void;
 }
 
+
+export interface GroupedPermissionState extends BaseState {
+  groupPermission?: GroupPermission;
+  getFlatPermissions: () => Permission[];
+  getGroupedPermission: (group: string) => Permission[];
+  setGroupedPermission: (group: string, groupPermission?: GroupPermission) => void;
+  setGroupedPermissions: (groupPermission: GroupPermission) => void;
+}
+
 export interface RoleState extends BaseState {
   role?: Role;
   roles: Role[];
   setRole: (role?: Role) => void;
   setRoles: (roles: Role[]) => void;
 }
-export interface GlobalDataState extends PriorityState, CategoryState, PermissionState {
+export interface GlobalDataState extends PriorityState, CategoryState, GroupedPermissionState {
   reload: boolean;
-  reloadPermission: boolean;
-  reloadCategory: boolean;
   reloadPriority: boolean;
+  reloadCategory: boolean;
+  reloadPermission: boolean;
   setReload: (reload: boolean, reloadType?: 'permission' | 'category' | 'priority') => void;
 }
 
