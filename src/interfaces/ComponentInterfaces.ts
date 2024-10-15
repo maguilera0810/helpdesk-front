@@ -25,14 +25,4 @@ export interface CategoryTypeFormProps {
   isDialog?: boolean;
 }
 
-export interface GroupPermission { // Add here if a new permission group is created
-  dashboard: Permission[];
-  tracking: Permission[];
-  task: Permission[];
-  issue: Permission[];
-  user: Permission[];
-  role: Permission[];
-  profile: Permission[];
-  category: Permission[];
-  priority: Permission[];
-}
+

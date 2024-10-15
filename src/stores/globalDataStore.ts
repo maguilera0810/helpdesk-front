@@ -4,7 +4,7 @@ import { GlobalDataState } from '../interfaces/StateInterfaces';
 import storeCreator from './core/storeCreator';
 
 
-const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (set) => ({
+const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (set, get) => ({
   reload: false,
   reloadCategory: false,
   reloadPermission: false,
@@ -41,15 +41,24 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
     set(produce((state: GlobalDataState) => {
       state.categories = categories;
     })),
-  permission: undefined,
-  permissions: [],
-  setPermission: (permission) =>
+  groupedPermissions: undefined,
+  getFlatPermissions() {
+    const groupedPermissions = get().groupedPermissions;
+    return groupedPermissions ? Object.values(groupedPermissions).flat() : [];
+
+  },
+  getGroupedPermission(group) {
+    return get().groupedPermissions?.[group] || [];
+  },
+  setGroupedPermissions: (groupPermissions) =>
     set(produce((state: GlobalDataState) => {
-      state.permission = permission;
+      state.groupedPermissions = groupPermissions;
     })),
-  setPermissions: (permissions) =>
+  setGroupedPermission: (group, permissions) =>
     set(produce((state: GlobalDataState) => {
-      state.permissions = permissions;
+      if (state.groupedPermissions) {
+        state.groupedPermissions[group] = permissions;
+      }
     })),
 
 });

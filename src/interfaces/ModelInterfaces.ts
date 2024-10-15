@@ -1,3 +1,4 @@
+import { GroupedPermissionType } from "../types/groupTypes";
 import { BaseInfoModel, BaseModel } from "./CoreInterfaces";
 
 
@@ -27,7 +28,7 @@ export interface Role extends BaseInfoModel {
 export interface Permission extends BaseInfoModel {
   id: number;
   permissions: number[];
-  group: string;
+  group: GroupedPermissionType;
 }
 
 export interface Task extends BaseInfoModel {

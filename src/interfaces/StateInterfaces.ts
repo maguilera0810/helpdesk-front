@@ -1,8 +1,9 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
 import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
+import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { Category } from "./ModelInterfaces";
-import { GroupPermission } from './ComponentInterfaces';
+
 
 
 interface BaseState {
@@ -54,11 +55,11 @@ export interface PermissionState extends BaseState {
 
 
 export interface GroupedPermissionState extends BaseState {
-  groupPermission?: GroupPermission;
+  groupedPermissions?: GroupedPermission;
   getFlatPermissions: () => Permission[];
-  getGroupedPermission: (group: string) => Permission[];
-  setGroupedPermission: (group: string, groupPermission?: GroupPermission) => void;
-  setGroupedPermissions: (groupPermission: GroupPermission) => void;
+  getGroupedPermission: (group: GroupedPermissionType) => Permission[];
+  setGroupedPermission: (group: GroupedPermissionType, permissions: Permission[]) => void;
+  setGroupedPermissions: (groupPermissions?: GroupedPermission) => void;
 }
 
 export interface RoleState extends BaseState {

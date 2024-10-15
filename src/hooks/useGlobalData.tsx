@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
+import { Permission } from '../interfaces/ModelInterfaces';
 import authStore from '../stores/auth/authStore';
 import globalDataStore from '../stores/globalDataStore';
+import { GroupedPermission } from '../types/groupTypes';
 import { usePermission } from './admin/usePermission';
 import { useCategory } from './settings/useCategory';
 import { usePriority } from './settings/usePriority';
 
 const useGlobalData = () => {
 
-  const { reload, reloadPriority, reloadCategory, reloadPermission, setReload,
+  const { reload, reloadPriority, reloadCategory, reloadPermission: reloadPermission, setReload,
     priorities, setPriorities,
     categories, setCategories,
-    permissions, setPermissions } = globalDataStore();
+    groupedPermissions, setGroupedPermissions } = globalDataStore();
   const { priorities: fetchedPriorities, fetchPriorities } = usePriority();
   const { categories: fetchedCategories, fetchCategories } = useCategory();
   const { permissions: fetchedPermissions, fetchPermissions } = usePermission();
@@ -51,7 +53,18 @@ const useGlobalData = () => {
   }, [fetchedCategories])
 
   useEffect(() => {
-    fetchedPermissions.length && setPermissions(fetchedPermissions);
+    if (!fetchedPermissions.length) {
+      setGroupedPermissions();
+      return;
+    }
+    const groupedPermissions = fetchedPermissions.reduce((acc: GroupedPermission, permission: Permission) => {
+      if (!acc[permission.group]) {
+        acc[permission.group] = [];
+      }
+      acc[permission.group].push(permission);
+      return acc;
+    }, {} as GroupedPermission);
+    setGroupedPermissions(groupedPermissions);
   }, [fetchedPermissions])
 
 
@@ -59,7 +72,7 @@ const useGlobalData = () => {
     reload,
     priorities,
     categories,
-    permissions,
+    groupedPermissions,
     setReload,
   };
 };
