@@ -12,4 +12,5 @@ export type GroupedPermissionType =
   'settings_category' |
   'settings_priority';
 export type GroupedPermission = Record<GroupedPermissionType, Permission[]>;
+export type SelectedGroupedPermission = Record<GroupedPermissionType, number[]>;
 
