@@ -13,8 +13,8 @@ export interface BaseInfoModel extends BaseModel {
 
 
 export interface BaseMethodsProps<T> {
-  onSubmit?: BaseMethod<T>
-  onSuccess?: BaseMethod<T>
-  onFail?: BaseMethod<T>
-  onCancel?: BaseMethod<T>
+  onSubmit?: BaseMethod<T>;
+  onSuccess?: BaseMethod<T>;
+  onFail?: BaseMethod<T>;
+  onCancel?: BaseMethod<T>;
 }
