@@ -52,7 +52,7 @@ export const usePriority = () => {
     setSuccess(false);
     try {
       const newPriority = await PriorityService.create(priority);
-      setPriorities((prevPriorities) => [...prevPriorities, newPriority]);
+      setPriority(newPriority);
       setSuccess(true);
     } catch (error) {
       console.error('Error creating priority:', error);
@@ -70,9 +70,7 @@ export const usePriority = () => {
     setSuccess(false);
     try {
       const updatedPriority = await PriorityService.update(priorityId, priority);
-      setPriorities((prevPriorities) =>
-        prevPriorities.map((u) => (u.id === priorityId ? updatedPriority : u))
-      );
+      setPriority(updatedPriority);
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating priority with id ${priorityId}:`, error);
@@ -90,7 +88,6 @@ export const usePriority = () => {
     setSuccess(false);
     try {
       await PriorityService.destroy(priorityId);
-      setPriorities((prevPriorities) => prevPriorities.filter((u) => u.id !== priorityId));
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting priority with id ${priorityId}:`, error);

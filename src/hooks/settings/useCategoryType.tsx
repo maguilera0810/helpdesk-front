@@ -70,9 +70,7 @@ export const useCategoryType = () => {
     setSuccess(false);
     try {
       const updatedCategoryType = await CategoryTypeService.update(categoryTypeId, categoryType);
-      setCategoryTypes((prevCategories) =>
-        prevCategories.map((u) => (u.id === categoryTypeId ? updatedCategoryType : u))
-      );
+      setCategoryType(updatedCategoryType);
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating categoryType with id ${categoryTypeId}:`, error);
@@ -90,7 +88,6 @@ export const useCategoryType = () => {
     setSuccess(false);
     try {
       await CategoryTypeService.destroy(categoryTypeId);
-      setCategoryTypes((prevCategories) => prevCategories.filter((u) => u.id !== categoryTypeId));
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting categoryType with id ${categoryTypeId}:`, error);

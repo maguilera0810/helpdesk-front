@@ -52,7 +52,7 @@ export const useCategory = () => {
     setSuccess(false);
     try {
       const newCategory = await CategoryService.create(category);
-      setCategories((prevCategories) => [...prevCategories, newCategory]);
+      setCategory(newCategory);
       setSuccess(true);
     } catch (error) {
       console.error('Error creating category:', error);
@@ -70,9 +70,7 @@ export const useCategory = () => {
     setSuccess(false);
     try {
       const updatedCategory = await CategoryService.update(categoryId, category);
-      setCategories((prevCategories) =>
-        prevCategories.map((u) => (u.id === categoryId ? updatedCategory : u))
-      );
+      setCategory(updatedCategory);
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating category with id ${categoryId}:`, error);
@@ -90,7 +88,6 @@ export const useCategory = () => {
     setSuccess(false);
     try {
       await CategoryService.destroy(categoryId);
-      setCategories((prevCategories) => prevCategories.filter((u) => u.id !== categoryId));
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting category with id ${categoryId}:`, error);

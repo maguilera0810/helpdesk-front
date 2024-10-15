@@ -55,7 +55,7 @@ export const useRole = () => {
     setSuccess(false);
     try {
       const newRole = await RoleService.create(role);
-      setRoles((prevRoles) => [...prevRoles, newRole]);
+      setRole(newRole);
       setSuccess(true);
     } catch (error) {
       console.error('Error creating role:', error);
@@ -73,9 +73,7 @@ export const useRole = () => {
     setSuccess(false);
     try {
       const updatedRole = await RoleService.update(roleId, role);
-      setRoles((prevRoles) =>
-        prevRoles.map((u) => (u.id === roleId ? updatedRole : u))
-      );
+      setRole(updatedRole);
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating role with id ${roleId}:`, error);
@@ -93,7 +91,6 @@ export const useRole = () => {
     setSuccess(false);
     try {
       await RoleService.destroy(roleId);
-      setRoles((prevRoles) => prevRoles.filter((u) => u.id !== roleId));
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting role with id ${roleId}:`, error);

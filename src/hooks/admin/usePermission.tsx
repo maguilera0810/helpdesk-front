@@ -53,7 +53,7 @@ export const usePermission = () => {
     setSuccess(false);
     try {
       const newPermission = await PermissionService.create(permission);
-      setPermissions((prevPermissions) => [...prevPermissions, newPermission]);
+      setPermission(newPermission);
       setSuccess(true);
     } catch (error) {
       console.error('Error creating permission:', error);
@@ -71,9 +71,7 @@ export const usePermission = () => {
     setSuccess(false);
     try {
       const updatedPermission = await PermissionService.update(permissionId, permission);
-      setPermissions((prevPermissions) =>
-        prevPermissions.map((u) => (u.id === permissionId ? updatedPermission : u))
-      );
+      setPermission(updatedPermission);
       setSuccess(true);
     } catch (error) {
       console.error(`Error updating permission with id ${permissionId}:`, error);
@@ -91,7 +89,6 @@ export const usePermission = () => {
     setSuccess(false);
     try {
       await PermissionService.destroy(permissionId);
-      setPermissions((prevPermissions) => prevPermissions.filter((u) => u.id !== permissionId));
       setSuccess(true);
     } catch (error) {
       console.error(`Error deleting permission with id ${permissionId}:`, error);
