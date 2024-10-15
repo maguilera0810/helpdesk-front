@@ -77,11 +77,11 @@ const MultipleSelectField: FC<IMultipleSelectFieldProps> = ({
         multiple
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
-          <Swipper gap={0.2}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.2, maxHeight: height, overflow: 'hidden' }}>
             {selected.map((value) => (
               <Chip key={value} label={options.find(e => e.value === value)?.label} />
             ))}
-          </Swipper>
+          </Box>
         )}
         MenuProps={MenuProps}
         sx={{ height: height }}
