@@ -122,7 +122,7 @@ const RolePermissions: FC = () => {
           </AccordionSummary>
           <AccordionDetails>
             <Grid container spacing={{ xs: 1 }} direction={"row"} >
-              {supportSection.map(({ key, label }) => (
+              {settingsSection.map(({ key, label }) => (
                 <Grid {...gridItemProps} key={key} >
                   <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
                     <CheckboxGroup
