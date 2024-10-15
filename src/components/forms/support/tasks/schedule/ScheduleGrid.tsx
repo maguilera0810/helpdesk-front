@@ -37,7 +37,6 @@ const ScheduleGrid: FC<ScheduleGridProps> = () => {
 
 
   useEffect(() => {
-    console.log('ScheduleGrid.schedule', schedule);
     schedule && setUserTasks(schedule.userTasks)
   }, [schedule])
 

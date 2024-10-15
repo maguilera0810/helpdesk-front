@@ -9,8 +9,6 @@ abstract class BaseAuthService {
   protected axiosInstance: AxiosInstance;
 
   constructor(path: string) {
-    console.log(`${apiUrl}${path}`);
-
     this.axiosInstance = axios.create({
       baseURL: `${apiUrl}${path}`,
     });

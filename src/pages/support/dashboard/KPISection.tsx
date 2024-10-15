@@ -25,11 +25,6 @@ interface KPIGridProps {
 
 const KPISection: FC<KPIGridProps> = ({ kpis }) => {
 
-
-  const handleClick = () => {
-    console.log("handleClick");
-  };
-
   return (
     <Swipper movementStep={1.5}>
       {kpis.map((kpi) => (
@@ -45,7 +40,6 @@ const KPISection: FC<KPIGridProps> = ({ kpis }) => {
             height: '100px',
             overflow: 'hidden',
           }}
-          onClick={handleClick}
         >
           {kpi.icon && (
             <Avatar
