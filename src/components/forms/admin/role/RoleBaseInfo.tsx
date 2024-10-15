@@ -10,6 +10,7 @@ import { BaseMethodsProps } from "../../../../interfaces/CoreInterfaces";
 import { Role } from "../../../../interfaces/ModelInterfaces";
 import roleStore from "../../../../stores/admin/roleStore";
 import { BaseChangeMethod } from "../../../../types/methodTypes";
+import { buttonMsg as getSubmitMsg } from "../../../../utils/messageUtils";
 import TextAreaField from "../../fields/TextAreaField";
 
 
@@ -30,11 +31,11 @@ Object.freeze(fieldProps)
 
 const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
 
-
   const { role, setRole } = roleStore();
   const { role: roleFetched, loading, success, method, createRole, updateRole } = useRole();
 
   const [formData, setFormData] = useState<Partial<Role>>({});
+  const submitMsg = getSubmitMsg(loading, Boolean(role));
 
   const handleInputChange: BaseChangeMethod<any> = (e) => {
     const { name, value } = e.target;
@@ -61,28 +62,23 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
       setRole(roleFetched);
     }
   }, [roleFetched]);
+
   useEffect(() => {
     if (role) {
       setFormData({ ...role });
     }
   }, [role]);
-  useEffect(() => {
-    if (onSuccess && success && role && (method === 'createRole' || method === 'updateRole')) {
-      onSuccess(role.id);
-    }
-  }, [success]);
 
-  const buttonMsg = () => {
-    if (loading) {
-      return role ? 'Actualizando...' : 'Creando...';
+  useEffect(() => {
+    if (onSuccess && success && roleFetched && (method === 'createRole' || method === 'updateRole')) {
+      onSuccess(roleFetched.id);
     }
-    return role ? 'Actualizar' : 'Crear';
-  }
+  }, [role, success, method]);
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
-        {buttonMsg()}
+        {submitMsg}
       </Button>
       <Grid container spacing={{ xs: 1 }}>
 
@@ -110,6 +106,7 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
             label="Key"
             name="key"
             value={formData.key ?? ''}
+            disabled={Boolean(role)}
             onChange={(e) => handleInputChange(e)}// CONTROLAR QUYE SEA SLUG
             {...fieldProps}
           />
