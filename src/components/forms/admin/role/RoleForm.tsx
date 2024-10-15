@@ -57,7 +57,7 @@ const RoleForm: React.FC = () => {
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
-      <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Actualizar Tarea' : 'Crear Tarea'}</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Role</Typography>
       {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
