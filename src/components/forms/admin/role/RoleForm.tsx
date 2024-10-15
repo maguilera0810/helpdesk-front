@@ -16,8 +16,13 @@ const RoleForm: React.FC = () => {
   const { roleId } = useParams<{ roleId: string }>();
   const isUpdate = Boolean(roleId && roleId !== 'addNew');
   const { role, error, success, method, fetchRole } = useRole();
-  const { setRole } = roleStore();
+  const { setRole, clearState } = roleStore();
   const [tabValue, setTabValue] = useState('0');
+
+  useEffect(() => {
+    return () => { clearState?.() }
+  }, [])
+
 
   useEffect(() => {
     if (!isUpdate) {
@@ -63,7 +68,7 @@ const RoleForm: React.FC = () => {
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="role form tabs">
             <Tab label="Información" value="0" />
-            <Tab label="Permisos" value="1" />
+            <Tab label="Permisos" value="1" disabled={Boolean(role)} />
           </TabList>
         </Box>
         <TabPanel value="0">
@@ -71,9 +76,9 @@ const RoleForm: React.FC = () => {
             onSuccess={handleSuccess}
             onSubmit={handleSubmit} />
         </TabPanel>
-        <TabPanel value="1">
+        {Boolean(role) && <TabPanel value="1">
           <RolePermissions />
-        </TabPanel>
+        </TabPanel>}
       </TabContext>
     </Paper>
   );
