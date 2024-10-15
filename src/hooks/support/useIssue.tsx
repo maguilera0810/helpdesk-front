@@ -1,10 +1,13 @@
 import { useCallback, useState } from 'react';
+
 import { Issue } from '../../interfaces/ModelInterfaces';
 import IssueService from '../../services/support/IssueService';
+import { methodIssue } from '../../types/methodTypes';
 
 export const useIssue = () => {
   const [issue, setIssue] = useState<Issue | null>(null);
   const [createdTask, setCreatedTask] = useState<number | null>(null);
+  const [method, setMethod] = useState<methodIssue | undefined>();
   const [issues, setIssues] = useState<Issue[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -12,6 +15,7 @@ export const useIssue = () => {
   const [successCreateTask, setSuccessCreateTask] = useState<boolean>(false);
 
   const fetchIssues = useCallback(async (filters: { [key: string]: any } = {}) => {
+    setMethod('fetchIssues');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -28,6 +32,7 @@ export const useIssue = () => {
   }, []);
 
   const fetchIssue = async (issueId: number) => {
+    setMethod('fetchIssue');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -45,6 +50,7 @@ export const useIssue = () => {
   };
 
   const createIssue = async (issue: Partial<Issue>) => {
+    setMethod('createIssue');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -62,6 +68,7 @@ export const useIssue = () => {
   };
 
   const createTask = async (id: number) => {
+    setMethod('createTask');
     setLoading(true);
     setError(null);
     setSuccessCreateTask(false);
@@ -79,6 +86,7 @@ export const useIssue = () => {
   };
 
   const updateIssue = async (issueId: number, issue: Partial<Issue>) => {
+    setMethod('updateIssue');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -96,6 +104,7 @@ export const useIssue = () => {
   };
 
   const deleteIssue = async (issueId: number) => {
+    setMethod('deleteIssue');
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -115,6 +124,7 @@ export const useIssue = () => {
   return {
     loading,
     error,
+    method,
     success,
     successCreateTask,
     issue,

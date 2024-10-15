@@ -2,11 +2,12 @@ import { useCallback, useState } from 'react';
 
 import { Permission } from '../../interfaces/ModelInterfaces';
 import PermissionService from '../../services/admin/PermissionService';
+import { methodPermission } from '../../types/methodTypes';
 
 export const usePermission = () => {
   const [permission, setPermission] = useState<Permission | undefined>(undefined);
   const [permissions, setPermissions] = useState<Permission[]>([]);
-  const [method, setMethod] = useState<string | null>(null)
+  const [method, setMethod] = useState<methodPermission | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);

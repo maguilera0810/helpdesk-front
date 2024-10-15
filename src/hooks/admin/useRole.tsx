@@ -2,13 +2,14 @@ import { useCallback, useState } from 'react';
 
 import { Role } from '../../interfaces/ModelInterfaces';
 import RoleService from '../../services/admin/RoleService';
+import { methodRole } from '../../types/methodTypes';
 
-type methods = 'fetchRoles' | 'fetchRole' | 'createRole' | 'updateRole' | 'deleteRole';
+
 
 export const useRole = () => {
   const [role, setRole] = useState<Role | null>(null);
   const [roles, setRoles] = useState<Role[]>([]);
-  const [method, setMethod] = useState<methods | undefined>()
+  const [method, setMethod] = useState<methodRole | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);

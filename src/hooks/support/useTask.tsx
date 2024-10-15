@@ -2,8 +2,9 @@ import { useCallback, useState } from 'react';
 import { Schedule, Task, UserTask } from '../../interfaces/ModelInterfaces';
 import { TaskScheduleRequest, TrackingTasksRequest } from '../../interfaces/RequestInterfaces';
 import TaskService from '../../services/support/TaskService';
+import { methodTask } from '../../types/methodTypes';
 
-type methodType = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | "fetchTrackingTasks" | null;
+
 
 export const useTask = () => {
   const [task, setTask] = useState<Task | null>(null);
@@ -11,7 +12,7 @@ export const useTask = () => {
   const [schedule, setSchedule] = useState<Schedule | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [method, setMethod] = useState<methodType>(null);
+  const [method, setMethod] = useState<methodTask | undefined>();
   const [success, setSuccess] = useState<boolean | null>(null);
 
   const fetchTasks = useCallback(async (filters: { [key: string]: any } = {}) => {

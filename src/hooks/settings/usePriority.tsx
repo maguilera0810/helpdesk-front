@@ -1,11 +1,14 @@
 import { useCallback, useState } from 'react';
+
 import { Priority } from '../../interfaces/ModelInterfaces';
 import PriorityService from '../../services/settings/PriorityService';
+import { methodPriority } from '../../types/methodTypes';
+
 
 export const usePriority = () => {
   const [priority, setPriority] = useState<Priority | null>(null);
   const [priorities, setPriorities] = useState<Priority[]>([]);
-  const [method, setMethod] = useState<string | null>(null)
+  const [method, setMethod] = useState<methodPriority | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);

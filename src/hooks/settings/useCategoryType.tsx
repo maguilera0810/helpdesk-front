@@ -1,13 +1,17 @@
 import { useCallback, useState } from 'react';
+
 import { CategoryType } from '../../interfaces/ModelInterfaces';
 import CategoryTypeService from '../../services/settings/CategoryTypeService';
+import { methodCategoryType } from '../../types/methodTypes';
+
+
 
 export const useCategoryType = () => {
   const [categoryType, setCategoryType] = useState<CategoryType | null>(null);
   const [categoryTypes, setCategoryTypes] = useState<CategoryType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [method, setMethod] = useState<string | null>(null);
+  const [method, setMethod] = useState<methodCategoryType | undefined>();
   const [success, setSuccess] = useState<boolean>(false);
 
   const fetchCategoryTypes = useCallback(async (filters: { [key: string]: any } = {}) => {

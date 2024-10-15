@@ -1,11 +1,13 @@
 import { useCallback, useState } from 'react';
+
 import { Category } from '../../interfaces/ModelInterfaces';
 import CategoryService from '../../services/settings/CategoryService';
+import { methodCategory } from '../../types/methodTypes';
 
 export const useCategory = () => {
   const [category, setCategory] = useState<Category | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [method, setMethod] = useState<string | null>(null)
+  const [method, setMethod] = useState<methodCategory | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
