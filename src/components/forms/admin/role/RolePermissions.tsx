@@ -1,24 +1,37 @@
 import { FC, useEffect, useState } from "react";
 
-import Box from "@mui/material/Box";
+import { Paper, Typography } from "@mui/material";
+import Grid, { Grid2Props } from "@mui/material/Grid2";
 import { useRole } from "../../../../hooks/admin/useRole";
-import roleStore from "../../../../stores/admin/roleStore";
-import Grid from "@mui/material/Grid2";
 import useGlobalData from "../../../../hooks/useGlobalData";
+import roleStore from "../../../../stores/admin/roleStore";
 import { GroupedPermissionType, SelectedGroupedPermission } from "../../../../types/groupTypes";
-import SelectField from "../../fields/SelectField";
-import { BaseChangeMethod } from "../../../../types/methodTypes";
-import MultipleSelectField from "../../fields/MultipleSelectField";
+import CheckboxGroup from "../../fields/CheckboxGroup";
 
 
-const gridItemProps = {
+const gridItemProps: Grid2Props = {
   size: {
     xs: 12,
-    sm: 6,
-    md: 4,
-    xl: 3,
+    sm: 'auto',
   }
 };
+
+type section = { key: GroupedPermissionType, label: string, }[]
+const adminSection: section = [
+  { key: 'admin_user', label: "Usuarios" },
+  { key: 'admin_role', label: "Roles" },
+]
+const supportSection: section = [
+  { key: 'support_task', label: "Tareas" },
+  { key: 'support_issue', label: "Problemas" },
+  { key: 'support_dashboard', label: "Tablero" },
+  { key: 'support_tracking', label: "Seguimiento" },
+]
+const settingsSection: section = [
+  { key: 'settings_profile', label: "Perfil" },
+  { key: 'settings_category', label: "Categorias" },
+  { key: 'settings_priority', label: "Prioridades" },
+]
 
 const RolePermissions: FC = () => {
   const { role, setRole } = roleStore();
@@ -26,8 +39,8 @@ const RolePermissions: FC = () => {
   const { groupedPermissions } = useGlobalData();
   const [formData, setFormData] = useState<Partial<SelectedGroupedPermission>>({});
 
-  const handleInputChange: BaseChangeMethod<any> = (e) => {
-    const { name, value } = e.target;
+
+  const handleValueChange = (name: string, value: number[]) => {
     if (name) {
       setFormData((prev) => ({
         ...prev,
@@ -37,10 +50,6 @@ const RolePermissions: FC = () => {
   };
 
   useEffect(() => {
-    console.log("entro 1");
-    console.log(role);
-    console.log(groupedPermissions);
-
     if (groupedPermissions) {
       const permissionsSet = new Set(role?.permissions ?? []);
       const res: SelectedGroupedPermission = {} as SelectedGroupedPermission;
@@ -51,45 +60,68 @@ const RolePermissions: FC = () => {
     }
   }, [role, groupedPermissions]);
 
-
-  useEffect(() => {
-    console.log("formData", formData);
-
-  }, [formData]);
-
   useEffect(() => {
     roleFetched && setRole(roleFetched);
   }, [roleFetched]);
 
-  useEffect(() => {
-    console.log(groupedPermissions);
-  }, [groupedPermissions])
-
   return (
+    <Grid container spacing={{ xs: 1 }} direction={"column"} >
 
-    <Grid container spacing={{ xs: 1 }}>
-      <Grid {...gridItemProps} key={"admin_role"} sx={{ borderColor: 'red' }}>
-        <MultipleSelectField
-          label="Admin Roles"
-          name="admin_role"
-          value={formData.admin_role ?? []}
-          options={groupedPermissions?.admin_role.map(e => ({ value: e.id, label: e.title })) ?? []}
-          onChange={(e) => handleInputChange(e)}
-          height="56px"
-        />
+      <Grid container spacing={{ xs: 1 }}>
+        <Grid size={12} key={"admin"} >
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Administración</Typography>
+        </Grid>
+        {adminSection.map(({ key, label }) => (
+          <Grid {...gridItemProps} key={key} >
+            <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
+              <CheckboxGroup
+                label={label}
+                isGroup={true}
+                value={formData[key] ?? []}
+                options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
+                onChange={(e) => handleValueChange(key, e)}
+              />
+            </Paper>
+          </Grid>
+        ))}
       </Grid>
-      <Grid {...gridItemProps} key={"admin_user"}>
-        <MultipleSelectField
-          label="Admin Usuarios"
-          name="admin_user"
-          value={formData.admin_user ?? []}
-          options={groupedPermissions?.admin_user.map(e => ({ value: e.id, label: e.title })) ?? []}
-          onChange={(e) => handleInputChange(e)}
-          height="56px"
-        />
+      <Grid container spacing={{ xs: 1 }}>
+        <Grid size={12} key={"support"} >
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Soporte</Typography>
+        </Grid>
+        {supportSection.map(({ key, label }) => (
+          <Grid {...gridItemProps} key={key} >
+            <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
+              <CheckboxGroup
+                label={label}
+                isGroup={true}
+                value={formData[key] ?? []}
+                options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
+                onChange={(e) => handleValueChange(key, e)}
+              />
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+      <Grid container spacing={{ xs: 1 }}>
+        <Grid size={12} key={"admin"} >
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Configuraciones</Typography>
+        </Grid>
+        {settingsSection.map(({ key, label }) => (
+          <Grid {...gridItemProps} key={key} >
+            <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
+              <CheckboxGroup
+                label={label}
+                isGroup={true}
+                value={formData[key] ?? []}
+                options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
+                onChange={(e) => handleValueChange(key, e)}
+              />
+            </Paper>
+          </Grid>
+        ))}
       </Grid>
     </Grid>
-
   );
 };
 
