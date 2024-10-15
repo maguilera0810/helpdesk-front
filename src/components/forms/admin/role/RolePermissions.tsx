@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
-import { Paper, Typography } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Paper, Typography } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Grid2";
 import { useRole } from "../../../../hooks/admin/useRole";
 import useGlobalData from "../../../../hooks/useGlobalData";
@@ -66,60 +67,77 @@ const RolePermissions: FC = () => {
 
   return (
     <Grid container spacing={{ xs: 1 }} direction={"column"} >
-
-      <Grid container spacing={{ xs: 1 }}>
-        <Grid size={12} key={"admin"} >
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Administración</Typography>
-        </Grid>
-        {adminSection.map(({ key, label }) => (
-          <Grid {...gridItemProps} key={key} >
-            <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
-              <CheckboxGroup
-                label={label}
-                isGroup={true}
-                value={formData[key] ?? []}
-                options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
-                onChange={(e) => handleValueChange(key, e)}
-              />
-            </Paper>
-          </Grid>
-        ))}
+      <Grid container>
+        <Accordion sx={{ width: '100%' }} defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} id="admin-section-header">
+            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Administración</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid container spacing={{ xs: 1 }} direction={"row"} >
+              {adminSection.map(({ key, label }) => (
+                <Grid {...gridItemProps} key={key} >
+                  <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
+                    <CheckboxGroup
+                      label={label}
+                      isGroup={true}
+                      value={formData[key] ?? []}
+                      options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
+                      onChange={(e) => handleValueChange(key, e)}
+                    />
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
-      <Grid container spacing={{ xs: 1 }}>
-        <Grid size={12} key={"support"} >
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Soporte</Typography>
-        </Grid>
-        {supportSection.map(({ key, label }) => (
-          <Grid {...gridItemProps} key={key} >
-            <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
-              <CheckboxGroup
-                label={label}
-                isGroup={true}
-                value={formData[key] ?? []}
-                options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
-                onChange={(e) => handleValueChange(key, e)}
-              />
-            </Paper>
-          </Grid>
-        ))}
+      <Grid container>
+        <Accordion sx={{ width: '100%' }} defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} id="support-section-header">
+            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Soporte</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid container spacing={{ xs: 1 }} direction={"row"} >
+              {supportSection.map(({ key, label }) => (
+                <Grid {...gridItemProps} key={key} >
+                  <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
+                    <CheckboxGroup
+                      label={label}
+                      isGroup={true}
+                      value={formData[key] ?? []}
+                      options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
+                      onChange={(e) => handleValueChange(key, e)}
+                    />
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
-      <Grid container spacing={{ xs: 1 }}>
-        <Grid size={12} key={"admin"} >
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Configuraciones</Typography>
-        </Grid>
-        {settingsSection.map(({ key, label }) => (
-          <Grid {...gridItemProps} key={key} >
-            <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
-              <CheckboxGroup
-                label={label}
-                isGroup={true}
-                value={formData[key] ?? []}
-                options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
-                onChange={(e) => handleValueChange(key, e)}
-              />
-            </Paper>
-          </Grid>
-        ))}
+      <Grid container>
+        <Accordion sx={{ width: '100%' }} defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} id="settings-section-header">
+            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Configuraciones</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid container spacing={{ xs: 1 }} direction={"row"} >
+              {supportSection.map(({ key, label }) => (
+                <Grid {...gridItemProps} key={key} >
+                  <Paper elevation={3} sx={{ pl: 2, borderRadius: 2, width: '100%' }}>
+                    <CheckboxGroup
+                      label={label}
+                      isGroup={true}
+                      value={formData[key] ?? []}
+                      options={groupedPermissions?.[key].map(e => ({ value: e.id, label: e.title })) ?? []}
+                      onChange={(e) => handleValueChange(key, e)}
+                    />
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
     </Grid>
   );
