@@ -57,22 +57,20 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
   };
 
   useEffect(() => {
-    if (onSuccess && success && role && (method === 'createRole' || method === 'updateRole')) {
-      onSuccess(role.id);
+    if (roleFetched) {
+      setRole(roleFetched);
     }
-  }, [success]);
-
+  }, [roleFetched]);
   useEffect(() => {
     if (role) {
       setFormData({ ...role });
     }
   }, [role]);
-
   useEffect(() => {
-    if (roleFetched) {
-      setRole(roleFetched);
+    if (onSuccess && success && role && (method === 'createRole' || method === 'updateRole')) {
+      onSuccess(role.id);
     }
-  }, [roleFetched]);
+  }, [success]);
 
   const buttonMsg = () => {
     if (loading) {
