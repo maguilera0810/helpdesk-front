@@ -54,7 +54,6 @@ const useGlobalData = () => {
 
   useEffect(() => {
     if (!fetchedPermissions.length) {
-      setGroupedPermissions();
       return;
     }
     const groupedPermissions = fetchedPermissions.reduce((acc: GroupedPermission, permission: Permission) => {
