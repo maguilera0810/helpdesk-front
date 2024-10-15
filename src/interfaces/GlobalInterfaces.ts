@@ -11,6 +11,7 @@ export interface IRandomStringOptions {
 export interface IOption {
   value?: any;
   label: string;
+  color?: string;
 }
 
 export interface IAutocompleteOption extends IOption {
