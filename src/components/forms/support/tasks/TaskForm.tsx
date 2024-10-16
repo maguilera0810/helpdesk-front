@@ -19,7 +19,7 @@ const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
-  const { setTask } = taskStore()
+  const { setTask, clearState } = taskStore()
   const { setUsers } = useUserStore();
   const { setCategories } = categoryStore();
 
@@ -32,6 +32,7 @@ const TaskForm: React.FC = () => {
   useEffect(() => {
     fetchCategories({ "type__title": "habilidad" });
     fetchUsers({ "groups__id__in": [1, 2, 3] });
+    return () => { clearState?.() }
   }, []);
 
   useEffect(() => {

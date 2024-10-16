@@ -34,7 +34,7 @@ const TaskTracking: FC = () => {
   const { loading, schedule, fetchTrackingTasks } = useTask();
   const { users, fetchUsers } = useUser()
   const { setUsers } = useUserStore();
-  const { schedule: scheduleStore, setSchedule, setCurrDate } = taskStore()
+  const { schedule: scheduleStore, setSchedule, setCurrDate, clearState } = taskStore()
 
   const handleInputChange = (e: handleInputChangeType) => {
     const { name, value } = e.target;
@@ -70,6 +70,7 @@ const TaskTracking: FC = () => {
   useEffect(() => {
     setCurrDate(dayjs());
     fetchUsers();
+    return () => { clearState?.() }
   }, []);
 
   useEffect(() => {
