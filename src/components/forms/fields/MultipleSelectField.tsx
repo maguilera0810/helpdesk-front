@@ -78,8 +78,8 @@ const MultipleSelectField: FC<IMultipleSelectFieldProps> = ({
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.2, maxHeight: height, overflow: 'hidden' }}>
-            {selected.map((value) => (
-              <Chip key={value} label={options.find(e => e.value === value)?.label} />
+            {selected.map((item) => (
+              <Chip key={item} label={options.find(e => e.value === item)?.label} />
             ))}
           </Box>
         )}
