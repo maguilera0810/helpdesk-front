@@ -9,10 +9,11 @@ import { usePriority } from './settings/usePriority';
 
 const useGlobalData = () => {
 
-  const { reload, reloadPriority, reloadCategory, reloadPermission: reloadPermission, setReload,
+  const { reload, reloadPriority, reloadCategory, reloadPermission, setReload,
     priorities, setPriorities,
     categories, setCategories,
-    groupedPermissions, setGroupedPermissions } = globalDataStore();
+    groupedPermissions, setGroupedPermissions, getFlatPermissions, getGroupedPermission,
+  } = globalDataStore();
   const { priorities: fetchedPriorities, fetchPriorities } = usePriority();
   const { categories: fetchedCategories, fetchCategories } = useCategory();
   const { permissions: fetchedPermissions, fetchPermissions } = usePermission();
@@ -73,6 +74,8 @@ const useGlobalData = () => {
     categories,
     groupedPermissions,
     setReload,
+    getFlatPermissions,
+    getGroupedPermission,
   };
 };
 
