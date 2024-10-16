@@ -102,7 +102,7 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"key"}>
           <TextField
-            label="Key"
+            label="Clave"
             name="key"
             value={formData.key ?? ''}
             disabled={isUpdate}

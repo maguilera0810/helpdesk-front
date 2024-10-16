@@ -9,7 +9,7 @@ import { useRole } from '../../hooks/admin/useRole';
 const COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'title', headerName: 'Titulo', width: 130 },
-  { field: 'code', headerName: 'Código', width: 130 },
+  { field: 'key', headerName: 'Código', width: 130 },
 ];
 Object.freeze(COLUMNS);
 

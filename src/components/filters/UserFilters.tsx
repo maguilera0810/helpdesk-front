@@ -61,7 +61,7 @@ const UserFilters: React.FC = () => {
         variant="outlined"
       />
       <Button variant="contained" color="primary" onClick={handleApplyFilters}>
-        Apply Filters
+        Buscar
       </Button>
     </Box>
   );
