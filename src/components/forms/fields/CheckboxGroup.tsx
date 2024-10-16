@@ -1,11 +1,16 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Typography } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import { CheckboxGroupProps } from "../../../interfaces/ComponentInterfaces";
 
 
 
 const CheckboxGroup: FC<CheckboxGroupProps<number>> = ({ label, options, value, isGroup = false, onChange }) => {
+
   const [selected, setSelected] = useState<number[]>(value);
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, value: number, isParent: boolean = false) => {
     const isChecked = e.target.checked;
@@ -20,19 +25,13 @@ const CheckboxGroup: FC<CheckboxGroupProps<number>> = ({ label, options, value, 
   };
 
   const getFather = () => {
+    const title = <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{label}</Typography>;
     if (!isGroup) {
-      return <FormLabel component="legend">
-        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {label}
-        </Typography>
-      </FormLabel>;
+      return (
+        <FormLabel component="legend">{title}</FormLabel>);
     }
     return <FormControlLabel
-      label={
-        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {label}
-        </Typography>
-      }
+      label={title}
       control={
         <Checkbox
           checked={selected.length === options.length}
