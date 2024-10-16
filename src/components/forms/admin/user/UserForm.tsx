@@ -164,7 +164,7 @@ const UserForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"documentType"}>
                 <SelectField
-                  label="Document Type"
+                  label="Tipo Documento"
                   name="documentType"
                   value={formData.profile?.documentType ?? ''}
                   options={documentTypeOptions}
@@ -175,7 +175,7 @@ const UserForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"Document"}>
                 <TextField
-                  label="Document"
+                  label="Documento"
                   name="document"
                   value={formData.profile?.document ?? ''}
                   onChange={(e) => handleInputChange(e, true)}

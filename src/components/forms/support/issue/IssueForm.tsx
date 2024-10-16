@@ -204,7 +204,7 @@ const IssueForm: React.FC = () => {
             <Grid container spacing={{ xs: 1 }}>
               <Grid item {...gridItemProps} key={"title"}>
                 <TextField
-                  label="Title"
+                  label="Título"
                   name="title"
                   required={true}
                   InputProps={{
@@ -292,7 +292,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"categories"}>
                 <MultipleSelectField
-                  label="Categories"
+                  label="Categorias"
                   name="categories"
                   value={formData.categories ?? []}
                   options={categories.map(category => ({ value: category.id, label: category.title, color: category.color }))}

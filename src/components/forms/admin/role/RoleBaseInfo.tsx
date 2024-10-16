@@ -83,7 +83,7 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess }) => {
 
         <Grid {...gridItemProps} key={"title"}>
           <TextField
-            label="Title"
+            label="Título"
             name="title"
             value={formData.title ?? ''}
             onChange={(e) => handleInputChange(e)}

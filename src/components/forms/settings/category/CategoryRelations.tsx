@@ -57,7 +57,7 @@ const CategoryRelations: React.FC = () => {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          <Typography>Type 1</Typography>
+          <Typography>Tipo 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>

@@ -112,7 +112,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
             <Grid container spacing={{ xs: 1 }}>
               <Grid size={gridSizes} key={"title"}>
                 <TextField
-                  label="Title"
+                  label="Título"
                   name="title"
                   value={formData.title ?? ''}
                   onChange={(e) => handleInputChange(e)}

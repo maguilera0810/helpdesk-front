@@ -1,21 +1,20 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Box, Button, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { taskStatusOptions, taskTypeOptions } from '../../../../constants';
-import useGlobalData from '../../../../hooks/useGlobalData';
 import { useTask } from '../../../../hooks/support/useTask';
+import useGlobalData from '../../../../hooks/useGlobalData';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/settings/categoryStore';
 import useTaskStore from '../../../../stores/support/useTaskStore';
+import { BaseChangeMethod } from '../../../../types/methodTypes';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
-import { BaseChangeMethod } from '../../../../types/methodTypes';
 
 const gridItemProps = {
   size: {
@@ -123,7 +122,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
       <Grid container spacing={{ xs: 1 }}>
         <Grid {...gridItemProps} key={"title"}>
           <TextField
-            label="Title"
+            label="Título"
             name="title"
             value={formData.title ?? ''}
             onChange={(e) => handleInputChange(e)}
@@ -153,7 +152,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"type"}>
           <SelectField
-            label="Type"
+            label="Tipo"
             name="type"
             value={formData.type ?? taskTypeOptions[0].value}
             options={taskTypeOptions}
@@ -204,7 +203,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"categories"}>
           <MultipleSelectField
-            label="Categories"
+            label="Categorias"
             name="categories"
             value={formData.categories ?? []}
             options={categories.map(e => ({ value: e.id, label: e.title }))}
