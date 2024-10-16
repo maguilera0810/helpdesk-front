@@ -133,7 +133,7 @@ const CategoryForm: React.FC = () => {
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="category form tabs">
-            <Tab label="Base Info" value="0" />
+            <Tab label="Información" value="0" />
             <Tab label="Relations" value="1" />
           </TabList>
         </Box>
