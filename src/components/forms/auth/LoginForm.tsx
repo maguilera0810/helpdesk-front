@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
       if (fetchedUser) {
         console.log(fetchedUser);
         setUser(fetchedUser);
-        navigate('/admin/users/');
+        navigate('/administracion/usuario/');
       } else {
         alert('Error al obtener el usuario');
       }

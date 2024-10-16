@@ -28,11 +28,11 @@ const UserTable: FC = () => {
   }, [filters]);
 
   const handleCreate = () => {
-    navigate('/admin/users/addNew/');
+    navigate('/administracion/usuario/addNew/');
   };
 
   const handleUpdate = (id: number) => {
-    navigate(`/admin/users/${id}/`);
+    navigate(`/administracion/usuario/${id}/`);
   };
 
   return (

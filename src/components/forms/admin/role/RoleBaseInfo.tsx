@@ -92,7 +92,7 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"description"}>
           <TextAreaField
-            label="Descrición"
+            label="Descripción"
             name="description"
             required={true}
             value={formData.description ?? ''}

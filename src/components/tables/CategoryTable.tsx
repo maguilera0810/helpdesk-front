@@ -26,11 +26,11 @@ const IssueTable: FC = () => {
   }, [filters]);
 
   const handleCreate = () => {
-    navigate('/configuraciones/categorias/addNew/');
+    navigate('/configuraciones/categoria/addNew/');
   };
 
   const handleUpdate = (id: number) => {
-    navigate(`/configuraciones/categorias/${id}/`);
+    navigate(`/configuraciones/categoria/${id}/`);
   };
 
   return (

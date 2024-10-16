@@ -8,7 +8,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import { UserTask } from '../../../../../interfaces/ModelInterfaces';
-import useTaskStore from '../../../../../stores/support/useTaskStore';
+import taskStore from '../../../../../stores/support/taskStore';
 import useUserStore from '../../../../../stores/admin/useUserStore';
 import ScheduleColumn from './ScheduleColum';
 
@@ -21,7 +21,7 @@ interface ScheduleGridProps {
 
 const ScheduleGrid: FC<ScheduleGridProps> = () => {
 
-  const { schedule, currDate } = useTaskStore()
+  const { schedule, currDate } = taskStore();
   const users = useUserStore((state) => state.users);
   const [times, setTimes] = useState<Dayjs[]>([])
   const [userTasks, setUserTasks] = useState<UserTask[]>([])
@@ -89,12 +89,12 @@ const ScheduleGrid: FC<ScheduleGridProps> = () => {
             return (
               <Grid size={{ xs: 12 }} key={`${time.toISOString()}`}
                 sx={{
-                  
+
                   height: '1.4rem',
                   border: '1px solid #ddd',
                   background: '#F0F0F0',
                 }}>
-                <Typography sx={{fontSize:'0.7rem'}}>
+                <Typography sx={{ fontSize: '0.7rem' }}>
                   {initTime} - {endTime}
                 </Typography>
               </Grid>);

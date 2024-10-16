@@ -78,7 +78,7 @@ const IssueForm: React.FC = () => {
     } else {
       await createIssue(formData);
     }
-    // navigate('/admin/users');
+    // navigate('/admin/usuario');
   };
   const showField = () => {
     return "block";
@@ -216,7 +216,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"description"}>
                 <TextAreaField
-                  label="Descrición"
+                  label="Descripción"
                   name="description"
                   required={true}
                   InputProps={{ readOnly: isUpdate, }}

@@ -9,7 +9,7 @@ import { useTask } from '../../../../hooks/support/useTask';
 import { useUser } from '../../../../hooks/admin/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/settings/categoryStore';
-import useTaskStore from '../../../../stores/support/useTaskStore';
+import useTaskStore from '../../../../stores/support/taskStore';
 import useUserStore from '../../../../stores/admin/useUserStore';
 import TaskBaseInfo from './TaskBaseInfo';
 import TaskSchedule from './TaskSchedule';

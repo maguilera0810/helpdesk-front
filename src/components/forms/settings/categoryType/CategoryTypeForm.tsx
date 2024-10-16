@@ -90,7 +90,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
       return;
     }
     if (!isDialog) {
-      navigate(`/configuraciones/categorias-type/${categoryType.id}/`);
+      navigate(`/configuraciones/categoria-type/${categoryType.id}/`);
     }
   }, [success]);
 
@@ -121,7 +121,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
               </Grid>
               <Grid size={gridSizes} key={"description"}>
                 <TextAreaField
-                  label="Descrición"
+                  label="Descripción"
                   name="description"
                   value={formData.description ?? ''}
                   onChange={(e) => handleInputChange(e)}

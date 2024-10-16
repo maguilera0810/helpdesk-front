@@ -7,7 +7,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import { UserTask } from '../../../interfaces/ModelInterfaces';
-import useTaskStore from '../../../stores/support/useTaskStore';
+import useTaskStore from '../../../stores/support/taskStore';
 import useUserStore from '../../../stores/admin/useUserStore';
 import TrackingColumn from './TrackingColum';
 

@@ -8,7 +8,7 @@ const ListFaculties: FC = () => {
   return (
     <Layout>
       <Typography variant="h4" gutterBottom>
-        Listado de Facultades
+        Facultades
       </Typography>
       <FacultiesTable />
 

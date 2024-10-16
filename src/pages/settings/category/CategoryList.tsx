@@ -8,7 +8,7 @@ const CategoryList: FC = () => {
   return (
     <Layout>
       <Typography variant="h4">
-        Listado de Categorias
+        Categorias
       </Typography>
       <CategoryTable />
     </Layout>

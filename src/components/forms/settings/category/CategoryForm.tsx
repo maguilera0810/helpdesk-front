@@ -119,7 +119,7 @@ const CategoryForm: React.FC = () => {
 
   useEffect(() => {
     if (success && category && (method === 'createCategory' || method === 'updateCategory')) {
-      navigate(`/configuraciones/categorias/${category.id}/`);
+      navigate(`/configuraciones/categoria/${category.id}/`);
     }
   }, [success]);
 

@@ -26,7 +26,7 @@ const CategoryRelations: React.FC = () => {
     e.preventDefault();
     // const categoryId = parseInt(id);
     // await updateCategory(categoryId, formData);
-    // navigate('/admin/users');
+    // navigate('/admin/usuario');
   };
 
   useEffect(() => {

@@ -15,7 +15,7 @@ const GroupTable: FC = () => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Button variant="contained" color="primary" href="/admin/users/create">
+        <Button variant="contained" color="primary" href="/administracion/usuario/create">
           Crear Groupo
         </Button>
       </Box>

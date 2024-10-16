@@ -11,7 +11,7 @@ import { useTask } from '../../../../hooks/support/useTask';
 import useGlobalData from '../../../../hooks/useGlobalData';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/settings/categoryStore';
-import useTaskStore from '../../../../stores/support/useTaskStore';
+import useTaskStore from '../../../../stores/support/taskStore';
 import { BaseChangeMethod } from '../../../../types/methodTypes';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
@@ -131,7 +131,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"description"}>
           <TextAreaField
-            label="Descrición"
+            label="Descripción"
             name="description"
             required={true}
             value={formData.description ?? ''}

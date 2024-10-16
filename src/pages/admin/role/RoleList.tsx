@@ -8,7 +8,7 @@ const RoleList: React.FC = () => {
     <Layout>
       <Box sx={{ padding: 2 }}>
         <Typography variant="h4" gutterBottom>
-          Listado de Roles
+          Roles
         </Typography>
         <RoleTable/>
       </Box>

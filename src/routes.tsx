@@ -44,8 +44,8 @@ const AppRoutes: FC = () => (
     <Routes>
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/admin/users/" element={<UserList />} />
-        <Route path="/admin/users/:id/" element={<UserDetail />} />
+        <Route path="/administracion/usuario/" element={<UserList />} />
+        <Route path="/administracion/usuario/:id/" element={<UserDetail />} />
         <Route path="/admin/role/" element={<RoleList />} />
         <Route path="/admin/role/:roleId" element={<RoleDetail />} />
 
@@ -60,8 +60,8 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/issue/:id/" element={<IssueDetail />} />
         <Route path="/soporte/statistics/" element={<Statistics />} />
 
-        <Route path="/configuraciones/categorias/" element={<CategoryList />} />
-        <Route path="/configuraciones/categorias/:id/" element={<CategoryDetail />} />
+        <Route path="/configuraciones/categoria/" element={<CategoryList />} />
+        <Route path="/configuraciones/categoria/:id/" element={<CategoryDetail />} />
         <Route path="/configuraciones/prioridad/" element={<PriorityList />} />
         <Route path="/configuraciones/prioridad/:priorityID/" element={<PriorityDetail />} />
         <Route path="/configuraciones/facultades/" element={<ListFaculties />} />

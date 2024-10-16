@@ -85,7 +85,7 @@ const UserForm: React.FC = () => {
     } else {
       await createUser(formData);
     }
-    // navigate('/admin/users');
+    // navigate('/admin/usuario');
   };
 
 
