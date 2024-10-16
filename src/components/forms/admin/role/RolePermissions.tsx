@@ -1,12 +1,15 @@
 import { FC, useEffect, useState } from "react";
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Paper, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, Paper, Typography } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Grid2";
 import { useRole } from "../../../../hooks/admin/useRole";
 import useGlobalData from "../../../../hooks/useGlobalData";
+import { BaseMethodsProps } from "../../../../interfaces/CoreInterfaces";
+import { Role } from "../../../../interfaces/ModelInterfaces";
 import roleStore from "../../../../stores/admin/roleStore";
 import { GroupedPermissionType, SelectedGroupedPermission } from "../../../../types/groupTypes";
+import { getSubmitMsg } from "../../../../utils/messageUtils";
 import CheckboxGroup from "../../fields/CheckboxGroup";
 
 
@@ -34,19 +37,26 @@ const settingsSection: section = [
   { key: 'settings_priority', label: "Prioridades" },
 ]
 
-const RolePermissions: FC = () => {
+const RolePermissions: FC<BaseMethodsProps<Role>> = ({ onSuccess }) => {
+
   const { role, setRole } = roleStore();
   const { role: roleFetched, loading, success, method, updateRole } = useRole();
   const { groupedPermissions } = useGlobalData();
-  const [formData, setFormData] = useState<Partial<SelectedGroupedPermission>>({});
+  const [formData, setFormData] = useState<SelectedGroupedPermission>({} as SelectedGroupedPermission);
 
 
-  const handleValueChange = (name: string, value: number[]) => {
+  const handleValueChange = (name: GroupedPermissionType, value: number[]) => {
     if (name) {
       setFormData((prev) => ({
         ...prev,
         [name]: value
       }));
+    }
+  };
+
+  const handleSubmit = () => {
+    if (role) {
+      updateRole(role.id, { permissions: Object.values(formData).flat() });
     }
   };
 
@@ -65,8 +75,20 @@ const RolePermissions: FC = () => {
     roleFetched && setRole(roleFetched);
   }, [roleFetched]);
 
+  useEffect(() => {
+    if (onSuccess && success && role && (method === 'createRole' || method === 'updateRole')) {
+      onSuccess(role.id);
+    }
+  }, [role, success, method]);
+
+  if (!role) {
+    return <></>;
+  }
   return (
     <Grid container spacing={{ xs: 1 }} direction={"column"} >
+      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
+        {getSubmitMsg(loading)}
+      </Button>
       <Grid container>
         <Accordion sx={{ width: '100%' }} defaultExpanded>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} id="admin-section-header">
