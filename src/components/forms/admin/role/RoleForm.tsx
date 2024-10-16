@@ -68,16 +68,19 @@ const RoleForm: React.FC = () => {
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="role form tabs">
             <Tab label="Información" value="0" />
-            <Tab label="Permisos" value="1" disabled={Boolean(role)} />
+            <Tab label="Permisos" value="1" disabled={!role} />
           </TabList>
         </Box>
         <TabPanel value="0">
           <RoleBaseInfo
             onSuccess={handleSuccess}
-            onSubmit={handleSubmit} />
+            onSubmit={handleSubmit}
+          />
         </TabPanel>
-        {Boolean(role) && <TabPanel value="1">
-          <RolePermissions />
+        {role && <TabPanel value="1">
+          <RolePermissions
+            onSuccess={handleSuccess}
+          />
         </TabPanel>}
       </TabContext>
     </Paper>
