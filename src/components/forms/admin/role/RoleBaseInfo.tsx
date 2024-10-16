@@ -10,7 +10,7 @@ import { BaseMethodsProps } from "../../../../interfaces/CoreInterfaces";
 import { Role } from "../../../../interfaces/ModelInterfaces";
 import roleStore from "../../../../stores/admin/roleStore";
 import { BaseChangeMethod } from "../../../../types/methodTypes";
-import { buttonMsg as getSubmitMsg } from "../../../../utils/messageUtils";
+import { getSubmitMsg } from "../../../../utils/messageUtils";
 import TextAreaField from "../../fields/TextAreaField";
 
 
@@ -29,13 +29,13 @@ const fieldProps = {
 Object.freeze(fieldProps)
 
 
-const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
+const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess }) => {
 
   const { role, setRole } = roleStore();
   const { role: roleFetched, loading, success, method, createRole, updateRole } = useRole();
-
   const [formData, setFormData] = useState<Partial<Role>>({});
-  const submitMsg = getSubmitMsg(loading, Boolean(role));
+
+  const isUpdate: boolean = Boolean(role);
 
   const handleInputChange: BaseChangeMethod<any> = (e) => {
     const { name, value } = e.target;
@@ -49,7 +49,6 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    onSubmit && onSubmit(formData);
     if (role) {
       updateRole(role.id, formData);
     } else {
@@ -70,15 +69,15 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
   }, [role]);
 
   useEffect(() => {
-    if (onSuccess && success && roleFetched && (method === 'createRole' || method === 'updateRole')) {
-      onSuccess(roleFetched.id);
+    if (onSuccess && success && role && (method === 'createRole' || method === 'updateRole')) {
+      onSuccess(role.id);
     }
   }, [role, success, method]);
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
-        {submitMsg}
+        {getSubmitMsg(loading, isUpdate)}
       </Button>
       <Grid container spacing={{ xs: 1 }}>
 
@@ -106,7 +105,7 @@ const RoleBaseIInfo: FC<BaseMethodsProps<Role>> = ({ onSuccess, onSubmit }) => {
             label="Key"
             name="key"
             value={formData.key ?? ''}
-            disabled={Boolean(role)}
+            disabled={isUpdate}
             onChange={(e) => handleInputChange(e)}// CONTROLAR QUYE SEA SLUG
             {...fieldProps}
           />
