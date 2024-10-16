@@ -7,7 +7,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import { UserTask } from '../../../interfaces/ModelInterfaces';
-import useTaskStore from '../../../stores/support/taskStore';
+import taskStore from '../../../stores/support/taskStore';
 import useUserStore from '../../../stores/admin/useUserStore';
 import TrackingColumn from './TrackingColum';
 
@@ -16,7 +16,7 @@ dayjs.extend(timezone);
 
 const TrackingGrid: FC = () => {
 
-  const { schedule, currDate } = useTaskStore()
+  const { schedule, currDate } = taskStore()
   const { users } = useUserStore();
   const [times, setTimes] = useState<Dayjs[]>([])
   const [userTasks, setUserTasks] = useState<UserTask[]>([])

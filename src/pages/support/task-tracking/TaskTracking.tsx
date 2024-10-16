@@ -9,7 +9,7 @@ import MultipleSelectField from "../../../components/forms/fields/MultipleSelect
 import Layout from '../../../components/layouts/Layout.tsx';
 import { useTask } from "../../../hooks/support/useTask.tsx";
 import { useUser } from "../../../hooks/admin/useUser.tsx";
-import useTaskStore from "../../../stores/support/taskStore.ts";
+import taskStore from "../../../stores/support/taskStore.ts";
 import useUserStore from "../../../stores/admin/useUserStore.ts";
 import TrackingGrid from "./TrackingGrid.tsx";
 
@@ -34,7 +34,7 @@ const TaskTracking: FC = () => {
   const { loading, schedule, fetchTrackingTasks } = useTask();
   const { users, fetchUsers } = useUser()
   const { setUsers } = useUserStore();
-  const { schedule: scheduleStore, setSchedule, setCurrDate } = useTaskStore()
+  const { schedule: scheduleStore, setSchedule, setCurrDate } = taskStore()
 
   const handleInputChange = (e: handleInputChangeType) => {
     const { name, value } = e.target;

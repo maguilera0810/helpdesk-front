@@ -16,7 +16,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { useTask } from '../../../../hooks/support/useTask';
 import { Task } from '../../../../interfaces/ModelInterfaces';
-import useTaskStore from '../../../../stores/support/taskStore';
+import taskStore from '../../../../stores/support/taskStore';
 import useUserStore from '../../../../stores/admin/useUserStore';
 import MultipleSelectField from '../../fields/MultipleSelectField';
 import SelectField from '../../fields/SelectField';
@@ -93,7 +93,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
   const {
     task, startAt, endAt,
     setTask, setSchedule, setCurrDate, setStartAt, setEndAt,
-  } = useTaskStore()
+  } = taskStore()
   const {
     task: taskFetched, schedule, loading, success, method,
     updateTask, fetchSchedule,

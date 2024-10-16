@@ -9,7 +9,7 @@ import { useTask } from '../../../../hooks/support/useTask';
 import { useUser } from '../../../../hooks/admin/useUser';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/settings/categoryStore';
-import useTaskStore from '../../../../stores/support/taskStore';
+import taskStore from '../../../../stores/support/taskStore';
 import useUserStore from '../../../../stores/admin/useUserStore';
 import TaskBaseInfo from './TaskBaseInfo';
 import TaskSchedule from './TaskSchedule';
@@ -19,7 +19,7 @@ const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
-  const { setTask } = useTaskStore()
+  const { setTask } = taskStore()
   const { setUsers } = useUserStore();
   const { setCategories } = categoryStore();
 

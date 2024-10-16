@@ -9,7 +9,7 @@ import utc from 'dayjs/plugin/utc';
 import { useNavigate } from 'react-router-dom';
 
 import { ScheduleColumnProps, ScheduleItemProps } from '../../../../../interfaces/ComponentInterfaces';
-import useTaskStore from '../../../../../stores/support/taskStore';
+import taskStore from '../../../../../stores/support/taskStore';
 
 
 dayjs.extend(utc);
@@ -105,7 +105,7 @@ const ScheduleItem: FC<ScheduleItemProps> = ({ type, time, task, onClick }) => {
 const ScheduleColumn: FC<ScheduleColumnProps> = ({ tasks, times }) => {
 
   const navigate = useNavigate();
-  const { task: currTask, startAt, endAt } = useTaskStore()
+  const { task: currTask, startAt, endAt } = taskStore()
 
   const handleTaskClick = (taskId: number) => {
     navigate(`/soporte/tareas/${taskId}/`);
