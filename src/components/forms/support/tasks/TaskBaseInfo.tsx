@@ -132,7 +132,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"description"}>
           <TextAreaField
-            label="Description"
+            label="Descrición"
             name="description"
             required={true}
             value={formData.description ?? ''}

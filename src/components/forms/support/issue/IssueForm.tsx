@@ -217,7 +217,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"description"}>
                 <TextAreaField
-                  label="Description"
+                  label="Descrición"
                   name="description"
                   required={true}
                   InputProps={{ readOnly: isUpdate, }}
