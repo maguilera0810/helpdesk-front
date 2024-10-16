@@ -9,7 +9,7 @@ import useFilterStore from '../../stores/useFilterStore';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 20 },
-  { field: 'code', headerName: 'Codigo', width: 130 },
+  { field: 'code', headerName: 'Código', width: 130 },
   { field: 'title', headerName: 'Titulo', width: 130 },
   { field: 'status', headerName: 'Estado', width: 130 },
   { field: 'createdBy', headerName: 'Creado por', width: 130 },

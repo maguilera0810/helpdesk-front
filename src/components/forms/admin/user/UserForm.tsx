@@ -115,18 +115,18 @@ const UserForm: React.FC = () => {
         <TabPanel value="0">
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
             <Grid container spacing={{ xs: 1 }}>
-              <Grid item {...gridItemProps} key={"First Name"}>
+              <Grid item {...gridItemProps} key={"Nombre"}>
                 <TextField
-                  label="First Name"
+                  label="Nombre"
                   name="firstName"
                   value={formData.firstName ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"Last Name"}>
+              <Grid item {...gridItemProps} key={"Apellido"}>
                 <TextField
-                  label="Last Name"
+                  label="Apellido"
                   name="lastName"
                   value={formData.lastName ?? ''}
                   onChange={(e) => handleInputChange(e)}

@@ -252,7 +252,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"code"} display={showField()}>
                 <TextField
-                  label="Code"
+                  label="Código"
                   name="code"
                   value={formData.code ?? ''}
                   onChange={(e) => handleInputChange(e)}
@@ -274,7 +274,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"createdAt"}>
                 <DateTimeField
-                  label="Created At"
+                  label="Creado"
                   disabled={true}
                   value={dayjs(formData.createdAt)}
                   onChange={handleDateChange('createdAt')}
@@ -283,7 +283,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"updatedAt"}>
                 <DateTimeField
-                  label="Updated At"
+                  label="Actualizado"
                   disabled={true}
                   value={dayjs(formData.updatedAt)}
                   onChange={handleDateChange('updatedAt')}

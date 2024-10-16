@@ -6,8 +6,8 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Name', width: 130 },
-  { field: 'code', headerName: 'Code', width: 130 },
+  { field: 'name', headerName: 'Nombre', width: 130 },
+  { field: 'code', headerName: 'Código', width: 130 },
 ];
 
 const FacultiesTable: FC = () => {

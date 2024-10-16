@@ -141,7 +141,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"code"} display={showField()}>
           <TextField
-            label="Code"
+            label="Código"
             name="code"
             disabled={true}
             value={formData.code ?? ''}
@@ -174,7 +174,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"priority"}>
           <SelectField
-            label="Priority"
+            label="Prioridad"
             name="priority"
             value={formData.priority ?? ''}
             options={priorities.map(e => ({ value: e.id, label: e.title }))}
@@ -185,7 +185,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"createdAt"}>
           <DateTimeField
-            label="Created At"
+            label="Creado"
             disabled={true}
             value={dayjs(formData.createdAt)}
             onChange={handleDateChange('createdAt')}
@@ -194,7 +194,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"updatedAt"}>
           <DateTimeField
-            label="Updated At"
+            label="Actualizado"
             disabled={true}
             value={dayjs(formData.updatedAt)}
             onChange={handleDateChange('updatedAt')}

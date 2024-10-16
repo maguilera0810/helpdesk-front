@@ -47,14 +47,14 @@ const UserFilters: React.FC = () => {
         variant="outlined"
       />
       <TextField
-        label="First Name"
+        label="Nombre"
         name="firstName__icontains"
         value={localFilters.firstName__icontains || ''}
         onChange={handleChange}
         variant="outlined"
       />
       <TextField
-        label="Last Name"
+        label="Apellido"
         name="lastName__icontains"
         value={localFilters.lastName__icontains || ''}
         onChange={handleChange}

@@ -10,8 +10,8 @@ import UserFilters from '../filters/UserFilters';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
+  { field: 'firstName', headerName: 'Nombre', width: 130 },
+  { field: 'lastName', headerName: 'Apellido', width: 130 },
   { field: 'email', headerName: 'Email', width: 200 },
   { field: 'username', headerName: 'Username', width: 130 },
 ];

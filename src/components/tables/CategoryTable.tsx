@@ -10,7 +10,7 @@ const columns: GridColDef[] = [
   { field: 'id', headerName: 'Id', width: 70 },
   { field: 'title', headerName: 'Título', width: 130 },
   { field: 'type', headerName: 'Tipo', width: 130 },
-  { field: 'code', headerName: 'Codigo', width: 130 },
+  { field: 'code', headerName: 'Código', width: 130 },
   { field: 'color', headerName: 'Color', width: 130 },
 ];
 
