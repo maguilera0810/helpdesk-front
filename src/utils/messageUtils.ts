@@ -1,5 +1,5 @@
 
-export const buttonMsg = (isLoading: boolean, isUpdate: boolean) => {
+export const getSubmitMsg = (isLoading: boolean, isUpdate: boolean = true) => {
   if (isLoading) {
     return isUpdate ? 'Actualizando...' : 'Creando...';
   }
