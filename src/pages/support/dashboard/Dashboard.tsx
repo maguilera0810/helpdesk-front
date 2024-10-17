@@ -46,35 +46,42 @@ const KPIS = [
     color: '#fb8c00',
     // unit: 'tareas',
   },
+  // {
+  //   key: 'Proyectos Activos',
+  //   title: 'Proyectos Activos',
+  //   value: 8,
+  //   icon: <WorkIcon />,
+  //   color: '#5e35b1',
+  // },
+  // {
+  //   key: 'Incidencias Resueltas',
+  //   title: 'Incidencias Resueltas',
+  //   value: 200,
+  //   icon: <ErrorIcon />,
+  //   color: '#00acc1',
+  //   unit: 'incidencias',
+  // },
+  // {
+  //   key: 'Porcentaje de Eficiencia',
+  //   title: 'Porcentaje de Eficiencia',
+  //   value: '85%',
+  //   icon: <BarChartIcon />,
+  //   color: '#f57c00',
+  // },
+  // {
+  //   key: 'Horas de Trabajo',
+  //   title: 'Horas de Trabajo',
+  //   value: 320,
+  //   icon: <AccessTimeIcon />,
+  //   color: '#1976d2',
+  //   unit: 'horas',
+  // },
   {
-    key: 'Proyectos Activos',
-    title: 'Proyectos Activos',
-    value: 8,
-    icon: <WorkIcon />,
-    color: '#5e35b1',
-  },
-  {
-    key: 'Incidencias Resueltas',
-    title: 'Incidencias Resueltas',
-    value: 200,
-    icon: <ErrorIcon />,
-    color: '#00acc1',
-    unit: 'incidencias',
-  },
-  {
-    key: 'Porcentaje de Eficiencia',
-    title: 'Porcentaje de Eficiencia',
-    value: '85%',
-    icon: <BarChartIcon />,
-    color: '#f57c00',
-  },
-  {
-    key: 'Horas de Trabajo',
-    title: 'Horas de Trabajo',
-    value: 320,
-    icon: <AccessTimeIcon />,
-    color: '#1976d2',
-    unit: 'horas',
+    key: 'Satisfacción del Cliente',
+    title: 'Satisfacción del Cliente',
+    value: '92%',
+    icon: <ThumbUpIcon />,
+    color: '#388e3c',
   },
   {
     key: 'Usuarios Activos',
@@ -83,13 +90,6 @@ const KPIS = [
     icon: <PersonIcon />,
     color: '#8e24aa',
     unit: 'usuarios',
-  },
-  {
-    key: 'Satisfacción del Cliente',
-    title: 'Satisfacción del Cliente',
-    value: '92%',
-    icon: <ThumbUpIcon />,
-    color: '#388e3c',
   },
   {
     key: 'Tasa de Rechazo',
@@ -111,9 +111,9 @@ const Dashboard: FC = () => {
       <Typography variant="h4" gutterBottom>
         Tablero
       </Typography>
-      <KPISection kpis={KPIS}/>
+      <KPISection kpis={KPIS} />
       <ChartsSection />
-      
+
     </Layout>
   );
 };

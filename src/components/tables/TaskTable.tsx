@@ -14,9 +14,10 @@ const columns: GridColDef[] = [
   { field: 'priority', headerName: 'Prioridad', width: 130 },
   { field: 'createdBy', headerName: 'Creado por', width: 130 },
   { field: 'responsible', headerName: 'Responsable', width: 130 },
-  { field: 'createdAt', headerName: 'Fecha Creación', width: 130 },
-  { field: 'updatedAt', headerName: 'Fecha Actualización', width: 130 },
+  { field: 'createdAt', headerName: 'Creado el', width: 130 },
+  { field: 'updatedAt', headerName: 'Actualizado el', width: 130 },
 ];
+Object.freeze(columns);
 
 const TaskTable: FC = () => {
   const navigate = useNavigate();
