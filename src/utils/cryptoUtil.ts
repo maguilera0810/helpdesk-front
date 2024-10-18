@@ -1,15 +1,12 @@
 import { AES, enc } from 'crypto-js';
+
 import { IRandomStringOptions } from '../interfaces/GlobalInterfaces';
 import Environment from './../environments/Environment';
 const { SECRET_KEY } = Environment;
 
-export const encryptData = (data: any) => {
-  return AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-};
+export const encryptData = (data: any) => AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
 
-export const decryptData = (ciphertext: string) => {
-  return JSON.parse(AES.decrypt(ciphertext, SECRET_KEY).toString(enc.Utf8));
-};
+export const decryptData = (ciphertext: string) => JSON.parse(AES.decrypt(ciphertext, SECRET_KEY).toString(enc.Utf8));
 
 export const generateRandomString = ({
   length = 15,
