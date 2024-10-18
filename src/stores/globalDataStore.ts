@@ -6,9 +6,10 @@ import storeCreator from './core/storeCreator';
 
 const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (set, get) => ({
   reload: false,
+  reloadUser: false,
+  reloadPriority: false,
   reloadCategory: false,
   reloadPermission: false,
-  reloadPriority: false,
   setReload: (reload, reloadType?) =>
     set(produce((state: GlobalDataState) => {
       if (!reloadType) {
@@ -19,28 +20,29 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
         state.reloadPermission = reload;
       } else if (reloadType === 'priority') {
         state.reloadPriority = reload;
+      } else if (reloadType === 'user') {
+        state.reloadUser = reload;
       }
     })),
-  priority: undefined,
-  priorities: [],
-  setPriority: (priority) =>
+
+  lightUsers: [],
+  setLightUsers: (lightUsers) =>
     set(produce((state: GlobalDataState) => {
-      state.priority = priority;
+      state.lightUsers = lightUsers;
     })),
+
+  priorities: [],
   setPriorities: (priorities) =>
     set(produce((state: GlobalDataState) => {
       state.priorities = priorities;
     })),
-  category: null,
+
   categories: [],
-  setCategory: (category) =>
-    set(produce((state: GlobalDataState) => {
-      state.category = category;
-    })),
   setCategories: (categories) =>
     set(produce((state: GlobalDataState) => {
       state.categories = categories;
     })),
+
   groupedPermissions: undefined,
   getFlatPermissions() {
     const groupedPermissions = get().groupedPermissions;
@@ -50,17 +52,10 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
   getGroupedPermission(group) {
     return get().groupedPermissions?.[group] || [];
   },
-  setGroupedPermissions: (groupPermissions) =>
+  setGroupedPermissions: (groupedPermissions) =>
     set(produce((state: GlobalDataState) => {
-      state.groupedPermissions = groupPermissions;
+      state.groupedPermissions = groupedPermissions;
     })),
-  setGroupedPermission: (group, permissions) =>
-    set(produce((state: GlobalDataState) => {
-      if (state.groupedPermissions) {
-        state.groupedPermissions[group] = permissions;
-      }
-    })),
-
 });
 
 const storageName = 'global-data-storage';

@@ -68,12 +68,18 @@ export interface RoleState extends BaseState {
   setRole: (role?: Role) => void;
   setRoles: (roles: Role[]) => void;
 }
-export interface GlobalDataState extends PriorityState, CategoryState, GroupedPermissionState {
+export interface GlobalDataState extends
+  BaseState,
+  Pick<UserState, 'lightUsers' | 'setLightUsers'>,
+  Pick<PriorityState, 'priorities' | 'setPriorities'>,
+  Pick<CategoryState, 'categories' | 'setCategories'>,
+  Pick<GroupedPermissionState, 'groupedPermissions' | 'getFlatPermissions' | 'setGroupedPermissions' | 'getGroupedPermission'> {
   reload: boolean;
+  reloadUser: boolean;
   reloadPriority: boolean;
   reloadCategory: boolean;
   reloadPermission: boolean;
-  setReload: (reload: boolean, reloadType?: 'permission' | 'category' | 'priority') => void;
+  setReload: (reload: boolean, reloadType?: 'permission' | 'category' | 'priority' | 'user') => void;
 }
 
 export interface IAuthState extends BaseState {
@@ -84,7 +90,7 @@ export interface IAuthState extends BaseState {
   logout: () => void;
 }
 
-export interface IUserState extends BaseState {
+export interface UserState extends BaseState {
   user: User | null;
   users: User[];
   lightUsers: Partial<User>[];

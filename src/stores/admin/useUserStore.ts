@@ -1,22 +1,22 @@
 import { produce } from 'immer';
 import { StateCreator } from 'zustand';
-import { IUserState } from '../../interfaces/StateInterfaces';
+import { UserState } from '../../interfaces/StateInterfaces';
 import storeCreator from '../core/storeCreator';
 
-const stateCreator: StateCreator<IUserState, [], [], IUserState> = (set) => ({
+const stateCreator: StateCreator<UserState, [], [], UserState> = (set) => ({
   user: null,
   users: [],
   lightUsers: [],
   setUser: (user) =>
-    set(produce((state: IUserState) => {
+    set(produce((state: UserState) => {
       state.user = user;
     })),
   setUsers: (users) =>
-    set(produce((state: IUserState) => {
+    set(produce((state: UserState) => {
       state.users = users;
     })),
   setLightUsers: (lightUsers) =>
-    set(produce((state: IUserState) => {
+    set(produce((state: UserState) => {
       state.lightUsers = lightUsers;
     })),
 });
