@@ -10,9 +10,11 @@ const storeCreator = <T>(stateCreator: StateCreator<T, [], [], T>, name?: string
 
   const persistOptions: PersistOptions<T> = {
     name,
-    getStorage: () => localStorage,
-    serialize: encryptData,
-    deserialize: decryptData,
+    storage: {
+      getItem: (name) => decryptData(localStorage.getItem(name) ?? ''),
+      setItem: (name, value) => localStorage.setItem(name, encryptData(value)),
+      removeItem: (name) => localStorage.removeItem(name),
+    },
   };
 
   return create<T>()(persist(stateCreator, persistOptions));
