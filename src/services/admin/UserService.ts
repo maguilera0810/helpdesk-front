@@ -19,7 +19,7 @@ export class UserService extends BaseCrudService<User> {
 
   public async listLight(filters: { [key: string]: any } = {}): Promise<Partial<User>[]> {
     try {
-      const response = await this.axiosInstance.get<Partial<User>[]>('',
+      const response = await this.axiosInstance.get<Partial<User>[]>('light/',
         { params: keysToSnake(filters) });
       return keysToCamel(response.data);
     } catch (error) {

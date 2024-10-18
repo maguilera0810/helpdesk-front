@@ -24,7 +24,7 @@ const useGlobalData = () => {
 
   useEffect(() => {
     if (!reload || !token) { return; }
-    fetchUsers();
+    fetchUsers({}, true);
     fetchPriorities();
     fetchCategories();
     fetchPermissions();
@@ -50,6 +50,9 @@ const useGlobalData = () => {
   }, [reloadPermission, token])
 
   useEffect(() => {
+    console.log("fetchedLightUsers");
+    console.log(fetchedLightUsers);
+    
     fetchedLightUsers.length && setLightUsers(fetchedLightUsers);
   }, [fetchedLightUsers])
 
