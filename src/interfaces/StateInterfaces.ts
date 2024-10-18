@@ -87,8 +87,10 @@ export interface IAuthState extends BaseState {
 export interface IUserState extends BaseState {
   user: User | null;
   users: User[];
+  lightUsers: Partial<User>[];
   setUser: (user: User | null) => void;
   setUsers: (users: User[]) => void;
+  setLightUsers: (lightUsers: Partial<User>[]) => void;
 }
 
 

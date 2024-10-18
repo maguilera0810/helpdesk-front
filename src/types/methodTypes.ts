@@ -8,6 +8,7 @@ export type BaseChangeMethod<T> = (e: ChangeEvent<HTMLInputElement | HTMLTextAre
 export type methodTask = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | "fetchTrackingTasks";
 export type methodIssue = 'fetchIssues' | 'fetchIssue' | 'createIssue' | 'createTask' | 'updateIssue' | 'deleteIssue';
 
+export type methodUser = 'fetchUsers' | 'fetchUser' | 'createUser' | 'updateUser' | 'deleteUser';
 export type methodRole = 'fetchRoles' | 'fetchRole' | 'createRole' | 'updateRole' | 'deleteRole';
 export type methodPermission = 'fetchPermissions' | 'fetchPermission' | 'createPermission' | 'updatePermission' | 'deletePermission';
 
