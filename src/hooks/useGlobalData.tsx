@@ -6,14 +6,17 @@ import { GroupedPermission } from '../types/groupTypes';
 import { usePermission } from './admin/usePermission';
 import { useCategory } from './settings/useCategory';
 import { usePriority } from './settings/usePriority';
+import { useUser } from './admin/useUser';
 
 const useGlobalData = () => {
 
   const { reload, reloadPriority, reloadCategory, reloadPermission, setReload,
+    lightUsers, setLightUsers,
     priorities, setPriorities,
     categories, setCategories,
     groupedPermissions, setGroupedPermissions, getFlatPermissions, getGroupedPermission,
   } = globalDataStore();
+  const { lightUsers: fetchedLightUsers, fetchUsers } = useUser();
   const { priorities: fetchedPriorities, fetchPriorities } = usePriority();
   const { categories: fetchedCategories, fetchCategories } = useCategory();
   const { permissions: fetchedPermissions, fetchPermissions } = usePermission();
@@ -21,6 +24,7 @@ const useGlobalData = () => {
 
   useEffect(() => {
     if (!reload || !token) { return; }
+    fetchUsers();
     fetchPriorities();
     fetchCategories();
     fetchPermissions();
@@ -28,13 +32,13 @@ const useGlobalData = () => {
   }, [reload, token])
 
   useEffect(() => {
-    if (!reloadPermission || !token) { return; }
+    if (!reloadPriority || !token) { return; }
     fetchPriorities();
     setReload(false, 'priority');
   }, [reloadPriority, token])
 
   useEffect(() => {
-    if (!reloadPermission || !token) { return; }
+    if (!reloadCategory || !token) { return; }
     fetchCategories();
     setReload(false, 'category');
   }, [reloadCategory, token])
@@ -44,6 +48,10 @@ const useGlobalData = () => {
     fetchPermissions();
     setReload(false, 'permission');
   }, [reloadPermission, token])
+
+  useEffect(() => {
+    fetchedLightUsers.length && setLightUsers(fetchedLightUsers);
+  }, [fetchedLightUsers])
 
   useEffect(() => {
     fetchedPriorities.length && setPriorities(fetchedPriorities);
@@ -70,6 +78,7 @@ const useGlobalData = () => {
 
   return {
     reload,
+    lightUsers,
     priorities,
     categories,
     groupedPermissions,
