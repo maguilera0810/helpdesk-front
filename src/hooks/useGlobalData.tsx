@@ -3,14 +3,15 @@ import { Permission } from '../interfaces/ModelInterfaces';
 import authStore from '../stores/auth/authStore';
 import globalDataStore from '../stores/globalDataStore';
 import { GroupedPermission } from '../types/groupTypes';
+import { ReloadType } from '../types/methodTypes';
 import { usePermission } from './admin/usePermission';
+import { useUser } from './admin/useUser';
 import { useCategory } from './settings/useCategory';
 import { usePriority } from './settings/usePriority';
-import { useUser } from './admin/useUser';
 
 const useGlobalData = () => {
 
-  const { reload, reloadPriority, reloadCategory, reloadPermission, setReload,
+  const { reload, reloadUser, reloadPriority, reloadCategory, reloadPermission, setReload,
     lightUsers, setLightUsers,
     priorities, setPriorities,
     categories, setCategories,
@@ -22,37 +23,27 @@ const useGlobalData = () => {
   const { permissions: fetchedPermissions, fetchPermissions } = usePermission();
   const token = authStore((state) => state.token);
 
-  useEffect(() => {
-    if (!reload || !token) { return; }
+  const useReloadData = (reloadFlag: boolean, callback: () => void, reloadType?: ReloadType) => {
+    useEffect(() => {
+      if (!reloadFlag || !token) return;
+      callback();
+      setReload(false, reloadType);
+    }, [reloadFlag, token, callback, reloadType]);
+  };
+
+  useReloadData(reload, () => {
     fetchUsers({}, true);
     fetchPriorities();
     fetchCategories();
     fetchPermissions();
-    setReload(false);
-  }, [reload, token])
+  });
+  useReloadData(reloadUser, () => fetchUsers({}, true), 'user');
+  useReloadData(reloadPriority, fetchPriorities, 'priority');
+  useReloadData(reloadCategory, fetchCategories, 'category');
+  useReloadData(reloadPermission, fetchPermissions, 'permission');
+
 
   useEffect(() => {
-    if (!reloadPriority || !token) { return; }
-    fetchPriorities();
-    setReload(false, 'priority');
-  }, [reloadPriority, token])
-
-  useEffect(() => {
-    if (!reloadCategory || !token) { return; }
-    fetchCategories();
-    setReload(false, 'category');
-  }, [reloadCategory, token])
-
-  useEffect(() => {
-    if (!reloadPermission || !token) { return; }
-    fetchPermissions();
-    setReload(false, 'permission');
-  }, [reloadPermission, token])
-
-  useEffect(() => {
-    console.log("fetchedLightUsers");
-    console.log(fetchedLightUsers);
-    
     fetchedLightUsers.length && setLightUsers(fetchedLightUsers);
   }, [fetchedLightUsers])
 
