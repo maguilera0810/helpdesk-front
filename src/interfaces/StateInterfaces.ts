@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Permission, Priority, Role, Schedule, Task, TaskStatus, User, UserTask } from '../interfaces/ModelInterfaces';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
 import { Category } from "./ModelInterfaces";
@@ -45,6 +45,11 @@ export interface PriorityState extends BaseState {
   priorities: Priority[];
   setPriority: (priority?: Priority) => void;
   setPriorities: (priorities: Priority[]) => void;
+}
+
+export interface TaskStatusState extends BaseState {
+  taskStatuses: TaskStatus[];
+  setTaskStatuses: (taskStatuses: TaskStatus[]) => void;
 }
 
 export interface PermissionState extends BaseState {
