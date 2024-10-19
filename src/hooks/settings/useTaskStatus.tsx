@@ -6,7 +6,7 @@ import { methodTaskStatus } from '../../types/methodTypes';
 
 
 export const useTaskStatus = () => {
-  const [taskStatus, setTaskStatus] = useState<TaskStatus | null>(null);
+  const [taskStatus, setTaskStatus] = useState<TaskStatus | undefined>(undefined);
   const [taskStatuses, setTaskStatuses] = useState<TaskStatus[]>([]);
   const [method, setMethod] = useState<methodTaskStatus | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
