@@ -2,6 +2,7 @@ import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
 import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
+import { ReloadType } from '../types/methodTypes';
 import { Category } from "./ModelInterfaces";
 
 
@@ -79,7 +80,7 @@ export interface GlobalDataState extends
   reloadPriority: boolean;
   reloadCategory: boolean;
   reloadPermission: boolean;
-  setReload: (reload: boolean, reloadType?: 'permission' | 'category' | 'priority' | 'user') => void;
+  setReload: (reload: boolean, reloadType?: ReloadType) => void;
 }
 
 export interface IAuthState extends BaseState {
