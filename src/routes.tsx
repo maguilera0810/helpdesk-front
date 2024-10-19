@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Navigate, Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Campus from './pages/admin/Campus';
+import RoleDetail from './pages/admin/role/RoleDetail';
 import RoleList from './pages/admin/role/RoleList';
 import UserDetail from './pages/admin/users/UserDetail';
 import UserList from './pages/admin/users/UserList';
@@ -14,6 +15,8 @@ import CategoryList from './pages/settings/category/CategoryList';
 import ListFaculties from './pages/settings/faculties/ListFaculties';
 import PriorityDetail from './pages/settings/priority/PriorityDetail';
 import PriorityList from './pages/settings/priority/PriorityList';
+import TaskStatusDetail from './pages/settings/task_status/TaskStatusDetail';
+import TaskStatusList from './pages/settings/task_status/TaskStatusList';
 import Dashboard from './pages/support/dashboard/Dashboard';
 import IssueDetail from './pages/support/issues/IssueDetail';
 import IssueList from './pages/support/issues/IssueList';
@@ -26,8 +29,6 @@ import TaskTracking from './pages/support/task-tracking/TaskTracking';
 import TaskDetail from './pages/support/task/TaskDetail';
 import TaskList from './pages/support/task/TaskList';
 import authStore from './stores/auth/authStore';
-import RoleDetail from './pages/admin/role/RoleDetail';
-import TaskStatusList from './pages/settings/task_status/TaskStatusList';
 
 
 const PublicRoute: FC = () => {
@@ -69,7 +70,7 @@ const AppRoutes: FC = () => (
         <Route path="/configuraciones/campus/" element={<Campus />} />
         <Route path="/configuraciones/perfil/" element={<Settings />} />
         <Route path="/configuraciones/estado-tarea/" element={<TaskStatusList />} />
-        <Route path="/configuraciones/estado-tarea/:taskStatusID/" element={<TaskStatusList />} />
+        <Route path="/configuraciones/estado-tarea/:taskStatusID/" element={<TaskStatusDetail />} />
 
         <Route path="/faqs" element={<FAQs />} />
       </Route>
