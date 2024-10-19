@@ -5,9 +5,11 @@ import Chip from '@mui/material/Chip';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { useNavigate } from 'react-router-dom';
+import { useTaskStatus } from '../../hooks/settings/useTaskStatus';
 import { useTask } from '../../hooks/support/useTask';
 import useGlobalData from '../../hooks/useGlobalData';
-import { Priority, User } from '../../interfaces/ModelInterfaces';
+import { Priority, TaskStatus, User } from '../../interfaces/ModelInterfaces';
+import taskStatusStore from '../../stores/settings/taskStatusStore';
 import useFilterStore from '../../stores/useFilterStore';
 
 const TaskTable: FC = () => {
@@ -15,26 +17,38 @@ const TaskTable: FC = () => {
   const { tasks, loading, error, fetchTasks } = useTask();
   const { filters, clearFilters } = useFilterStore();
   const { lightUsers, priorities } = useGlobalData();
+  const { taskStatuses: taskStatusesFetched, fetchTaskStatuses } = useTaskStatus();
+  const { taskStatuses, setTaskStatuses } = taskStatusStore();
 
 
   const getUserNameById = (userId: number) => {
     return lightUsers.find(user => user.id === userId);
   };
-  const getPriorityById = (userId: number) => {
-    return priorities.find(user => user.id === userId);
+  const getPriorityById = (id: number) => {
+    return priorities.find(user => user.id === id);
   };
+  const getStatusById = (id: number) => {
+    return taskStatuses.find(user => user.id === id);
+  };
+
   const rows = useMemo(() => {
     return tasks.map(task => ({
       ...task,
       createdBy: getUserNameById(task.createdBy),
       responsible: getUserNameById(task.responsible),
       priority: getPriorityById(task.priority),
+      status: getStatusById(task.status),
     }));
-  }, [tasks, lightUsers, priorities]);
+  }, [tasks, lightUsers, priorities, taskStatuses]);
 
   useEffect(() => {
+    fetchTaskStatuses();
     return () => clearFilters();
   }, [])
+
+  useEffect(() => {
+    taskStatusesFetched.length && setTaskStatuses(taskStatusesFetched);
+  }, [taskStatusesFetched])
 
   useEffect(() => {
     if (!loading) {
@@ -77,12 +91,12 @@ const TaskTable: FC = () => {
       </Box>
     );
   };
-  const renderPriorityCell = (priority: Priority) => {
+  const renderChipCell = (elem: Priority | TaskStatus) => {
     let bgcolor: string = 'lightgray'
     let title: string = 'N/A'
-    if (priority) {
-      bgcolor = priority.color ?? 'lightgray';
-      title = priority.title;
+    if (elem) {
+      bgcolor = elem.color ?? 'lightgray';
+      title = elem.title;
     }
     return (
       <Chip
@@ -104,12 +118,17 @@ const TaskTable: FC = () => {
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'code', headerName: 'Código', width: 130 },
     { field: 'title', headerName: 'Titulo', width: 130 },
-    { field: 'status', headerName: 'Estado', width: 130 },
+    {
+      field: 'status',
+      headerName: 'Estado',
+      width: 130,
+      renderCell: (params) => renderChipCell(params.value)
+    },
     {
       field: 'priority',
       headerName: 'Prioridad',
       width: 130,
-      renderCell: (params) => renderPriorityCell(params.value)
+      renderCell: (params) => renderChipCell(params.value)
     },
     {
       field: 'createdBy',

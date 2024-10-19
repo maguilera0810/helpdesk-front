@@ -9,6 +9,10 @@ const stateCreator: StateCreator<TaskStatusState, [], [], TaskStatusState> = (se
     set(produce((state: TaskStatusState) => {
       state.taskStatuses = taskStatuses;
     })),
+  clearState: () =>
+    set(produce((state: TaskStatusState) => {
+      state.taskStatuses = [];
+    })),
 });
 
 

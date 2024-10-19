@@ -35,7 +35,7 @@ export interface Task extends BaseInfoModel {
   id: number;
   code: string;
   type: string;
-  status: string;
+  status: number;
   priority: number;
   createdBy: number;
   responsible: number;
