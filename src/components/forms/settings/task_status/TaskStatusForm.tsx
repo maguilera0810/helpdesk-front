@@ -72,7 +72,7 @@ const TaskStatusForm: FC = () => {
 
   useEffect(() => {
     if (success && taskStatus && (method === 'createTaskStatus' || method === 'updateTaskStatus')) {
-      navigate(`/configuraciones/prioridad/${taskStatus.id}/`);
+      navigate(`/configuraciones/estado-tarea/${taskStatus.id}/`);
     }
   }, [success]);
 
