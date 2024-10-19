@@ -1,44 +1,36 @@
 import { FC, useEffect, useMemo } from 'react';
 
 import { Avatar, Box, Button, Typography } from '@mui/material';
+import Chip from '@mui/material/Chip';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+
 import { useNavigate } from 'react-router-dom';
 import { useTask } from '../../hooks/support/useTask';
 import useGlobalData from '../../hooks/useGlobalData';
+import { Priority, User } from '../../interfaces/ModelInterfaces';
 import useFilterStore from '../../stores/useFilterStore';
-import { User } from '../../interfaces/ModelInterfaces';
-
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'code', headerName: 'Código', width: 130 },
-  { field: 'title', headerName: 'Titulo', width: 130 },
-  { field: 'status', headerName: 'Estado', width: 130 },
-  { field: 'priority', headerName: 'Prioridad', width: 130 },
-  { field: 'createdBy', headerName: 'Creado por', width: 130 },
-  { field: 'responsible', headerName: 'Responsable', width: 130 },
-  { field: 'createdAt', headerName: 'Creado el', width: 130 },
-  { field: 'updatedAt', headerName: 'Actualizado el', width: 130 },
-];
-Object.freeze(columns);
 
 const TaskTable: FC = () => {
   const navigate = useNavigate();
   const { tasks, loading, error, fetchTasks } = useTask();
   const { filters, clearFilters } = useFilterStore();
-  const { lightUsers } = useGlobalData();
+  const { lightUsers, priorities } = useGlobalData();
 
 
   const getUserNameById = (userId: number) => {
     return lightUsers.find(user => user.id === userId);
   };
-
+  const getPriorityById = (userId: number) => {
+    return priorities.find(user => user.id === userId);
+  };
   const rows = useMemo(() => {
     return tasks.map(task => ({
       ...task,
       createdBy: getUserNameById(task.createdBy),
       responsible: getUserNameById(task.responsible),
+      priority: getPriorityById(task.priority),
     }));
-  }, [tasks, lightUsers]);
+  }, [tasks, lightUsers, priorities]);
 
   useEffect(() => {
     return () => clearFilters();
@@ -69,19 +61,43 @@ const TaskTable: FC = () => {
       text = `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase();
     }
     const onclick = () => { user?.id && handleUserProfile(user.id); };
-    return (<Box
-      display="flex"
-      alignItems="center"
-      height="100%"
-      justifyContent="center"
-      alignContent={"center"}
-      sx={{ cursor: user ? 'pointer' : 'auto' }}
-      onClick={onclick}
-    >
-      <Avatar sx={{ bgcolor: color, marginRight: 2, maxWidth: 30, maxHeight: 30, fontSize: 14 }} >
-        {text}
-      </Avatar>
-    </Box>);
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        height="100%"
+        justifyContent="center"
+        alignContent={"center"}
+        sx={{ cursor: user ? 'pointer' : 'auto' }}
+        onClick={onclick}
+      >
+        <Avatar sx={{ bgcolor: color, marginRight: 2, maxWidth: 30, maxHeight: 30, fontSize: 14 }} >
+          {text}
+        </Avatar>
+      </Box>
+    );
+  };
+  const renderPriorityCell = (priority: Priority) => {
+    let bgcolor: string = 'lightgray'
+    let title: string = 'N/A'
+    if (priority) {
+      bgcolor = priority.color ?? 'lightgray';
+      title = priority.title;
+    }
+    return (
+      <Chip
+        label={title}
+        sx={{
+          bgcolor,
+          color: '#FFF',
+          height: '1.5rem',
+          '& .MuiChip-label': {
+            fontSize: 12,
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    );
   };
   // Columnas con nombres de usuarios como enlaces
   const columns: GridColDef[] = [
@@ -89,7 +105,12 @@ const TaskTable: FC = () => {
     { field: 'code', headerName: 'Código', width: 130 },
     { field: 'title', headerName: 'Titulo', width: 130 },
     { field: 'status', headerName: 'Estado', width: 130 },
-    { field: 'priority', headerName: 'Prioridad', width: 130 },
+    {
+      field: 'priority',
+      headerName: 'Prioridad',
+      width: 130,
+      renderCell: (params) => renderPriorityCell(params.value)
+    },
     {
       field: 'createdBy',
       headerName: 'Creado por',
