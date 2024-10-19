@@ -24,11 +24,11 @@ const TaskStatusTable: FC = () => {
   }, []);
 
   const handleCreate = () => {
-    navigate('/configuraciones/tarea-estado/addNew/');
+    navigate('/configuraciones/estado-tarea/addNew/');
   };
 
   const handleUpdate = (id: number) => {
-    navigate(`/configuraciones/tarea-estado/${id}/`);
+    navigate(`/configuraciones/estado-tarea/${id}/`);
   };
 
   return (
