@@ -15,3 +15,5 @@ export type methodPermission = 'fetchPermissions' | 'fetchPermission' | 'createP
 export type methodCategory = 'fetchCategories' | 'fetchCategory' | 'createCategory' | 'updateCategory' | 'deleteCategory';
 export type methodCategoryType = 'fetchCategoryTypes' | 'fetchCategoryType' | 'createCategoryType' | 'updateCategoryType' | 'deleteCategoryType';
 export type methodPriority = 'fetchPriorities' | 'fetchPriority' | 'createPriority' | 'updatePriority' | 'deletePriority';
+
+export type ReloadType = 'permission' | 'category' | 'priority' | 'user';
