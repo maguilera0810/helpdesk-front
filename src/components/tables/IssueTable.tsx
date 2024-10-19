@@ -43,7 +43,7 @@ const IssueTable: FC = () => {
         </Button>
       </Box>
       {error && <Typography color="error">{error}</Typography>}
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ minHeight: 400, width: '100%' }}>
         <DataGrid
           rows={issues}
           columns={columns}

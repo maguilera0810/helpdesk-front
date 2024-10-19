@@ -38,7 +38,7 @@ const PriorityTable: FC = () => {
           Crear Prioridad
         </Button>
       </Box>
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ minHeight: 400, width: '100%' }}>
         <DataGrid
           rows={priorities}
           columns={COLUMNS}

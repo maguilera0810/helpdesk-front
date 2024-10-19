@@ -19,7 +19,7 @@ const FacultiesTable: FC = () => {
           Crear Facultad
         </Button>
       </Box>
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ minHeight: 400, width: '100%' }}>
         <DataGrid
           rows={[]}
           columns={columns}
