@@ -104,7 +104,7 @@ const ColorPickerField: React.FC<ColorPickerFieldProps> = ({ label, name, value,
       >
         <Box sx={{ p: 2 }}>
           <Typography variant="subtitle1" gutterBottom>
-            Select a color
+            Selecciona un color
           </Typography>
           {COLOR_PALLETS.map((palette, rowIndex) => (
             <Box sx={{ display: 'flex', gap: 0.05, flexWrap: 'wrap', margin: 0.05 }} key={`color-${rowIndex}`}>
