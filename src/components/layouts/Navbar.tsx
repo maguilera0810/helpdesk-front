@@ -3,6 +3,7 @@ import React from 'react';
 import { AdminPanelSettings } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import CategoryIcon from '@mui/icons-material/Category';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -12,7 +13,6 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import TimelineIcon from '@mui/icons-material/Timeline';
-
 
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import uiStore from '../../stores/uiStore';
@@ -48,6 +48,7 @@ const Navbar: React.FC = () => {
           <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
           <NavItem text="Categorias" icon={<CategoryIcon />} path="/configuraciones/categoria/" />
           <NavItem text="Prioridades" icon={<PriorityHighIcon />} path="/configuraciones/prioridad/" />
+          <NavItem text="Estado Tarea" icon={<AssignmentTurnedInIcon />} path="/configuraciones/estado-tarea/" />
           {/* <NavItem text="Campus" icon={<LocationCityIcon />} path="/configuraciones/campus/" /> */}
           {/* <NavItem text="Facultades" icon={<SchoolIcon />} path="/configuraciones/facultades/" /> */}
         </NavItem>

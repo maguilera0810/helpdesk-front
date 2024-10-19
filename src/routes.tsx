@@ -27,6 +27,7 @@ import TaskDetail from './pages/support/task/TaskDetail';
 import TaskList from './pages/support/task/TaskList';
 import authStore from './stores/auth/authStore';
 import RoleDetail from './pages/admin/role/RoleDetail';
+import TaskStatusList from './pages/settings/task_status/TaskStatusList';
 
 
 const PublicRoute: FC = () => {
@@ -67,12 +68,10 @@ const AppRoutes: FC = () => (
         <Route path="/configuraciones/facultades/" element={<ListFaculties />} />
         <Route path="/configuraciones/campus/" element={<Campus />} />
         <Route path="/configuraciones/perfil/" element={<Settings />} />
+        <Route path="/configuraciones/estado-tarea/" element={<TaskStatusList />} />
+        <Route path="/configuraciones/estado-tarea/:taskStatusID/" element={<TaskStatusList />} />
 
         <Route path="/faqs" element={<FAQs />} />
-
-        {/* <Route path="/tickets/:ticketId" element={<TaskDetails />} /> */}
-        {/* <Route path="/profile" element={<UserProfile />} /> */}
-        {/* <Route path="/faqs" element={<FAQs />} /> */}
       </Route>
       <Route element={<PublicRoute />}>
         <Route path="/auth/login" element={<Login />} />

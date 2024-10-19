@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
 import TaskStatusTable from '../../../components/tables/TaskStatusTable';
 
-const PriorityList: FC = () => {
+const TaskStatusList: FC = () => {
   return (
     <Layout>
       <Typography variant="h4" gutterBottom>
@@ -15,4 +15,4 @@ const PriorityList: FC = () => {
   );
 };
 
-export default PriorityList;
+export default TaskStatusList;
