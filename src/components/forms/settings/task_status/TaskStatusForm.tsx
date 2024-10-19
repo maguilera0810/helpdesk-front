@@ -78,7 +78,9 @@ const TaskStatusForm: FC = () => {
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
-      <Typography variant="h4" sx={{ mb: 2 }}>Prioridad</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        Estado Tarea
+      </Typography>
       {errorTaskStatus && <Typography color="error" sx={{ mb: 2 }}>{errorTaskStatus}</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingTaskStatus} sx={{ mt: 3, mb: 2 }}>
         {getSubmitMsg(loadingTaskStatus, isUpdate)}
