@@ -10,6 +10,7 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
   reloadPriority: false,
   reloadCategory: false,
   reloadPermission: false,
+  reloadTaskStatus: false,
   setReload: (reload, reloadType?) =>
     set(produce((state: GlobalDataState) => {
       if (!reloadType) {
@@ -23,6 +24,20 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
       } else if (reloadType === 'user') {
         state.reloadUser = reload;
       }
+    })),
+
+  groupedPermissions: undefined,
+  getFlatPermissions() {
+    const groupedPermissions = get().groupedPermissions;
+    return groupedPermissions ? Object.values(groupedPermissions).flat() : [];
+
+  },
+  getGroupedPermission(group) {
+    return get().groupedPermissions?.[group] || [];
+  },
+  setGroupedPermissions: (groupedPermissions) =>
+    set(produce((state: GlobalDataState) => {
+      state.groupedPermissions = groupedPermissions;
     })),
 
   lightUsers: [],
@@ -43,18 +58,10 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
       state.categories = categories;
     })),
 
-  groupedPermissions: undefined,
-  getFlatPermissions() {
-    const groupedPermissions = get().groupedPermissions;
-    return groupedPermissions ? Object.values(groupedPermissions).flat() : [];
-
-  },
-  getGroupedPermission(group) {
-    return get().groupedPermissions?.[group] || [];
-  },
-  setGroupedPermissions: (groupedPermissions) =>
+  taskStatuses: [],
+  setTaskStatuses: (statuses) =>
     set(produce((state: GlobalDataState) => {
-      state.groupedPermissions = groupedPermissions;
+      state.taskStatuses = statuses;
     })),
 });
 
