@@ -1,4 +1,4 @@
-import { Avatar, Box, Chip } from "@mui/material";
+import { Avatar, Chip } from "@mui/material";
 import { User } from "../../interfaces/ModelInterfaces";
 
 export const renderChipCell = (elem: any) => {
