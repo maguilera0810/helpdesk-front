@@ -1,14 +1,21 @@
 import { FC, useEffect } from 'react';
 
-import { Box, Button } from '@mui/material';
+import { Box, Button, Chip } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import { useTaskStatus } from '../../hooks/settings/useTaskStatus';
+import { renderChipCell } from './renders';
+
 
 const COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'title', headerName: 'Título', width: 130 },
-  { field: 'color', headerName: 'Color', width: 130 },
+  {
+    field: 'color',
+    headerName: 'Color',
+    width: 130,
+    renderCell: (params) => renderChipCell(params.value),
+  },
 ];
 Object.freeze(COLUMNS);
 
