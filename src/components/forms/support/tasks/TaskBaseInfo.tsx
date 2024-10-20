@@ -15,6 +15,7 @@ import taskStore from '../../../../stores/support/taskStore';
 import { BaseChangeMethod } from '../../../../types/methodTypes';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 
 const gridItemProps = {
   size: {
@@ -105,19 +106,10 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
     return isUpdate ? "block" : "none";
   }
 
-  const buttonMsg = () => {
-    if (loading) {
-      return isUpdate ? 'Actualizando...' : 'Creando...';
-    }
-    return isUpdate ? 'Actualizar' : 'Crear';
-  }
-
-
-
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mb: 2 }}>
-        {buttonMsg()}
+        {getSubmitMsg(loading, isUpdate)}
       </Button>
       <Grid container spacing={{ xs: 1 }}>
         <Grid {...gridItemProps} key={"title"}>

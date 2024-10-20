@@ -1,14 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
+import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useUser } from '../../../../hooks/admin/useUser';
 import { User } from '../../../../interfaces/ModelInterfaces';
-
-import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select';
-
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 import { PasswordField, SelectField } from '../../fields';
 
 
@@ -36,24 +35,11 @@ const documentTypeOptions = [ // TODO get options from backend server
 const UserForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { user, error, loading, success, fetchUser, createUser, updateUser } = useUser();
+  const { user, error, loading, success, method, fetchUser, createUser, updateUser } = useUser();
   const [formData, setFormData] = useState<Partial<User>>({});
   const [tabValue, setTabValue] = useState('0');
 
-  const isUpdate = id && id !== 'addNew';
-
-  useEffect(() => {
-    if (isUpdate) {
-      const userId = parseInt(id);
-      if (!isNaN(userId)) {
-        fetchUser(userId);
-      }
-    }
-  }, [id]);
-
-  useEffect(() => {
-    user && setFormData(user);
-  }, [user]);
+  const isUpdate = Boolean(id && id !== 'addNew');
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
@@ -77,33 +63,44 @@ const UserForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isUpdate) {
-      const userId = parseInt(id);
-      if (!isNaN(userId)) {
-        await updateUser(userId, formData);
-      }
+    if (user?.id) {
+      updateUser(user.id, formData);
     } else {
-      await createUser(formData);
+      createUser(formData);
     }
-    // navigate('/admin/usuario');
   };
 
-
-  const handleTabLisChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabLisChange = (e: React.SyntheticEvent, newValue: string) => {
+    e.preventDefault();
     setTabValue(newValue);
   };
 
-  // useEffect(() => {
-  //   success && setFormData({});
-  // }, [success]);
+  useEffect(() => {
+    if (isUpdate && id) {
+      const userId = parseInt(id);
+      !isNaN(userId) && fetchUser(userId);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    user && setFormData(user);
+  }, [user]);
+
+  useEffect(() => {
+    success && setFormData({});
+  }, [success]);
+
+  useEffect(() => {
+    if (success && user && (method === 'createUser' || method === 'updateUser')) {
+      navigate(`/configuraciones/categoria/${user.id}/`);
+    }
+  }, [success]);
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       <Typography variant="h4" sx={{ mb: 2 }}>{isUpdate ? 'Update User' : 'Create User'}</Typography>
-      {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
-      {success && <Typography color="primary" sx={{ mb: 2 }}>User {isUpdate ? 'updated' : 'created'} successfully!</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mt: 3, mb: 2 }}>
-        {loading ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Update User' : 'Create User')}
+        {getSubmitMsg(loading, isUpdate)}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>

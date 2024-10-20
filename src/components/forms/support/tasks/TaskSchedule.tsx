@@ -21,6 +21,7 @@ import useUserStore from '../../../../stores/admin/useUserStore';
 import MultipleSelectField from '../../fields/MultipleSelectField';
 import SelectField from '../../fields/SelectField';
 import ScheduleGrid from './schedule/ScheduleGrid';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 
 const gridCol1Props = {
   size: {
@@ -163,12 +164,6 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
     schedule && setSchedule(schedule);
   }, [schedule])
 
-  const buttonMsg = () => {
-    if (loading) {
-      return isUpdate ? 'Actualizando...' : 'Creando...';
-    }
-    return isUpdate ? 'Agendar' : 'Reagendar';
-  }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
@@ -198,7 +193,7 @@ const TaskSchedule: FC<TaskScheduleProps> = ({ onSubmit, onSuccess }) => {
             variant="contained"
             color="primary"
             disabled={loading || schedule?.hasCollision} sx={{ mb: 2, height: 50 }}>
-            {buttonMsg()}
+            {getSubmitMsg(loading, isUpdate)}
           </Button>
           {schedule?.hasCollision && <Alert severity="error" sx={{ mb: 2, height: 50 }}>Hay un conflicto.</Alert>}
         </Grid>

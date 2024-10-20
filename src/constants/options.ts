@@ -6,7 +6,7 @@ export const taskTypeOptions: IOption[] = [
 ];
 
 
-export const taskStatusOptions: IOption[] = [
+export const taskStatusOptions: IOption[] = [ // AQUI
   { value: 'to_do', label: 'Por hacer' },
   { value: 'in_progress', label: 'En ejecución' },
   { value: 'blocked', label: 'Bloqueado' },

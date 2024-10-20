@@ -8,6 +8,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 
 import { usePriority } from '../../../../hooks/settings/usePriority';
 import { Priority } from '../../../../interfaces/ModelInterfaces';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
 
@@ -23,13 +24,12 @@ const fieldProps = {
 
 const PriorityForm: FC = () => {
   const navigate = useNavigate();
-  const { priorityId } = useParams<{ priorityId: string }>();
-
+  const { priorityID } = useParams<{ priorityID: string }>();
   const { priority, error: errorPriority, loading: loadingPriority, success, method,
     fetchPriority, createPriority, updatePriority } = usePriority();
   const [formData, setFormData] = useState<Partial<Priority>>({});
   const [tabValue, setTabValue] = useState('0');
-  const isUpdate = priorityId && priorityId !== 'addNew';
+  const isUpdate = Boolean(priorityID && priorityID !== 'addNew');
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
@@ -49,15 +49,12 @@ const PriorityForm: FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isUpdate) {
-      const id = parseInt(priorityId);
-      if (!isNaN(id)) {
-        await updatePriority(id, formData);
-      }
+    if (priority) {
+      updatePriority(priority.id, formData);
     } else {
-      await createPriority(formData);
+      createPriority(formData);
     }
   };
 
@@ -70,13 +67,11 @@ const PriorityForm: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isUpdate) {
-      const id = parseInt(priorityId);
-      if (!isNaN(id)) {
-        fetchPriority(id);
-      }
+    if (isUpdate && priorityID) {
+      const id = parseInt(priorityID);
+      !isNaN(id) && fetchPriority(id);
     }
-  }, [priorityId]);
+  }, [priorityID]);
 
   useEffect(() => {
     if (priority) {
@@ -95,7 +90,7 @@ const PriorityForm: FC = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>Prioridad</Typography>
       {errorPriority && <Typography color="error" sx={{ mb: 2 }}>{errorPriority}</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingPriority} sx={{ mt: 3, mb: 2 }}>
-        {loadingPriority ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Actualizar' : 'Crear')}
+        {getSubmitMsg(loadingPriority, isUpdate)}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>

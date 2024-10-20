@@ -7,11 +7,9 @@ import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 import { useCategoryType } from '../../../../hooks/settings/useCategoryType';
-
-import { CategoryType } from '../../../../interfaces/ModelInterfaces';
-
-
 import { CategoryTypeFormProps } from '../../../../interfaces/ComponentInterfaces';
+import { CategoryType } from '../../../../interfaces/ModelInterfaces';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 import TextAreaField from '../../fields/TextAreaField';
 
 const gridSizes = {
@@ -34,9 +32,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
 
   const [formData, setFormData] = useState<Partial<CategoryType>>({});
   const [tabValue, setTabValue] = useState('0');
-  const isUpdate = categoryTypeId && categoryTypeId !== 'addNew';
-
-
+  const isUpdate = Boolean(categoryTypeId && categoryTypeId !== 'addNew');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
     const { name, value } = e.target;
@@ -48,32 +44,24 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isUpdate) {
-      const id = parseInt(categoryTypeId);
-      if (!isNaN(id)) {
-        await updateCategoryType(id, formData);
-      }
+    if (categoryType) {
+      updateCategoryType(categoryType.id, formData);
     } else {
-      await createCategoryType(formData);
+      createCategoryType(formData);
     }
   };
 
-  const handleTabLisChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabLisChange = (e: React.SyntheticEvent, newValue: string) => {
+    e.preventDefault();
     setTabValue(newValue);
   };
 
   useEffect(() => {
-
-  }, []);
-
-  useEffect(() => {
-    if (isUpdate) {
+    if (isUpdate && categoryTypeId) {
       const id = parseInt(categoryTypeId);
-      if (!isNaN(id)) {
-        fetchCategoryType(id);
-      }
+      !isNaN(id) && fetchCategoryType(id);
     }
   }, [categoryTypeId]);
 
@@ -86,7 +74,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
 
 
   useEffect(() => {
-    if (!success || (!categoryType || !(method === 'createCategoryType' || method === 'updateCategoryType'))) {
+    if (!(success && categoryType && (method === 'createCategoryType' || method === 'updateCategoryType'))) {
       return;
     }
     if (!isDialog) {
@@ -99,7 +87,7 @@ const CategoryTypeForm: React.FC<CategoryTypeFormProps> = ({ categoryTypeInput, 
       <Typography variant="h4" sx={{ mb: 2 }}>Tipo de Categoria</Typography>
       {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mt: 3, mb: 2 }}>
-        {loading ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Actualizar' : 'Crear')}
+        {getSubmitMsg(loading, isUpdate)}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>

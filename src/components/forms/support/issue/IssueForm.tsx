@@ -11,6 +11,7 @@ import { issueStatusOptions } from '../../../../constants';
 import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useIssue } from '../../../../hooks/support/useIssue';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 import DialogComponent from '../../../dialogs/DialogComponent';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
@@ -25,9 +26,6 @@ const gridItemProps = {
 const fieldProps = {
   fullWidth: true,
 };
-
-
-
 
 const IssueForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -168,7 +166,7 @@ const IssueForm: React.FC = () => {
       return (
         <Button onClick={handleSubmit} variant="contained" color="primary"
           disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
-          {loadingIssue ? 'Creating...' : 'Create Issue'}
+          {getSubmitMsg(loadingIssue, isUpdate)}
         </Button>);
     } else if (issue?.status === 'received') {
       return <>

@@ -18,6 +18,7 @@ import TextAreaField from '../../fields/TextAreaField';
 import { IAutocompleteOption } from '../../../../interfaces/GlobalInterfaces';
 import AutoCompletField from '../../fields/AutoCompletField';
 import CategoryRelations from './CategoryRelations';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 
 const gridSizes = {
   xs: 12,
@@ -41,8 +42,7 @@ const CategoryForm: React.FC = () => {
     fetchCategory, createCategory, updateCategory } = useCategory();
   const [formData, setFormData] = useState<Partial<Category>>({});
   const [tabValue, setTabValue] = useState('0');
-  const isUpdate = id && id !== 'addNew';
-
+  const isUpdate = Boolean(id && id !== 'addNew');
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
@@ -62,15 +62,12 @@ const CategoryForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isUpdate) {
-      const categoryId = parseInt(id);
-      if (!isNaN(categoryId)) {
-        await updateCategory(categoryId, formData);
-      }
+    if (category) {
+      updateCategory(category.id, formData);
     } else {
-      await createCategory(formData);
+      createCategory(formData);
     }
   };
 
@@ -102,13 +99,17 @@ const CategoryForm: React.FC = () => {
   }, [categoryTypes])
 
   useEffect(() => {
-    if (isUpdate) {
+    if (isUpdate && id) {
       const categoryId = parseInt(id);
-      if (!isNaN(categoryId)) {
-        fetchCategory(categoryId);
-      }
+      !isNaN(categoryId) && fetchCategory(categoryId);
     }
   }, [id]);
+
+  useEffect(() => {
+    if (success && category && (method === 'createCategory' || method === 'updateCategory')) {
+      navigate(`/configuraciones/categoria/${category.id}/`);
+    }
+  }, [success]);
 
   useEffect(() => {
     if (category) {
@@ -117,18 +118,14 @@ const CategoryForm: React.FC = () => {
     }
   }, [category]);
 
-  useEffect(() => {
-    if (success && category && (method === 'createCategory' || method === 'updateCategory')) {
-      navigate(`/configuraciones/categoria/${category.id}/`);
-    }
-  }, [success]);
+
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       <Typography variant="h4" sx={{ mb: 2 }}>Categoria</Typography>
       {errorCategory && <Typography color="error" sx={{ mb: 2 }}>{errorCategory}</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingCategory} sx={{ mt: 3, mb: 2 }}>
-        {loadingCategory ? (isUpdate ? 'Updating...' : 'Creating...') : (isUpdate ? 'Actualizar' : 'Crear')}
+        {getSubmitMsg(loadingCategory, isUpdate)}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
