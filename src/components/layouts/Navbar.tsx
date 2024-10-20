@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
           <NavItem text="Tablero" icon={<DashboardIcon />} path="/soporte/tablero/" />
           <NavItem text="Seguimiento" icon={<TimelineIcon />} path="/soporte/seguimiento-tareas/" />
           <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas/" />
-          <NavItem text="Problemas" icon={<ErrorIcon />} path="/soporte/issue/" />
+          <NavItem text="Problemas" icon={<ErrorIcon />} path="/soporte/problema/" />
           {/* <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning/" /> */}
           {/* <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects/" /> */}
           {/* <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics/" /> */}

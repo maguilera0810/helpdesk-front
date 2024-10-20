@@ -58,8 +58,8 @@ const AppRoutes: FC = () => (
         <Route path="/soporte/proyects/" element={<Projects />} />
         <Route path="/soporte/planning/" element={<Planning />} />
         <Route path="/soporte/reports/" element={<Reports />} />
-        <Route path="/soporte/issue/" element={<IssueList />} />
-        <Route path="/soporte/issue/:id/" element={<IssueDetail />} />
+        <Route path="/soporte/problema/" element={<IssueList />} />
+        <Route path="/soporte/problema/:id/" element={<IssueDetail />} />
         <Route path="/soporte/statistics/" element={<Statistics />} />
 
         <Route path="/configuraciones/categoria/" element={<CategoryList />} />

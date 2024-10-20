@@ -78,7 +78,6 @@ const IssueForm: React.FC = () => {
     } else {
       await createIssue(formData);
     }
-    // navigate('/admin/usuario');
   };
   const showField = () => {
     return "block";
@@ -143,7 +142,7 @@ const IssueForm: React.FC = () => {
 
   useEffect(() => {
     if (successIssue && !isUpdate && issue) {
-      navigate(`/soporte/issue/${issue.id}/`);
+      navigate(`/soporte/problema/${issue.id}/`);
     }
   }, [successIssue, issue])
 

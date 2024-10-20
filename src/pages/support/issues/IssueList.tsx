@@ -8,7 +8,7 @@ const IssueList: FC = () => {
   return (
     <Layout>
       <Typography variant="h4" gutterBottom>
-        Issues
+        Problemas
       </Typography>
       <IssueTable />
     </Layout>

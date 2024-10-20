@@ -28,11 +28,11 @@ const IssueTable: FC = () => {
   }, [filters]);
 
   const handleCreate = () => {
-    navigate('/soporte/issue/addNew/');
+    navigate('/soporte/problema/addNew/');
   };
 
   const handleUpdate = (id: number) => {
-    navigate(`/soporte/issue/${id}/`);
+    navigate(`/soporte/problema/${id}/`);
   };
 
   return (
