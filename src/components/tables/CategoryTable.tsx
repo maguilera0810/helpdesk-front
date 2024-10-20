@@ -5,13 +5,19 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import { useCategory } from '../../hooks/settings/useCategory';
 import useFilterStore from '../../stores/useFilterStore';
+import { renderChipCell } from './renders';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Id', width: 70 },
   { field: 'title', headerName: 'Título', width: 130 },
   { field: 'type', headerName: 'Tipo', width: 130 },
   { field: 'code', headerName: 'Código', width: 130 },
-  { field: 'color', headerName: 'Color', width: 130 },
+  {
+    field: 'color',
+    headerName: 'Color',
+    width: 130,
+    renderCell: (params) => renderChipCell({ color: params.value }),
+  },
 ];
 
 const IssueTable: FC = () => {

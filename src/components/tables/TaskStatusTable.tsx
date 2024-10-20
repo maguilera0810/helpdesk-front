@@ -14,7 +14,7 @@ const COLUMNS: GridColDef[] = [
     field: 'color',
     headerName: 'Color',
     width: 130,
-    renderCell: (params) => renderChipCell(params.value),
+    renderCell: (params) => renderChipCell({color: params.value}),
   },
 ];
 Object.freeze(COLUMNS);
