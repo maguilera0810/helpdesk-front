@@ -79,12 +79,14 @@ export interface GlobalDataState extends
   Pick<UserState, 'lightUsers' | 'setLightUsers'>,
   Pick<PriorityState, 'priorities' | 'setPriorities'>,
   Pick<CategoryState, 'categories' | 'setCategories'>,
-  Pick<GroupedPermissionState, 'groupedPermissions' | 'getFlatPermissions' | 'setGroupedPermissions' | 'getGroupedPermission'> {
+  Pick<GroupedPermissionState, 'groupedPermissions' | 'getFlatPermissions' | 'setGroupedPermissions' | 'getGroupedPermission'>,
+  Pick<TaskStatusState, 'taskStatuses' | 'setTaskStatuses'> {
   reload: boolean;
   reloadUser: boolean;
   reloadPriority: boolean;
   reloadCategory: boolean;
   reloadPermission: boolean;
+  reloadTaskStatus: boolean;
   setReload: (reload: boolean, reloadType?: ReloadType) => void;
 }
 

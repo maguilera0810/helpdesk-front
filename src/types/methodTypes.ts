@@ -17,4 +17,4 @@ export type methodCategoryType = 'fetchCategoryTypes' | 'fetchCategoryType' | 'c
 export type methodPriority = 'fetchPriorities' | 'fetchPriority' | 'createPriority' | 'updatePriority' | 'deletePriority';
 export type methodTaskStatus = 'fetchTaskStatuses' | 'fetchTaskStatus' | 'createTaskStatus' | 'updateTaskStatus' | 'deleteTaskStatus';
 
-export type ReloadType = 'permission' | 'category' | 'priority' | 'user';
+export type ReloadType = 'permission' | 'category' | 'priority' | 'user' | 'taskStatus';
