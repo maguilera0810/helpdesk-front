@@ -8,15 +8,18 @@ import { usePermission } from './admin/usePermission';
 import { useUser } from './admin/useUser';
 import { useCategory } from './settings/useCategory';
 import { usePriority } from './settings/usePriority';
+import { useTaskStatus } from './settings/useTaskStatus';
 
 const useGlobalData = () => {
 
-  const { reload, reloadUser, reloadPriority, reloadCategory, reloadPermission, setReload,
+  const { reload, reloadUser, reloadPriority, reloadCategory, reloadPermission, reloadTaskStatus, setReload,
+    groupedPermissions, setGroupedPermissions, getFlatPermissions, getGroupedPermission,
     lightUsers, setLightUsers,
     priorities, setPriorities,
     categories, setCategories,
-    groupedPermissions, setGroupedPermissions, getFlatPermissions, getGroupedPermission,
+    taskStatuses, setTaskStatuses,
   } = globalDataStore();
+  const { taskStatuses: fetchedTaskStatuses, fetchTaskStatuses } = useTaskStatus();
   const { lightUsers: fetchedLightUsers, fetchUsers } = useUser();
   const { priorities: fetchedPriorities, fetchPriorities } = usePriority();
   const { categories: fetchedCategories, fetchCategories } = useCategory();
@@ -32,28 +35,17 @@ const useGlobalData = () => {
   };
 
   useReloadData(reload, () => {
+    fetchPermissions();
     fetchUsers({}, true);
     fetchPriorities();
     fetchCategories();
-    fetchPermissions();
+    fetchTaskStatuses();
   });
+  useReloadData(reloadPermission, fetchPermissions, 'permission');
   useReloadData(reloadUser, () => fetchUsers({}, true), 'user');
   useReloadData(reloadPriority, fetchPriorities, 'priority');
   useReloadData(reloadCategory, fetchCategories, 'category');
-  useReloadData(reloadPermission, fetchPermissions, 'permission');
-
-
-  useEffect(() => {
-    fetchedLightUsers.length && setLightUsers(fetchedLightUsers);
-  }, [fetchedLightUsers])
-
-  useEffect(() => {
-    fetchedPriorities.length && setPriorities(fetchedPriorities);
-  }, [fetchedPriorities])
-
-  useEffect(() => {
-    fetchedPriorities.length && setCategories(fetchedCategories);
-  }, [fetchedCategories])
+  useReloadData(reloadTaskStatus, fetchTaskStatuses, 'taskStatus');
 
   useEffect(() => {
     if (!fetchedPermissions.length) {
@@ -69,13 +61,31 @@ const useGlobalData = () => {
     setGroupedPermissions(groupedPermissions);
   }, [fetchedPermissions])
 
+  useEffect(() => {
+    fetchedLightUsers.length && setLightUsers(fetchedLightUsers);
+  }, [fetchedLightUsers])
+
+  useEffect(() => {
+    fetchedPriorities.length && setPriorities(fetchedPriorities);
+  }, [fetchedPriorities])
+
+  useEffect(() => {
+    fetchedCategories.length && setCategories(fetchedCategories);
+  }, [fetchedCategories])
+
+  useEffect(() => {
+    fetchedTaskStatuses.length && setTaskStatuses(fetchedTaskStatuses);
+  }, [fetchedTaskStatuses])
+
+
 
   return {
     reload,
+    groupedPermissions,
     lightUsers,
     priorities,
     categories,
-    groupedPermissions,
+    taskStatuses,
     setReload,
     getFlatPermissions,
     getGroupedPermission,
