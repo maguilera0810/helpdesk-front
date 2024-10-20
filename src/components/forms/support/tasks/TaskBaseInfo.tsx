@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid2';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { taskStatusOptions, taskTypeOptions } from '../../../../constants';
+import { taskTypeOptions } from '../../../../constants';
 import { useTask } from '../../../../hooks/support/useTask';
 import useGlobalData from '../../../../hooks/useGlobalData';
 import { Task } from '../../../../interfaces/ModelInterfaces';
@@ -42,10 +42,10 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
   const isUpdate = Boolean(id && id !== 'addNew');
 
 
-  const { priorities } = useGlobalData();
+  const { priorities, taskStatuses } = useGlobalData();
   const { task, setTask } = taskStore()
   const { task: taskFetched, loading, success, method, createTask, updateTask } = useTask();
-  const categories = categoryStore((state) => state.categories)
+  const { categories } = categoryStore();
   const [formData, setFormData] = useState<Partial<Task>>({});
 
   useEffect(() => {
@@ -165,8 +165,8 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
           <SelectField
             label="Status"
             name="status"
-            value={formData.status ?? taskStatusOptions[0].value}
-            options={taskStatusOptions}
+            value={formData.status ?? ''}
+            options={taskStatuses.map(e => ({ value: e.id, label: e.title }))}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="56px"
