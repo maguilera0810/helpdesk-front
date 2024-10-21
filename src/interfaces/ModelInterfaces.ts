@@ -68,7 +68,7 @@ export interface ScheduleTask extends Task {
 export interface Issue extends BaseInfoModel {
   id?: number;
   code: string;
-  status: string; // 'to_do' | 'in_progress' | 'done'; // Asumiendo que puede haber otros estados
+  status: number;
   contactEmail: string;
   contactPhone: string;
   requestingUnit: number;
