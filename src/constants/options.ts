@@ -17,7 +17,7 @@ export const taskStatusOptions: IOption[] = [ // AQUI
   { value: 'completed', label: 'Completado' },
 ];
 
-export const issueStatusOptions: IOption[] = [
+export const issueStatusOptions: IOption[] = [ // AQUI
   { value: 'received', label: 'Recibido' },
   { value: 'task_created', label: 'Tarea Creada' },
   { value: 'rejected', label: 'Rechazado' },
