@@ -33,7 +33,7 @@ const IssueTable: FC = () => {
   const navigate = useNavigate();
   const { issues, loading, error, fetchIssues } = useIssue();
   const { filters, clearFilters } = useFilterStore();
-  const { lightUsers } = useGlobalData();
+  const { lightUsers, issueStatuses } = useGlobalData();
 
   const handleCreate = () => {
     navigate('/soporte/problema/addNew/');
@@ -45,9 +45,9 @@ const IssueTable: FC = () => {
   const getUserNameById = (userId: number) => {
     return lightUsers.find(user => user.id === userId);
   };
-  // const getStatusById = (id: number) => {
-  //   return taskStatuses.find(user => user.id === id);
-  // };
+  const getStatusById = (id: number) => {
+    return issueStatuses.find(e => e.id === id);
+  };
 
   useEffect(() => {
     return () => clearFilters();
@@ -63,7 +63,7 @@ const IssueTable: FC = () => {
     return issues.map(issue => ({
       ...issue,
       createdBy: getUserNameById(issue.createdBy),
-      // status: getStatusById(issue.status),
+      status: getStatusById(issue.status),
     }));
   }, [issues, lightUsers]);
 
