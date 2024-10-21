@@ -7,19 +7,23 @@ import { ReloadType } from '../types/methodTypes';
 import { usePermission } from './admin/usePermission';
 import { useUser } from './admin/useUser';
 import { useCategory } from './settings/useCategory';
+import { useIssueStatus } from './settings/useIssueStatus';
 import { usePriority } from './settings/usePriority';
 import { useTaskStatus } from './settings/useTaskStatus';
 
 const useGlobalData = () => {
 
-  const { reload, reloadUser, reloadPriority, reloadCategory, reloadPermission, reloadTaskStatus, setReload,
+  const { reload, reloadUser, reloadPriority, reloadIssueStatus,
+    reloadCategory, reloadPermission, reloadTaskStatus, setReload,
     groupedPermissions, setGroupedPermissions, getFlatPermissions, getGroupedPermission,
     lightUsers, setLightUsers,
     priorities, setPriorities,
     categories, setCategories,
     taskStatuses, setTaskStatuses,
+    issueStatuses, setIssueStatuses,
   } = globalDataStore();
   const { taskStatuses: fetchedTaskStatuses, fetchTaskStatuses } = useTaskStatus();
+  const { issueStatuses: fetchedIssueStatuses, fetchIssueStatuses } = useIssueStatus();
   const { lightUsers: fetchedLightUsers, fetchUsers } = useUser();
   const { priorities: fetchedPriorities, fetchPriorities } = usePriority();
   const { categories: fetchedCategories, fetchCategories } = useCategory();
@@ -40,12 +44,14 @@ const useGlobalData = () => {
     fetchPriorities();
     fetchCategories();
     fetchTaskStatuses();
+    fetchIssueStatuses();
   });
   useReloadData(reloadPermission, fetchPermissions, 'permission');
   useReloadData(reloadUser, () => fetchUsers({}, true), 'user');
   useReloadData(reloadPriority, fetchPriorities, 'priority');
   useReloadData(reloadCategory, fetchCategories, 'category');
   useReloadData(reloadTaskStatus, fetchTaskStatuses, 'taskStatus');
+  useReloadData(reloadIssueStatus, fetchIssueStatuses, 'issueStatus');
 
   useEffect(() => {
     if (!fetchedPermissions.length) {
@@ -77,7 +83,9 @@ const useGlobalData = () => {
     fetchedTaskStatuses.length && setTaskStatuses(fetchedTaskStatuses);
   }, [fetchedTaskStatuses])
 
-
+  useEffect(() => {
+    fetchedIssueStatuses.length && setIssueStatuses(fetchedIssueStatuses);
+  }, [fetchedIssueStatuses])
 
   return {
     reload,
@@ -86,6 +94,7 @@ const useGlobalData = () => {
     priorities,
     categories,
     taskStatuses,
+    issueStatuses,
     setReload,
     getFlatPermissions,
     getGroupedPermission,
