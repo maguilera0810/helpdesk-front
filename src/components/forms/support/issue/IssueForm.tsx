@@ -111,7 +111,7 @@ const IssueForm: React.FC = () => {
 
 
   useEffect(() => {
-    fetchCategories({ "type": 1 });
+    fetchCategories();
   }, []);
 
   useEffect(() => {
@@ -293,7 +293,7 @@ const IssueForm: React.FC = () => {
                   value={formData.categories ?? []}
                   options={categories.map(category => ({ value: category.id, label: category.title, color: category.color }))}
                   onChange={(e) => handleInputChange(e)}
-                  disabled={isUpdate}
+                  // disabled={isUpdate}
                   fullWidth
                 />
               </Grid>
