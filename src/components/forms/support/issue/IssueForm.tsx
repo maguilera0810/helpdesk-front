@@ -7,9 +7,9 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { issueStatusOptions } from '../../../../constants';
 import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useIssue } from '../../../../hooks/support/useIssue';
+import useGlobalData from '../../../../hooks/useGlobalData';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
 import { getSubmitMsg } from '../../../../utils/messageUtils';
 import DialogComponent from '../../../dialogs/DialogComponent';
@@ -31,6 +31,7 @@ const IssueForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { categories, fetchCategories } = useCategory();
+  const { issueStatuses } = useGlobalData();
   const { issue, createdTask, error: errorIssue, loading: loadingIssue, success: successIssue,
     fetchIssue, createIssue, updateIssue, createTask } = useIssue();
 
@@ -93,19 +94,19 @@ const IssueForm: React.FC = () => {
   };
 
   const handleConfirmCreateTask = async () => {
-    toogleOpenDialog('createTask'); // Close the confirmation dialog
+    toogleOpenDialog('createTask');
     issue?.id && await createTask(issue.id)
   }
 
 
   const handleRejectIssue = async (e: React.FormEvent) => {
     e.preventDefault();
-    toogleOpenDialog('refectIssue'); // Open the confirmation dialog
+    toogleOpenDialog('refectIssue');
   };
 
   const handleConfirmRejectIssue = async () => {
-    toogleOpenDialog('refectIssue'); // Close the confirmation dialog
-    issue?.id && await updateIssue(issue.id, { "status": "rejected" })
+    toogleOpenDialog('refectIssue');
+    issue?.id && await updateIssue(issue.id, { "status": 3 }) // 3  = RECHAZADO
   }
 
 
@@ -162,13 +163,14 @@ const IssueForm: React.FC = () => {
   )
 
   const displayButtons = () => {
-    if (!isUpdate) {
-      return (
-        <Button onClick={handleSubmit} variant="contained" color="primary"
-          disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
-          {getSubmitMsg(loadingIssue, isUpdate)}
-        </Button>);
-    } else if (issue?.status === 'received') {
+    // if (!!isUpdate) {
+    //   return (
+    //     <Button onClick={handleSubmit} variant="contained" color="primary"
+    //       disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
+    //       {getSubmitMsg(loadingIssue, isUpdate)}
+    //     </Button>);
+    // } else 
+    if (issue?.status === 1) { // 1 = RECIBIDO
       return <>
         <Button onClick={handleCreateTask} variant="contained" color="secondary"
           disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
@@ -188,6 +190,10 @@ const IssueForm: React.FC = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>Problema</Typography>
       {/* {errorIssue && <Typography color="error" sx={{ mb: 2 }}>{errorIssue}</Typography>} */}
       {/* {successIssue && <Typography color="primary" sx={{ mb: 2 }}>Issue {isUpdate ? 'updated' : 'created'} successfully!</Typography>} */}
+      <Button onClick={handleSubmit} variant="contained" color="primary"
+        disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
+        {getSubmitMsg(loadingIssue, isUpdate)}
+      </Button>
       {displayButtons()}
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
@@ -203,9 +209,7 @@ const IssueForm: React.FC = () => {
                   label="Título"
                   name="title"
                   required={true}
-                  InputProps={{
-                    readOnly: isUpdate,
-                  }}
+                  // InputProps={{ readOnly: isUpdate, }}
                   value={formData.title ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -216,7 +220,7 @@ const IssueForm: React.FC = () => {
                   label="Descripción"
                   name="description"
                   required={true}
-                  InputProps={{ readOnly: isUpdate, }}
+                  // InputProps={{ readOnly: isUpdate, }}
                   value={formData.description ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -226,9 +230,7 @@ const IssueForm: React.FC = () => {
                 <TextField
                   label="Email Contacto"
                   name="contactEmail"
-                  InputProps={{
-                    readOnly: isUpdate,
-                  }}
+                  // InputProps={{ readOnly: isUpdate, }}
                   value={formData.contactEmail ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -238,9 +240,7 @@ const IssueForm: React.FC = () => {
                 <TextField
                   label="Télefono Contacto"
                   name="contactPhone"
-                  InputProps={{
-                    readOnly: isUpdate,
-                  }}
+                  // InputProps={{ readOnly: isUpdate, }}
                   value={formData.contactPhone ?? ''}
                   onChange={(e) => handleInputChange(e)}
                   {...fieldProps}
@@ -260,9 +260,9 @@ const IssueForm: React.FC = () => {
                 <SelectField
                   label="Status"
                   name="status"
-                  readOnly={isUpdate}
-                  value={formData.status ?? issueStatusOptions[0].value}
-                  options={issueStatusOptions}
+                  // readOnly={isUpdate}
+                  value={formData.status ?? ''}
+                  options={issueStatuses.map((e) => ({ value: e.id, label: e.title }))}
                   onChange={(e) => handleInputChange(e)}
                   fullWidth
                   height="56px"
