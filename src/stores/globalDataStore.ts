@@ -67,7 +67,7 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
   issueStatuses: [],
   setIssueStatuses: (statuses) =>
     set(produce((state: GlobalDataState) => {
-      state.taskStatuses = statuses;
+      state.issueStatuses = statuses;
     })),
 });
 
