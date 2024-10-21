@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 
-import { Box, Button, Chip } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import { useTaskStatus } from '../../hooks/settings/useTaskStatus';
