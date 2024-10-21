@@ -31,11 +31,11 @@ const IssueStatusTable: FC = () => {
   }, []);
 
   const handleCreate = () => {
-    navigate('/configuraciones/estado-tarea/addNew/');
+    navigate('/configuraciones/estado-problema/addNew/');
   };
 
   const handleUpdate = (id: number) => {
-    navigate(`/configuraciones/estado-tarea/${id}/`);
+    navigate(`/configuraciones/estado-problema/${id}/`);
   };
 
   return (
