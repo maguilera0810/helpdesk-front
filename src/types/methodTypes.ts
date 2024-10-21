@@ -18,4 +18,4 @@ export type methodPriority = 'fetchPriorities' | 'fetchPriority' | 'createPriori
 export type methodTaskStatus = 'fetchTaskStatuses' | 'fetchTaskStatus' | 'createTaskStatus' | 'updateTaskStatus' | 'deleteTaskStatus';
 export type methodIssueStatus = 'fetchIssueStatuses' | 'fetchIssueStatus' | 'createIssueStatus' | 'updateIssueStatus' | 'deleteIssueStatus';
 
-export type ReloadType = 'permission' | 'category' | 'priority' | 'user' | 'taskStatus';
+export type ReloadType = 'permission' | 'category' | 'priority' | 'user' | 'taskStatus' | 'issueStatus';
