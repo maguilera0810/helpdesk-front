@@ -48,14 +48,18 @@ const NavItem: React.FC<NavItemProps> = ({ text, icon, path, children }) => {
           },
         }}
       >
-        <ListItemIcon sx={{ color: isActive ? theme.palette.primary.main : 'inherit' }}>{icon}</ListItemIcon>
+        <ListItemIcon sx={{
+          color: isActive ? theme.palette.primary.main : 'inherit',
+          minWidth: 'auto',
+          marginRight: theme.spacing(1),
+        }}>{icon}</ListItemIcon>
         <ListItemText primary={text}
           sx={{ color: isActive ? theme.palette.primary.main : 'inherit' }} />
         {children && (expanded ? <ExpandLess /> : <ExpandMore />)}
       </ListItem>
       {children && (
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding sx={{ pl: 4 }}>
+          <List component="div" disablePadding sx={{ pl: 2 }}>
             {children}
           </List>
         </Collapse>
