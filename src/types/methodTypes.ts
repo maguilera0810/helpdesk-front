@@ -16,5 +16,6 @@ export type methodCategory = 'fetchCategories' | 'fetchCategory' | 'createCatego
 export type methodCategoryType = 'fetchCategoryTypes' | 'fetchCategoryType' | 'createCategoryType' | 'updateCategoryType' | 'deleteCategoryType';
 export type methodPriority = 'fetchPriorities' | 'fetchPriority' | 'createPriority' | 'updatePriority' | 'deletePriority';
 export type methodTaskStatus = 'fetchTaskStatuses' | 'fetchTaskStatus' | 'createTaskStatus' | 'updateTaskStatus' | 'deleteTaskStatus';
+export type methodIssueStatus = 'fetchIssueStatuses' | 'fetchIssueStatus' | 'createIssueStatus' | 'updateIssueStatus' | 'deleteIssueStatus';
 
 export type ReloadType = 'permission' | 'category' | 'priority' | 'user' | 'taskStatus';
