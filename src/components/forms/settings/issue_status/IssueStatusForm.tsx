@@ -1,13 +1,13 @@
-import { ChangeEvent, FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { SelectChangeEvent } from '@mui/material/Select';
 
-import { useTaskStatus } from '../../../../hooks/settings/useTaskStatus';
-import { TaskStatus } from '../../../../interfaces/ModelInterfaces';
+import { useIssueStatus } from '../../../../hooks/settings/useIssueStatus';
+import { IssueStatus } from '../../../../interfaces/ModelInterfaces';
+import { BaseChangeMethod } from '../../../../types/methodTypes';
 import { getSubmitMsg } from '../../../../utils/messageUtils';
 import ColorPickerField from '../../fields/ColorPickerField';
 import TextAreaField from '../../fields/TextAreaField';
@@ -24,16 +24,16 @@ const fieldProps = {
 
 const IssueStatusForm: FC = () => {
   const navigate = useNavigate();
-  const { taskStatusID } = useParams<{ taskStatusID: string }>();
-  const { taskStatus, error: errorTaskStatus, loading: loadingTaskStatus, success, method,
-    fetchTaskStatus, createTaskStatus, updateTaskStatus } = useTaskStatus();
-  const [formData, setFormData] = useState<Partial<TaskStatus>>({});
+  const { issueStatusID } = useParams<{ issueStatusID: string }>();
+  const { issueStatus, error: errorIssueStatus, loading: loadingIssueStatus, success, method,
+    fetchIssueStatus, createIssueStatus, updateIssueStatus } = useIssueStatus();
+  const [formData, setFormData] = useState<Partial<IssueStatus>>({});
 
   const [tabValue, setTabValue] = useState('0');
-  const isUpdate = Boolean(taskStatusID && taskStatusID !== 'addNew');
+  const isUpdate = Boolean(issueStatusID && issueStatusID !== 'addNew');
 
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string> | SelectChangeEvent<any[]>) => {
+  const handleInputChange: BaseChangeMethod<any> = (e) => {
     const { name, value } = e.target;
     name && handleInputValueChange(name, value);
   };
@@ -47,10 +47,10 @@ const IssueStatusForm: FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (taskStatus) {
-      updateTaskStatus(taskStatus.id, formData);
+    if (issueStatus) {
+      updateIssueStatus(issueStatus.id, formData);
     } else {
-      createTaskStatus(formData);
+      createIssueStatus(formData);
     }
   };
 
@@ -60,34 +60,34 @@ const IssueStatusForm: FC = () => {
   };
 
   useEffect(() => {
-    if (isUpdate && taskStatusID) {
-      const id = parseInt(taskStatusID);
-      !isNaN(id) && fetchTaskStatus(id);
+    if (isUpdate && issueStatusID) {
+      const id = parseInt(issueStatusID);
+      !isNaN(id) && fetchIssueStatus(id);
     }
   }, []);
 
   useEffect(() => {
-    taskStatus && setFormData({ ...taskStatus });
-  }, [taskStatus]);
+    issueStatus && setFormData({ ...issueStatus });
+  }, [issueStatus]);
 
   useEffect(() => {
-    if (success && taskStatus && (method === 'createTaskStatus' || method === 'updateTaskStatus')) {
-      navigate(`/configuraciones/estado-tarea/${taskStatus.id}/`);
+    if (success && issueStatus && (method === 'createIssueStatus' || method === 'updateIssueStatus')) {
+      navigate(`/configuraciones/estado-problema/${issueStatus.id}/`);
     }
   }, [success]);
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
       <Typography variant="h4" sx={{ mb: 2 }}>
-        Estado Tarea
+        Estado Problema
       </Typography>
-      {errorTaskStatus && <Typography color="error" sx={{ mb: 2 }}>{errorTaskStatus}</Typography>}
-      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingTaskStatus} sx={{ mt: 3, mb: 2 }}>
-        {getSubmitMsg(loadingTaskStatus, isUpdate)}
+      {errorIssueStatus && <Typography color="error" sx={{ mb: 2 }}>{errorIssueStatus}</Typography>}
+      <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loadingIssueStatus} sx={{ mt: 3, mb: 2 }}>
+        {getSubmitMsg(loadingIssueStatus, isUpdate)}
       </Button>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
-          <TabList onChange={handleTabLisChange} aria-label="taskStatus form tabs">
+          <TabList onChange={handleTabLisChange}>
             <Tab label="Información" value="0" />
           </TabList>
         </Box>
