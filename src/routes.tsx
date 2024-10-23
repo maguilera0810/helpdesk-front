@@ -13,12 +13,8 @@ import FAQs from './pages/FAQ';
 import CategoryDetail from './pages/settings/category/CategoryDetail';
 import CategoryList from './pages/settings/category/CategoryList';
 import ListFaculties from './pages/settings/faculties/ListFaculties';
-import IssueStatusDetail from './pages/settings/issue_status/IssueStatusDetail';
-import IssueStatusList from './pages/settings/issue_status/IssueStatusList';
 import PriorityDetail from './pages/settings/priority/PriorityDetail';
 import PriorityList from './pages/settings/priority/PriorityList';
-import TaskStatusDetail from './pages/settings/task_status/TaskStatusDetail';
-import TaskStatusList from './pages/settings/task_status/TaskStatusList';
 import Dashboard from './pages/support/dashboard/Dashboard';
 import IssueDetail from './pages/support/issues/IssueDetail';
 import IssueList from './pages/support/issues/IssueList';
@@ -71,10 +67,6 @@ const AppRoutes: FC = () => (
         <Route path="/configuraciones/facultades/" element={<ListFaculties />} />
         <Route path="/configuraciones/campus/" element={<Campus />} />
         <Route path="/configuraciones/perfil/" element={<Settings />} />
-        <Route path="/configuraciones/estado-tarea/" element={<TaskStatusList />} />
-        <Route path="/configuraciones/estado-tarea/:taskStatusID/" element={<TaskStatusDetail />} />
-        <Route path="/configuraciones/estado-problema/" element={<IssueStatusList />} />
-        <Route path="/configuraciones/estado-problema/:issueStatusID/" element={<IssueStatusDetail />} />
 
         <Route path="/faqs" element={<FAQs />} />
       </Route>

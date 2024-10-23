@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { IssueStatus, Permission, Priority, Role, Schedule, Task, TaskStatus, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
 import { Category } from "./ModelInterfaces";
@@ -47,15 +47,6 @@ export interface PriorityState extends BaseState {
   setPriorities: (priorities: Priority[]) => void;
 }
 
-export interface TaskStatusState extends BaseState {
-  taskStatuses: TaskStatus[];
-  setTaskStatuses: (taskStatuses: TaskStatus[]) => void;
-}
-export interface IssueStatusState extends BaseState {
-  issueStatuses: IssueStatus[];
-  setIssueStatuses: (issueStatus: IssueStatus[]) => void;
-}
-
 export interface PermissionState extends BaseState {
   permission?: Permission;
   permissions: Permission[];
@@ -83,16 +74,12 @@ export interface GlobalDataState extends
   Pick<UserState, 'lightUsers' | 'setLightUsers'>,
   Pick<PriorityState, 'priorities' | 'setPriorities'>,
   Pick<CategoryState, 'categories' | 'setCategories'>,
-  Pick<GroupedPermissionState, 'groupedPermissions' | 'getFlatPermissions' | 'setGroupedPermissions' | 'getGroupedPermission'>,
-  Pick<TaskStatusState, 'taskStatuses' | 'setTaskStatuses'>,
-  Pick<IssueStatusState, 'issueStatuses' | 'setIssueStatuses'> {
+  Pick<GroupedPermissionState, 'groupedPermissions' | 'getFlatPermissions' | 'setGroupedPermissions' | 'getGroupedPermission'> {
   reload: boolean;
   reloadUser: boolean;
   reloadPriority: boolean;
   reloadCategory: boolean;
   reloadPermission: boolean;
-  reloadTaskStatus: boolean;
-  reloadIssueStatus: boolean;
   setReload: (reload: boolean, reloadType?: ReloadType) => void;
 }
 

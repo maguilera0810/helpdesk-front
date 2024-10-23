@@ -52,10 +52,7 @@ export interface Status extends BaseInfoModel {
   id: number;
   color: string;
 }
-export interface TaskStatus extends Status {
-}
-export interface IssueStatus extends Status {
-}
+
 export interface Priority extends BaseInfoModel {
   id: number;
   color: string;
