@@ -35,7 +35,7 @@ export interface Task extends BaseInfoModel {
   id: number;
   code: string;
   type: string;
-  status: number;
+  status: string;
   priority: number;
   createdBy: number;
   responsible: number;
@@ -48,11 +48,6 @@ export interface Task extends BaseInfoModel {
   startAt: Date | null;
   endAt: Date | null;
 }
-export interface Status extends BaseInfoModel {
-  id: number;
-  color: string;
-}
-
 export interface Priority extends BaseInfoModel {
   id: number;
   color: string;
@@ -65,7 +60,7 @@ export interface ScheduleTask extends Task {
 export interface Issue extends BaseInfoModel {
   id?: number;
   code: string;
-  status: number;
+  status: string;
   contactEmail: string;
   contactPhone: string;
   requestingUnit: number;

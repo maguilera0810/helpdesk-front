@@ -1,6 +1,15 @@
 import { Dayjs } from "dayjs";
-import { IOption } from "./GlobalInterfaces";
+import { Option } from "./GlobalInterfaces";
 import { CategoryType, ScheduleTask } from "./ModelInterfaces";
+
+
+export interface RandomStringProps {
+  length?: number;
+  useLowercase?: boolean;
+  useUppercase?: boolean;
+  useNumbers?: boolean;
+  useSpecialChars?: boolean;
+}
 
 export interface ScheduleColumnProps {
   tasks: ScheduleTask[];
@@ -30,7 +39,7 @@ export interface CategoryTypeFormProps {
 export interface CheckboxGroupProps<T> {
   label?: string;
   isGroup?: boolean;
-  options: IOption[];
+  options: Option[];
   value: T[];
   onChange?: (selected: T[]) => void;
 }

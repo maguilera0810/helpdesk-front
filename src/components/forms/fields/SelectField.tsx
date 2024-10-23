@@ -1,12 +1,12 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import React, { ChangeEvent } from 'react';
-import { IOption } from '../../../interfaces/GlobalInterfaces';
+import { Option } from '../../../interfaces/GlobalInterfaces';
 
 interface ISelectFieldProps {
   label: string;
   name: string;
   value: any;
-  options: IOption[];
+  options: Option[];
   onChange: (e: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement>) => void;
   fullWidth?: boolean;
   height?: string;
