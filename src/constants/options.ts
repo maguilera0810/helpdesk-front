@@ -6,26 +6,24 @@ export const taskTypeOptions: IOption[] = [
 ];
 
 
-export const taskStatusOptions: IOption[] = [ // AQUI
-  { value: 'to_do', label: 'Por hacer' },
-  { value: 'in_progress', label: 'En ejecución' },
-  { value: 'blocked', label: 'Bloqueado' },
-  { value: 'scheduled', label: 'Programado' },
-  { value: 'rescheduled', label: 'Reprogramado' },
-  { value: 'executed', label: 'Ejecutado' },
-  { value: 'to_validate', label: 'Por validar' },
-  { value: 'completed', label: 'Completado' },
+export const taskStatusOptions: IOption[] = [ // ESTO SI VA
+  { value: 'por_hacer', label: 'Por hacer' },
+  { value: 'en_ejecucion', label: 'En ejecución' },
+  { value: 'bloqueado', label: 'Bloqueado' },
+  { value: 'programado', label: 'Programado' },
+  { value: 'reprogramado', label: 'Reprogramado' },
+  { value: 'no_ejecutable', label: 'No ejecutado' },
+  { value: 'completado', label: 'Completado' },
 ];
 
-export const issueStatusOptions: IOption[] = [ // AQUI
-  { value: 'received', label: 'Recibido' },
-  { value: 'task_created', label: 'Tarea Creada' },
-  { value: 'rejected', label: 'Rechazado' },
-  { value: 'to_validate', label: 'Por Validar' },
-  { value: 'completed', label: 'Completed' },
+export const issueStatusOptions: IOption[] = [ // ESTO SI VA
+  { value: 'recibido', label: 'Recibido' },
+  { value: 'tarea_creada', label: 'Tarea Creada' },
+  { value: 'rechazado', label: 'Rechazado' },
+  { value: 'completedo', label: 'Completed' },
 ];
 
-export const priorityOptions: IOption[] = [
+export const priorityOptions: IOption[] = [ // ESTO NO VA
   { value: 'lowest', label: 'Lowest' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
