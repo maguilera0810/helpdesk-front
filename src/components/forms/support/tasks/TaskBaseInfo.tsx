@@ -155,7 +155,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
         </Grid>
         <Grid {...gridItemProps} key={"status"}>
           <SelectField
-            label="Status"
+            label="Estado"
             name="status"
             value={formData.status ?? ''}
             options={taskStatuses.map(e => ({ value: e.id, label: e.title }))}

@@ -258,7 +258,7 @@ const IssueForm: React.FC = () => {
               </Grid>
               <Grid item {...gridItemProps} key={"status"}>
                 <SelectField
-                  label="Status"
+                  label="Estado"
                   name="status"
                   // readOnly={isUpdate}
                   value={formData.status ?? ''}
