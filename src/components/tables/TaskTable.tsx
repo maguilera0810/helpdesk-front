@@ -4,10 +4,9 @@ import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { useNavigate } from 'react-router-dom';
-import { useTaskStatus } from '../../hooks/settings/useTaskStatus';
+import { taskStatuses } from '../../constants/states';
 import { useTask } from '../../hooks/support/useTask';
 import useGlobalData from '../../hooks/useGlobalData';
-import taskStatusStore from '../../stores/settings/taskStatusStore';
 import useFilterStore from '../../stores/useFilterStore';
 import { renderChipCell, renderUserCell } from './renders';
 
@@ -50,9 +49,6 @@ const TaskTable: FC = () => {
   const { tasks, loading, error, fetchTasks } = useTask();
   const { filters, clearFilters } = useFilterStore();
   const { lightUsers, priorities } = useGlobalData();
-  const { taskStatuses: taskStatusesFetched, fetchTaskStatuses } = useTaskStatus();
-  const { taskStatuses, setTaskStatuses } = taskStatusStore();
-
 
   const getUserNameById = (userId: number) => {
     return lightUsers.find(user => user.id === userId);
@@ -60,8 +56,8 @@ const TaskTable: FC = () => {
   const getPriorityById = (id: number) => {
     return priorities.find(user => user.id === id);
   };
-  const getStatusById = (id: number) => {
-    return taskStatuses.find(user => user.id === id);
+  const getStatusById = (code: string) => {
+    return taskStatuses.find(e => e.value === code);
   };
 
   const rows = useMemo(() => {
@@ -75,13 +71,8 @@ const TaskTable: FC = () => {
   }, [tasks, lightUsers, priorities, taskStatuses]);
 
   useEffect(() => {
-    fetchTaskStatuses();
     return () => clearFilters();
   }, [])
-
-  useEffect(() => {
-    taskStatusesFetched.length && setTaskStatuses(taskStatusesFetched);
-  }, [taskStatusesFetched])
 
   useEffect(() => {
     if (!loading) {
