@@ -108,7 +108,7 @@ const KPIS = [
 const Dashboard: FC = () => {
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Tablero
       </Typography>
       <KPISection kpis={KPIS} />

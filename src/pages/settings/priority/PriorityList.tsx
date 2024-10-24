@@ -7,7 +7,7 @@ import PriorityTable from '../../../components/tables/PriorityTable';
 const PriorityList: FC = () => {
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Prioridades
       </Typography>
       <PriorityTable />

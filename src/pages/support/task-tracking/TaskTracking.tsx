@@ -86,7 +86,7 @@ const TaskTracking: FC = () => {
 
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Seguimiento de Tareas
       </Typography>
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>

@@ -7,7 +7,7 @@ import IssueTable from '../../../components/tables/IssueTable';
 const IssueList: FC = () => {
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Problemas
       </Typography>
       <IssueTable />
