@@ -35,12 +35,12 @@ const Header: React.FC = () => {
         >
           {isDrawerOpen ? <MenuOpenIcon /> : <MenuIcon />}
         </IconButton>
-        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1 }}>
           UTMACH HelpDesk
         </Typography>
         {user && (
           <Box display="flex" alignItems="center">
-            <Typography variant="h6" noWrap component="div" marginRight={1}>
+            <Typography variant="body1" noWrap component="div" marginRight={1}>
               {user.email}
             </Typography>
             <Avatar sx={{ bgcolor: "blue", marginRight: 2 }} onClick={handleLogout}>
