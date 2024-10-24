@@ -7,9 +7,9 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { issueStatuses } from '../../../../constants/states';
 import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useIssue } from '../../../../hooks/support/useIssue';
-import useGlobalData from '../../../../hooks/useGlobalData';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
 import { getSubmitMsg } from '../../../../utils/messageUtils';
 import DialogComponent from '../../../dialogs/DialogComponent';
@@ -31,7 +31,6 @@ const IssueForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { categories, fetchCategories } = useCategory();
-  const { issueStatuses } = useGlobalData();
   const { issue, createdTask, error: errorIssue, loading: loadingIssue, success: successIssue,
     fetchIssue, createIssue, updateIssue, createTask } = useIssue();
 
@@ -106,7 +105,7 @@ const IssueForm: React.FC = () => {
 
   const handleConfirmRejectIssue = async () => {
     toogleOpenDialog('refectIssue');
-    issue?.id && await updateIssue(issue.id, { "status": 3 }) // 3  = RECHAZADO
+    issue?.id && await updateIssue(issue.id, { "status": "rechazado" }) // 3  = RECHAZADO
   }
 
 
@@ -170,7 +169,7 @@ const IssueForm: React.FC = () => {
     //       {getSubmitMsg(loadingIssue, isUpdate)}
     //     </Button>);
     // } else 
-    if (issue?.status === 1) { // 1 = RECIBIDO
+    if (issue?.status === "recibido") { // 1 = RECIBIDO
       return <>
         <Button onClick={handleCreateTask} variant="contained" color="secondary"
           disabled={loadingIssue} sx={{ marginInline: 0.2 }}>
@@ -262,7 +261,7 @@ const IssueForm: React.FC = () => {
                   name="status"
                   // readOnly={isUpdate}
                   value={formData.status ?? ''}
-                  options={issueStatuses.map((e) => ({ value: e.id, label: e.title }))}
+                  options={issueStatuses}
                   onChange={(e) => handleInputChange(e)}
                   fullWidth
                   height="56px"
