@@ -1,4 +1,4 @@
-// theme.ts
+
 import { createTheme } from '@mui/material/styles';
 
 import colors from './colors';
@@ -17,24 +17,24 @@ const theme = createTheme({
       dark: colors.secondary[60].hex,
     },
     background: {
-      default: colors.background.Primary.hex, // Primary
-      paper: colors.background.Helper.hex,   // Helper
+      default: colors.background.Primary.hex,
+      paper: colors.background.Helper.hex,
     },
     text: {
-      primary: colors.text.Dark.hex,  // Dark
-      secondary: colors.text.Light.hex, // Light
+      primary: colors.text.Dark.hex,
+      secondary: colors.text.Light.hex,
     },
     error: {
-      main: colors.feedback.Dark.hex,  // Dark (Feedback red)
+      main: colors.feedback.Dark.hex,
     },
     success: {
-      main: colors.feedback.DarkGreen.hex,  // Dark (Green feedback)
+      main: colors.feedback.DarkGreen.hex,
     },
     warning: {
-      main: colors.feedback.DarkYellow.hex,  // Dark (Yellow feedback)
+      main: colors.feedback.DarkYellow.hex,
     },
     info: {
-      main: colors.feedback.DarkAlt.hex,  // Dark (Blue feedback)
+      main: colors.feedback.DarkAlt.hex,
     },
   },
   typography: typography,
