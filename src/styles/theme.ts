@@ -7,34 +7,34 @@ import typography from './typography';
 const theme = createTheme({
   palette: {
     primary: {
-      main: colors.primary[0].hex,
-      light: colors.primary[1].hex,
-      dark: colors.primary[4].hex,
+      main: colors.primary[40].hex,
+      light: colors.primary[10].hex,
+      dark: colors.primary[60].hex,
     },
     secondary: {
-      main: colors.secondary[0].hex,
-      light: colors.secondary[1].hex,
-      dark: colors.secondary[4].hex,
+      main: colors.secondary[40].hex,
+      light: colors.secondary[10].hex,
+      dark: colors.secondary[60].hex,
     },
     background: {
-      default: colors.background[1].hex, // Primary
-      paper: colors.background[0].hex,   // Helper
+      default: colors.background.Primary.hex, // Primary
+      paper: colors.background.Helper.hex,   // Helper
     },
     text: {
-      primary: colors.neutral[6].hex,  // Dark
-      secondary: colors.neutral[4].hex, // Light
+      primary: colors.text.Dark.hex,  // Dark
+      secondary: colors.text.Light.hex, // Light
     },
     error: {
-      main: colors.feedback[0].hex,  // Dark (Feedback red)
+      main: colors.feedback.Dark.hex,  // Dark (Feedback red)
     },
     success: {
-      main: colors.feedback[6].hex,  // Dark (Green feedback)
+      main: colors.feedback.DarkGreen.hex,  // Dark (Green feedback)
     },
     warning: {
-      main: colors.feedback[9].hex,  // Dark (Yellow feedback)
+      main: colors.feedback.DarkYellow.hex,  // Dark (Yellow feedback)
     },
     info: {
-      main: colors.feedback[3].hex,  // Dark (Blue feedback)
+      main: colors.feedback.DarkAlt.hex,  // Dark (Blue feedback)
     },
   },
   typography: typography,
