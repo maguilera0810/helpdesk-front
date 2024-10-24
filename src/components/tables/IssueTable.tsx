@@ -4,6 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 
+import { issueStatuses } from '../../constants/states';
 import { useIssue } from '../../hooks/support/useIssue';
 import useGlobalData from '../../hooks/useGlobalData';
 import useFilterStore from '../../stores/useFilterStore';
@@ -33,7 +34,7 @@ const IssueTable: FC = () => {
   const navigate = useNavigate();
   const { issues, loading, error, fetchIssues } = useIssue();
   const { filters, clearFilters } = useFilterStore();
-  const { lightUsers, issueStatuses } = useGlobalData();
+  const { lightUsers } = useGlobalData();
 
   const handleCreate = () => {
     navigate('/soporte/problema/addNew/');
@@ -45,8 +46,8 @@ const IssueTable: FC = () => {
   const getUserNameById = (userId: number) => {
     return lightUsers.find(user => user.id === userId);
   };
-  const getStatusById = (id: number) => {
-    return issueStatuses.find(e => e.id === id);
+  const getStatusByCode = (code: string) => {
+    return issueStatuses.find(e => e.value === code);
   };
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const IssueTable: FC = () => {
     return issues.map(issue => ({
       ...issue,
       createdBy: getUserNameById(issue.createdBy),
-      status: getStatusById(issue.status),
+      status: getStatusByCode(issue.status),
     }));
   }, [issues, lightUsers]);
 
