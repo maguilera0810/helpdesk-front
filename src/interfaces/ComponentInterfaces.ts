@@ -1,8 +1,12 @@
 import { Dayjs } from "dayjs";
+import { ReactNode } from "react";
+
 import { Option } from "./GlobalInterfaces";
 import { CategoryType, ScheduleTask } from "./ModelInterfaces";
 
-
+export interface ParentComponentProps {
+  children: ReactNode;
+}
 export interface RandomStringProps {
   length?: number;
   useLowercase?: boolean;
@@ -42,4 +46,15 @@ export interface CheckboxGroupProps<T> {
   options: Option[];
   value: T[];
   onChange?: (selected: T[]) => void;
+}
+
+
+export interface LayoutDialogProps extends ParentComponentProps {
+  open: boolean;
+  title: string;
+  okText?: string;
+  cancelText?: string;
+  message?: string;
+  onOk: () => void;
+  onCancel: () => void;
 }

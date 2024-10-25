@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,17 +7,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
+import { LayoutDialogProps } from '../../interfaces/ComponentInterfaces';
 
-interface LayoutDialogProps {
-  open: boolean;
-  title: string;
-  children: ReactNode;
-  okText?: string;
-  cancelText?: string;
-  message?: string;
-  onOk: () => void;
-  onCancel: () => void;
-}
+
 
 const LayoutDialog: React.FC<LayoutDialogProps> = ({
   open,
