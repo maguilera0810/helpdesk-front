@@ -7,7 +7,7 @@ const UserList: React.FC = () => {
   return (
     <Layout>
       <Box sx={{ padding: 2 }}>
-        <Typography variant="h4">
+        <Typography variant="h1">
           Usuarios
         </Typography>
         <UserTable />

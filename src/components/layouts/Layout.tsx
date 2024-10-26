@@ -1,16 +1,16 @@
-import MenuIcon from '@mui/icons-material/Menu';
-import { Box, CssBaseline, IconButton, Toolbar } from '@mui/material';
+import { FC } from 'react';
+
+import { Box, CssBaseline, Toolbar } from '@mui/material';
 import { motion } from 'framer-motion';
-import { FC, ReactNode, useState } from 'react';
+
+import { ParentComponentProps } from '../../interfaces/ComponentInterfaces';
 import uiStore from '../../stores/uiStore';
 import Header from './Header';
 import Navbar from './Navbar';
 
 const drawerWidth = 240;
-interface LayoutProps {
-  children: ReactNode;
-}
-const Layout: FC<LayoutProps> = ({ children }) => {
+
+const Layout: FC<ParentComponentProps> = ({ children }) => {
   const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
 
   return (

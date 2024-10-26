@@ -16,6 +16,7 @@ import { BaseChangeMethod } from '../../../../types/methodTypes';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 import { getSubmitMsg } from '../../../../utils/messageUtils';
+import { taskStatuses } from '../../../../constants/states';
 
 const gridItemProps = {
   size: {
@@ -43,7 +44,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
   const isUpdate = Boolean(id && id !== 'addNew');
 
 
-  const { priorities, taskStatuses } = useGlobalData();
+  const { priorities } = useGlobalData();
   const { task, setTask } = taskStore()
   const { task: taskFetched, loading, success, method, createTask, updateTask } = useTask();
   const { categories } = categoryStore();
@@ -158,7 +159,7 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
             label="Estado"
             name="status"
             value={formData.status ?? ''}
-            options={taskStatuses.map(e => ({ value: e.id, label: e.title }))}
+            options={taskStatuses}
             onChange={(e) => handleInputChange(e)}
             fullWidth
             height="56px"

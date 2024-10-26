@@ -7,7 +7,7 @@ import TaskTable from '../../../components/tables/TaskTable';
 const TaskList: FC = () => {
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Tareas
       </Typography>
       <TaskTable />

@@ -1,19 +1,15 @@
+import { ReactNode } from 'react';
 
-export interface IRandomStringOptions {
-  length?: number;
-  useLowercase?: boolean;
-  useUppercase?: boolean;
-  useNumbers?: boolean;
-  useSpecialChars?: boolean;
-}
-
-
-export interface IOption {
+export interface Option {
   value?: any;
   label: string;
   color?: string;
 }
 
-export interface IAutocompleteOption extends IOption {
+export interface IAutocompleteOption extends Option {
   inputValue?: string;
+}
+
+export interface Status extends Option {
+  icon: ReactNode;
 }

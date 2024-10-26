@@ -1,7 +1,9 @@
 import { AES, enc } from 'crypto-js';
 
-import { IRandomStringOptions } from '../interfaces/GlobalInterfaces';
+
+import { RandomStringProps } from '../interfaces/ComponentInterfaces';
 import Environment from './../environments/Environment';
+
 const { SECRET_KEY } = Environment;
 
 export const encryptData = (data: any) => AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
@@ -14,7 +16,7 @@ export const generateRandomString = ({
   useUppercase = true,
   useNumbers = true,
   useSpecialChars = true
-}: IRandomStringOptions = {}): string => {
+}: RandomStringProps): string => {
   const charTypes = [
     { use: useLowercase, chars: 'abcdefghijklmnopqrstuvwxyz' },
     { use: useUppercase, chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' },

@@ -6,7 +6,7 @@ export const renderChipCell = (elem: any) => {
   let title: string = 'N/A'
   if (elem) {
     bgcolor = elem.color ?? 'lightgray';
-    title = elem.title;
+    title = elem.title ?? elem.label;
   }
   return (
     <Chip

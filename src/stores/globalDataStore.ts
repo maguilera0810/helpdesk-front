@@ -10,8 +10,6 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
   reloadPriority: false,
   reloadCategory: false,
   reloadPermission: false,
-  reloadTaskStatus: false,
-  reloadIssueStatus: false,
   setReload: (reload, reloadType?) =>
     set(produce((state: GlobalDataState) => {
       if (!reloadType) {
@@ -59,16 +57,6 @@ const stateCreator: StateCreator<GlobalDataState, [], [], GlobalDataState> = (se
       state.categories = categories;
     })),
 
-  taskStatuses: [],
-  setTaskStatuses: (statuses) =>
-    set(produce((state: GlobalDataState) => {
-      state.taskStatuses = statuses;
-    })),
-  issueStatuses: [],
-  setIssueStatuses: (statuses) =>
-    set(produce((state: GlobalDataState) => {
-      state.issueStatuses = statuses;
-    })),
 });
 
 const storageName = 'global-data-storage';

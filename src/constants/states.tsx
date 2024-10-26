@@ -1,17 +1,11 @@
-import { ReactNode } from 'react';
-
 import {
   Assignment, AssignmentTurnedIn, Block,
   CheckCircle, Close, NotInterested,
   PlayArrow, Replay, Schedule, Task
 } from '@mui/icons-material';
 
-interface Status {
-  label: string;
-  value: string;
-  color: string;
-  icon: ReactNode;
-}
+import { Status } from '../interfaces/GlobalInterfaces';
+
 
 export const taskStatuses: Status[] = [
   {

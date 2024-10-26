@@ -7,7 +7,7 @@ import FacultiesTable from '../../../components/tables/FacultiesTable';
 const ListFaculties: FC = () => {
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Facultades
       </Typography>
       <FacultiesTable />
