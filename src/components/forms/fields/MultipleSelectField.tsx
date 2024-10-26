@@ -5,12 +5,11 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Chip from '@mui/material/Chip';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
-import Swipper from '../../layouts/Swipper';
+import Label from './Label';
 
 
 const ITEM_HEIGHT = 48;
@@ -69,7 +68,7 @@ const MultipleSelectField: FC<IMultipleSelectFieldProps> = ({
 
   return (
     <FormControl fullWidth={fullWidth}>
-      <InputLabel>{label}</InputLabel>
+      <Label >{label}</Label>
       <Select
         name={name}
         value={value}

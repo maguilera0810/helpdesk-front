@@ -1,6 +1,7 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import React, { ChangeEvent } from 'react';
 import { Option } from '../../../interfaces/GlobalInterfaces';
+import Label from './Label';
 
 interface ISelectFieldProps {
   label: string;
@@ -24,7 +25,7 @@ const SelectField: React.FC<ISelectFieldProps> = ({
   height = '56px' }) => {
   return (
     <FormControl fullWidth={fullWidth}>
-      <InputLabel>{label}</InputLabel>
+      <Label>{label}</Label>
       <Select
         name={name}
         value={value}
