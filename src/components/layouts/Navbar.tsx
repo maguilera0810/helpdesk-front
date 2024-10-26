@@ -50,8 +50,6 @@ const Navbar: React.FC = () => {
           <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
           <NavItem text="Categorias" icon={<CategoryIcon />} path="/configuraciones/categoria/" />
           <NavItem text="Prioridades" icon={<PriorityHighIcon />} path="/configuraciones/prioridad/" />
-          <NavItem text="Estado Tarea" icon={<AssignmentTurnedInIcon />} path="/configuraciones/estado-tarea/" />
-          <NavItem text="Estado Problema" icon={<AssignmentLateIcon />} path="/configuraciones/estado-problema/" />
         </NavItem>
         <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs/" />
       </List>
