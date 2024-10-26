@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
+import { IssueComment, Permission, Priority, Role, Schedule, Task, TaskComment, User, UserTask } from '../interfaces/ModelInterfaces';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
 import { modeType } from '../types/uiTypes';
@@ -34,7 +34,18 @@ export interface TaskState extends BaseState, ICallback {
   setEndAt: (date: Dayjs | null) => void;
   clearTaks: () => void;
 }
-
+export interface TaskCommentState extends BaseState {
+  taskComment: TaskComment | null;
+  taskComments: TaskComment[];
+  setTaskComment: (taskComment: TaskComment | null) => void;
+  setTaskComments: (taskComments: TaskComment[]) => void;
+}
+export interface IssueCommentState extends BaseState {
+  issueComment: IssueComment | null;
+  issueComments: IssueComment[];
+  setIssueComment: (issueComment: IssueComment | null) => void;
+  setIssueComments: (issueComments: IssueComment[]) => void;
+}
 export interface CategoryState extends BaseState {
   category: Category | null;
   categories: Category[];
