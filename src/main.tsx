@@ -2,15 +2,14 @@ import { StrictMode } from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import CssBaseline from '@mui/material/CssBaseline';
+import ThemeProviderWrapper from './styles/ThemeProviderWrapper';
 // import { I18nextProvider } from 'react-i18next';
 // import i18n from './i18n';
 
 import App from './App';
-import theme from './styles/theme';
 
 // import './index.css';
 
@@ -18,11 +17,11 @@ import theme from './styles/theme';
 </I18nextProvider> */}
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProviderWrapper>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <CssBaseline />
         <App />
       </LocalizationProvider>
-    </ThemeProvider>
+    </ThemeProviderWrapper>
   </StrictMode>,
 )
