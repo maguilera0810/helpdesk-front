@@ -35,15 +35,15 @@ export interface TaskState extends BaseState, ICallback {
   clearTaks: () => void;
 }
 export interface TaskCommentState extends BaseState {
-  taskComment: TaskComment | null;
+  taskComment?: TaskComment;
   taskComments: TaskComment[];
-  setTaskComment: (taskComment: TaskComment | null) => void;
+  setTaskComment: (taskComment?: TaskComment) => void;
   setTaskComments: (taskComments: TaskComment[]) => void;
 }
 export interface IssueCommentState extends BaseState {
-  issueComment: IssueComment | null;
+  issueComment?: IssueComment;
   issueComments: IssueComment[];
-  setIssueComment: (issueComment: IssueComment | null) => void;
+  setIssueComment: (issueComment?: IssueComment) => void;
   setIssueComments: (issueComments: IssueComment[]) => void;
 }
 export interface CategoryState extends BaseState {
