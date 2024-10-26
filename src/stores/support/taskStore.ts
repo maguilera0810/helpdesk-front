@@ -1,10 +1,10 @@
 import { produce } from 'immer';
 import { StateCreator } from 'zustand';
-import { ITaskState } from '../../interfaces/StateInterfaces';
+import { TaskState } from '../../interfaces/StateInterfaces';
 import storeCreator from '../core/storeCreator';
 
 
-const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
+const stateCreator: StateCreator<TaskState, [], [], TaskState> = (set) => ({
   task: null,
   schedule: null,
   tasks: [],
@@ -13,39 +13,39 @@ const stateCreator: StateCreator<ITaskState, [], [], ITaskState> = (set) => ({
   startAt: null,
   endAt: null,
   setTask: (task) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.task = task;
     })),
   setTasks: (tasks) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.tasks = tasks;
     })),
   setUserTasks: (userTasks) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.userTasks = userTasks;
     })),
   setSchedule: (schedule) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.schedule = schedule;
     })),
   setCurrDate: (currDate) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.currDate = currDate;
     })),
   setStartAt: (startAt) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.startAt = startAt;
     })),
   setEndAt: (endAt) =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.endAt = endAt;
     })),
   clearTaks: () =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.tasks = [];
     })),
   clearState: () =>
-    set(produce((state: ITaskState) => {
+    set(produce((state: TaskState) => {
       state.task = null;
       state.tasks = [];
       state.userTasks = [];

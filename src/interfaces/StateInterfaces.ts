@@ -17,7 +17,7 @@ interface ICallback {
   setCallback?: (callback: (fn: any) => void) => void
 }
 
-export interface ITaskState extends BaseState, ICallback {
+export interface TaskState extends BaseState, ICallback {
   task: Task | null;
   tasks: Task[];
   userTasks: UserTask[];
