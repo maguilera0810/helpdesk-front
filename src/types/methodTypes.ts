@@ -6,7 +6,9 @@ export type BaseChangeMethod<T> = (e: ChangeEvent<HTMLInputElement | HTMLTextAre
 
 
 export type methodTask = "fetchTasks" | "fetchTask" | "createTask" | "updateTask" | "deleteTask" | "fetchUserTasks" | "fetchTrackingTasks";
+export type methodTaskComment = "fetchTaskComments" | "fetchTaskComment" | "createTaskComment" | "updateTaskComment" | "deleteTaskComment";
 export type methodIssue = 'fetchIssues' | 'fetchIssue' | 'createIssue' | 'createTask' | 'updateIssue' | 'deleteIssue';
+export type methodIssueComment = "fetchIssueComments" | "fetchIssueComment" | "createIssueComment" | "updateIssueComment" | "deleteIssueComment";
 
 export type methodUser = 'fetchUsers' | 'fetchUser' | 'createUser' | 'updateUser' | 'deleteUser';
 export type methodRole = 'fetchRoles' | 'fetchRole' | 'createRole' | 'updateRole' | 'deleteRole';
@@ -16,4 +18,4 @@ export type methodCategory = 'fetchCategories' | 'fetchCategory' | 'createCatego
 export type methodCategoryType = 'fetchCategoryTypes' | 'fetchCategoryType' | 'createCategoryType' | 'updateCategoryType' | 'deleteCategoryType';
 export type methodPriority = 'fetchPriorities' | 'fetchPriority' | 'createPriority' | 'updatePriority' | 'deletePriority';
 
-export type ReloadType = 'permission' | 'category' | 'priority' | 'user' ;
+export type ReloadType = 'permission' | 'category' | 'priority' | 'user';
