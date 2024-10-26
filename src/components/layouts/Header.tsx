@@ -1,15 +1,13 @@
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { AppBar, Box, IconButton, Toolbar, Typography, Avatar } from '@mui/material';
+import { AppBar, Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import authStore from '../../stores/auth/authStore';
 import uiStore from '../../stores/uiStore';
+import ToggleThemeButton from '../forms/fields/ToggleThemeButton';
 
-interface HeaderProps {
-  handleDrawerToggle: () => void;
-}
+
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -38,6 +36,7 @@ const Header: React.FC = () => {
         <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1 }}>
           UTMACH HelpDesk
         </Typography>
+        <ToggleThemeButton />
         {user && (
           <Box display="flex" alignItems="center">
             <Typography variant="body1" noWrap component="div" marginRight={1}>

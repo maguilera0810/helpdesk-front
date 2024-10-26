@@ -2,7 +2,6 @@ import { StrictMode } from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import CssBaseline from '@mui/material/CssBaseline';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ThemeProviderWrapper from './styles/ThemeProviderWrapper';
@@ -19,7 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProviderWrapper>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <CssBaseline />
         <App />
       </LocalizationProvider>
     </ThemeProviderWrapper>

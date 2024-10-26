@@ -3,6 +3,7 @@ import { Token } from '../interfaces/AuthInterfaces';
 import { Permission, Priority, Role, Schedule, Task, User, UserTask } from '../interfaces/ModelInterfaces';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
+import { modeType } from '../types/uiTypes';
 import { Category } from "./ModelInterfaces";
 
 
@@ -107,9 +108,12 @@ export interface IFilterState extends BaseState {
   clearFilters: () => void;
 }
 
-export interface IUIState extends BaseState {
+export interface UIState extends BaseState {
   isDrawerOpen: boolean;
+  mode: modeType;
   toggleDrawer: () => void;
+  setMode: (mode: modeType) => void;
+  toggleMode: () => void;
 }
 
 
