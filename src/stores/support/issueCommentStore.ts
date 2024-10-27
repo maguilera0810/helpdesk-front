@@ -5,8 +5,13 @@ import storeCreator from '../core/storeCreator';
 
 
 const stateCreator: StateCreator<IssueCommentState, [], [], IssueCommentState> = (set) => ({
+  issue: undefined,
   issueComment: undefined,
   issueComments: [],
+  setIssue: (issue) =>
+    set(produce((state: IssueCommentState) => {
+      state.issue = issue;
+    })),
   setIssueComment: (issueComment) =>
     set(produce((state: IssueCommentState) => {
       state.issueComment = issueComment;
@@ -18,6 +23,7 @@ const stateCreator: StateCreator<IssueCommentState, [], [], IssueCommentState> =
 
   clearState: () =>
     set(produce((state: IssueCommentState) => {
+      state.issue = undefined;
       state.issueComment = undefined;
       state.issueComments = [];
     })),
