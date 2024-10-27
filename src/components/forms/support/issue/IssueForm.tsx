@@ -15,6 +15,7 @@ import { getSubmitMsg } from '../../../../utils/messageUtils';
 import DialogComponent from '../../../dialogs/DialogComponent';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
+import CommentList from '../../../comments/CommentList';
 
 const gridItemProps = {
   xs: 12,
@@ -299,6 +300,7 @@ const IssueForm: React.FC = () => {
             </Grid>
           </Box>
         </TabPanel>
+        <CommentList type='issue' />
       </TabContext>
     </Paper>
   );
