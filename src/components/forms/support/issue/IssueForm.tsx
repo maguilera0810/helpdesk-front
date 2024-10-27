@@ -10,12 +10,14 @@ import dayjs, { Dayjs } from 'dayjs';
 import { issueStatuses } from '../../../../constants/states';
 import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useIssue } from '../../../../hooks/support/useIssue';
+import { useIssueComment } from '../../../../hooks/support/useIssueComment';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
+import issueCommentStore from '../../../../stores/support/issueCommentStore';
 import { getSubmitMsg } from '../../../../utils/messageUtils';
+import CommentList from '../../../comments/CommentList';
 import DialogComponent from '../../../dialogs/DialogComponent';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
-import CommentList from '../../../comments/CommentList';
 
 const gridItemProps = {
   xs: 12,
@@ -34,11 +36,12 @@ const IssueForm: React.FC = () => {
   const { categories, fetchCategories } = useCategory();
   const { issue, createdTask, error: errorIssue, loading: loadingIssue, success: successIssue,
     fetchIssue, createIssue, updateIssue, createTask } = useIssue();
-
   const [formData, setFormData] = useState<Partial<Issue>>({});
   const [tabValue, setTabValue] = useState('0');
   const [openDialogCreateTask, setOpenDialogCreateTask] = useState<boolean>(false);
   const [openDialogRejectIssue, setOpenDialogRejectIssue] = useState<boolean>(false);
+  const { issueComments, fetchIssueComments } = useIssueComment();
+  const { setIssue, setIssueComments, clearState } = issueCommentStore();
 
   const isUpdate = Boolean(id && id !== 'addNew');
 
@@ -87,41 +90,35 @@ const IssueForm: React.FC = () => {
     e.preventDefault();
     setTabValue(newValue);
   };
-
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
     toogleOpenDialog('createTask'); // Open the confirmation dialog
   };
-
   const handleConfirmCreateTask = async () => {
     toogleOpenDialog('createTask');
     issue?.id && await createTask(issue.id)
   }
-
-
   const handleRejectIssue = async (e: React.FormEvent) => {
     e.preventDefault();
     toogleOpenDialog('refectIssue');
   };
-
   const handleConfirmRejectIssue = async () => {
     toogleOpenDialog('refectIssue');
     issue?.id && await updateIssue(issue.id, { "status": "rechazado" }) // 3  = RECHAZADO
   }
 
-
+  const handdleFetchComments = () => {
+    if (!issue) { return; }
+    fetchIssueComments({ "issue__id": issue.id, "order_by": "-created_at" });
+  }
   useEffect(() => {
     fetchCategories();
+    return () => { clearState?.() }
   }, []);
-
   useEffect(() => {
-    if (!isUpdate) {
-      return
-    }
+    if (!isUpdate) return;
     const issueId = parseInt(id as string);
-    if (!isNaN(issueId)) {
-      fetchIssue(issueId);
-    }
+    !isNaN(issueId) && fetchIssue(issueId);
   }, [id]);
 
   useEffect(() => {
@@ -131,7 +128,13 @@ const IssueForm: React.FC = () => {
       createdAt: issue.createdAt ? dayjs(issue.createdAt).toDate() : undefined,
       updatedAt: issue.updatedAt ? dayjs(issue.updatedAt).toDate() : undefined,
     });
+    setIssue(issue);
+    handdleFetchComments();
   }, [issue]);
+
+  useEffect(() => {
+    issueComments.length && setIssueComments(issueComments);
+  }, [issueComments])
 
   useEffect(() => {
     if (createdTask) {
@@ -300,7 +303,7 @@ const IssueForm: React.FC = () => {
             </Grid>
           </Box>
         </TabPanel>
-        <CommentList type='issue' />
+        <CommentList type='issue' onSave={handdleFetchComments} />
       </TabContext>
     </Paper>
   );
