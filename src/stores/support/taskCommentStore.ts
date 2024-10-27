@@ -5,8 +5,13 @@ import storeCreator from '../core/storeCreator';
 
 
 const stateCreator: StateCreator<TaskCommentState, [], [], TaskCommentState> = (set) => ({
+  task: undefined,
   taskComment: undefined,
   taskComments: [],
+  setTask: (task) =>
+    set(produce((state: TaskCommentState) => {
+      state.task = task;
+    })),
   setTaskComment: (taskComment) =>
     set(produce((state: TaskCommentState) => {
       state.taskComment = taskComment;
