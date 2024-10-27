@@ -27,8 +27,9 @@ const colors = {
   },
   text: {
     Dark: { hex: "#282828", rgb: "rgb(40, 40, 40)" },
-    Light: { hex: "#9A9A9A", rgb: "rgb(154, 154, 154)" },
     Medium: { hex: "#818181", rgb: "rgb(129, 129, 129)" },
+    Light: { hex: "#9A9A9A", rgb: "rgb(154, 154, 154)" },
+    Light2: { hex: "#C8C8C8", rgb: "rgb(200, 200, 200)" },
     Heading: { hex: "#095493", rgb: "rgb(9, 84, 147)" },
     Link: { hex: "#E73741", rgb: "rgb(231, 55, 65)" },
   },
