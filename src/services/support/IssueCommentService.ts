@@ -6,7 +6,7 @@ export class IssueCommentService extends BaseCrudService<IssueComment> {
   private static instance: IssueCommentService;
 
   private constructor() {
-    super(`/api/management/task-comment/`);
+    super(`/api/management/issue-comment/`);
   }
 
   public static getInstance(): IssueCommentService {
