@@ -4,13 +4,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Paper, Tab, Typography } from '@mui/material';
 
+import { useUser } from '../../../../hooks/admin/useUser';
 import { useCategory } from '../../../../hooks/settings/useCategory';
 import { useTask } from '../../../../hooks/support/useTask';
-import { useUser } from '../../../../hooks/admin/useUser';
-import { Task } from '../../../../interfaces/ModelInterfaces';
-import categoryStore from '../../../../stores/settings/categoryStore';
-import taskStore from '../../../../stores/support/taskStore';
+import { useTaskComment } from '../../../../hooks/support/useTaskComment';
 import useUserStore from '../../../../stores/admin/useUserStore';
+import categoryStore from '../../../../stores/settings/categoryStore';
+import taskCommentStore from '../../../../stores/support/taskCommentStore';
+import taskStore from '../../../../stores/support/taskStore';
+import CommentList from '../../../comments/CommentList';
 import TaskBaseInfo from './TaskBaseInfo';
 import TaskSchedule from './TaskSchedule';
 
@@ -19,20 +21,26 @@ const TaskForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
-  const { setTask, clearState } = taskStore()
-  const { setUsers } = useUserStore();
-  const { setCategories } = categoryStore();
-
   const { users, fetchUsers } = useUser();
   const { categories, fetchCategories } = useCategory();
   const { task, error, success, method, fetchTask } = useTask();
-  const [tabValue, setTabValue] = useState('0');
 
+  const { setTask, clearState } = taskStore()
+  const { setUsers } = useUserStore();
+  const { setCategories } = categoryStore();
+  const { taskComments, fetchTaskComments } = useTaskComment();
+  const { setTask: setTaskComentStore, setTaskComments, clearState: clearStateComment } = taskCommentStore();
+
+
+  const [tabValue, setTabValue] = useState('0');
 
   useEffect(() => {
     fetchCategories({ "type__title": "habilidad" });
     fetchUsers({ "groups__id__in": [1, 2, 3] });
-    return () => { clearState?.() }
+    return () => {
+      clearState?.();
+      clearStateComment?.();
+    }
   }, []);
 
   useEffect(() => {
@@ -56,11 +64,17 @@ const TaskForm: React.FC = () => {
   useEffect(() => {
     if (task) {
       setTask(task);
+      setTaskComentStore(task);
+      handdleFetchComments();
     }
   }, [task]);
 
   useEffect(() => {
-    if (success === true && task && (method === 'createTask' || method === 'updateTask')) {
+    taskComments.length && setTaskComments(taskComments);
+  }, [taskComments])
+
+  useEffect(() => {
+    if (task && success && (method === 'createTask' || method === 'updateTask')) {
       navigate(`/soporte/tareas/${task.id}/`);
     }
   }, [success]);
@@ -70,24 +84,15 @@ const TaskForm: React.FC = () => {
 
   }
 
-
-  const handleSubmit = (task: Partial<Task>) => {
-    console.log(task);
-
-    // if (isUpdate) {
-    //   const taskId = parseInt(id as string);
-    //   if (!isNaN(taskId)) {
-    //     updateTask(taskId, task);
-    //   }
-    // } else {
-    //   createTask(task);
-    // }
-  };
-
-
   const handleTabLisChange = (event: React.SyntheticEvent, newValue: string) => {
+    event.preventDefault();
     setTabValue(newValue);
   };
+
+  const handdleFetchComments = () => {
+    if (!task) { return; }
+    fetchTaskComments({ "task__id": task.id, "order_by": "-created_at" });
+  }
 
 
   return (
@@ -104,12 +109,12 @@ const TaskForm: React.FC = () => {
         </Box>
         <TabPanel value="0">
           <TaskBaseInfo
-            onSuccess={handleSuccess}
-            onSubmit={handleSubmit} />
+            onSuccess={handleSuccess} />
         </TabPanel>
         <TabPanel value="1">
           <TaskSchedule />
         </TabPanel>
+        {task && <CommentList type='task' onSave={handdleFetchComments} />}
       </TabContext>
     </Paper>
   );
