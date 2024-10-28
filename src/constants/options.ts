@@ -1,8 +1,8 @@
 import { Option } from "../interfaces/GlobalInterfaces";
 
 export const taskTypeOptions: Option[] = [
-  { value: 'preventive', label: 'Preventiva' },
-  { value: 'emergency', label: 'Emergente' },
+  { value: 'preventiva', label: 'Preventiva' },
+  { value: 'emergente', label: 'Emergente' },
 ];
 
 
