@@ -58,7 +58,6 @@ export interface ScheduleTask extends Task {
   hasCollision?: boolean;
 }
 export interface Issue extends BaseInfoModel {
-  id?: number;
   code: string;
   status: string;
   contactEmail: string;
@@ -70,6 +69,19 @@ export interface Issue extends BaseInfoModel {
   createdAt: Date | null; //
   updatedAt: Date | null; //
 }
+export interface Comment extends BaseInfoModel {
+  files: string[];
+  createdBy: number | Partial<User>;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+}
+export interface TaskComment extends Comment {
+  task: number;
+}
+export interface IssueComment extends Comment {
+  issue: number;
+}
+
 export interface Category extends BaseInfoModel {
   id: number;
   code: string;

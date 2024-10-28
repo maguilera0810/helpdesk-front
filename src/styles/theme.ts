@@ -22,10 +22,10 @@ export const getTheme = (mode?: 'light' | 'dark' | 'system') => {
       ...(finalMode === 'light'
         ? {
           primary: {
-            main: colors.primary["00"].hex,
+            main: colors.primary["10"].hex,
           },
           secondary: {
-            main: colors.secondary["00"].hex,
+            main: colors.secondary["10"].hex,
           },
           background: {
             default: colors.background.Primary.hex,
@@ -41,14 +41,14 @@ export const getTheme = (mode?: 'light' | 'dark' | 'system') => {
             main: colors.primary["60"].hex,
           },
           secondary: {
-            main: colors.secondary["80"].hex,
+            main: colors.secondary["60"].hex,
           },
           background: {
-            default: colors.neutral["80"].hex,
-            paper: colors.neutral["60"].hex,
+            default: colors.neutral["40"].hex,
+            paper: colors.neutral["80"].hex,
           },
           text: {
-            primary: colors.text.Light.hex,
+            primary: colors.text.Light2.hex,
             secondary: colors.text.Medium.hex,
           },
         }),

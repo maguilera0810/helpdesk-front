@@ -2,7 +2,7 @@ import { Dayjs } from "dayjs";
 import { ReactNode } from "react";
 
 import { Option } from "./GlobalInterfaces";
-import { CategoryType, ScheduleTask } from "./ModelInterfaces";
+import { CategoryType, IssueComment, ScheduleTask, TaskComment } from "./ModelInterfaces";
 
 export interface ParentComponentProps {
   children: ReactNode;
@@ -57,4 +57,22 @@ export interface LayoutDialogProps extends ParentComponentProps {
   message?: string;
   onOk: () => void;
   onCancel: () => void;
+}
+
+export interface CommentProps {
+  comment: IssueComment | TaskComment;
+}
+
+export interface ComentListProps {
+  type: 'issue' | 'task';
+  onSave: () => void;
+}
+
+export interface CommentFormDialogProps {
+  open: boolean;
+  type?: 'task' | 'issue';
+  taskComment?: TaskComment;
+  issueComment?: IssueComment;
+  onConfirm?: (value?: number | TaskComment | IssueComment) => void;
+  onClose?: () => void;
 }
