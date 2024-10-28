@@ -2,7 +2,8 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Box, Button, Grid, Paper, Tab, TextField, Typography } from '@mui/material';
+import { Box, Button, Paper, Tab, TextField, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
@@ -20,10 +21,12 @@ import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 
 const gridItemProps = {
-  xs: 12,
-  sm: 6,
-  md: 4,
-  xl: 3,
+  size: {
+    xs: 12,
+    sm: 6,
+    md: 4,
+    xl: 3,
+  }
 };
 
 const fieldProps = {
@@ -207,7 +210,7 @@ const IssueForm: React.FC = () => {
         <TabPanel value="0">
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
             <Grid container spacing={{ xs: 1 }}>
-              <Grid item {...gridItemProps} key={"title"}>
+              <Grid {...gridItemProps} key={"title"}>
                 <TextField
                   label="Título"
                   name="title"
@@ -218,7 +221,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"description"}>
+              <Grid {...gridItemProps} key={"description"}>
                 <TextAreaField
                   label="Descripción"
                   name="description"
@@ -229,7 +232,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"contactEmail"}>
+              <Grid {...gridItemProps} key={"contactEmail"}>
                 <TextField
                   label="Email Contacto"
                   name="contactEmail"
@@ -239,7 +242,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"contactPhone"}>
+              <Grid {...gridItemProps} key={"contactPhone"}>
                 <TextField
                   label="Télefono Contacto"
                   name="contactPhone"
@@ -249,7 +252,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"code"} display={showField()}>
+              <Grid {...gridItemProps} key={"code"} display={showField()}>
                 <TextField
                   label="Código"
                   name="code"
@@ -259,7 +262,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"status"}>
+              <Grid {...gridItemProps} key={"status"}>
                 <SelectField
                   label="Estado"
                   name="status"
@@ -271,7 +274,7 @@ const IssueForm: React.FC = () => {
                   height="56px"
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"createdAt"}>
+              <Grid {...gridItemProps} key={"createdAt"}>
                 <DateTimeField
                   label="Creado"
                   disabled={true}
@@ -280,7 +283,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"updatedAt"}>
+              <Grid {...gridItemProps} key={"updatedAt"}>
                 <DateTimeField
                   label="Actualizado"
                   disabled={true}
@@ -289,7 +292,7 @@ const IssueForm: React.FC = () => {
                   {...fieldProps}
                 />
               </Grid>
-              <Grid item {...gridItemProps} key={"categories"}>
+              <Grid {...gridItemProps} key={"categories"}>
                 <MultipleSelectField
                   label="Categorias"
                   name="categories"
@@ -303,7 +306,7 @@ const IssueForm: React.FC = () => {
             </Grid>
           </Box>
         </TabPanel>
-        <CommentList type='issue' onSave={handdleFetchComments} />
+        {issue && <CommentList type='issue' onSave={handdleFetchComments} />}
       </TabContext>
     </Paper>
   );
