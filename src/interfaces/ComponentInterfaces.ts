@@ -67,3 +67,12 @@ export interface ComentListProps {
   type: 'issue' | 'task';
   onSave: () => void;
 }
+
+export interface CommentFormDialogProps {
+  open: boolean;
+  type?: 'task' | 'issue';
+  taskComment?: TaskComment;
+  issueComment?: IssueComment;
+  onConfirm?: (value?: number | TaskComment | IssueComment) => void;
+  onClose?: () => void;
+}
