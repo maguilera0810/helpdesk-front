@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { useIssueComment } from '../../../hooks/support/useIssueComment';
-import { useTaskComment } from '../../../hooks/support/useTaskComment';
-import { CommentFormDialogProps } from '../../../interfaces/ComponentInterfaces';
-import { IssueComment, TaskComment } from '../../../interfaces/ModelInterfaces';
-import issueCommentStore from '../../../stores/support/issueCommentStore';
-import taskCommentStore from '../../../stores/support/taskCommentStore';
+import { useIssueComment } from '../../hooks/support/useIssueComment';
+import { useTaskComment } from '../../hooks/support/useTaskComment';
+import { CommentFormDialogProps } from '../../interfaces/ComponentInterfaces';
+import { IssueComment, TaskComment } from '../../interfaces/ModelInterfaces';
+import issueCommentStore from '../../stores/support/issueCommentStore';
+import taskCommentStore from '../../stores/support/taskCommentStore';
 
 
 const CommentFormDialog: FC<CommentFormDialogProps> = ({ open, type, taskComment, issueComment,

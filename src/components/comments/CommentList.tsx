@@ -6,7 +6,7 @@ import { ComentListProps } from '../../interfaces/ComponentInterfaces';
 import { IssueComment, TaskComment } from '../../interfaces/ModelInterfaces';
 import issueCommentStore from '../../stores/support/issueCommentStore';
 import taskCommentStore from '../../stores/support/taskCommentStore';
-import CommentFormDialog from '../forms/comments/CommentFormDialog';
+import CommentFormDialog from '../dialogs/CommentFormDialog';
 import Comment from './Comment';
 
 const CommentList: FC<ComentListProps> = ({ type, onSave }) => {
