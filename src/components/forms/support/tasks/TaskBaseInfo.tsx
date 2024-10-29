@@ -7,16 +7,16 @@ import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { taskTypeOptions } from '../../../../constants';
+import { taskStatuses } from '../../../../constants/states';
 import { useTask } from '../../../../hooks/support/useTask';
 import useGlobalData from '../../../../hooks/useGlobalData';
 import { Task } from '../../../../interfaces/ModelInterfaces';
 import categoryStore from '../../../../stores/settings/categoryStore';
 import taskStore from '../../../../stores/support/taskStore';
 import { BaseChangeMethod } from '../../../../types/methodTypes';
+import { getSubmitMsg } from '../../../../utils/messageUtils';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
-import { getSubmitMsg } from '../../../../utils/messageUtils';
-import { taskStatuses } from '../../../../constants/states';
 
 const gridItemProps = {
   size: {
@@ -43,10 +43,9 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
   const { id } = useParams<{ id: string }>();
   const isUpdate = Boolean(id && id !== 'addNew');
 
-
   const { priorities } = useGlobalData();
-  const { task, setTask } = taskStore()
-  const { task: taskFetched, loading, success, method, createTask, updateTask } = useTask();
+  const { task } = taskStore()
+  const { loading, createTask, updateTask } = useTask();
   const { categories } = categoryStore();
   const [formData, setFormData] = useState<Partial<Task>>({});
 
@@ -59,18 +58,6 @@ const TaskBaseInfo: FC<TaskBaseInfoProps> = ({ onSubmit, onSuccess }) => {
       });
     }
   }, [task]);
-
-  useEffect(() => {
-    if (taskFetched) {
-      setTask(taskFetched);
-    }
-  }, [taskFetched])
-
-  useEffect(() => {
-    if (onSuccess && success === true && task && (method === 'createTask' || method === 'updateTask')) {
-      onSuccess(task.id);
-    }
-  }, [success]);
 
   const handleInputChange: BaseChangeMethod<any> = (e) => {
     const { name, value } = e.target;
