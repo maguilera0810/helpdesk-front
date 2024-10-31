@@ -14,12 +14,13 @@ const Layout: FC<ParentComponentProps> = ({ children }) => {
   const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
 
   return (
-    <Box id="box-layout" sx={{
-      display: 'flex',
-      minHeight: '100vh',
-      minWidth: '100vw',
-      // overflow: 'auto',
-    }}>
+    <Box
+      id="box-layout"
+      sx={{
+        display: 'flex',
+        minHeight: '100%',
+        minWidth: '100%',
+      }}>
       <CssBaseline />
       <Header />
       <Navbar />
@@ -27,29 +28,27 @@ const Layout: FC<ParentComponentProps> = ({ children }) => {
         id="main-box"
         component="main"
         sx={{
-          // backgroundColor: "#BB0000",
           flexGrow: 1,
           minHeight: '100vh',
           width: { sm: `calc(100vw - ${isDrawerOpen ? drawerWidth : 0}px)` },
           transition: 'margin 0.3s',
-          padding:1,
+          padding: 1,
+          overflowY: 'auto',
           // position: 'relative'
         }}
       >
-        <Toolbar />
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.5 }}
         >
+          <Toolbar />
           {children}
         </motion.div>
-
       </Box>
     </Box>
   );
 };
 
 export default Layout;
-

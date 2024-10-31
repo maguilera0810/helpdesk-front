@@ -1,10 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 
 import { AdminPanelSettings } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import CategoryIcon from '@mui/icons-material/Category';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -14,21 +12,22 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import { Box, Drawer, List, Toolbar, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-
-import { Box, Drawer, List, Toolbar } from '@mui/material';
 import uiStore from '../../stores/uiStore';
-
 import NavItem from './NavItem';
 
 const drawerWidth = 240;
 
 
-const Navbar: React.FC = () => {
-  const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
-  const toggleDrawer = uiStore((state) => state.toggleDrawer);
+const Navbar: FC = () => {
 
-  const drawer = (
+  const theme = useTheme();
+  const { isDrawerOpen, toggleDrawer } = uiStore();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const menu = (
     <>
       <Toolbar />
       <List>
@@ -37,10 +36,6 @@ const Navbar: React.FC = () => {
           <NavItem text="Seguimiento" icon={<TimelineIcon />} path="/soporte/seguimiento-tareas/" />
           <NavItem text="Tareas" icon={<AssignmentIcon />} path="/soporte/tareas/" />
           <NavItem text="Problemas" icon={<ErrorIcon />} path="/soporte/problema/" />
-          {/* <NavItem text="Planificación" icon={<EventIcon />} path="/soporte/planning/" /> */}
-          {/* <NavItem text="Proyectos" icon={<WorkIcon />} path="/soporte/proyects/" /> */}
-          {/* <NavItem text="Estadísticas" icon={<BarChartIcon />} path="/soporte/statistics/" /> */}
-          {/* <NavItem text="Reportes" icon={<InsertChartIcon />} path="/soporte/reports/" /> */}
         </NavItem>
         <NavItem text="Administración" icon={<AdminPanelSettings />}>
           <NavItem text="Usuarios" icon={<PersonIcon />} path="/administracion/usuario/" />
@@ -63,36 +58,18 @@ const Navbar: React.FC = () => {
       aria-label="mailbox folders"
     >
       <Drawer
-        variant="temporary"// mobile
+        variant={isMobile ? "temporary" : "persistent"} // desktop
         open={isDrawerOpen}
         onClose={toggleDrawer}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
         sx={{
-          display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: drawerWidth,
-          },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="persistent" // desktop
-        sx={{
-          display: { xs: 'none', sm: 'block' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: isDrawerOpen ? drawerWidth : 0,
-            transition: 'width 0.3s',
+            transition: 'width 4s',
           },
         }}
-        onClose={toggleDrawer}
-        open={isDrawerOpen}
       >
-        {drawer}
+        {menu}
       </Drawer>
     </Box>
   );
