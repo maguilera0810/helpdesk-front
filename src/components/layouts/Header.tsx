@@ -11,8 +11,7 @@ import ToggleThemeButton from '../forms/fields/ToggleThemeButton';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const user = authStore((state) => state.user);
-  const logout = authStore((state) => state.logout);
+  const { user, logout } = authStore();
   const isDrawerOpen = uiStore((state) => state.isDrawerOpen);
   const toggleDrawer = uiStore((state) => state.toggleDrawer);
 
