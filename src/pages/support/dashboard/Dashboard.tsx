@@ -1,23 +1,16 @@
 import { FC } from 'react';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ErrorIcon from '@mui/icons-material/Error';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import PersonIcon from '@mui/icons-material/Person';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import WorkIcon from '@mui/icons-material/Work';
 import { Typography } from '@mui/material';
+
 import Layout from '../../../components/layouts/Layout';
-
-
-
-
-import KPISection from './KPISection';
-import StatusTasksBarChart from '../../../components/forms/data_visualization/StatusTasksBarChart';
 import ChartsSection from './ChartsSection';
+import KPISection from './KPISection';
 
 
 

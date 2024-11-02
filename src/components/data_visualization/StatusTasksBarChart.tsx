@@ -1,12 +1,10 @@
 // src/components/BarChartComponent.tsx
-
 import { FC } from 'react';
 
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { BarChart } from '@mui/x-charts';
-import { axisClasses } from '@mui/x-charts/ChartsAxis';
-// Definición de la interfaz para los datos del gráfico
+
 
 
 const statusTasks = [
