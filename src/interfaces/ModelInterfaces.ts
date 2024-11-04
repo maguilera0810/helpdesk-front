@@ -1,3 +1,4 @@
+import { IssueStatusDataType, TaskStatusDataType } from "../types/dataTypes";
 import { GroupedPermissionType } from "../types/groupTypes";
 import { BaseInfoModel, BaseModel } from "./CoreInterfaces";
 
@@ -101,4 +102,14 @@ export interface Schedule {
   minTime?: Date;
   maxTime?: Date;
   userTasks: UserTask[];
+}
+
+
+// ANALYTICS
+
+export interface DataAnalytics {
+  TaskStatus: TaskStatusDataType;
+  IssueStatus: IssueStatusDataType;
+  TaskCategories: (Partial<Category> & { value?: number })[];
+  IssueCategories: (Partial<Category> & { value?: number })[];
 }
