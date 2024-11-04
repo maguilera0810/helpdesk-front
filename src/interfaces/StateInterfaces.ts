@@ -1,6 +1,7 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
 import { Issue, IssueComment, Permission, Priority, Role, Schedule, Task, TaskComment, User, UserTask } from '../interfaces/ModelInterfaces';
+import { IssueStatusDataType, TaskStatusDataType } from '../types/dataTypes';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
 import { modeType } from '../types/uiTypes';
@@ -136,4 +137,16 @@ export interface NavbarState {
   expandedItems: string[];
   toggleItem: (item: string) => void;
   isItemExpanded: (item: string) => boolean;
+}
+
+
+export interface DataAnalyticsState extends BaseState {
+  taskStatus?: TaskStatusDataType;
+  issueStatus?: IssueStatusDataType;
+  taskCategories: (Partial<Category> & { value?: number })[];
+  issueCategories: (Partial<Category> & { value?: number })[];
+  setTaskStatus: (value: TaskStatusDataType) => void;
+  setIssueStatus: (value: IssueStatusDataType) => void;
+  setTaskCategories: (value: (Partial<Category> & { value?: number })[]) => void;
+  setIssueCategories: (value: (Partial<Category> & { value?: number })[]) => void;
 }
