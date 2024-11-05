@@ -6,7 +6,7 @@ export const taskTypeOptions: Option[] = [
 ];
 
 
-export const taskStatusOptions: Option[] = [ // ESTO SI VA
+export const taskStatusOptions: Option[] = [
   { value: 'por_hacer', label: 'Por hacer' },
   { value: 'en_ejecucion', label: 'En ejecución' },
   { value: 'bloqueado', label: 'Bloqueado' },
@@ -16,17 +16,28 @@ export const taskStatusOptions: Option[] = [ // ESTO SI VA
   { value: 'completado', label: 'Completado' },
 ];
 
-export const issueStatusOptions: Option[] = [ // ESTO SI VA
+export const issueStatusOptions: Option[] = [
   { value: 'recibido', label: 'Recibido' },
   { value: 'tarea_creada', label: 'Tarea Creada' },
   { value: 'rechazado', label: 'Rechazado' },
   { value: 'completedo', label: 'Completed' },
 ];
 
-export const priorityOptions: Option[] = [ // ESTO NO VA
+export const priorityOptions: Option[] = [
   { value: 'lowest', label: 'Lowest' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
   { value: 'high', label: 'High' },
   { value: 'highest', label: 'Highest' },
+];
+
+export const periodOptions: Option[] = [
+  { value: 'today', label: 'Hoy' },
+  { value: 'yesterday', label: 'Ayer' },
+  { value: 'last_7_days', label: 'Hace 7 días' },
+  { value: 'last_14_days', label: 'Hace 14 días' },
+  { value: 'last_month', label: 'Este mes' },
+  { value: 'last_3_months', label: 'Últimos 3 meses' },
+  { value: 'current_year', label: 'Este año' },
+  { value: 'last_5_years', label: 'Últimos 5 meses' },
 ];
