@@ -110,6 +110,6 @@ export interface Schedule {
 export interface DataAnalytics {
   taskStatus: TaskStatusDataType;
   issueStatus: IssueStatusDataType;
-  taskCategories: (Partial<Category> & { value?: number })[];
-  issueCategories: (Partial<Category> & { value?: number })[];
+  taskCategories: (Partial<Category> & { value: number })[];
+  issueCategories: (Partial<Category> & { value: number })[];
 }
