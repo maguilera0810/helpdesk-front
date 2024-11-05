@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { issueStatuses } from '../../constants/states';
 import { useIssue } from '../../hooks/support/useIssue';
 import useGlobalData from '../../hooks/useGlobalData';
-import useFilterStore from '../../stores/useFilterStore';
+import filterStore from '../../stores/filterStore';
 import { renderChipCell, renderUserCell } from './renders';
 
 const COLUMNS: GridColDef[] = [
@@ -33,7 +33,7 @@ Object.freeze(COLUMNS);
 const IssueTable: FC = () => {
   const navigate = useNavigate();
   const { issues, loading, error, fetchIssues } = useIssue();
-  const { filters, clearFilters } = useFilterStore();
+  const { filters, clearFilters } = filterStore();
   const { lightUsers } = useGlobalData();
 
   const handleCreate = () => {

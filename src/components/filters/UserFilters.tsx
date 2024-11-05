@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField } from '@mui/material';
-import useFilterStore from '../../stores/useFilterStore';
+import filterStore from '../../stores/filterStore';
 
 
 const filterEmptyValues = (filters: { [key: string]: any }) => {
@@ -10,7 +10,7 @@ const filterEmptyValues = (filters: { [key: string]: any }) => {
 };
 
 const UserFilters: React.FC = () => {
-  const { filters, setFilters } = useFilterStore();
+  const { filters, setFilters } = filterStore();
   const [localFilters, setLocalFilters] = useState<{ [key: string]: any }>(filters);
 
   useEffect(() => {

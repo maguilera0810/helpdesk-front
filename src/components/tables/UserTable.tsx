@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/admin/useUser';
-import useFilterStore from '../../stores/useFilterStore';
+import filterStore from '../../stores/filterStore';
 import UserFilters from '../filters/UserFilters';
 
 const columns: GridColDef[] = [
@@ -19,7 +19,7 @@ const columns: GridColDef[] = [
 const UserTable: FC = () => {
   const navigate = useNavigate();
   const { users, loading, error, fetchUsers, deleteUser } = useUser();
-  const { filters, clearFilters } = useFilterStore();
+  const { filters, clearFilters } = filterStore();
 
   useEffect(() => {
     if (!loading) {
