@@ -1,4 +1,5 @@
-export type periodType = "today" |
+export type periodType =
+  "today" |
   "yesterday" |
   "last_7_days" |
   "last_14_days" |
@@ -8,17 +9,19 @@ export type periodType = "today" |
   "last_5_years";
 export type DataStatusType = Record<periodType, number>;
 
-export type IssueStatusEnum = "recibido" |
-  "tarea_creada" |
+export type IssueStatusEnum =
+  "recibido" |
+  "tareaCreada" |
   "rechazado" |
   "completado";
 export type IssueStatusDataType = Record<IssueStatusEnum, number>;
 
-export type TaskStatusEnum = "por_hacer" |
-  "en_ejecucion" |
+export type TaskStatusEnum =
+  "porHacer" |
+  "enEjecucion" |
   "bloqueado" |
   "programado" |
   "reprogramado" |
-  "no_ejecutable" |
+  "noEjecutable" |
   "completado";
 export type TaskStatusDataType = Record<TaskStatusEnum, number>;
