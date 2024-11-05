@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 
 import { Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { SelectField } from '../../../components/forms/fields';
 import Layout from '../../../components/layouts/Layout';
 import { periodOptions } from '../../../constants/options';
@@ -35,20 +36,30 @@ const Dashboard: FC = () => {
 
   return (
     <Layout>
-      <Typography variant="h1" gutterBottom>
-        Tablero
-      </Typography>
-      <SelectField
-        label="Periodo"
-        name="period"
-        value={filters.period ?? ''}
-        options={periodOptions}
-        onChange={(e) => handleInputChange(e)}
-        fullWidth
-        height="56px"
-      />
-      <TaskStatusSection />
-      <IssueStatusSection />
+      <Grid container spacing={2} >
+        <Typography variant="h1">
+          Tablero
+        </Typography>
+        <Grid size={{ xs: 12, sm: 4, md: 3, lg: 2 }}>
+          <SelectField
+            label=""
+            name="period"
+            value={filters.period ?? ''}
+            options={periodOptions}
+            onChange={(e) => handleInputChange(e)}
+            fullWidth
+            height="40px"
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <TaskStatusSection />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <IssueStatusSection />
+        </Grid>
+      </Grid>
       <ChartsSection />
 
     </Layout>
