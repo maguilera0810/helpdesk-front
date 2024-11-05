@@ -36,7 +36,7 @@ const Dashboard: FC = () => {
 
   return (
     <Layout>
-      <Grid container spacing={2} >
+      <Grid container spacing={{ xs: 0, sm: 2 }} sx={{ marginBottom: 1 }} >
         <Typography variant="h1">
           Tablero
         </Typography>
