@@ -6,6 +6,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import EventIcon from '@mui/icons-material/Event';
 import UpdateIcon from '@mui/icons-material/Update';
+import { Box } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import { SvgIconProps } from '@mui/material/SvgIcon';
@@ -13,7 +14,6 @@ import Typography from '@mui/material/Typography';
 import Swipper from '../../../components/layouts/Swipper';
 import { useDataAnalytics } from '../../../hooks/analytics/useDataAnalytics';
 import { TaskStatusEnum } from '../../../types/dataTypes';
-import { Box } from '@mui/material';
 
 
 
@@ -83,12 +83,12 @@ const TaskStatusSection: FC = () => {
         Tareas por Estados
       </Typography>
       <Swipper movementStep={1.5}>
-        {taskStatus && Object.entries(taskStatus).map(([key, value]) => {
-          const kpi = TaskStatusKPIS.find(item => item.key === key);
+        {taskStatus && TaskStatusKPIS.map((kpi) => {
+          const value = taskStatus[kpi.key]
           return (
             kpi &&
             <Paper
-              key={key}
+              key={kpi.key}
               elevation={3}
               sx={{
                 flex: '0 0 auto',
