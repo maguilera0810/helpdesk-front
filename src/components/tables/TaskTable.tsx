@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { taskStatuses } from '../../constants/states';
 import { useTask } from '../../hooks/support/useTask';
 import useGlobalData from '../../hooks/useGlobalData';
-import useFilterStore from '../../stores/useFilterStore';
+import filterStore from '../../stores/filterStore';
 import { renderChipCell, renderUserCell } from './renders';
 
 const COLUMNS: GridColDef[] = [
@@ -47,7 +47,7 @@ Object.freeze(COLUMNS);
 const TaskTable: FC = () => {
   const navigate = useNavigate();
   const { tasks, loading, error, fetchTasks } = useTask();
-  const { filters, clearFilters } = useFilterStore();
+  const { filters, clearFilters } = filterStore();
   const { lightUsers, priorities } = useGlobalData();
 
   const getUserNameById = (userId: number) => {

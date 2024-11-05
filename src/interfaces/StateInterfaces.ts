@@ -143,10 +143,10 @@ export interface NavbarState {
 export interface DataAnalyticsState extends BaseState {
   taskStatus?: TaskStatusDataType;
   issueStatus?: IssueStatusDataType;
-  taskCategories: (Partial<Category> & { value?: number })[];
-  issueCategories: (Partial<Category> & { value?: number })[];
+  taskCategories: (Partial<Category> & { value: number })[];
+  issueCategories: (Partial<Category> & { value: number })[];
   setTaskStatus: (value: TaskStatusDataType) => void;
   setIssueStatus: (value: IssueStatusDataType) => void;
-  setTaskCategories: (value: (Partial<Category> & { value?: number })[]) => void;
-  setIssueCategories: (value: (Partial<Category> & { value?: number })[]) => void;
+  setTaskCategories: (value: (Partial<Category> & { value: number })[]) => void;
+  setIssueCategories: (value: (Partial<Category> & { value: number })[]) => void;
 }

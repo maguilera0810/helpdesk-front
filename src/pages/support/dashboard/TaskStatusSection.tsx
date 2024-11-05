@@ -6,6 +6,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import EventIcon from '@mui/icons-material/Event';
 import UpdateIcon from '@mui/icons-material/Update';
+import { Box } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import { SvgIconProps } from '@mui/material/SvgIcon';
@@ -55,13 +56,6 @@ const TaskStatusKPIS: TaskStatusKPI[] = [
     icon: <UpdateIcon />,
     color: '#fdd835',
   },
-  // {
-  //   key: 'enEjecucion',
-  //   title: 'En Ejecución',
-  //   value: 0,
-  //   icon: <AutorenewIcon />,
-  //   color: '#1e88e5',
-  // },
   {
     key: 'bloqueado',
     title: 'Bloqueado',
@@ -84,58 +78,64 @@ const TaskStatusSection: FC = () => {
   const { taskStatus } = useDataAnalytics();
 
   return (
-    <Swipper movementStep={1.5}>
-      {taskStatus && Object.entries(taskStatus).map(([key, value]) => {
-        const kpi = TaskStatusKPIS.find(item => item.key === key);
-        return (
-          kpi &&
-          <Paper
-            key={key}
-            elevation={3}
-            sx={{
-              flex: '0 0 auto',
-              padding: 2,
-              minWidth: 200,
-              display: 'flex',
-              alignItems: 'center',
-              height: '100px',
-              overflow: 'hidden',
-            }}
-          >
-            {kpi.icon && (
-              <Avatar
-                sx={{
-                  bgcolor: kpi.color ?? 'primary.main',
-                  marginRight: 2,
-                  width: 36,
-                  height: 36,
-                }}
-              >
-                {kpi.icon}
-              </Avatar>
-            )}
-            <div>
-              <Typography variant="body2" component="div" sx={{ fontWeight: 'bold' }}>
-                {kpi.title}
-              </Typography>
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                  fontWeight: 'bold',
-                  color: kpi.color ?? 'text.primary',
-                  fontSize: '1rem',
-                }}
-              >
-                {value} {kpi.unit ?? ''}
-              </Typography>
-            </div>
-          </Paper>
-        )
-      }
-
-      )}
-    </Swipper>
+    <Box component="div">
+      <Typography variant="h4" sx={{ paddingLeft: 2 }}>
+        Tareas por Estados
+      </Typography>
+      <Swipper movementStep={1.5}>
+        {taskStatus && TaskStatusKPIS.map((kpi) => {
+          const value = taskStatus[kpi.key]
+          return (
+            kpi &&
+            <Paper
+              key={kpi.key}
+              elevation={3}
+              sx={{
+                flex: '0 0 auto',
+                paddingY: 2,
+                paddingX: 2,
+                minWidth: 200,
+                display: 'flex',
+                alignItems: 'center',
+                height: 'auto',
+                overflow: 'hidden',
+                borderRadius: 2
+              }}
+            >
+              {kpi.icon && (
+                <Avatar
+                  sx={{
+                    bgcolor: kpi.color ?? 'primary.main',
+                    marginRight: 2,
+                    width: 36,
+                    height: 36,
+                  }}
+                >
+                  {kpi.icon}
+                </Avatar>
+              )}
+              <div>
+                <Typography variant="body2" component="div" sx={{ fontWeight: 'bold' }}>
+                  {kpi.title}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontWeight: 'bold',
+                    color: kpi.color ?? 'text.primary',
+                    fontSize: '1rem',
+                  }}
+                >
+                  {value} {kpi.unit ?? ''}
+                </Typography>
+              </div>
+            </Paper>
+          )
+        }
+        )}
+      </Swipper>
+    </Box>
   );
 };
 

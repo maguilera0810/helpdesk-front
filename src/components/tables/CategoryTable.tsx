@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import { useCategory } from '../../hooks/settings/useCategory';
-import useFilterStore from '../../stores/useFilterStore';
+import filterStore from '../../stores/filterStore';
 import { renderChipCell } from './renders';
 
 const columns: GridColDef[] = [
@@ -23,7 +23,7 @@ const columns: GridColDef[] = [
 const IssueTable: FC = () => {
   const navigate = useNavigate();
   const { categories, loading, error, fetchCategories, deleteCategory } = useCategory();
-  const { filters, clearFilters } = useFilterStore();
+  const { filters, clearFilters } = filterStore();
 
   useEffect(() => {
     if (!loading) {

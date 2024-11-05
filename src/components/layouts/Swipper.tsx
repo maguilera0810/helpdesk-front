@@ -51,14 +51,17 @@ const Swipper: FC<SwipperProps> = ({ children, movementStep = 2, gap = 2 }) => {
       sx={{
         display: 'flex',
         overflowX: 'auto',
-        padding: 2,
-        width: { xs: '95vw', sm: '100%' },
+        paddingX: 2,
+        paddingY: 0.5,
+        marginY: 2,
+        width: '100%',
         gap,
         cursor: isDragging ? 'grabbing' : 'pointer',
         userSelect: isDragging ? 'none' : 'auto',
         scrollbarWidth: 'none',
         scrollbarColor: '#888 #f1f1f1',
-        scrollbarGutter: 'stable'
+        scrollbarGutter: 'stable',
+        borderRadius: 2,
       }}
     >
       {children}
