@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import IssueTaskLineChart from '../../../components/forms/data_visualization/IssueTaskLineChart';
-import StatusTasksBarChart from '../../../components/forms/data_visualization/StatusTasksBarChart';
+import IssueTaskLineChart from '../../../components/data_visualization/IssueTaskLineChart';
+import StatusTasksBarChart from '../../../components/data_visualization/StatusTasksBarChart';
 import Swipper from '../../../components/layouts/Swipper';
 
 type typeChart = 'statusTasks' | 'IssueTask'

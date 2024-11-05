@@ -1,10 +1,8 @@
 // src/components/BarChartComponent.tsx
-
 import { FC } from 'react';
 
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-// Definición de la interfaz para los datos del gráfico
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const dataset = [
