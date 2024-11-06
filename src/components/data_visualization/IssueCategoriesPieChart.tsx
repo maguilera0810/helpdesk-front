@@ -7,17 +7,17 @@ import { PieChart } from '@mui/x-charts';
 import { useDataAnalytics } from '../../hooks/analytics/useDataAnalytics';
 
 
-interface TaskCategoriesPieChartProps {
+interface IssueCategoriesPieChartProps {
   title?: string;
 }
 
-const TaskCategoriesPieChart: FC<TaskCategoriesPieChartProps> = ({ title = "Tareas por Categoria" }) => {
+const IssueCategoriesPieChart: FC<IssueCategoriesPieChartProps> = ({ title = "Problemas por Categoria" }) => {
   const noData = [{ label: "SIN DATOS", value: 1 }]
-  const { taskCategories } = useDataAnalytics();
-  const total = useMemo(() => taskCategories.reduce((acc, curr) => acc + curr.value, 0) || 1, [taskCategories])
+  const { issueCategories } = useDataAnalytics();
+  const total = useMemo(() => issueCategories.reduce((acc, curr) => acc + curr.value, 0) || 1, [issueCategories])
 
   const aggregatedData = useMemo(() => {
-    const items = taskCategories.map(e => ({ label: e.title, value: e.value }));
+    const items = issueCategories.map(e => ({ label: e.title, value: e.value }));
     const sortedCategories = [...items].sort((a, b) => b.value - a.value);
     const naCategory = sortedCategories.find(item => item.label === "N/A");
     const topCategories = sortedCategories.filter(item => item.label !== "N/A").slice(0, 7);
@@ -25,12 +25,11 @@ const TaskCategoriesPieChart: FC<TaskCategoriesPieChartProps> = ({ title = "Tare
     const othersValue = otherCategories.reduce((acc, curr) => acc + curr.value, 0);
     const result = [
       ...topCategories,
-      ...(othersValue > 0 ? [{ label: "Otros", value: othersValue }] : []),
-      ...(naCategory ? [naCategory] : []),
+      ...(naCategory ? [naCategory] : []), // Agrega "N/A" si existe
+      ...(othersValue > 0 ? [{ label: "Otros", value: othersValue }] : []) // Agrega "Otros" si hay datos
     ];
     return result.length ? result : noData;
-  }, [taskCategories]);
-
+  }, [issueCategories]);
 
   return (
     <Paper elevation={3} sx={{ padding: 2, height: '100%', width: '100%', minWidth: { xs: '400px', sm: '500px' } }}>
@@ -56,4 +55,4 @@ const TaskCategoriesPieChart: FC<TaskCategoriesPieChartProps> = ({ title = "Tare
   );
 };
 
-export default TaskCategoriesPieChart;
+export default IssueCategoriesPieChart;
