@@ -41,7 +41,7 @@ const TaskCategoriesPieChart: FC<TaskCategoriesPieChartProps> = ({ title = "Tare
         height={300}
         series={[
           {
-            arcLabel: (item) => `${((item.value / total) * 100).toFixed(2)}%`,
+            arcLabel: (item) => item.label === 'SIN DATOS' ? '' : `${((item.value / total) * 100).toFixed(2)}%`,
             arcLabelMinAngle: 15,
             arcLabelRadius: '80%',
             highlightScope: { fade: 'global', highlight: 'item' },
