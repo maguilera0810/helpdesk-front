@@ -1,17 +1,17 @@
 import { produce } from 'immer';
 import { StateCreator } from 'zustand';
-import { LocationState } from '../../interfaces/StateInterfaces';
+import { LocationDetailState } from '../../interfaces/StateInterfaces';
 import storeCreator from '../core/storeCreator';
 
-const stateCreator: StateCreator<LocationState, [], [], LocationState> = (set) => ({
+const stateCreator: StateCreator<LocationDetailState, [], [], LocationDetailState> = (set) => ({
   location: undefined,
   locations: [],
   setLocation: (location) =>
-    set(produce((state: LocationState) => {
+    set(produce((state: LocationDetailState) => {
       state.location = location;
     })),
   setLocations: (locations) =>
-    set(produce((state: LocationState) => {
+    set(produce((state: LocationDetailState) => {
       state.locations = locations;
     })),
 });
