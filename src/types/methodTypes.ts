@@ -13,6 +13,7 @@ export type methodIssueComment = "fetchIssueComments" | "fetchIssueComment" | "c
 export type methodUser = 'fetchUsers' | 'fetchUser' | 'createUser' | 'updateUser' | 'deleteUser';
 export type methodRole = 'fetchRoles' | 'fetchRole' | 'createRole' | 'updateRole' | 'deleteRole';
 export type methodPermission = 'fetchPermissions' | 'fetchPermission' | 'createPermission' | 'updatePermission' | 'deletePermission';
+export type methodLocation = 'fetchLocations' | 'fetchLocation' | 'createLocation' | 'updateLocation' | 'deleteLocation';
 
 export type methodCategory = 'fetchCategories' | 'fetchCategory' | 'createCategory' | 'updateCategory' | 'deleteCategory';
 export type methodCategoryType = 'fetchCategoryTypes' | 'fetchCategoryType' | 'createCategoryType' | 'updateCategoryType' | 'deleteCategoryType';
