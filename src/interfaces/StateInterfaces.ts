@@ -63,6 +63,12 @@ export interface PriorityState extends BaseState {
   setPriority: (priority?: Priority) => void;
   setPriorities: (priorities: Priority[]) => void;
 }
+export interface LocationState extends BaseState {
+  location?: Location;
+  locations: Location[];
+  setLocation: (value?: Location) => void;
+  setLocations: (value: Location[]) => void;
+}
 
 export interface PermissionState extends BaseState {
   permission?: Permission;
