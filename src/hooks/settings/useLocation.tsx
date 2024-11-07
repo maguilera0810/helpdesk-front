@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { LocationDetail } from '../../interfaces/ModelInterfaces';
-import LocationService from '../../services/settings/LocationDetailService';
+import LocationService from '../../services/settings/LocationService';
 import locationStore from '../../stores/settings/locationStore';
 import { methodLocation } from '../../types/methodTypes';
 
