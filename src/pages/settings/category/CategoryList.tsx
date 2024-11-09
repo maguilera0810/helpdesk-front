@@ -7,7 +7,7 @@ import CategoryTable from '../../../components/tables/CategoryTable';
 const CategoryList: FC = () => {
   return (
     <Layout>
-      <Typography variant="h1">
+      <Typography variant="h1" gutterBottom>
         Categorias
       </Typography>
       <CategoryTable />
