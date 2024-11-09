@@ -48,7 +48,7 @@ export interface Task extends BaseInfoModel {
   updatedAt: Date | null;
   startAt: Date | null;
   endAt: Date | null;
-  location?: number | LocationDetail;
+  location?: number | LocationInfo;
 }
 export interface Priority extends BaseInfoModel {
   id: number;
@@ -70,7 +70,7 @@ export interface Issue extends BaseInfoModel {
   createdBy: number;
   createdAt: Date | null;
   updatedAt: Date | null;
-  location?: number | LocationDetail;
+  location?: number | LocationInfo;
 }
 export interface Comment extends BaseInfoModel {
   files: string[];
@@ -106,7 +106,7 @@ export interface Schedule {
   userTasks: UserTask[];
 }
 
-export interface LocationDetail extends BaseInfoModel {
+export interface LocationInfo extends BaseInfoModel {
   postalCode: string;
   lat: number;
   long: number;

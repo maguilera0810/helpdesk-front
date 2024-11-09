@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Issue, IssueComment, LocationDetail, Permission, Priority, Role, Schedule, Task, TaskComment, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Issue, IssueComment, LocationInfo, Permission, Priority, Role, Schedule, Task, TaskComment, User, UserTask } from '../interfaces/ModelInterfaces';
 import { IssueStatusDataType, TaskStatusDataType } from '../types/dataTypes';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
@@ -64,10 +64,10 @@ export interface PriorityState extends BaseState {
   setPriorities: (priorities: Priority[]) => void;
 }
 export interface LocationState extends BaseState {
-  location?: LocationDetail;
-  locations: LocationDetail[];
-  setLocation: (value?: LocationDetail) => void;
-  setLocations: (value: LocationDetail[]) => void;
+  location?: LocationInfo;
+  locations: LocationInfo[];
+  setLocation: (value?: LocationInfo) => void;
+  setLocations: (value: LocationInfo[]) => void;
 }
 
 export interface PermissionState extends BaseState {

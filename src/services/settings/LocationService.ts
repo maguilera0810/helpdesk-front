@@ -1,7 +1,7 @@
-import { LocationDetail } from '../../interfaces/ModelInterfaces';
+import { LocationInfo } from '../../interfaces/ModelInterfaces';
 import BaseCrudService from '../core/BaseCrudService';
 
-export class LocationService extends BaseCrudService<LocationDetail> {
+export class LocationService extends BaseCrudService<LocationInfo> {
   private static instance: LocationService;
 
   private constructor() {

@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
 
-import { LocationDetail } from '../../interfaces/ModelInterfaces';
+import { LocationInfo } from '../../interfaces/ModelInterfaces';
 import LocationService from '../../services/settings/LocationService';
 import locationStore from '../../stores/settings/locationStore';
 import { methodLocation } from '../../types/methodTypes';
 
 
-export const useLocationDetail = () => {
+export const useLocation = () => {
   const { location, locations, setLocation, setLocations } = locationStore()
   const [method, setMethod] = useState<methodLocation | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,7 +48,7 @@ export const useLocationDetail = () => {
     }
   };
 
-  const createLocation = async (location: Partial<LocationDetail>) => {
+  const createLocation = async (location: Partial<LocationInfo>) => {
     setMethod('createLocation');
     setLoading(true);
     setError(null);
@@ -66,7 +66,7 @@ export const useLocationDetail = () => {
     }
   };
 
-  const updateLocation = async (locationId: number, location: Partial<LocationDetail>) => {
+  const updateLocation = async (locationId: number, location: Partial<LocationInfo>) => {
     setMethod('updateLocation');
     setLoading(true);
     setError(null);
