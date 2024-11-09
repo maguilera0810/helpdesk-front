@@ -62,7 +62,7 @@ const AppRoutes: FC = () => (
 
         <Route path="/configuraciones/categoria/" element={<CategoryList />} />
         <Route path="/configuraciones/categoria/:id/" element={<CategoryDetail />} />
-        <Route path="/configuraciones/locaciones/" element={<LocationList />} />
+        <Route path="/configuraciones/locacion/" element={<LocationList />} />
         <Route path="/configuraciones/prioridad/" element={<PriorityList />} />
         <Route path="/configuraciones/prioridad/:priorityID/" element={<PriorityDetail />} />
         <Route path="/configuraciones/campus/" element={<Campus />} />

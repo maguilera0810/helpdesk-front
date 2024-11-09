@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
-import PriorityTable from '../../../components/tables/PriorityTable';
+import LocationTable from '../../../components/tables/LocationTable';
 
 const LocationList: FC = () => {
   return (
@@ -10,7 +10,7 @@ const LocationList: FC = () => {
       <Typography variant="h1" gutterBottom>
         Locaciones
       </Typography>
-      <PriorityTable />
+      <LocationTable />
     </Layout>
   );
 };
