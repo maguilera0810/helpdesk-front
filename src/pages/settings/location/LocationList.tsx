@@ -4,15 +4,15 @@ import { Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
 import PriorityTable from '../../../components/tables/PriorityTable';
 
-const PriorityList: FC = () => {
+const LocationList: FC = () => {
   return (
     <Layout>
       <Typography variant="h1" gutterBottom>
-        Prioridades
+        Locaciones
       </Typography>
       <PriorityTable />
     </Layout>
   );
 };
 
-export default PriorityList;
+export default LocationList;
