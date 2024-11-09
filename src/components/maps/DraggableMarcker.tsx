@@ -1,16 +1,17 @@
-import { FC, useMemo, useRef, useState } from 'react';
+import { FC, ReactNode, useMemo, useRef, useState } from 'react';
 
 import L from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
+import { Marker } from 'react-leaflet';
 
 
 interface DraggableMarkerProps {
   isDraggable?: boolean;
   lat: number;
   lng: number;
+  children?: ReactNode;
 }
 
-const DraggableMarker: FC<DraggableMarkerProps> = ({ isDraggable = false, lat, lng }) => {
+const DraggableMarker: FC<DraggableMarkerProps> = ({ isDraggable = false, lat, lng, children }) => {
   // const [draggable, setDraggable] = useState(isDraggable);
   const [position, setPosition] = useState({ lat, lng });
   const markerRef = useRef<L.Marker>(null)
@@ -33,11 +34,7 @@ const DraggableMarker: FC<DraggableMarkerProps> = ({ isDraggable = false, lat, l
       eventHandlers={eventHandlers}
       position={position}
       ref={markerRef}>
-      <Popup minWidth={90}>
-        <span>
-          AQUI VA LA DIRECCION
-        </span>
-      </Popup>
+      {children}
     </Marker>
   )
 }

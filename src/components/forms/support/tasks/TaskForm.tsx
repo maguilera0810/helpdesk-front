@@ -15,6 +15,7 @@ import taskStore from '../../../../stores/support/taskStore';
 import CommentList from '../../../comments/CommentList';
 import TaskBaseInfo from './TaskBaseInfo';
 import TaskSchedule from './TaskSchedule';
+import MapComponent from '../../../maps/MapComponent';
 
 const TaskForm: React.FC = () => {
   const navigate = useNavigate();
@@ -105,6 +106,7 @@ const TaskForm: React.FC = () => {
           <TabList onChange={handleTabLisChange} aria-label="task form tabs">
             <Tab label="Información" value="0" />
             <Tab label="Agenda" value="1" />
+            <Tab label="Locación" value="2" />
           </TabList>
         </Box>
         <TabPanel value="0">
@@ -113,6 +115,11 @@ const TaskForm: React.FC = () => {
         </TabPanel>
         <TabPanel value="1">
           <TaskSchedule />
+        </TabPanel>
+        <TabPanel value="2">
+          <MapComponent
+            lat={-3.322108}
+            lng={-79.812168} />
         </TabPanel>
         {task && <CommentList type='task' onSave={handdleFetchComments} />}
       </TabContext>
