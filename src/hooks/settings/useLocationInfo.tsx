@@ -6,7 +6,7 @@ import locationStore from '../../stores/settings/locationStore';
 import { methodLocation } from '../../types/methodTypes';
 
 
-export const useLocation = () => {
+export const useLocationInfo = () => {
   const { location, locations, setLocation, setLocations } = locationStore()
   const [method, setMethod] = useState<methodLocation | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
