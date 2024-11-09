@@ -13,3 +13,16 @@ export interface IAutocompleteOption extends Option {
 export interface Status extends Option {
   icon: ReactNode;
 }
+
+
+export interface LocationData {
+  display_name: string;
+  address?: {
+    city?: string;
+    country?: string;
+    country_code?: string;
+    postcode?: string;
+    road?: string;
+    state?: string;
+  };
+}

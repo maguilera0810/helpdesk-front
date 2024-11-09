@@ -56,7 +56,7 @@ const useReverseGeocode = (lat: number, lng: number): UseReverseGeocodeResult =>
   return {
     location,
     isLoading,
-    error
+    error,
   };
 };
 
