@@ -145,6 +145,7 @@ export const useLocationInfo = () => {
     success,
     method,
     setPosition,
+    setLocation,
     fetchLocations,
     fetchLocation,
     createLocation,

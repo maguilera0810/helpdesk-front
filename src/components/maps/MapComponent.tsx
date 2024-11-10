@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { Box, Paper, Typography } from '@mui/material';
+import { Map as LeafletMap } from 'leaflet';
 import { MapContainer, Popup, TileLayer } from 'react-leaflet';
 import { useLocationInfo } from '../../hooks/settings/useLocationInfo';
 import DraggableMarker from './DraggableMarcker';
@@ -19,15 +20,18 @@ import DraggableMarker from './DraggableMarcker';
 interface MapComponentProps {
   title?: string;
   isEditable?: boolean;
+  zoom?: number;
 }
 
-const MapComponent: React.FC<MapComponentProps> = ({ title, isEditable = false }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ title, isEditable = false, zoom = 15 }) => {
 
   const { position, locationData, reverseGeocode } = useLocationInfo()
-
+  const mapRef = useRef<LeafletMap | null>(null);
 
   useEffect(() => {
-    position && reverseGeocode();
+    if (!position) return;
+    reverseGeocode();
+    mapRef.current && mapRef.current.setView([position.lat, position.lng], zoom);
   }, [position])
 
 
@@ -38,8 +42,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ title, isEditable = false }
         {position &&
           <MapContainer
             center={position}
-            zoom={16}
+            zoom={zoom}
             style={{ height: '100%', width: '100%' }}
+            ref={(ref) => { if (ref) { mapRef.current = ref; } }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
