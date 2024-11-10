@@ -117,9 +117,7 @@ const TaskForm: React.FC = () => {
           <TaskSchedule />
         </TabPanel>
         <TabPanel value="2">
-          <MapComponent
-            lat={-3.322108}
-            lng={-79.812168} />
+          <MapComponent />
         </TabPanel>
         {task && <CommentList type='task' onSave={handdleFetchComments} />}
       </TabContext>

@@ -109,7 +109,7 @@ export interface Schedule {
 export interface LocationInfo extends BaseInfoModel {
   postalCode: string;
   lat: number;
-  long: number;
+  lng: number;
   address: string;
   createdAt: Date | null;
   updatedAt: Date | null;

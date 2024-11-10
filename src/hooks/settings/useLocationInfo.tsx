@@ -2,12 +2,16 @@ import { useCallback, useState } from 'react';
 
 import { LocationInfo } from '../../interfaces/ModelInterfaces';
 import LocationService from '../../services/settings/LocationService';
-import locationStore from '../../stores/settings/locationStore';
+import locationStore from '../../stores/settings/locationInfoStore';
 import { methodLocation } from '../../types/methodTypes';
 
 
 export const useLocationInfo = () => {
-  const { location, locations, setLocation, setLocations } = locationStore()
+  const {
+    location, setLocation,
+    locations, setLocations,
+    position, setPosition,
+  } = locationStore()
   const [method, setMethod] = useState<methodLocation | undefined>()
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -103,11 +107,13 @@ export const useLocationInfo = () => {
 
   return {
     location,
+    position,
     locations,
     loading,
     error,
     success,
     method,
+    setPosition,
     fetchLocations,
     fetchLocation,
     createLocation,

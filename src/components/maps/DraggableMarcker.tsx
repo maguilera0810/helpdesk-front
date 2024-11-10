@@ -1,34 +1,27 @@
-import { FC, ReactNode, useMemo, useRef, useState } from 'react';
+import { FC, ReactNode, useMemo, useRef } from 'react';
 
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
+import { useLocationInfo } from '../../hooks/settings/useLocationInfo';
 
 
 interface DraggableMarkerProps {
   isDraggable?: boolean;
-  lat: number;
-  lng: number;
   children?: ReactNode;
 }
 
-const DraggableMarker: FC<DraggableMarkerProps> = ({ isDraggable = false, lat, lng, children }) => {
-  // const [draggable, setDraggable] = useState(isDraggable);
-  const [position, setPosition] = useState({ lat, lng });
+const DraggableMarker: FC<DraggableMarkerProps> = ({ isDraggable = false, children }) => {
+  const { position, setPosition } = useLocationInfo()
   const markerRef = useRef<L.Marker>(null)
   const eventHandlers = useMemo(() => ({
     dragend() {
       const marker = markerRef.current
-      if (marker != null) {
-        setPosition(marker.getLatLng())
-      }
+      marker && setPosition(marker.getLatLng());
     },
   }), []);
 
-  // const toggleDraggable = useCallback(() => {
-  //   setDraggable((d) => !d)
-  // }, [])
-
   return (
+    position &&
     <Marker
       draggable={isDraggable}
       eventHandlers={eventHandlers}
