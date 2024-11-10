@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Box, Paper, Typography } from '@mui/material';
 import { MapContainer, Popup, TileLayer } from 'react-leaflet';
@@ -18,19 +18,22 @@ import DraggableMarker from './DraggableMarcker';
 
 interface MapComponentProps {
   title?: string;
-  description?: string;
   isEditable?: boolean;
 }
 
-const MapComponent: React.FC<MapComponentProps> = ({ title, description, isEditable = false }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ title, isEditable = false }) => {
 
-  const { position } = useLocationInfo()
+  const { position, locationData, reverseGeocode } = useLocationInfo()
+
+  useEffect(() => {
+    reverseGeocode();
+  }, [position])
+
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }} >
-      {title && <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>}
+      {title && <Typography variant="h6" gutterBottom>{title}</Typography>}
       <Paper elevation={3} sx={{ width: '100%', height: 400 }}>
         <MapContainer
           center={position}
@@ -43,9 +46,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ title, description, isEdita
           />
           <DraggableMarker
             isDraggable={isEditable}>
-            <Popup minWidth={90}>
-              <Typography variant="subtitle1">{description || 'Ubicación seleccionada'}</Typography>
-            </Popup>
+            {locationData &&
+              <Popup minWidth={90}>
+                <Typography variant="body2">{locationData?.display_name}</Typography>
+              </Popup>}
           </DraggableMarker>
         </MapContainer>
       </Paper>

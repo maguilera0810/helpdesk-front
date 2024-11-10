@@ -5,11 +5,16 @@ import storeCreator from '../core/storeCreator';
 
 const stateCreator: StateCreator<LocationInfoState, [], [], LocationInfoState> = (set) => ({
   location: undefined,
+  locationData: undefined,
   locations: [],
   position: undefined,
   setLocation: (value) =>
     set(produce((state: LocationInfoState) => {
       state.location = value;
+    })),
+  setLocationData: (value) =>
+    set(produce((state: LocationInfoState) => {
+      state.locationData = value;
     })),
   setLocations: (value) =>
     set(produce((state: LocationInfoState) => {

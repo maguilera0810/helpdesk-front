@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useCallback, useState } from 'react';
 
+import { LocationData } from '../../interfaces/GlobalInterfaces';
 import { LocationInfo } from '../../interfaces/ModelInterfaces';
 import LocationService from '../../services/settings/LocationService';
 import locationStore from '../../stores/settings/locationInfoStore';
@@ -9,10 +11,11 @@ import { methodLocation } from '../../types/methodTypes';
 export const useLocationInfo = () => {
   const {
     location, setLocation,
+    locationData, setLocationData,
     locations, setLocations,
     position, setPosition,
   } = locationStore()
-  const [method, setMethod] = useState<methodLocation | undefined>()
+  const [method, setMethod] = useState<methodLocation | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
@@ -105,8 +108,36 @@ export const useLocationInfo = () => {
     }
   };
 
+  const reverseGeocode = async () => {
+    setMethod('reverseGeocode');
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      const resp = await axios.get<LocationData>(
+        `https://nominatim.openstreetmap.org/reverse`,
+        {
+          params: {
+            lat: position?.lat,
+            lon: position?.lng,
+            format: 'json',
+          },
+        }
+      );
+      setLocationData(resp.data)
+      setSuccess(true);
+    } catch (error) {
+      console.error(`Error deleting location with id (${position?.lat}, ${position?.lng}):`, error);
+      setError('Error deleting location');
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     location,
+    locationData,
     position,
     locations,
     loading,
@@ -119,5 +150,6 @@ export const useLocationInfo = () => {
     createLocation,
     updateLocation,
     deleteLocation,
+    reverseGeocode,
   };
 };

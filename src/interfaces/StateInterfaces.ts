@@ -6,8 +6,8 @@ import { IssueStatusDataType, TaskStatusDataType } from '../types/dataTypes';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
 import { modeType } from '../types/uiTypes';
+import { LocationData } from './GlobalInterfaces';
 import { Category } from "./ModelInterfaces";
-
 
 
 interface BaseState {
@@ -66,10 +66,12 @@ export interface PriorityState extends BaseState {
 }
 export interface LocationInfoState extends BaseState {
   location?: LocationInfo;
-  locations: LocationInfo[];
-  position?: LatLng;
   setLocation: (value?: LocationInfo) => void;
+  locationData?: LocationData;
+  setLocationData: (value?: LocationData) => void;
+  locations: LocationInfo[];
   setLocations: (value: LocationInfo[]) => void;
+  position?: LatLng;
   setPosition: (value?: LatLng) => void;
 }
 
