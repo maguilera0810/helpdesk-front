@@ -10,7 +10,7 @@ import ThemeProviderWrapper from './styles/ThemeProviderWrapper';
 
 import App from './App';
 
-// import './index.css';
+import './index.css';
 
 {/* <I18nextProvider i18n={i18n}>
 </I18nextProvider> */}

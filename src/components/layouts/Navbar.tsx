@@ -6,6 +6,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import CategoryIcon from '@mui/icons-material/Category';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ErrorIcon from '@mui/icons-material/Error';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from '@mui/icons-material/Person';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -44,6 +45,7 @@ const Navbar: FC = () => {
         <NavItem text="Configuraciones" icon={<SettingsIcon />} >
           <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
           <NavItem text="Categorias" icon={<CategoryIcon />} path="/configuraciones/categoria/" />
+          <NavItem text="Ubicaciones" icon={<LocationOnIcon />} path="/configuraciones/locacion/" />
           <NavItem text="Prioridades" icon={<PriorityHighIcon />} path="/configuraciones/prioridad/" />
         </NavItem>
         <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs/" />

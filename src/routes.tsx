@@ -12,7 +12,8 @@ import Login from './pages/auth/Login';
 import FAQs from './pages/FAQ';
 import CategoryDetail from './pages/settings/category/CategoryDetail';
 import CategoryList from './pages/settings/category/CategoryList';
-import ListFaculties from './pages/settings/faculties/ListFaculties';
+import LocationDetail from './pages/settings/location/LocationDetail';
+import LocationList from './pages/settings/location/LocationList';
 import PriorityDetail from './pages/settings/priority/PriorityDetail';
 import PriorityList from './pages/settings/priority/PriorityList';
 import Dashboard from './pages/support/dashboard/Dashboard';
@@ -62,9 +63,10 @@ const AppRoutes: FC = () => (
 
         <Route path="/configuraciones/categoria/" element={<CategoryList />} />
         <Route path="/configuraciones/categoria/:id/" element={<CategoryDetail />} />
+        <Route path="/configuraciones/locacion/" element={<LocationList />} />
+        <Route path="/configuraciones/locacion/:locationId/" element={<LocationDetail />} />
         <Route path="/configuraciones/prioridad/" element={<PriorityList />} />
         <Route path="/configuraciones/prioridad/:priorityID/" element={<PriorityDetail />} />
-        <Route path="/configuraciones/facultades/" element={<ListFaculties />} />
         <Route path="/configuraciones/campus/" element={<Campus />} />
         <Route path="/configuraciones/perfil/" element={<Settings />} />
 

@@ -13,6 +13,7 @@ import categoryStore from '../../../../stores/settings/categoryStore';
 import taskCommentStore from '../../../../stores/support/taskCommentStore';
 import taskStore from '../../../../stores/support/taskStore';
 import CommentList from '../../../comments/CommentList';
+import MapComponent from '../../../maps/MapComponent';
 import TaskBaseInfo from './TaskBaseInfo';
 import TaskSchedule from './TaskSchedule';
 
@@ -105,6 +106,7 @@ const TaskForm: React.FC = () => {
           <TabList onChange={handleTabLisChange} aria-label="task form tabs">
             <Tab label="Información" value="0" />
             <Tab label="Agenda" value="1" />
+            <Tab label="Ubicación" value="2" />
           </TabList>
         </Box>
         <TabPanel value="0">
@@ -113,6 +115,9 @@ const TaskForm: React.FC = () => {
         </TabPanel>
         <TabPanel value="1">
           <TaskSchedule />
+        </TabPanel>
+        <TabPanel value="2">
+          <MapComponent />
         </TabPanel>
         {task && <CommentList type='task' onSave={handdleFetchComments} />}
       </TabContext>

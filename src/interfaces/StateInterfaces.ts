@@ -1,12 +1,13 @@
 import { Dayjs } from 'dayjs';
+import { LatLng } from 'leaflet';
 import { Token } from '../interfaces/AuthInterfaces';
-import { Issue, IssueComment, Permission, Priority, Role, Schedule, Task, TaskComment, User, UserTask } from '../interfaces/ModelInterfaces';
+import { Issue, IssueComment, LocationInfo, Permission, Priority, Role, Schedule, Task, TaskComment, User, UserTask } from '../interfaces/ModelInterfaces';
 import { IssueStatusDataType, TaskStatusDataType } from '../types/dataTypes';
 import { GroupedPermission, GroupedPermissionType } from '../types/groupTypes';
 import { ReloadType } from '../types/methodTypes';
 import { modeType } from '../types/uiTypes';
+import { LocationData } from './GlobalInterfaces';
 import { Category } from "./ModelInterfaces";
-
 
 
 interface BaseState {
@@ -62,6 +63,16 @@ export interface PriorityState extends BaseState {
   priorities: Priority[];
   setPriority: (priority?: Priority) => void;
   setPriorities: (priorities: Priority[]) => void;
+}
+export interface LocationInfoState extends BaseState {
+  location?: LocationInfo;
+  setLocation: (value?: LocationInfo) => void;
+  locationData?: LocationData;
+  setLocationData: (value?: LocationData) => void;
+  locations: LocationInfo[];
+  setLocations: (value: LocationInfo[]) => void;
+  position?: LatLng;
+  setPosition: (value?: LatLng) => void;
 }
 
 export interface PermissionState extends BaseState {

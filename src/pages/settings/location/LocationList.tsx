@@ -2,18 +2,17 @@ import { FC } from 'react';
 
 import { Typography } from '@mui/material';
 import Layout from '../../../components/layouts/Layout';
-import FacultiesTable from '../../../components/tables/FacultiesTable';
+import LocationTable from '../../../components/tables/LocationTable';
 
-const ListFaculties: FC = () => {
+const LocationList: FC = () => {
   return (
     <Layout>
       <Typography variant="h1" gutterBottom>
-        Facultades
+        Ubicaciones
       </Typography>
-      <FacultiesTable />
-
+      <LocationTable />
     </Layout>
   );
 };
 
-export default ListFaculties;
+export default LocationList;

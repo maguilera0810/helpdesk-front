@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
 import { BaseMethod } from "../types/methodTypes";
 
 
 export interface BaseModel {
-  id?: number;
+  id: number;
 }
 
 
