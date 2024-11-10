@@ -26,8 +26,9 @@ const stateCreator: StateCreator<LocationInfoState, [], [], LocationInfoState> =
     })),
   clearState: () =>
     set(produce((state: LocationInfoState) => {
-      state.position = undefined;
       state.location = undefined;
+      state.locationData = undefined;
+      state.position = undefined;
     })),
 });
 

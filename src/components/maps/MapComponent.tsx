@@ -25,33 +25,34 @@ const MapComponent: React.FC<MapComponentProps> = ({ title, isEditable = false }
 
   const { position, locationData, reverseGeocode } = useLocationInfo()
 
-  useEffect(() => {
-    reverseGeocode();
-  }, [position])
 
+  useEffect(() => {
+    position && reverseGeocode();
+  }, [position])
 
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }} >
       {title && <Typography variant="h6" gutterBottom>{title}</Typography>}
       <Paper elevation={3} sx={{ width: '100%', height: 400 }}>
-        <MapContainer
-          center={position}
-          zoom={18}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <DraggableMarker
-            isDraggable={isEditable}>
-            {locationData &&
-              <Popup minWidth={90}>
-                <Typography variant="body2">{locationData?.display_name}</Typography>
-              </Popup>}
-          </DraggableMarker>
-        </MapContainer>
+        {position &&
+          <MapContainer
+            center={position}
+            zoom={16}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <DraggableMarker
+              isDraggable={isEditable}>
+              {locationData &&
+                <Popup minWidth={90}>
+                  <Typography variant="body2">{locationData?.display_name}</Typography>
+                </Popup>}
+            </DraggableMarker>
+          </MapContainer>}
       </Paper>
     </Box>
   );

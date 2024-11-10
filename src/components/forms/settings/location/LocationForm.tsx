@@ -90,6 +90,8 @@ const LocationForm: FC = () => {
     if (isUpdate && locationId) {
       const id = parseInt(locationId);
       !isNaN(id) && fetchLocation(id);
+    } else {
+      setPosition(latLng(-3.285406191914073, -79.91101168625984));
     }
   }, [locationId]);
 
