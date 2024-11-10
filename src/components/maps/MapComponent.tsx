@@ -37,7 +37,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ title, isEditable = false }
       <Paper elevation={3} sx={{ width: '100%', height: 400 }}>
         <MapContainer
           center={position}
-          zoom={13}
+          zoom={18}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
