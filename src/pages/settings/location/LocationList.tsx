@@ -8,7 +8,7 @@ const LocationList: FC = () => {
   return (
     <Layout>
       <Typography variant="h1" gutterBottom>
-        Locaciones
+        Ubicaciones
       </Typography>
       <LocationTable />
     </Layout>

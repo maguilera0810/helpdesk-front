@@ -4,18 +4,13 @@ import { Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import { useLocationInfo } from '../../hooks/settings/useLocationInfo';
-import { renderChipCell } from './renders';
 
 const COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'title', headerName: 'Título', width: 130 },
-  { field: 'order', headerName: 'Orden', width: 130 },
-  {
-    field: 'color',
-    headerName: 'Color',
-    width: 130,
-    renderCell: (params) => renderChipCell({ color: params.value }),
-  },
+  { field: 'title', headerName: 'Título', width: 200 },
+  { field: 'address', headerName: 'Direccion', width: 250 },
+  { field: 'lat', headerName: 'Latitud', width: 250 },
+  { field: 'lng', headerName: 'Longitud', width: 250 },
 ];
 Object.freeze(COLUMNS);
 

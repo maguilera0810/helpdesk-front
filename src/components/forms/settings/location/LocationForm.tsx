@@ -108,7 +108,7 @@ const LocationForm: FC = () => {
 
   return (
     <Paper elevation={3} sx={{ p: 1, borderRadius: 2, width: '100%', overflow: 'auto' }}>
-      <Typography variant="h4" sx={{ mb: 2 }}>Locación</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>Ubicación</Typography>
       {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
       <Button onClick={handleSubmit} variant="contained" color="primary" disabled={loading} sx={{ mt: 3, mb: 2 }}>
         {getSubmitMsg(loading, isUpdate)}

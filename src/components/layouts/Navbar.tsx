@@ -45,7 +45,7 @@ const Navbar: FC = () => {
         <NavItem text="Configuraciones" icon={<SettingsIcon />} >
           <NavItem text="Perfil" icon={<PersonIcon />} path="/configuraciones/perfil/" />
           <NavItem text="Categorias" icon={<CategoryIcon />} path="/configuraciones/categoria/" />
-          <NavItem text="Locaciones" icon={<LocationOnIcon />} path="/configuraciones/locacion/" />
+          <NavItem text="Ubicaciones" icon={<LocationOnIcon />} path="/configuraciones/locacion/" />
           <NavItem text="Prioridades" icon={<PriorityHighIcon />} path="/configuraciones/prioridad/" />
         </NavItem>
         <NavItem text="FAQs" icon={<QuestionAnswerIcon />} path="/faqs/" />
