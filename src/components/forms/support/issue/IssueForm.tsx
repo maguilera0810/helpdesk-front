@@ -8,15 +8,19 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { latLng } from 'leaflet';
 import { issueStatuses } from '../../../../constants/states';
 import { useCategory } from '../../../../hooks/settings/useCategory';
+import { useLocationInfo } from '../../../../hooks/settings/useLocationInfo';
 import { useIssue } from '../../../../hooks/support/useIssue';
 import { useIssueComment } from '../../../../hooks/support/useIssueComment';
 import { Issue } from '../../../../interfaces/ModelInterfaces';
 import issueCommentStore from '../../../../stores/support/issueCommentStore';
+import { BaseChangeMethod } from '../../../../types/methodTypes';
 import { getSubmitMsg } from '../../../../utils/messageUtils';
 import CommentList from '../../../comments/CommentList';
 import DialogComponent from '../../../dialogs/DialogComponent';
+import MapComponent from '../../../maps/MapComponent';
 import { MultipleSelectField, SelectField } from '../../fields';
 import TextAreaField from '../../fields/TextAreaField';
 
@@ -39,12 +43,13 @@ const IssueForm: React.FC = () => {
   const { categories, fetchCategories } = useCategory();
   const { issue, createdTask, error: errorIssue, loading: loadingIssue, success: successIssue,
     fetchIssue, createIssue, updateIssue, createTask } = useIssue();
+  const { locations, location, setLocation, setPosition } = useLocationInfo();
   const [formData, setFormData] = useState<Partial<Issue>>({});
   const [tabValue, setTabValue] = useState('0');
   const [openDialogCreateTask, setOpenDialogCreateTask] = useState<boolean>(false);
   const [openDialogRejectIssue, setOpenDialogRejectIssue] = useState<boolean>(false);
   const { issueComments, fetchIssueComments } = useIssueComment();
-  const { setIssue, setIssueComments, clearState } = issueCommentStore();
+  const { setIssue, setIssueComments } = issueCommentStore();
 
   const isUpdate = Boolean(id && id !== 'addNew');
 
@@ -114,9 +119,15 @@ const IssueForm: React.FC = () => {
     if (!issue) { return; }
     fetchIssueComments({ "issue__id": issue.id, "order_by": "-created_at" });
   }
+  const handleLocationChange: BaseChangeMethod<any> = (e) => {
+    const { name, value } = e.target;
+    if (name === 'location' && typeof value === 'number') {
+      setLocation(locations.find(e => e.id === value));
+    }
+  };
+
   useEffect(() => {
     fetchCategories();
-    return () => { clearState?.() }
   }, []);
   useEffect(() => {
     if (!isUpdate) return;
@@ -125,7 +136,7 @@ const IssueForm: React.FC = () => {
   }, [id]);
 
   useEffect(() => {
-    if (!issue) { return; }
+    if (!issue) return;
     setFormData({
       ...issue,
       createdAt: issue.createdAt ? dayjs(issue.createdAt).toDate() : undefined,
@@ -133,7 +144,14 @@ const IssueForm: React.FC = () => {
     });
     setIssue(issue);
     handdleFetchComments();
+    setLocation(locations.find(e => e.id === issue.location));
   }, [issue]);
+
+  useEffect(() => {
+    if (!location) return;
+    setFormData((prev) => ({ ...prev, location: location.id }));
+    setPosition(latLng(location.lat, location.lng));
+  }, [location]);
 
   useEffect(() => {
     issueComments.length && setIssueComments(issueComments);
@@ -205,6 +223,7 @@ const IssueForm: React.FC = () => {
         <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
           <TabList onChange={handleTabLisChange} aria-label="issue form tabs">
             <Tab label="Información" value="0" />
+            <Tab label="Ubicación" value="1" />
           </TabList>
         </Box>
         <TabPanel value="0">
@@ -305,6 +324,18 @@ const IssueForm: React.FC = () => {
               </Grid>
             </Grid>
           </Box>
+        </TabPanel>
+        <TabPanel value="1">
+          <Grid container spacing={{ xs: 1 }} key={"location"} >
+            <SelectField
+              label='Ubicación'
+              name='location'
+              options={locations.map(e => ({ label: e.title, value: e.id }))}
+              value={location?.id ?? ''}
+              onChange={handleLocationChange}
+            />
+            {location && <MapComponent />}
+          </Grid>
         </TabPanel>
         {issue && <CommentList type='issue' onSave={handdleFetchComments} />}
       </TabContext>
