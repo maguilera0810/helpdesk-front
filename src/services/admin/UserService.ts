@@ -1,5 +1,6 @@
 import { User } from '../../interfaces/ModelInterfaces';
-import { keysToCamel, keysToSnake } from '../../utils/caseUtils';
+import { keysToCamel } from '../../utils/caseUtils';
+import { encodeBase64 } from '../../utils/cryptoUtil';
 import BaseCrudService from '../core/BaseCrudService';
 
 
@@ -19,8 +20,9 @@ export class UserService extends BaseCrudService<User> {
 
   public async listLight(filters: { [key: string]: any } = {}): Promise<Partial<User>[]> {
     try {
+      const params = Object.keys(filters).length ? encodeBase64(filters) : {}
       const response = await this.axiosInstance.get<Partial<User>[]>('light/',
-        { params: keysToSnake(filters) });
+        { params });
       return keysToCamel(response.data);
     } catch (error) {
       console.error('Error fetching list light:', error);

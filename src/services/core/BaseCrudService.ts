@@ -1,4 +1,5 @@
 import { keysToCamel, keysToSnake } from '../../utils/caseUtils';
+import { encodeBase64 } from '../../utils/cryptoUtil';
 import BaseAuthService from './BaseAuthService';
 
 
@@ -10,8 +11,8 @@ abstract class BaseCrudService<T> extends BaseAuthService {
 
   public async list(filters: { [key: string]: any } = {}): Promise<T[]> {
     try {
-      const response = await this.axiosInstance.get<T[]>('',
-        { params: keysToSnake(filters) });
+      const params = Object.keys(filters).length ? { q: encodeBase64(filters) } : {}
+      const response = await this.axiosInstance.get<T[]>('', { params });
       return keysToCamel(response.data);
     } catch (error) {
       console.error('Error fetching list:', error);

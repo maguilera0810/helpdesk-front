@@ -3,14 +3,14 @@ import Environment from '../../environments/Environment';
 import authStore from '../../stores/auth/authStore';
 import AuthService from '../auth/AuthService';
 
-const { apiUrl } = Environment;
+const { API_URL } = Environment;
 
 abstract class BaseAuthService {
   protected axiosInstance: AxiosInstance;
 
   constructor(path: string) {
     this.axiosInstance = axios.create({
-      baseURL: `${apiUrl}${path}`,
+      baseURL: `${API_URL}${path}`,
     });
     this.setupToken();
     // this.setupInterceptors();

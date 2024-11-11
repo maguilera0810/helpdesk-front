@@ -1,11 +1,11 @@
 import axios from 'axios';
+import Environment from '../../environments/Environment';
 import { Token } from '../../interfaces/AuthInterfaces';
 import { User } from '../../interfaces/ModelInterfaces';
 import authStore from '../../stores/auth/authStore';
 import { keysToCamel } from '../../utils/caseUtils';
-import Environment from '../../environments/Environment';
 
-const { apiUrl, apiKey } = Environment;
+const { API_URL, API_KEY } = Environment;
 
 class AuthService {
   private static instance: AuthService;
@@ -13,8 +13,8 @@ class AuthService {
   private url: string;
 
   private constructor() {
-    this.url = `${apiUrl}/api/auth`;
-    this.apiKey = apiKey;
+    this.url = `${API_URL}/api/auth`;
+    this.apiKey = API_KEY;
   }
 
   public static getInstance(): AuthService {

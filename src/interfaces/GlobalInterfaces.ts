@@ -26,3 +26,9 @@ export interface LocationData {
     state?: string;
   };
 }
+
+export interface EncryptedPayload {
+  iv: string;
+  key: string;
+  data: string;
+};
