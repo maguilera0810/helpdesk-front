@@ -1,5 +1,6 @@
 import { DataAnalytics } from '../../interfaces/ModelInterfaces';
-import { keysToCamel, keysToSnake } from '../../utils/caseUtils';
+import { keysToCamel } from '../../utils/caseUtils';
+import { encodeBase64 } from '../../utils/cryptoUtil';
 import BaseAuthService from '../core/BaseAuthService';
 
 export class DataAnalyticsService extends BaseAuthService {
@@ -19,7 +20,7 @@ export class DataAnalyticsService extends BaseAuthService {
   public async getData(filters: { [key: string]: any } = {}): Promise<DataAnalytics> {
     try {
       const response = await this.axiosInstance.get<DataAnalytics>('',
-        { params: keysToSnake(filters) });
+        { params: { "q": encodeBase64(filters, 2) } });
       return keysToCamel(response.data);
     } catch (error) {
       console.error('Error fetching DataAnalytics:', error);
