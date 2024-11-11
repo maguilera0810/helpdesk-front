@@ -19,8 +19,8 @@ export class DataAnalyticsService extends BaseAuthService {
 
   public async getData(filters: { [key: string]: any } = {}): Promise<DataAnalytics> {
     try {
-      const response = await this.axiosInstance.get<DataAnalytics>('',
-        { params: { "q": encodeBase64(filters, 2) } });
+      const params = Object.keys(filters).length ? { q: encodeBase64(filters) } : {}
+      const response = await this.axiosInstance.get<DataAnalytics>('', { params });
       return keysToCamel(response.data);
     } catch (error) {
       console.error('Error fetching DataAnalytics:', error);

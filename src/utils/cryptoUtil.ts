@@ -2,7 +2,7 @@ import { AES, enc } from "crypto-js";
 import { RandomStringProps } from '../interfaces/ComponentInterfaces';
 import Environment from './../environments/Environment';
 
-const { SECRET_KEY, PUBLIC_KEY } = Environment;
+const { SECRET_KEY } = Environment;
 
 export const encryptData = (data: any) => AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
 
